@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Přidat heslo";
+}
+
+<article>
+    <section>
+        <h2>Přidat záznam hesla</h2>
+
+        <form action="/Hesla/Pridat" method="post">
+            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" /><br />
+            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" /><br />
+            <input name="heslo" placeholder="Zadejte heslo používané pro danou službu..." type="password" /><br />
+            <input value="Přidat záznam" type="submit"/>
+        </form>
+    </section>
+</article>
