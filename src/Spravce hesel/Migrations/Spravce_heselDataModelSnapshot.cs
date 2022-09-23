@@ -61,7 +61,7 @@ namespace Spravce_hesel.Migrations
 
                     b.HasKey("email");
 
-                    b.ToTable("uivatel");
+                    b.ToTable("uzivatel");
                 });
 #pragma warning restore 612, 618
         }

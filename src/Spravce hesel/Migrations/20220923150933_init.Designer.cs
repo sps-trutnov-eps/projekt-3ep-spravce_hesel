@@ -11,8 +11,8 @@ using Spravce_hesel.Data;
 namespace Spravce_hesel.Migrations
 {
     [DbContext(typeof(Spravce_heselData))]
-    [Migration("20220921184237_prejmenovani")]
-    partial class prejmenovani
+    [Migration("20220923150933_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace Spravce_hesel.Migrations
 
                     b.HasKey("email");
 
-                    b.ToTable("uivatel");
+                    b.ToTable("uzivatel");
                 });
 #pragma warning restore 612, 618
         }
