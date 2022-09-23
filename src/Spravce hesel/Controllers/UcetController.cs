@@ -45,22 +45,48 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registrace(string jmeno, string email, string heslo, string kontrola_hesla)
+        public IActionResult Registrace(uzivatel obj, string kontrola_hesla)
         {
-            uzivatel? existujici = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
-
-            if (heslo != null && kontrola_hesla != null && email != null && heslo == kontrola_hesla && heslo != email && heslo != jmeno && heslo.Length >= 8)
+            if (obj.Username == null ||obj.Username.Length < 2)
             {
-                HttpContext.Session.SetString("Email", email);
-                HttpContext.Session.SetString("Klic", heslo);
+                obj.Username = "Lmao";
+                ModelState.AddModelError("username", "Jméno je příliš krátké.");
+            }
+           
+            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
+            {
+                ModelState.AddModelError("email", "Tento email už existuje.");
+            }
 
-                Databaze.uzivatel.Add(new uzivatel() { Email = email, Heslo = BCrypt.Net.BCrypt.HashPassword(heslo), Username = jmeno });
+            if (obj.Email == null)
+            {
+                ModelState.AddModelError("email", "Zadejte email.");
+            }
+
+            if (obj.Heslo != kontrola_hesla)
+            {
+                ModelState.AddModelError("heslo", "Hesla se neshodují.");
+            }
+
+            if (obj.Heslo != null && obj.Heslo.Length > 7)
+            {
+                obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
+            }
+            else {
+                ModelState.AddModelError("heslo", "Heslo musí mít 8 znaků a více.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                Databaze.uzivatel.Add(obj);
                 Databaze.SaveChanges();
+
+                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetString("Klic", obj.Heslo);
 
                 return RedirectToAction("Zobrazeni", "Hesla");
             }
-
-            return RedirectToAction("Registrace", "Ucet");
+            return View();
         }
 
         // Nastavení
