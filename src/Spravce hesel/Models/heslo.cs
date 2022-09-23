@@ -9,12 +9,12 @@ namespace Spravce_hesel.Models
         public int Id { get; set; }
 
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required]
-        public string hash { get; set; }
+        public string Hash { get; set; }
 
         [Required]
-        public string sifra { get; set; }
+        public string Sifra { get; set; }
     }
 }

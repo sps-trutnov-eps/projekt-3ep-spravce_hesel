@@ -12,7 +12,7 @@ namespace Spravce_hesel.Data
         // Models.Uzivatel = Soubor ve složce models se samotným modelem
         // Uzivatele = Název tabulky v databázi (Většinou vývá množné číslo názvu souboru)
 
-        public DbSet<Models.uzivatel> uivatel { get; set; }
+        public DbSet<Models.uzivatel> uzivatel { get; set; }
         public DbSet<Models.heslo> heslo { get; set; }
 
         public Spravce_heselData (DbContextOptions<Spravce_heselData> options) : base(options) { }
