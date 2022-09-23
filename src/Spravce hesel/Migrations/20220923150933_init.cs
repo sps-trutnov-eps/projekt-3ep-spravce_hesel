@@ -4,12 +4,12 @@
 
 namespace Spravce_hesel.Migrations
 {
-    public partial class pridanydatabaze : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "hesla",
+                name: "heslo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,11 +20,11 @@ namespace Spravce_hesel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_hesla", x => x.Id);
+                    table.PrimaryKey("PK_heslo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "uivatele",
+                name: "uzivatel",
                 columns: table => new
                 {
                     email = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -33,17 +33,17 @@ namespace Spravce_hesel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_uivatele", x => x.email);
+                    table.PrimaryKey("PK_uzivatel", x => x.email);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "hesla");
+                name: "heslo");
 
             migrationBuilder.DropTable(
-                name: "uivatele");
+                name: "uzivatel");
         }
     }
 }

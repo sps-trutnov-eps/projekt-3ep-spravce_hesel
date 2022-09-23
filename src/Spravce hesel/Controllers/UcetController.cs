@@ -7,6 +7,10 @@ namespace Spravce_hesel.Controllers
     public class UcetController : Controller
     {
         private Spravce_heselData Databaze { get; set; }
+        public UcetController(Spravce_heselData databaze)
+        {
+            Databaze = databaze;
+        }
 
         // Přihlášení
         [HttpGet]
@@ -18,24 +22,16 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Prihlaseni(string email, string heslo)
         {
-
-            uzivatel? prihlasujiciseuzivatel = Databaze.uivatel.Where(uzivatel => uzivatel.email == email).FirstOrDefault();
-            if (prihlasujiciseuzivatel == null)
+            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+            if ((prihlasujiciseuzivatel != null || heslo != null) && BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.Heslo))
             {
-                return RedirectToAction("Prihlaseni");
-            }
-            if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.heslo))
-            {
-                return RedirectToAction("Prihlaseni");
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("Klic", heslo);
+                return RedirectToAction("Zobrazeni", "Hesla");
             }
 
-            HttpContext.Session.SetString("email", email);
-            HttpContext.Session.SetString("klic", heslo);
+            return RedirectToAction("Prihlaseni");
 
-
-
-
-            return RedirectToAction("Zobrazeni", "Hesla");
         }
 
         // Registrace
@@ -48,7 +44,7 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Registrace(string jmeno, string heslo, string kontrola_hesla, string email)
         {
-            uzivatel? existujici = Databaze.uivatel.Where(uzivatel => uzivatel.email == email).FirstOrDefault();
+            uzivatel? existujici = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
 
             if (heslo == null || jmeno == null || kontrola_hesla == null || email == null || heslo != kontrola_hesla || jmeno == heslo || email == heslo || existujici != null)
             {
@@ -60,7 +56,7 @@ namespace Spravce_hesel.Controllers
 
 
             heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
-            Databaze.uivatel.Add(new uzivatel() { email = email, heslo = heslo, username = jmeno });
+            Databaze.uzivatel.Add(new uzivatel() { Email = email, Heslo = heslo, Username = jmeno });
             Databaze.SaveChanges();
 
             return RedirectToAction("Zobrazeni", "Hesla");
