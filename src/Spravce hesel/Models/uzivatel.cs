@@ -6,7 +6,7 @@ namespace Spravce_hesel.Models
     public class uzivatel
     {
         [Key]
-        public string email { get; set; }
+        public string? email { get; set; } = null;
 
         [Required]
         public string? username { get; set; } = null;
