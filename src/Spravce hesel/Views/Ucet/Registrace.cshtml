@@ -1,4 +1,5 @@
-﻿@{
+﻿@model uzivatel
+@{
     Layout = "_Layout";
     ViewData["Title"] = "Registrace";
 }
@@ -11,10 +12,13 @@
 
     <section>
         <form action="/Ucet/Registrace" method="post">
-            <input type="text" name="jmeno" placeholder="Zadejte uživatelské jméno..." /><br />
-            <input type="password" name="heslo" placeholder="Zadejte nové heslo..." /><br />
-            <input type="password" name="kontrola_hesla" placeholder="Znovu pro kontrolu..." /><br />
-            <input type="email" name="email" placeholder="Zadejte E-Mail..." /><br />
+            <input type="text" asp-for="Username" placeholder="Zadejte uživatelské jméno..." /><br />
+            <span asp-validation-for="Username" class="text-danger"></span><br />
+            <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." /><br />
+            <span asp-validation-for="Email" class="text-danger"></span><br />
+            <input type="password" asp-for="Heslo" placeholder="Zadejte nové heslo..." /><br />
+            <span asp-validation-for="Heslo" class="text-danger"></span><br />
+            <input type="password" name="Kontrola_hesla" placeholder="Znovu pro kontrolu..." /><br /><br />
             <input type="submit" value="Zaregistrovat se" />
         </form>
     </section>
