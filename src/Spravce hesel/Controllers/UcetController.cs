@@ -45,24 +45,22 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registrace(string jmeno, string heslo, string kontrola_hesla, string email)
+        public IActionResult Registrace(string jmeno, string email, string heslo, string kontrola_hesla)
         {
             uzivatel? existujici = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
 
-            if (heslo == null || jmeno == null || kontrola_hesla == null || email == null || heslo != kontrola_hesla || jmeno == heslo || email == heslo || existujici != null)
+            if (heslo != null && kontrola_hesla != null && email != null && heslo == kontrola_hesla && heslo != email && heslo != jmeno && heslo.Length >= 8)
             {
-                return RedirectToAction("Registrace", "Ucet");
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("Klic", heslo);
+
+                Databaze.uzivatel.Add(new uzivatel() { Email = email, Heslo = BCrypt.Net.BCrypt.HashPassword(heslo), Username = jmeno });
+                Databaze.SaveChanges();
+
+                return RedirectToAction("Zobrazeni", "Hesla");
             }
 
-            HttpContext.Session.SetString("email", email);
-            HttpContext.Session.SetString("klic", heslo);
-
-
-            heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
-            Databaze.uzivatel.Add(new uzivatel() { Email = email, Heslo = heslo, Username = jmeno });
-            Databaze.SaveChanges();
-
-            return RedirectToAction("Zobrazeni", "Hesla");
+            return RedirectToAction("Registrace", "Ucet");
         }
 
         // Nastavení
