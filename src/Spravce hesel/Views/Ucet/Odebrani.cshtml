@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Odebrání účtu";
+}
+
+<article>
+    <section>
+        <h2>Odebrání účtu</h2>
+
+        <form action="/Ucet/Odebrani" method="post">
+            <input type="checkbox" name="potvrzeni" />Opravdu si přejete odstranit svůj účet?<br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" /><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
+    </section>
+</article>

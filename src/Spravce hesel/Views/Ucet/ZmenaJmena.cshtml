@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Změna jména";
+}
+
+<article>
+    <section>
+        <h2>Změna jména</h2>
+
+        <form action="/Ucet/ZmenaJmena" method="post">
+            <input name="novejmeno" placeholder="Zadejte nové jméno..." type="text" /><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" /><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
+    </section>
+</article>

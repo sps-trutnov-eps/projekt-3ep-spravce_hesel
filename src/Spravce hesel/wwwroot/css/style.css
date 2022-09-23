@@ -1,0 +1,35 @@
+#container {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+a {
+  text-decoration: underline solid 1px auto;
+  color: black;
+}
+
+a.odkaz-vybran {
+  font-weight: bold;
+  color: cornflowerblue !important;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+}
+header h1 {
+  font-weight: bold;
+  font-size: 2em;
+}
+header nav div {
+  display: inline-block;
+}
+header nav a:not(:first-of-type) {
+  padding-left: 2em;
+}
+header nav a {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */

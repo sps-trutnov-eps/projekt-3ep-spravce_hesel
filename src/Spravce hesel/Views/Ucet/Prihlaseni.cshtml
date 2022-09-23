@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Přihlášení";
+}
+
+<article>
+    <section>
+        <h2>Přihlášení</h2>
+        <div><a href="javascript:void(0)" class="odkaz-vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div>
+    </section>
+
+    <section>
+        <form action="/Ucet/Prihlaseni" method="post">
+            <input type="text" name="jmeno" placeholder="Zadejte uživatelské jméno..." /><br />
+            <input type="password" name="heslo" placeholder="Zadejte heslo..." /><br />
+            <input type="submit" value="Přihlásit se" />
+        </form>
+    </section>
+</article>
