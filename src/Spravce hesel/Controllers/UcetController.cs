@@ -16,8 +16,25 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Prihlaseni(string jmeno, string heslo)
+        public IActionResult Prihlaseni(string email, string heslo)
         {
+
+            uzivatel? prihlasujiciseuzivatel = Databaze.uivatel.Where(uzivatel => uzivatel.email == email).FirstOrDefault();
+            if (prihlasujiciseuzivatel == null)
+            {
+                return RedirectToAction("Prihlaseni");
+            }
+            if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.heslo))
+            {
+                return RedirectToAction("Prihlaseni");
+            }
+
+            HttpContext.Session.SetString("email", email);
+            HttpContext.Session.SetString("klic", heslo);
+
+
+
+
             return RedirectToAction("Zobrazeni", "Hesla");
         }
 
