@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace Spravce_hesel.Models
 {
     public class uzivatel
