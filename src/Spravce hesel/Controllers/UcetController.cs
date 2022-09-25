@@ -47,20 +47,12 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Registrace(uzivatel obj, string kontrola_hesla)
         {
-            if (obj.Username == null ||obj.Username.Length < 2)
-            {
-                obj.Username = "Lmao";
-                ModelState.AddModelError("username", "◀ Jméno je příliš krátké.");
-            }
-           
+
+            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
+
             if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
                 ModelState.AddModelError("email", "◀ Tento email už existuje.");
-            }
-
-            if (obj.Email == null)
-            {
-                ModelState.AddModelError("email", "◀ Zadejte email.");
             }
 
             if (obj.Heslo != kontrola_hesla)
@@ -68,12 +60,17 @@ namespace Spravce_hesel.Controllers
                 ModelState.AddModelError("heslo", "◀ Hesla se neshodují.");
             }
 
+            foreach (var nah in objCategoryList)
+            {
+                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
+                {
+                    ModelState.AddModelError("heslo", "◀ Toto heslo používá už uživatel " + nah.Username + ", zvolte prosím jiné heslo.");
+                }
+            }
+
             if (obj.Heslo != null && obj.Heslo.Length > 7)
             {
                 obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
-            }
-            else {
-                ModelState.AddModelError("heslo", "◀ Heslo musí mít 8 znaků a více.");
             }
 
             if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
