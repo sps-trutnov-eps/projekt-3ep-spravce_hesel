@@ -7,6 +7,10 @@ namespace Spravce_hesel.Controllers
     public class UcetController : Controller
     {
         private Spravce_heselData Databaze { get; set; }
+        public UcetController(Spravce_heselData databaze)
+        {
+            Databaze = databaze;
+        }
 
         // Přihlášení
         [HttpGet]
@@ -18,24 +22,19 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Prihlaseni(string email, string heslo)
         {
-
-            uzivatel? prihlasujiciseuzivatel = Databaze.uivatel.Where(uzivatel => uzivatel.email == email).FirstOrDefault();
-            if (prihlasujiciseuzivatel == null)
+            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+            if (prihlasujiciseuzivatel != null && heslo != null && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
             {
-                return RedirectToAction("Prihlaseni");
+                if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.Heslo))
+                {
+                    HttpContext.Session.SetString("Email", email);
+                    HttpContext.Session.SetString("Klic", heslo);
+                    return RedirectToAction("Zobrazeni", "Hesla");
+                }
             }
-            if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.heslo))
-            {
-                return RedirectToAction("Prihlaseni");
-            }
 
-            HttpContext.Session.SetString("email", email);
-            HttpContext.Session.SetString("klic", heslo);
+            return RedirectToAction("Prihlaseni");
 
-
-
-
-            return RedirectToAction("Zobrazeni", "Hesla");
         }
 
         // Registrace
@@ -46,24 +45,45 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registrace(string jmeno, string heslo, string kontrola_hesla, string email)
+        public IActionResult Registrace(uzivatel obj, string kontrola_hesla)
         {
-            uzivatel? existujici = Databaze.uivatel.Where(uzivatel => uzivatel.email == email).FirstOrDefault();
 
-            if (heslo == null || jmeno == null || kontrola_hesla == null || email == null || heslo != kontrola_hesla || jmeno == heslo || email == heslo || existujici != null)
+            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
+
+            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
-                return RedirectToAction("Registrace", "Ucet");
+                ModelState.AddModelError("email", "◀ Tento email už existuje.");
             }
 
-            HttpContext.Session.SetString("email", email);
-            HttpContext.Session.SetString("klic", heslo);
+            if (obj.Heslo != kontrola_hesla)
+            {
+                ModelState.AddModelError("heslo", "◀ Hesla se neshodují.");
+            }
 
+            foreach (var nah in objCategoryList)
+            {
+                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
+                {
+                    ModelState.AddModelError("heslo", "◀ Toto heslo používá už uživatel " + nah.Username + ", zvolte prosím jiné heslo.");
+                }
+            }
 
-            heslo = BCrypt.Net.BCrypt.HashPassword(heslo);
-            Databaze.uivatel.Add(new uzivatel() { email = email, heslo = heslo, username = jmeno });
-            Databaze.SaveChanges();
+            if (obj.Heslo != null && obj.Heslo.Length > 7)
+            {
+                obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
+            }
 
-            return RedirectToAction("Zobrazeni", "Hesla");
+            if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            {
+                Databaze.uzivatel.Add(obj);
+                Databaze.SaveChanges();
+
+                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetString("Klic", obj.Heslo);
+
+                return RedirectToAction("Zobrazeni", "Hesla");
+            }
+            return View();
         }
 
         // Nastavení

@@ -1,7 +1,16 @@
-﻿#container {
+﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+// Container
+#container {
     max-width: 1000px;
     margin: 0 auto;
-    font-family: Arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+// Základní elementy
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-size: 2em;
 }
 
 a {
@@ -9,19 +18,10 @@ a {
     color: black;
 }
 
-a.odkaz-vybran {
-    font-weight: bold;
-    color: cornflowerblue !important;
-}
-
+// Header
 header {
     width: 100%;
     text-align: center;
-
-    h1 {
-        font-weight: bold;
-        font-size: 2em;
-    }
 
     nav {
         div {
@@ -37,3 +37,72 @@ header {
         }
     }
 }
+
+// Main a jeho součásti
+section:not(:last-of-type) {
+    padding-bottom: 1em;
+}
+
+// Footer
+
+// Specifické stránky
+// Přihlášení a registrace
+.login {
+    text-align: center;
+
+    a {
+        text-decoration: none;
+    }
+
+    a.odkaz-vybran {
+        font-weight: bold;
+        color: cornflowerblue !important;
+    }
+
+    form {
+        input {
+            padding: 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid lightblue;
+            border-radius: 4px;
+            background-size: 1em;
+            background-position: 15px 50%;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        input[type=password] {
+            background-image: url('../icons/key.png');
+            padding-left: 40px;
+        }
+
+        input[type=email] {
+            background-image: url('../icons/email.png');
+            padding-left: 40px;
+        }
+
+        input[type=text] {
+            background-image: url('../icons/user.png');
+            padding-left: 40px;
+        }
+
+        span {
+            position: absolute;
+            height: 60px;
+            line-height: 60px;
+            padding-top: 8px;
+            padding-left: 1rem;
+            color: red;
+            font-weight: bold;
+        }
+    }
+}
+
+// Zobrazení hesel
+
+// Oznámení
+
+// Přidávání hesel
+
+// Správa účtu

@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 #container {
   max-width: 1000px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  font-size: 2em;
 }
 
 a {
@@ -9,18 +15,9 @@ a {
   color: black;
 }
 
-a.odkaz-vybran {
-  font-weight: bold;
-  color: cornflowerblue !important;
-}
-
 header {
   width: 100%;
   text-align: center;
-}
-header h1 {
-  font-weight: bold;
-  font-size: 2em;
 }
 header nav div {
   display: inline-block;
@@ -30,6 +27,53 @@ header nav a:not(:first-of-type) {
 }
 header nav a {
   text-decoration: none;
+}
+
+section:not(:last-of-type) {
+  padding-bottom: 1em;
+}
+
+.login {
+  text-align: center;
+}
+.login a {
+  text-decoration: none;
+}
+.login a.odkaz-vybran {
+  font-weight: bold;
+  color: cornflowerblue !important;
+}
+.login form input {
+  padding: 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid lightblue;
+  border-radius: 4px;
+  background-size: 1em;
+  background-position: 15px 50%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.login form input[type=password] {
+  background-image: url("../icons/key.png");
+  padding-left: 40px;
+}
+.login form input[type=email] {
+  background-image: url("../icons/email.png");
+  padding-left: 40px;
+}
+.login form input[type=text] {
+  background-image: url("../icons/user.png");
+  padding-left: 40px;
+}
+.login form span {
+  position: absolute;
+  height: 60px;
+  line-height: 60px;
+  padding-top: 8px;
+  padding-left: 1rem;
+  color: red;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=style.css.map */
