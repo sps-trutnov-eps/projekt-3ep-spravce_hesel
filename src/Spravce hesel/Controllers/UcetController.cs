@@ -133,6 +133,10 @@ namespace Spravce_hesel.Controllers
         public IActionResult Odebrani(string heslo)
         {
             string? email = HttpContext.Session.GetString("Email");
+            if (email == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
             if (prihlaseny_uzivatel != null)
             {
@@ -144,10 +148,14 @@ namespace Spravce_hesel.Controllers
 
 
             List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
-            foreach (heslo h in hesla)
+            if (hesla == null)
             {
-                Databaze.heslo.Remove(h);
+                foreach (heslo h in hesla)
+                {
+                    Databaze.heslo.Remove(h);
+                }
             }
+            
             Databaze.uzivatel.Remove(prihlaseny_uzivatel);
 
 
