@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Data;
 using Spravce_hesel.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spravce_hesel.Controllers
 {
@@ -129,7 +132,28 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Odebrani(string heslo)
         {
+            string? email = HttpContext.Session.GetString("Email");
+            uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+            if (prihlaseny_uzivatel != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
+                {
+                    //misto pro vraceni chyby
+                }
+            }
+
+
+            List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
+            foreach (heslo h in hesla)
+            {
+                Databaze.heslo.Remove(h);
+            }
+            Databaze.uzivatel.Remove(prihlaseny_uzivatel);
+
+
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+
         }
     }
 }
