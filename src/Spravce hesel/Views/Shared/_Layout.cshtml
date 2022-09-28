@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Spravce Hesel</title>
         <link rel="stylesheet" href="~/css/style.css"/>
+        <link rel="stylesheet" href="~/icons/css/icons.css" />
     </head>
 
     <body class="@barevneTema">
@@ -24,11 +25,11 @@
                     <div class="nav-vlevo">
                         @if (barevneTema == "light")
                         {
-                            <a href="/Home/ZmenitbarevneTema" title="Zapnout tmavý režim"><img class="ikona" src="~/icons/moon.svg"></a>
+                            <a href="/Home/ZmenitbarevneTema" title="Zapnout tmavý režim" class="icon-moon"></a>
                         }
                         else
                         {
-                            <a href="/Home/ZmenitbarevneTema" title="Zapnout světlý režim"><img class="ikona" src="~/icons/sun.svg"></a>
+                            <a href="/Home/ZmenitbarevneTema" title="Zapnout světlý režim" class="icon-sun"></a>
                         }
                     </div>
 
@@ -43,12 +44,12 @@
                     <div class="nav-vpravo">
                         @if (uzivatel == null)
                         {
-                            <a href="/Ucet/Prihlaseni" title="Přihlášení a registrace"><img class="ikona" src="~/icons/user.svg" /></a>
+                            <a href="/Ucet/Prihlaseni" title="Přihlášení a registrace" class="icon-user"></a>
                         }
                         else
                         {
-                            <a href="/Ucet/Nastaveni" title="Nastavení účtu"><img class="ikona" src="~/icons/settings.png"/></a>
-                            <a href="/Ucet/Odhlaseni" title="Odhlášení"><img class="ikona" src="~/icons/logout.png"/></a>
+                            <a href="/Ucet/Nastaveni" title="Nastavení účtu" class="icon-settings"></a>
+                            <a href="/Ucet/Odhlaseni" title="Odhlášení" class="icon-logout"></a>
                         }
                     </div>
                 </nav>

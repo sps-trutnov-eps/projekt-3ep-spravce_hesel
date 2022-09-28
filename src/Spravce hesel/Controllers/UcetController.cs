@@ -139,7 +139,8 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Odhlaseni()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("Email");
+            HttpContext.Session.Remove("Klic");
             return RedirectToAction("Index", "Home");
         }
     }

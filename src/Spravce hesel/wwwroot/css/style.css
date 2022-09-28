@@ -12,11 +12,6 @@ a {
   color: black;
 }
 
-.ikona {
-  width: 1em;
-  height: 1em;
-}
-
 .dark {
   background-color: #252931;
   color: #c4c2c2;
@@ -27,10 +22,6 @@ a {
 .dark form input {
   background-color: #4a4a4b;
   color: #c4c2c2;
-}
-.dark .ikona {
-  color: #c4c2c2;
-  fill: #c4c2c2;
 }
 
 #container {
@@ -67,7 +58,12 @@ header nav a {
 }
 
 section:not(:last-of-type) {
-  padding-bottom: 1em;
+  padding-bottom: 2em;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
 }
 
 .login {
@@ -92,15 +88,15 @@ section:not(:last-of-type) {
   position: relative;
 }
 .login form input[type=password] {
-  background-image: url("../icons/key.svg");
+  background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
 }
 .login form input[type=email] {
-  background-image: url("../icons/email.svg");
+  background-image: url("../icons/svg/email.svg");
   padding-left: 40px;
 }
 .login form input[type=text] {
-  background-image: url("../icons/user.svg");
+  background-image: url("../icons/svg/user.svg");
   padding-left: 40px;
 }
 .login form span {

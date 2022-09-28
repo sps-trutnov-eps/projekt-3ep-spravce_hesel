@@ -15,11 +15,6 @@ a {
     color: black;
 }
 
-.ikona {
-    width: 1em;
-    height: 1em;
-}
-
 // Barevné motivy
 // Světlý mód
 
@@ -39,11 +34,6 @@ a {
             background-color: #4a4a4b;
             color: $barva-text;
         }
-    }
-
-    .ikona {
-        color: $barva-text;
-        fill: $barva-text;
     }
 }
 
@@ -85,7 +75,6 @@ header {
             text-align: right;
         }
 
-
         a {
             text-decoration: none;
             display: inline-block
@@ -95,10 +84,14 @@ header {
 
 // Main a jeho součásti
 section:not(:last-of-type) {
-    padding-bottom: 1em;
+    padding-bottom: 2em;
 }
 
 // Footer
+footer {
+    text-align: center;
+    width: 100%;
+}
 
 // Specifické stránky
 // Přihlášení a registrace
@@ -128,17 +121,17 @@ section:not(:last-of-type) {
         }
 
         input[type=password] {
-            background-image: url('../icons/key.svg');
+            background-image: url('../icons/svg/key.svg');
             padding-left: 40px;
         }
 
         input[type=email] {
-            background-image: url('../icons/email.svg');
+            background-image: url('../icons/svg/email.svg');
             padding-left: 40px;
         }
 
         input[type=text] {
-            background-image: url('../icons/user.svg');
+            background-image: url('../icons/svg/user.svg');
             padding-left: 40px;
         }
 
