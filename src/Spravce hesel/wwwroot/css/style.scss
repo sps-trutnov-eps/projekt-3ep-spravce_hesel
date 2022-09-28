@@ -1,21 +1,57 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-// Container
-#container {
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
 // Základní elementy
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     font-size: 2em;
+
+    a {
+        text-decoration: none;
+    }
 }
 
 a {
     text-decoration: underline solid 1px auto;
     color: black;
+}
+
+.ikona {
+    width: 1em;
+    height: 1em;
+}
+
+// Barevné motivy
+// Světlý mód
+
+// Tmavý mód
+.dark {
+    $barva-pozadi: #252931;
+    $barva-text: #c4c2c2;
+    background-color: $barva-pozadi;
+    color: $barva-text;
+
+    a {
+        color: $barva-text;
+    }
+
+    form {
+        input {
+            background-color: #4a4a4b;
+            color: $barva-text;
+        }
+    }
+
+    .ikona {
+        color: $barva-text;
+        fill: $barva-text;
+    }
+}
+
+// Container
+#container {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 // Header
@@ -26,14 +62,33 @@ header {
     nav {
         div {
             display: inline-block;
+            min-width: 3em;
+
+            a:not(:first-of-type) {
+                padding-left: 1em !important;
+            }
         }
 
-        a:not(:first-of-type) {
-            padding-left: 2em;
+        div.nav-vlevo {
+            float: left;
+            text-align: left;
         }
+
+        div.nav-stred {
+            a:not(:first-of-type) {
+                padding-left: 2em !important;
+            }
+        }
+
+        div.nav-vpravo {
+            float: right;
+            text-align: right;
+        }
+
 
         a {
             text-decoration: none;
+            display: inline-block
         }
     }
 }
@@ -73,17 +128,17 @@ section:not(:last-of-type) {
         }
 
         input[type=password] {
-            background-image: url('../icons/key.png');
+            background-image: url('../icons/key.svg');
             padding-left: 40px;
         }
 
         input[type=email] {
-            background-image: url('../icons/email.png');
+            background-image: url('../icons/email.svg');
             padding-left: 40px;
         }
 
         input[type=text] {
-            background-image: url('../icons/user.png');
+            background-image: url('../icons/user.svg');
             padding-left: 40px;
         }
 

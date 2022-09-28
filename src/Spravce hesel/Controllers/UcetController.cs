@@ -134,5 +134,13 @@ namespace Spravce_hesel.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        // Odhlášení
+        [HttpGet]
+        public IActionResult Odhlaseni()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
