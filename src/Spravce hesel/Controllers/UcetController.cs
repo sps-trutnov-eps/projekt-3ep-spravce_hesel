@@ -23,20 +23,34 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Prihlaseni(string email, string heslo)
+        public IActionResult Prihlaseni(uzivatel obj)
         {
-            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
-            if (prihlasujiciseuzivatel != null && heslo != null && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            ModelState.Clear();
+
+            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
+
+            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
+
+            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.Heslo))
+                ModelState.AddModelError("email", "◀ Tento uživatel neexistuje.");
+            }
+            else
+            {
+                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    HttpContext.Session.SetString("Email", email);
-                    HttpContext.Session.SetString("Klic", heslo);
-                    return RedirectToAction("Zobrazeni", "Hesla");
+                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
                 }
             }
 
-            return RedirectToAction("Prihlaseni");
+            if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            {
+                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetString("Klic", obj.Heslo);
+                return RedirectToAction("Zobrazeni", "Hesla");
+            }
+
+            return View();
 
         }
 
