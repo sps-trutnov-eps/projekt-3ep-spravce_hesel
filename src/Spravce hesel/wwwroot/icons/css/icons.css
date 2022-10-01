@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'icons';
-  src: url('../font/icons.eot?35081967');
-  src: url('../font/icons.eot?35081967#iefix') format('embedded-opentype'),
-       url('../font/icons.woff2?35081967') format('woff2'),
-       url('../font/icons.woff?35081967') format('woff'),
-       url('../font/icons.ttf?35081967') format('truetype'),
-       url('../font/icons.svg?35081967#icons') format('svg');
+  src: url('../font/icons.eot?59634066');
+  src: url('../font/icons.eot?59634066#iefix') format('embedded-opentype'),
+       url('../font/icons.woff2?59634066') format('woff2'),
+       url('../font/icons.woff?59634066') format('woff'),
+       url('../font/icons.ttf?59634066') format('truetype'),
+       url('../font/icons.svg?59634066#icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'icons';
-    src: url('../font/icons.svg?35081967#icons') format('svg');
+    src: url('../font/icons.svg?59634066#icons') format('svg');
   }
 }
 */
@@ -54,13 +54,17 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-bin:before { content: '\e800'; } /* '' */
-.icon-edit:before { content: '\e801'; } /* '' */
+.icon-sun:before { content: '\e800'; } /* '' */
+.icon-plus:before { content: '\e801'; } /* '' */
 .icon-email:before { content: '\e802'; } /* '' */
 .icon-key:before { content: '\e803'; } /* '' */
 .icon-logout:before { content: '\e804'; } /* '' */
-.icon-moon:before { content: '\e805'; } /* '' */
-.icon-plus:before { content: '\e806'; } /* '' */
-.icon-settings:before { content: '\e807'; } /* '' */
-.icon-sun:before { content: '\e808'; } /* '' */
-.icon-user:before { content: '\e809'; } /* '' */
+.icon-settings:before { content: '\e805'; } /* '' */
+.icon-user:before { content: '\e806'; } /* '' */
+.icon-bin:before { content: '\e807'; } /* '' */
+.icon-edit:before { content: '\e808'; } /* '' */
+.icon-eye:before { content: '\e809'; } /* '' */
+.icon-eye-off:before { content: '\e80a'; } /* '' */
+.icon-left:before { content: '\e80b'; } /* '' */
+.icon-right:before { content: '\e80c'; } /* '' */
+.icon-moon:before { content: '\f186'; } /* '' */

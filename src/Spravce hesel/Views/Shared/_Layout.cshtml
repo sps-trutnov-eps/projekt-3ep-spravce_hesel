@@ -14,6 +14,7 @@
         <title>@ViewData["Title"] - Spravce Hesel</title>
         <link rel="stylesheet" href="~/css/style.css"/>
         <link rel="stylesheet" href="~/icons/css/icons.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
     </head>
 
     <body class="@barevneTema">
@@ -58,12 +59,12 @@
             <main>
                 @RenderBody()
             </main>
-
+            
             <footer>
-                <div>&copy;Spravce Hesel 2022 – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
+                <div><b>&copy; Spravce Hesel 2022</b> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
             </footer>
 
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
 

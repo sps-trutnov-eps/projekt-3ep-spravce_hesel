@@ -3,15 +3,37 @@
     ViewData["Title"] = "Přidat heslo";
 }
 
-<article>
+<article class="pridat">
+    <h2>Přidat záznam hesla</h2>
     <section>
-        <h2>Přidat záznam hesla</h2>
+        <div>
+            <h3>Informace o záznamu</h3>
+            <form action="/Hesla/Pridat" method="post">
+                <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" /><br />
+                <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" /><br />
+                <input name="heslo" placeholder="Zadejte heslo používané pro danou službu..." type="password" id="gen_vystup" />
+                <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button>
+                <button type="button" id="gen_hesel_tlacitko" class="icon-left" onclick="gen_zapnuti()"></button><br />
+                <input value="Přidat záznam" type="submit"/>
+            </form>
+        </div>
 
-        <form action="/Hesla/Pridat" method="post">
-            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" /><br />
-            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" /><br />
-            <input name="heslo" placeholder="Zadejte heslo používané pro danou službu..." type="password" /><br />
-            <input value="Přidat záznam" type="submit"/>
-        </form>
+        <div id="gen_hesel" class="skryty">
+            <h3>Generátor hesla</h3>
+            <form onchange="generace(this)">
+                <div>
+                    <h4>Délka hesla</h4>
+                    <input type="range" min="8" max="48" value="16" id="gen_delka" /><span id="posuvnikvystup">16</span>
+                </div>
+
+                <div>
+                    <h4>Složení hesla</h4>
+                    <input type="checkbox" checked id="gen_mala" />Malá písmena<br />
+                    <input type="checkbox" checked id="gen_velka" />Velká písmena<br />
+                    <input type="checkbox" id="gen_cisla" />Čísla<br />
+                    <input type="checkbox" id="gen_znaky" />Speciální znaky<br />
+                </div>
+            </form>
+        </div>
     </section>
 </article>
