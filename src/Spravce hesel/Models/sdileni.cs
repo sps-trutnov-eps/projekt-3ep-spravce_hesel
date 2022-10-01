@@ -2,18 +2,19 @@
 
 namespace Spravce_hesel.Models
 {
-    public class uzivatel
+    public class sdileni
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string? Email { get; set; }
+        public int Id_hesla { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public string email { get; set; }
 
         [Required]
-        public string Heslo { get; set; }
+        public string sdilena_sifra { get; set; }
+
     }
 }
