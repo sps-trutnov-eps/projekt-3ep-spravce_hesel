@@ -31,9 +31,11 @@ function gen_zapnuti() {
 }
 
 function delka_hesla_aktualizace() {
-    var posuvnik = document.getElementById("gen_delka");
-    var vystup = document.getElementById("posuvnikvystup");
-    vystup.innerHTML = posuvnik.value; 
+    document.getElementById("posuvnikvystup").value = document.getElementById("gen_delka").value;
+}
+
+function delka_hesla_zapis() {
+    document.getElementById("gen_delka").value = document.getElementById("posuvnikvystup").value;
 }
 
 function generace(form) {
@@ -61,7 +63,7 @@ function generace(form) {
     });
 
     let skupina_symbolu;
-    count = 1;
+    count = 0;
     while (count != form.gen_delka.value) {
         skupina_symbolu = pouzivane_symboly[NahodneCislo(pouzivane_symboly.length)];
         vysledne_heslo = vysledne_heslo.concat(skupina_symbolu[NahodneCislo(skupina_symbolu.length)]);

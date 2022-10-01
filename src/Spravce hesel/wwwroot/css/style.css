@@ -47,10 +47,14 @@ form input {
   background-color: #4a4a4b;
   color: #c4c2c2;
 }
+.dark form button {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+}
 
 #container {
   font-family: "Source Sans Pro", sans-serif;
-  max-width: 1000px;
+  width: 1000px;
   margin: 0 auto;
 }
 
@@ -79,9 +83,6 @@ header nav div.nav-vpravo {
 header nav a {
   text-decoration: none;
   display: inline-block;
-}
-header nav a:hover {
-  color: lightblue;
 }
 
 section:not(:last-of-type) {
@@ -137,7 +138,8 @@ footer {
 .pridat form input[type=range] {
   -webkit-appearance: none;
   width: 75%;
-  height: 4px;
+  padding: 0;
+  height: 0.5em;
   border-radius: 5px;
   outline: none;
   opacity: 0.7;
@@ -160,17 +162,25 @@ footer {
   background-color: lightblue;
   cursor: pointer;
 }
+.pridat form #posuvnikvystup {
+  height: 1em;
+  width: 1.1em;
+  padding: 0.5em;
+  margin-left: 1em;
+}
+.pridat form button {
+  border: 2px solid lightblue;
+  border-radius: 4px;
+}
 .pridat section > div {
   width: calc(50% - 2px);
   display: inline-block;
   margin: 0;
   padding: 0;
+  vertical-align: top;
 }
 .pridat section div#gen_hesel.skryty {
   display: none;
-}
-.pridat section div#gen_hesel.zobrazeny {
-  display: inline-block;
 }
 
 /*# sourceMappingURL=style.css.map */

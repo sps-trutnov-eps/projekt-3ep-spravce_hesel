@@ -8,7 +8,7 @@
     <section>
         <div>
             <h3>Informace o záznamu</h3>
-            <form action="/Hesla/Pridat" method="post">
+            <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
                 <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" /><br />
                 <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" /><br />
                 <input name="heslo" placeholder="Zadejte heslo používané pro danou službu..." type="password" id="gen_vystup" />
@@ -23,7 +23,7 @@
             <form onchange="generace(this)">
                 <div>
                     <h4>Délka hesla</h4>
-                    <input type="range" min="8" max="48" value="16" id="gen_delka" /><span id="posuvnikvystup">16</span>
+                    <input type="range" min="4" max="64" value="16" id="gen_delka" /><input type="text" id="posuvnikvystup" onchange="delka_hesla_zapis()" value="16" />
                 </div>
 
                 <div>
