@@ -14,6 +14,7 @@ namespace Spravce_hesel.Data
 
         public DbSet<Models.uzivatel> uzivatel { get; set; }
         public DbSet<Models.heslo> heslo { get; set; }
+        public DbSet<Models.sdileni> sdileni { get; set; }
 
         public Spravce_heselData (DbContextOptions<Spravce_heselData> options) : base(options) { }
     }
