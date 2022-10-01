@@ -1,27 +1,104 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@charset "UTF-8";
+
+// Barevné schéma
+$barva-text: black;
+$barva-text-sekundar: cornflowerblue;
+$barva-pozadi: white;
+$barva-pozadi-sekundar: #4a4a4b;
 
 // Základní elementy
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
-    font-size: 2em;
 
     a {
         text-decoration: none;
     }
 }
 
+h1, h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+h4, h5, h6 {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
 a {
     text-decoration: underline solid 1px auto;
-    color: black;
+    color: $barva-text;
+}
+
+form {
+    input {
+        padding: 20px;
+        margin: 8px 0;
+        border: 2px solid $barva-text-sekundar;
+        border-radius: 4px;
+        background-size: 1em;
+        background-position: 15px 50%;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 75%;
+        padding: 0;
+        height: .5em;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: $barva-text-sekundar;
+        cursor: pointer;
+    }
+
+    input[type=range]::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: $barva-text-sekundar;
+        cursor: pointer;
+    }
+
+    #posuvnikvystup {
+        height: 1em;
+        width: 1.1em;
+        padding: .5em;
+        margin-left: 1em;
+    }
+
+    button {
+        border: 2px solid $barva-text-sekundar;
+        border-radius: 4px;
+    }
 }
 
 // Barevné motivy
-// Světlý mód
+// Světlý motiv
 
-// Tmavý mód
+// Tmavý motiv
 .dark {
-    $barva-pozadi: #252931;
     $barva-text: #c4c2c2;
+    $barva-text-sekundar: lightblue;
+    $barva-pozadi: #252931;
+    $barva-pozadi-sekundar: #4a4a4b;
+
     background-color: $barva-pozadi;
     color: $barva-text;
 
@@ -29,19 +106,39 @@ a {
         color: $barva-text;
     }
 
+    a.odkaz-vybran {
+        font-weight: bold;
+        color: $barva-text-sekundar !important;
+    }
+
     form {
         input {
-            background-color: #4a4a4b;
+            background-color: $barva-pozadi-sekundar;
             color: $barva-text;
+            border-color: $barva-text-sekundar;
+        }
+
+        button {
+            background-color: $barva-pozadi-sekundar;
+            color: $barva-text;
+            border-color: $barva-text-sekundar !important;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            background-color: $barva-text-sekundar !important;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: $barva-text-sekundar !important;
         }
     }
 }
 
 // Container
 #container {
-    max-width: 1000px;
-    margin: 0 auto;
     font-family: 'Source Sans Pro', sans-serif;
+    width: 1000px;
+    margin: 0 auto;
 }
 
 // Header
@@ -55,7 +152,7 @@ header {
             min-width: 3em;
 
             a:not(:first-of-type) {
-                padding-left: 1em !important;
+                padding-left: 1em;
             }
         }
 
@@ -66,7 +163,7 @@ header {
 
         div.nav-stred {
             a:not(:first-of-type) {
-                padding-left: 2em !important;
+                padding-left: 2em;
             }
         }
 
@@ -104,46 +201,32 @@ footer {
 
     a.odkaz-vybran {
         font-weight: bold;
-        color: cornflowerblue !important;
+        color: $barva-text-sekundar;
     }
 
-    form {
-        input {
-            padding: 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 2px solid lightblue;
-            border-radius: 4px;
-            background-size: 1em;
-            background-position: 15px 50%;
-            background-repeat: no-repeat;
-            position: relative;
-        }
+    input[type=password] {
+        background-image: url('../icons/svg/key.svg');
+        padding-left: 40px;
+    }
 
-        input[type=password] {
-            background-image: url('../icons/svg/key.svg');
-            padding-left: 40px;
-        }
+    input[type=email] {
+        background-image: url('../icons/svg/email.svg');
+        padding-left: 40px;
+    }
 
-        input[type=email] {
-            background-image: url('../icons/svg/email.svg');
-            padding-left: 40px;
-        }
+    input[type=text] {
+        background-image: url('../icons/svg/user.svg');
+        padding-left: 40px;
+    }
 
-        input[type=text] {
-            background-image: url('../icons/svg/user.svg');
-            padding-left: 40px;
-        }
-
-        span {
-            position: absolute;
-            height: 60px;
-            line-height: 60px;
-            padding-top: 8px;
-            padding-left: 1rem;
-            color: red;
-            font-weight: bold;
-        }
+    span {
+        position: absolute;
+        height: 60px;
+        line-height: 60px;
+        padding-top: 8px;
+        padding-left: 1rem;
+        color: red;
+        font-weight: bold;
     }
 }
 
@@ -152,5 +235,32 @@ footer {
 // Oznámení
 
 // Přidávání hesel
+.pridat {
+    form {
+        width: 100%;
+
+        input[type=email], input[type=text] {
+            width: 75%;
+        }
+
+        input#gen_vystup {
+            width: 50%;
+        }
+    }
+
+    section {
+        > div {
+            width: calc(50% - 2px);
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            vertical-align: top;
+        }
+
+        div#gen_hesel.skryty {
+            display: none;
+        }
+    }
+}
 
 // Správa účtu
