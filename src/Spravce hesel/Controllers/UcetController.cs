@@ -146,36 +146,45 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Odebrani(string heslo)
         {
+
+            ModelState.Clear();
+
             string? email = HttpContext.Session.GetString("Email");
             if (email == null)
             {
                 return RedirectToAction("Index", "Home");
             }
             uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+
             if (prihlaseny_uzivatel != null)
             {
                 if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    //misto pro vraceni chyby
+                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
                 }
             }
 
-
-            List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
-            if (hesla == null)
+            if (ModelState.IsValid)
             {
-                foreach (heslo h in hesla)
+                List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
+                if (hesla == null)
                 {
-                    Databaze.heslo.Remove(h);
+                    foreach (heslo h in hesla)
+                    {
+                        Databaze.heslo.Remove(h);
+                    }
                 }
+
+                Databaze.uzivatel.Remove(prihlaseny_uzivatel);
+                Databaze.SaveChanges();
+
+
+                HttpContext.Session.Remove("Email");
+                HttpContext.Session.Remove("Klic");
+                return RedirectToAction("Index", "Home");
             }
-            
-            Databaze.uzivatel.Remove(prihlaseny_uzivatel);
 
-
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-
+            return View();
         }
 
         // Odhlášení
