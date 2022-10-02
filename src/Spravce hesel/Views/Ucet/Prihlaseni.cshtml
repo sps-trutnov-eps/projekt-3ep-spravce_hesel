@@ -1,4 +1,5 @@
-﻿@{
+﻿@model uzivatel
+@{
     Layout = "_Layout";
     ViewData["Title"] = "Přihlášení";
 }
@@ -11,8 +12,14 @@
 
     <section>
         <form action="/Ucet/Prihlaseni" method="post">
-            <input type="email" name="email" placeholder="Zadejte E-Mail..." /><br />
-            <input type="password" name="heslo" placeholder="Zadejte heslo..." /><br />
+            <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')"/>
+            <span asp-validation-for="Email"></span><br />
+            <input type="password" name="heslo" placeholder="Zadejte heslo..." required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')"/>
+            <span asp-validation-for="Heslo"></span><br />
             <input type="submit" value="Přihlásit se" />
         </form>
     </section>
