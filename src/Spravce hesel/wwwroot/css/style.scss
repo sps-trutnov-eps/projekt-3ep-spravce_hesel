@@ -104,11 +104,13 @@ form {
         padding: .5em;
         margin-left: 1em;
     }
+}
 
-    button {
-        border: 2px solid $barva-text-sekundar;
-        border-radius: 4px;
-    }
+button {
+    border: 2px solid $barva-text-sekundar;
+    border-radius: 4px;
+    padding: .25em .5em;
+    margin-block: .25em;
 }
 
 .center {
@@ -123,6 +125,18 @@ span.chyba {
     padding-left: 1rem;
     color: red;
     font-weight: bold;
+}
+
+article.split section {
+    width: calc(50% - 2px);
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+section.skryty {
+    display: none !important;
 }
 
 // Barevné motivy
@@ -155,6 +169,12 @@ span.chyba {
         border-top: 2px solid $barva-text-sekundar;
     }
 
+    button {
+        background-color: $barva-pozadi-sekundar;
+        color: $barva-text;
+        border-color: $barva-text-sekundar !important;
+    }
+
     form {
         input {
             background-color: $barva-pozadi-sekundar;
@@ -162,11 +182,6 @@ span.chyba {
             border-color: $barva-text-sekundar;
         }
 
-        button {
-            background-color: $barva-pozadi-sekundar;
-            color: $barva-text;
-            border-color: $barva-text-sekundar !important;
-        }
 
         input[type=range]::-webkit-slider-thumb {
             background-color: $barva-text-sekundar !important;
@@ -356,14 +371,6 @@ footer {
             background-image: url('../icons/svg/key.svg');
             padding-left: 40px;
         }
-    }
-
-    section {
-        width: calc(50% - 2px);
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        vertical-align: top;
     }
 }
 

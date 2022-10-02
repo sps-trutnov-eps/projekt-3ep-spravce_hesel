@@ -86,9 +86,12 @@ form #posuvnikvystup {
   padding: 0.5em;
   margin-left: 1em;
 }
-form button {
+
+button {
   border: 2px solid cornflowerblue;
   border-radius: 4px;
+  padding: 0.25em 0.5em;
+  margin-block: 0.25em;
 }
 
 .center {
@@ -103,6 +106,18 @@ span.chyba {
   padding-left: 1rem;
   color: red;
   font-weight: bold;
+}
+
+article.split section {
+  width: calc(50% - 2px);
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+section.skryty {
+  display: none !important;
 }
 
 .dark {
@@ -122,15 +137,15 @@ span.chyba {
 .dark footer {
   border-top: 2px solid lightblue;
 }
+.dark button {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue !important;
+}
 .dark form input {
   background-color: #4a4a4b;
   color: #c4c2c2;
   border-color: lightblue;
-}
-.dark form button {
-  background-color: #4a4a4b;
-  color: #c4c2c2;
-  border-color: lightblue !important;
 }
 .dark form input[type=range]::-webkit-slider-thumb {
   background-color: lightblue !important;
@@ -275,13 +290,6 @@ footer {
   width: 50%;
   background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
-}
-.pridat section {
-  width: calc(50% - 2px);
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  vertical-align: top;
 }
 
 /*# sourceMappingURL=style.css.map */
