@@ -1,5 +1,6 @@
 ﻿@model uzivatel
 @{
+
     Layout = "_Layout";
     ViewData["Title"] = "Nastavení účtu";
 }
@@ -15,16 +16,13 @@
 
     <section id="informace"> @*Zde dodělat zobrazení informací u účtu*@
         <h3>Informace o účtu</h3>
-        <p>Uživatelské jméno: </p>
-        <p>E-Mail: </p><br />
-        <p>Počet uložených hesel:</p>
-        <p>Počet mých sdílených hesel: </p>
-        <p>Počet mně nasdílených hesel: </p>
+        <p><b>Uživatelské jméno:</b> @Model.Username</p>
+        <p><b>E-Mail:</b> @Model.Email</p>
     </section>
 
     <section id="zmena_jmena" class="skryty">
         <h3>Změna jména účtu</h3>
-        <form action="/Ucet/ZmenaJmena" method="post">
+        <form action="/Ucet/ZmenaJmena" method="post" onkeydown="return event.key != 'Enter';">
             <input name="novejmeno" placeholder="Zadejte nové jméno..." class="username" type="text" required /><br />
             <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required />
             <span asp-validation-for="Heslo" class="chyba"></span><br />
@@ -34,7 +32,7 @@
 
     <section id="zmena_hesla" class="skryty">
         <h3>Změna hesla účtu</h3>
-        <form action="/Ucet/ZmenaHesla" method="post">
+        <form action="/Ucet/ZmenaHesla" method="post" onkeydown="return event.key != 'Enter';">
             <input name="noveheslo" placeholder="Zadejte nové heslo..." type="password" required /><br />
             <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required />
             <span asp-validation-for="Heslo" class="chyba"></span><br />
@@ -44,7 +42,7 @@
 
     <section id="odstraneni" class="skryty">
         <h3>Odstranění účtu</h3>
-        <form action="/Ucet/Odebrani" method="post">
+        <form action="/Ucet/Odebrani" method="post" onkeydown="return event.key != 'Enter';">
             <input type="checkbox" name="potvrzeni" required
                    oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
                    oninput="this.setCustomValidity('')" /> Opravdu si přejete odstranit svůj účet? <br />

@@ -132,10 +132,10 @@ section.skryty {
   color: lightblue !important;
 }
 .dark header {
-  border-bottom: 2px solid lightblue;
+  border-bottom-color: lightblue;
 }
 .dark footer {
-  border-top: 2px solid lightblue;
+  border-top-color: lightblue;
 }
 .dark button {
   background-color: #4a4a4b;
@@ -179,7 +179,7 @@ section.skryty {
 
 header {
   text-align: center;
-  border-bottom: 2px solid cornflowerblue;
+  border-bottom: 1px solid cornflowerblue;
 }
 header nav > div {
   display: inline-block;
@@ -254,7 +254,7 @@ section:not(:last-of-type) {
 }
 
 footer {
-  border-top: 2px solid cornflowerblue;
+  border-top: 1px solid cornflowerblue;
   text-align: center;
   position: absolute;
   bottom: 0;

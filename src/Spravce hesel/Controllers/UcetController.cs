@@ -107,7 +107,12 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Nastaveni()
         {
-            return View();
+            uzivatel? uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == HttpContext.Session.GetString("Email")).FirstOrDefault();
+
+            if (uzivatel != null)
+                return View(uzivatel);
+
+            return RedirectToAction("Index", "Home");
         }
 
         // Změna jména
