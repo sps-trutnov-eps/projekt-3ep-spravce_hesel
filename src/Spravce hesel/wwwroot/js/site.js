@@ -16,20 +16,6 @@ function zobrazeni_hesla() {
     };
 }
 
-function gen_zapnuti() {
-    let generator = document.getElementById("gen_hesel");
-    let tlacitko = document.getElementById("gen_hesel_tlacitko");
-    
-    if (generator.className == "skryty") {
-        generator.className = "zobrazeny";
-        tlacitko.className = "icon-right";
-    }
-    else {
-        generator.className = "skryty";
-        tlacitko.className = "icon-left";
-    };
-}
-
 function delka_hesla_aktualizace() {
     document.getElementById("posuvnikvystup").value = document.getElementById("gen_delka").value;
 }

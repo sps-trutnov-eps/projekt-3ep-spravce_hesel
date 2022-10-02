@@ -1,0 +1,9 @@
+Server: https://www.svgrepo.com/svg/135603/server
+Sun: https://www.svgrepo.com/svg/59691/sun
+Settings: https://www.svgrepo.com/svg/13646/settings
+Moon: https://www.svgrepo.com/svg/6390/moon
+Exit: https://www.svgrepo.com/svg/361486/exit
+Key: https://www.svgrepo.com/svg/34405/key
+EMail: https://www.svgrepo.com/svg/43274/email
+Edit: https://www.svgrepo.com/svg/6755/edit
+Bin: https://www.svgrepo.com/svg/175161/recycle-bin
