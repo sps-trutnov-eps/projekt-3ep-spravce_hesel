@@ -1,5 +1,5 @@
 ﻿@{
-    string? uzivatel = HttpContextAccessor.HttpContext.Session.GetString("Email");
+    int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
     string? barevneTema = HttpContextAccessor.HttpContext.Session.GetString("Tema");
 
     if (barevneTema == null)

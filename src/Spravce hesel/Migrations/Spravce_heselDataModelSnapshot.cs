@@ -29,10 +29,6 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Hash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,6 +36,9 @@ namespace Spravce_hesel.Migrations
                     b.Property<string>("Sifra")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("userID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -72,25 +71,21 @@ namespace Spravce_hesel.Migrations
 
             modelBuilder.Entity("Spravce_hesel.Models.uzivatel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Heslo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Email");
 
                     b.ToTable("uzivatel");
                 });
