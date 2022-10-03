@@ -45,7 +45,7 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
             {
-                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetInt32("ID", obj.Id);
                 HttpContext.Session.SetString("Klic", obj.Heslo);
                 return RedirectToAction("Zobrazeni", "Hesla");
             }
@@ -90,12 +90,30 @@ namespace Spravce_hesel.Controllers
                 obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
             }
 
-            if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            bool kontrola = true;
+            Random randID = new Random();
+            while (kontrola) {
+                obj.Id = randID.Next(1, 1000000);
+                kontrola = false;
+                foreach (var nah in objCategoryList)
+                {
+                    if (nah.Id == obj.Id)
+                    {
+                        kontrola = true;
+                    }
+                }
+            }
+            
+
+
+            if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
             {
+                
+
                 Databaze.uzivatel.Add(obj);
                 Databaze.SaveChanges();
 
-                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetInt32("ID", obj.Id);
                 HttpContext.Session.SetString("Klic", obj.Heslo);
 
                 return RedirectToAction("Zobrazeni", "Hesla");
@@ -154,12 +172,15 @@ namespace Spravce_hesel.Controllers
 
             ModelState.Clear();
 
-            string? email = HttpContext.Session.GetString("Email");
-            if (email == null)
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            if (uzivatelID == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+
+
+
+            uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
 
             if (prihlaseny_uzivatel != null)
             {
@@ -171,7 +192,7 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid)
             {
-                List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
+                List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.userID == uzivatelID).ToList();
                 if (hesla == null)
                 {
                     foreach (heslo h in hesla)
@@ -184,7 +205,7 @@ namespace Spravce_hesel.Controllers
                 Databaze.SaveChanges();
 
 
-                HttpContext.Session.Remove("Email");
+                HttpContext.Session.Remove("ID");
                 HttpContext.Session.Remove("Klic");
                 return RedirectToAction("Index", "Home");
             }
@@ -196,7 +217,7 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Odhlaseni()
         {
-            HttpContext.Session.Remove("Email");
+            HttpContext.Session.Remove("ID");
             HttpContext.Session.Remove("Klic");
             return RedirectToAction("Index", "Home");
         }
