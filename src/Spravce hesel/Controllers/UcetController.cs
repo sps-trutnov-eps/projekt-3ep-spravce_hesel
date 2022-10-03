@@ -23,20 +23,34 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Prihlaseni(string email, string heslo)
+        public IActionResult Prihlaseni(uzivatel obj)
         {
-            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
-            if (prihlasujiciseuzivatel != null && heslo != null && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            ModelState.Clear();
+
+            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
+
+            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
+
+            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                if (BCrypt.Net.BCrypt.Verify(heslo, prihlasujiciseuzivatel.Heslo))
+                ModelState.AddModelError("email", "◀ Tento uživatel neexistuje.");
+            }
+            else
+            {
+                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    HttpContext.Session.SetString("Email", email);
-                    HttpContext.Session.SetString("Klic", heslo);
-                    return RedirectToAction("Zobrazeni", "Hesla");
+                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
                 }
             }
 
-            return RedirectToAction("Prihlaseni");
+            if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
+            {
+                HttpContext.Session.SetString("Email", obj.Email);
+                HttpContext.Session.SetString("Klic", obj.Heslo);
+                return RedirectToAction("Zobrazeni", "Hesla");
+            }
+
+            return View();
 
         }
 
@@ -132,36 +146,54 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Odebrani(string heslo)
         {
+
+            ModelState.Clear();
+
             string? email = HttpContext.Session.GetString("Email");
             if (email == null)
             {
                 return RedirectToAction("Index", "Home");
             }
             uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == email).FirstOrDefault();
+
             if (prihlaseny_uzivatel != null)
             {
                 if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    //misto pro vraceni chyby
+                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
                 }
             }
 
-
-            List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
-            if (hesla == null)
+            if (ModelState.IsValid)
             {
-                foreach (heslo h in hesla)
+                List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.Email == email).ToList();
+                if (hesla == null)
                 {
-                    Databaze.heslo.Remove(h);
+                    foreach (heslo h in hesla)
+                    {
+                        Databaze.heslo.Remove(h);
+                    }
                 }
+
+                Databaze.uzivatel.Remove(prihlaseny_uzivatel);
+                Databaze.SaveChanges();
+
+
+                HttpContext.Session.Remove("Email");
+                HttpContext.Session.Remove("Klic");
+                return RedirectToAction("Index", "Home");
             }
-            
-            Databaze.uzivatel.Remove(prihlaseny_uzivatel);
 
+            return View();
+        }
 
-            HttpContext.Session.Clear();
+        // Odhlášení
+        [HttpGet]
+        public IActionResult Odhlaseni()
+        {
+            HttpContext.Session.Remove("Email");
+            HttpContext.Session.Remove("Klic");
             return RedirectToAction("Index", "Home");
-
         }
     }
 }

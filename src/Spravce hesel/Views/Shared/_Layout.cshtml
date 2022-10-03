@@ -1,32 +1,70 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string? uzivatel = HttpContextAccessor.HttpContext.Session.GetString("Email");
+    string? barevneTema = HttpContextAccessor.HttpContext.Session.GetString("Tema");
+
+    if (barevneTema == null)
+        barevneTema = "light";
+}
+
+<!DOCTYPE html>
 <html lang="cs">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Spravce Hesel</title>
         <link rel="stylesheet" href="~/css/style.css"/>
+        <link rel="stylesheet" href="~/icons/css/icons.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
     </head>
 
-    <body>
+    <body class="@barevneTema">
         <div id="container">
             <header>
-                <h1>Správce hesel</h1>
+                <h1><a href="/Home/Index">Správce hesel</a></h1>
 
                 <nav>
-                    <a href="/Home/Index">Domovská stránka</a>
-                    <a href="/Ucet/Prihlaseni">Přihlášení</a>
+                    <div class="nav-vlevo">
+                        @if (barevneTema == "light")
+                        {
+                            <a href="/Home/ZmenitbarevneTema" title="Zapnout tmavý režim" class="icon-moon"></a>
+                        }
+                        else
+                        {
+                            <a href="/Home/ZmenitbarevneTema" title="Zapnout světlý režim" class="icon-sun"></a>
+                        }
+                    </div>
+
+                    <div class="nav-stred">
+                        <a href="/Home/Index">Domovská stránka</a>
+                        @if (uzivatel != null)
+                        {
+                            <a href="/Hesla/Zobrazeni">Moje Hesla</a>
+                        }
+                    </div>
+
+                    <div class="nav-vpravo">
+                        @if (uzivatel == null)
+                        {
+                            <a href="/Ucet/Prihlaseni" title="Přihlášení a registrace" class="icon-user"></a>
+                        }
+                        else
+                        {
+                            <a href="/Ucet/Nastaveni" title="Nastavení účtu" class="icon-settings"></a>
+                            <a href="/Ucet/Odhlaseni" title="Odhlášení" class="icon-logout"></a>
+                        }
+                    </div>
                 </nav>
             </header>
 
             <main>
                 @RenderBody()
             </main>
-
+            
             <footer>
-                <div>&copy;Spravce Hesel 2022 – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
+                <div><b>&copy; Spravce Hesel 2022</b> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
             </footer>
 
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
 

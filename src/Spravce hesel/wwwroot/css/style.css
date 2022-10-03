@@ -1,18 +1,109 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
-#container {
-  max-width: 1000px;
-  margin: 0 auto;
-  font-family: "Source Sans Pro", sans-serif;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
-  font-size: 2em;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  text-decoration: none;
+}
+
+h1, h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+h4, h5, h6 {
+  font-size: 1rem;
+  margin-bottom: 0;
 }
 
 a {
   text-decoration: underline solid 1px auto;
   color: black;
+}
+
+form input {
+  padding: 20px;
+  margin: 8px 0;
+  border: 2px solid cornflowerblue;
+  border-radius: 4px;
+  background-size: 1em;
+  background-position: 15px 50%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+form input[type=range] {
+  -webkit-appearance: none;
+  width: 75%;
+  padding: 0;
+  height: 0.5em;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+form input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
+form input[type=range]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
+form #posuvnikvystup {
+  height: 1em;
+  width: 1.1em;
+  padding: 0.5em;
+  margin-left: 1em;
+}
+form button {
+  border: 2px solid cornflowerblue;
+  border-radius: 4px;
+}
+
+.dark {
+  background-color: #252931;
+  color: #c4c2c2;
+}
+.dark a {
+  color: #c4c2c2;
+}
+.dark a.odkaz-vybran {
+  font-weight: bold;
+  color: lightblue !important;
+}
+.dark form input {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue;
+}
+.dark form button {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue !important;
+}
+.dark form input[type=range]::-webkit-slider-thumb {
+  background-color: lightblue !important;
+}
+.dark form input[type=range]::-moz-range-thumb {
+  background-color: lightblue !important;
+}
+
+#container {
+  font-family: "Source Sans Pro", sans-serif;
+  width: 1000px;
+  margin: 0 auto;
 }
 
 header {
@@ -21,16 +112,34 @@ header {
 }
 header nav div {
   display: inline-block;
+  min-width: 3em;
 }
-header nav a:not(:first-of-type) {
+header nav div a:not(:first-of-type) {
+  padding-left: 1em;
+}
+header nav div.nav-vlevo {
+  float: left;
+  text-align: left;
+}
+header nav div.nav-stred a:not(:first-of-type) {
   padding-left: 2em;
+}
+header nav div.nav-vpravo {
+  float: right;
+  text-align: right;
 }
 header nav a {
   text-decoration: none;
+  display: inline-block;
 }
 
 section:not(:last-of-type) {
-  padding-bottom: 1em;
+  padding-bottom: 2em;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
 }
 
 .login {
@@ -41,32 +150,21 @@ section:not(:last-of-type) {
 }
 .login a.odkaz-vybran {
   font-weight: bold;
-  color: cornflowerblue !important;
+  color: cornflowerblue;
 }
-.login form input {
-  padding: 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid lightblue;
-  border-radius: 4px;
-  background-size: 1em;
-  background-position: 15px 50%;
-  background-repeat: no-repeat;
-  position: relative;
-}
-.login form input[type=password] {
-  background-image: url("../icons/key.png");
+.login input[type=password] {
+  background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
 }
-.login form input[type=email] {
-  background-image: url("../icons/email.png");
+.login input[type=email] {
+  background-image: url("../icons/svg/email.svg");
   padding-left: 40px;
 }
-.login form input[type=text] {
-  background-image: url("../icons/user.png");
+.login input[type=text] {
+  background-image: url("../icons/svg/user.svg");
   padding-left: 40px;
 }
-.login form span {
+.login span {
   position: absolute;
   height: 60px;
   line-height: 60px;
@@ -74,6 +172,26 @@ section:not(:last-of-type) {
   padding-left: 1rem;
   color: red;
   font-weight: bold;
+}
+
+.pridat form {
+  width: 100%;
+}
+.pridat form input[type=email], .pridat form input[type=text] {
+  width: 75%;
+}
+.pridat form input#gen_vystup {
+  width: 50%;
+}
+.pridat section > div {
+  width: calc(50% - 2px);
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+.pridat section div#gen_hesel.skryty {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
