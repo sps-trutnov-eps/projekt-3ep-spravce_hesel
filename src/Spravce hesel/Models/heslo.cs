@@ -9,7 +9,7 @@ namespace Spravce_hesel.Models
         public int Id { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public int userID { get; set; }
 
         [Required]
         public string Hash { get; set; }

@@ -1,9 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Spravce_hesel.Data;
+using Spravce_hesel.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spravce_hesel.Controllers
 {
+    
     public class HeslaController : Controller
     {
+        private Spravce_heselData Databaze { get; set; }
+
+        [HttpGet]
         public IActionResult Zobrazeni()
         {
             return View();

@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 
 namespace Spravce_hesel.Models
 {
     public class uzivatel
     {
-        [Key]
+        [Required]
         public int Id { get; set; }
 
-        [Required]
+        [Key]
         public string? Email { get; set; }
 
         [Required]
