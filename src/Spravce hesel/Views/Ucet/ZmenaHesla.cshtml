@@ -1,15 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
     ViewData["Title"] = "Změna hesla";
 }
 
-<article>
+<article class="center">
     <section>
         <h2>Změna hesla</h2>
 
         <form action="/Ucet/ZmenaHesla" method="post">
-            <input name="noveheslo" placeholder="Zadejte nové heslo..." type="password" /><br />
-            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" /><br />
+            <input name="noveheslo" placeholder="Zadejte nové heslo..." type="password" required /><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
             <input type="submit" value="Potvrdit" />
         </form>
     </section>

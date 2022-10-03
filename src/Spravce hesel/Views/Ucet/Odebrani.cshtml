@@ -1,10 +1,9 @@
 ﻿@model uzivatel
 @{
-    Layout = "_Layout";
     ViewData["Title"] = "Odebrání účtu";
 }
 
-<article class="login">
+<article class="center">
     <section>
         <h2>Odebrání účtu</h2>
 
@@ -15,7 +14,7 @@
             <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
             oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
             oninput="this.setCustomValidity('')"/>
-            <span asp-validation-for="Heslo"></span><br />
+            <span asp-validation-for="Heslo" class="chyba"></span><br />
             <input type="submit" value="Potvrdit" />
         </form>
     </section>

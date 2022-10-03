@@ -33,13 +33,13 @@ namespace Spravce_hesel.Controllers
 
             if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                ModelState.AddModelError("email", "◀ Tento uživatel neexistuje.");
+                ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
             }
             else
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
+                    ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
                 }
             }
 
@@ -107,7 +107,12 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Nastaveni()
         {
-            return View();
+            uzivatel? uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == HttpContext.Session.GetString("Email")).FirstOrDefault();
+
+            if (uzivatel != null)
+                return View(uzivatel);
+
+            return RedirectToAction("Index", "Home");
         }
 
         // Změna jména
