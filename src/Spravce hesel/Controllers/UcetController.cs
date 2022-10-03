@@ -33,13 +33,13 @@ namespace Spravce_hesel.Controllers
 
             if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                ModelState.AddModelError("email", "◀ Tento uživatel neexistuje.");
+                ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
             }
             else
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
+                    ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
                 }
             }
 

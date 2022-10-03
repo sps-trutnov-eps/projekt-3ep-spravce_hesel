@@ -60,9 +60,6 @@ form input[type=range] {
   padding: 0;
   height: 0.5em;
   outline: none;
-  opacity: 0.7;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
 }
 form input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -153,15 +150,11 @@ section.skryty {
 .dark form input[type=range]::-moz-range-thumb {
   background-color: lightblue !important;
 }
-.dark div.item {
-  display: inline-block;
-  position: relative;
-}
 .dark div.item div.submenu a:not(:last-of-type) {
-  border-bottom: lightblue solid 1px;
+  border-bottom-color: lightblue;
 }
 .dark div.item div.submenu > div {
-  border: 2px solid lightblue;
+  border-color: lightblue;
   background-color: #4a4a4b;
 }
 
