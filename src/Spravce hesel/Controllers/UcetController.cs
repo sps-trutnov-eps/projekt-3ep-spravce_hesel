@@ -23,31 +23,29 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Prihlaseni(uzivatel obj)
+        public IActionResult Prihlaseni(Uzivatel obj)
         {
             ModelState.Clear();
 
-            uzivatel? prihlasujiciseuzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
+            Uzivatel? prihlasujiciseuzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
 
-            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
-
-            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
+            if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
+                ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
             }
             else
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    ModelState.AddModelError("heslo", "◀ E-Mail a heslo se neshodují");
+                    ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
                 }
-            }
 
-            if (ModelState.IsValid && (HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Klic") == null))
-            {
-                HttpContext.Session.SetInt32("ID", obj.Id);
-                HttpContext.Session.SetString("Klic", obj.Heslo);
-                return RedirectToAction("Zobrazeni", "Hesla");
+                if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
+                {
+                    HttpContext.Session.SetInt32("ID", prihlasujiciseuzivatel.Id);
+                    HttpContext.Session.SetString("Klic", prihlasujiciseuzivatel.Heslo);
+                    return RedirectToAction("Zobrazeni", "Hesla");
+                }
             }
 
             return View();
@@ -62,26 +60,25 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registrace(uzivatel obj, string kontrola_hesla)
+        public IActionResult Registrace(Uzivatel obj, string kontrola_hesla)
         {
+            IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
-            IEnumerable<uzivatel> objCategoryList = Databaze.uzivatel;
-
-            if (Databaze.uzivatel.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
+            if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
                 ModelState.AddModelError("email", "◀ Tento email už existuje.");
             }
 
             if (obj.Heslo != kontrola_hesla)
             {
-                ModelState.AddModelError("heslo", "◀ Hesla se neshodují.");
+                ModelState.AddModelError("Heslo", "◀ Hesla se neshodují.");
             }
 
             foreach (var nah in objCategoryList)
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
                 {
-                    ModelState.AddModelError("heslo", "◀ Toto heslo používá už uživatel " + nah.Username + ", zvolte prosím jiné heslo.");
+                    ModelState.AddModelError("Heslo", "◀ Toto heslo používá už uživatel " + nah.Jmeno + ", zvolte prosím jiné heslo.");
                 }
             }
 
@@ -103,14 +100,12 @@ namespace Spravce_hesel.Controllers
                     }
                 }
             }
-            
-
 
             if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
             {
                 
 
-                Databaze.uzivatel.Add(obj);
+                Databaze.Uzivatele.Add(obj);
                 Databaze.SaveChanges();
 
                 HttpContext.Session.SetInt32("ID", obj.Id);
@@ -125,7 +120,7 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Nastaveni()
         {
-            uzivatel? uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Email == HttpContext.Session.GetString("Email")).FirstOrDefault();
+            Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == HttpContext.Session.GetInt32("ID")).FirstOrDefault();
 
             if (uzivatel != null)
                 return View(uzivatel);
@@ -178,32 +173,29 @@ namespace Spravce_hesel.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
-
-            uzivatel? prihlaseny_uzivatel = Databaze.uzivatel.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+            Uzivatel? prihlaseny_uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
 
             if (prihlaseny_uzivatel != null)
             {
                 if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("heslo", "◀ Špatné heslo.");
+                    ModelState.AddModelError("Heslo", "◀ Špatné heslo.");
                 }
             }
 
             if (ModelState.IsValid)
             {
-                List<heslo> hesla = Databaze.heslo.Where(heslo => heslo.userID == uzivatelID).ToList();
+                List<Heslo> hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
                 if (hesla == null)
                 {
-                    foreach (heslo h in hesla)
+                    foreach (Heslo h in hesla)
                     {
-                        Databaze.heslo.Remove(h);
+                        Databaze.Hesla.Remove(h);
                     }
                 }
 
-                Databaze.uzivatel.Remove(prihlaseny_uzivatel);
+                Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.SaveChanges();
-
 
                 HttpContext.Session.Remove("ID");
                 HttpContext.Session.Remove("Klic");

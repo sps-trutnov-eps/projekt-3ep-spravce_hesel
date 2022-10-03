@@ -1,4 +1,4 @@
-﻿@model uzivatel
+﻿@model Uzivatel
 @{
     ViewData["Title"] = "Registrace";
 }
@@ -11,7 +11,7 @@
 
     <section>
         <form action="/Ucet/Registrace" method="post">
-            <input type="text" class="username" asp-for="Username" placeholder="Zadejte uživatelské jméno..." required minlength="3"
+            <input type="text" class="username" asp-for="Jmeno" placeholder="Zadejte uživatelské jméno..." required minlength="3"
             oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
             oninput="this.setCustomValidity('')"/><br />
             <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required

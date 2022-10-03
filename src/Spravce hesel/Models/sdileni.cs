@@ -1,20 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spravce_hesel.Models
 {
-    public class sdileni
+    public class SdileneHeslo
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int Id_hesla { get; set; }
+        public int IdHesla { get; set; }
 
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required]
-        public string sdilena_sifra { get; set; }
-
+        public string SdilenaSifra { get; set; }
     }
 }
