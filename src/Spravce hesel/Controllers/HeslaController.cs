@@ -11,6 +11,10 @@ namespace Spravce_hesel.Controllers
     public class HeslaController : Controller
     {
         private Spravce_heselData Databaze { get; set; }
+        public HeslaController(Spravce_heselData databaze)
+        {
+            Databaze = databaze;
+        }
 
         [HttpGet]
         public IActionResult Zobrazeni()
