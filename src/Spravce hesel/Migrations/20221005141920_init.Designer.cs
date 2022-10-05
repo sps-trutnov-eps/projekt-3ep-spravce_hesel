@@ -11,7 +11,7 @@ using Spravce_hesel.Data;
 namespace Spravce_hesel.Migrations
 {
     [DbContext(typeof(Spravce_heselData))]
-    [Migration("20221003162118_init")]
+    [Migration("20221005141920_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
