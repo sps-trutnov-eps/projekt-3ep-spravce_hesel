@@ -20,41 +20,68 @@ namespace Spravce_hesel.Controllers
         [HttpGet]
         public IActionResult Zobrazeni()
         {
-            return View();
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            if (uzivatelID != null)
+            {
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+                    // Sem piš logiku
+
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Error", "Home", 404);
         }
 
         [HttpGet]
         public IActionResult Pridat()
         {
-            return View();
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            if (uzivatelID != null)
+            {
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Error", "Home", 404);
         }
 
         [HttpPost]
         public IActionResult Pridat(string sluzba, string jmeno, string heslo)
         {
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
             string? klic = HttpContext.Session.GetString("Klic");
-            int? IDuzivatele = HttpContext.Session.GetInt32("ID");
-            if (IDuzivatele == null || klic == null)
+            if (uzivatelID != null && klic != null)
             {
-                return RedirectToAction("Index", "Home");
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+                    int delka = klic.Length;
+
+                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
+
+                    int hash = heslo.GetHashCode();
+                    heslo = Sifrovani.Zasifrovat(klic, heslo);
+
+                    Heslo h = new Heslo()
+                    {
+                        UzivatelskeID = (int)uzivatelID,
+                        Sluzba = sluzba,
+                        Jmeno = jmeno,
+                        Hash = hash,
+                        Sifra = heslo
+                    };
+
+                    Databaze.Hesla.Add(h);
+                    Databaze.SaveChanges();
+
+                    return RedirectToAction("Zobrazeni");
+                }
             }
-            int delka = klic.Length;
 
-            klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
-
-
-            int hash = heslo.GetHashCode();
-            heslo = Sifrovani.Zasifrovat(klic, heslo);
-
-            Heslo h = new Heslo();
-            h.UzivatelskeID = (int)IDuzivatele;
-            h.Sluzba = sluzba;
-            h.Jmeno = jmeno;
-            h.Hash = hash;
-            h.Sifra = heslo;
-            Databaze.Hesla.Add(h);
-            Databaze.SaveChanges();
-            return RedirectToAction("Zobrazeni");
+            return RedirectToAction("Error", "Home", 404);
         }
     }
 }
