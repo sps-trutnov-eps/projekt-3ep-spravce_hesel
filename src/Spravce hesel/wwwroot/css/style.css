@@ -35,7 +35,7 @@ form input {
   padding: 20px;
   margin: 8px 0;
   border: 2px solid cornflowerblue;
-  border-radius: 4px;
+  border-radius: 2px;
   background-color: #f4f7fc;
   background-size: 1em;
   background-position: 15px 50%;
@@ -86,7 +86,7 @@ form #posuvnikvystup {
 
 button {
   border: 2px solid cornflowerblue;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 0.25em 0.5em;
   margin-block: 0.25em;
 }
@@ -117,45 +117,57 @@ section.skryty {
   display: none !important;
 }
 
-.dark {
+.chyba {
+  color: cornflowerblue;
+}
+.chyba h2 {
+  font-size: 2em;
+}
+.chyba div {
+  font-size: 4em;
+}
+
+.tmavy {
   background-color: #252931;
   color: #c4c2c2;
 }
-.dark a {
+.tmavy a {
   color: #c4c2c2;
 }
-.dark a.odkaz-vybran {
-  font-weight: bold;
-  color: lightblue !important;
+.tmavy .login_vyber a.vybran {
+  color: lightblue;
 }
-.dark header {
+.tmavy header {
   border-bottom-color: lightblue;
 }
-.dark footer {
+.tmavy footer {
   border-top-color: lightblue;
 }
-.dark button {
-  background-color: #4a4a4b;
-  color: #c4c2c2;
-  border-color: lightblue !important;
-}
-.dark form input {
+.tmavy button {
   background-color: #4a4a4b;
   color: #c4c2c2;
   border-color: lightblue;
 }
-.dark form input[type=range]::-webkit-slider-thumb {
-  background-color: lightblue !important;
+.tmavy form input {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue;
 }
-.dark form input[type=range]::-moz-range-thumb {
-  background-color: lightblue !important;
+.tmavy form input[type=range]::-webkit-slider-thumb {
+  background-color: lightblue;
 }
-.dark div.item div.submenu a:not(:last-of-type) {
+.tmavy form input[type=range]::-moz-range-thumb {
+  background-color: lightblue;
+}
+.tmavy div.item div.submenu a:not(:last-of-type) {
   border-bottom-color: lightblue;
 }
-.dark div.item div.submenu > div {
+.tmavy div.item div.submenu > div {
   border-color: lightblue;
   background-color: #4a4a4b;
+}
+.tmavy .chyba {
+  color: lightblue;
 }
 
 #container {
@@ -211,7 +223,7 @@ header nav div.item div.submenu > a {
 header nav div.item div.submenu > div {
   border: 2px solid cornflowerblue;
   background-color: #f4f7fc;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 0;
   margin: 0;
   width: calc(100% - 4px);
@@ -258,14 +270,11 @@ footer {
   max-width: calc(1000px - 2em);
 }
 
-.login {
-  text-align: center;
-}
-.login a {
+.login_vyber a {
   text-decoration: none;
-}
-.login a.odkaz-vybran {
   font-weight: bold;
+}
+.login_vyber a.vybran {
   color: cornflowerblue;
 }
 

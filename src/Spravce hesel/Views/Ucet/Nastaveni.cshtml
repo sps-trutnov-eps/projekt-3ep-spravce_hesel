@@ -1,4 +1,4 @@
-﻿@model uzivatel
+﻿@model Uzivatel
 @{
     ViewData["Title"] = "Nastavení účtu";
 }
@@ -14,7 +14,7 @@
 
     <section id="informace"> @*Zde dodělat zobrazení informací u účtu*@
         <h3>Informace o účtu</h3>
-        <p><b>Uživatelské jméno:</b> @Model.Username</p>
+        <p><b>Uživatelské jméno:</b> @Model.Jmeno</p>
         <p><b>E-Mail:</b> @Model.Email</p>
     </section>
 

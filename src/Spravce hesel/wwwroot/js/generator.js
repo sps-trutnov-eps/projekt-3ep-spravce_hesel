@@ -34,7 +34,7 @@ function generace(form) {
     ]
     let pouzivane_symboly = [];
     let vysledne_heslo = "";
-    let vyber = [
+    const vyber = [
         form.gen_mala.checked,
         form.gen_velka.checked,
         form.gen_cisla.checked,

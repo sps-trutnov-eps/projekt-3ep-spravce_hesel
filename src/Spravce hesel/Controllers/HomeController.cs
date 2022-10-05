@@ -22,5 +22,12 @@ namespace Spravce_hesel.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Route("/Home/Error/{code:int}")]
+        public IActionResult Error(int code)
+        {
+            ViewData["Chyba"] = $"{code}";
+            return View();
+        }
     }
 }

@@ -1,20 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace Spravce_hesel.Models
 {
-    public class heslo
+    public class Heslo
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
-        public int userID { get; set; }
+        public int UzivatelskeID { get; set; }
 
         [Required]
-        public string Hash { get; set; }
+        public int Hash { get; set; }
 
         [Required]
         public string Sifra { get; set; }
+
+        public string? Sluzba { get; set; } = null;
+
+        public string? Jmeno { get; set; } = null;
     }
 }
