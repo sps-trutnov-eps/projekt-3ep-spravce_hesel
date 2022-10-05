@@ -32,12 +32,15 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Pridat(string sluzba, string jmeno, string heslo)
         {
-            string? klic = HttpContext.Session.GetString("Heslo");
+            string? klic = HttpContext.Session.GetString("Klic");
             int? IDuzivatele = HttpContext.Session.GetInt32("ID");
             if (IDuzivatele == null || klic == null)
             {
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
             }
+            int delka = klic.Length;
+
+            klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
 
 
             int hash = heslo.GetHashCode();
@@ -50,6 +53,7 @@ namespace Spravce_hesel.Controllers
             h.Hash = hash;
             h.Sifra = heslo;
             Databaze.Hesla.Add(h);
+            Databaze.SaveChanges();
             return RedirectToAction("Zobrazeni");
         }
     }
