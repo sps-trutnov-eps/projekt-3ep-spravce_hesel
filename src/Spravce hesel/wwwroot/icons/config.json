@@ -175,6 +175,12 @@
       "search": [
         "bin"
       ]
+    },
+    {
+      "uid": "8f28d948aa6379b1a69d2a090e7531d4",
+      "css": "error",
+      "code": 59407,
+      "src": "typicons"
     }
   ]
 }
