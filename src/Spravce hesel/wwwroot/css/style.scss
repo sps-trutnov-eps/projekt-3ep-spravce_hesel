@@ -4,7 +4,6 @@
 // Barevné schéma
 $barva-text: black;
 $barva-text-sekundar: cornflowerblue;
-$barva-chyba: #c4c2c2;
 $barva-pozadi: white;
 $barva-pozadi-sekundar: #f4f7fc;
 
@@ -121,7 +120,7 @@ span.chyba {
     line-height: 60px;
     padding-top: 8px;
     padding-left: 1rem;
-    color: red;
+    color: red !important;
     font-weight: bold;
 }
 

@@ -2,9 +2,9 @@
     let cookies = document.cookie;
 
     if (cookies.length == 0)
-        document.cookie = "Motiv=tmavy";
+        document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     else {
-        document.cookie = "Motiv=;max-age=0";
+        document.cookie = "TmavyMotiv=; path=/; max-age=0";
     }
 
     window.location.reload();

@@ -22,8 +22,7 @@
         <h3>Změna jména účtu</h3>
         <form action="/Ucet/ZmenaJmena" method="post" onkeydown="return event.key != 'Enter';">
             <input name="novejmeno" placeholder="Zadejte nové jméno..." class="username" type="text" required /><br />
-            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required />
-            <span asp-validation-for="Heslo" class="chyba"></span><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
             <input type="submit" value="Potvrdit" />
         </form>
     </section>
@@ -32,8 +31,7 @@
         <h3>Změna hesla účtu</h3>
         <form action="/Ucet/ZmenaHesla" method="post" onkeydown="return event.key != 'Enter';">
             <input name="noveheslo" placeholder="Zadejte nové heslo..." type="password" required /><br />
-            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required />
-            <span asp-validation-for="Heslo" class="chyba"></span><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
             <input type="submit" value="Potvrdit" />
         </form>
     </section>
@@ -46,8 +44,7 @@
                    oninput="this.setCustomValidity('')" /> Opravdu si přejete odstranit svůj účet? <br />
             <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
                    oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-                   oninput="this.setCustomValidity('')" />
-            <span asp-validation-for="Heslo" class="chyba"></span><br />
+                   oninput="this.setCustomValidity('')" /><br />
             <input type="submit" value="Potvrdit" />
         </form>
     </section>
