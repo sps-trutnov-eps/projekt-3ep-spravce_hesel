@@ -1,14 +1,52 @@
-﻿@{
-    Layout = "_Layout";
+﻿@model Uzivatel
+@{
     ViewData["Title"] = "Nastavení účtu";
 }
 
-<article>
+<article class="split">
+    <h2>Nastavení účtu</h2>
     <section>
-        <h2>Nastavení účtu</h2>
+        <h3>Možnosti</h3>
+        <button type="button" onclick="zobrazit_zmena_jmena()">Změna jména účtu</button><br />
+        <button type="button" onclick="zobrazit_zmena_hesla()">Změna hesla účtu</button><br />
+        <button type="button" onclick="zobrazit_odstraneni()">Odstranění účtu</button>
+    </section>
 
-        <a href="/Ucet/ZmenaJmena">Změna jména účtu</a><br />
-        <a href="/Ucet/ZmenaHesla">Změna hesla k účtu</a><br />
-        <a href="/Ucet/Odebrani">Odebrání účtu</a>
+    <section id="informace"> @*Zde dodělat zobrazení informací u účtu*@
+        <h3>Informace o účtu</h3>
+        <p><b>Uživatelské jméno:</b> @Model.Jmeno</p>
+        <p><b>E-Mail:</b> @Model.Email</p>
+    </section>
+
+    <section id="zmena_jmena" class="skryty">
+        <h3>Změna jména účtu</h3>
+        <form action="/Ucet/ZmenaJmena" method="post" onkeydown="return event.key != 'Enter';">
+            <input name="novejmeno" placeholder="Zadejte nové jméno..." class="username" type="text" required /><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
+    </section>
+
+    <section id="zmena_hesla" class="skryty">
+        <h3>Změna hesla účtu</h3>
+        <form action="/Ucet/ZmenaHesla" method="post" onkeydown="return event.key != 'Enter';">
+            <input name="noveheslo" placeholder="Zadejte nové heslo..." type="password" required /><br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
+    </section>
+
+    <section id="odstraneni" class="skryty">
+        <h3>Odstranění účtu</h3>
+        <form action="/Ucet/Odebrani" method="post" onkeydown="return event.key != 'Enter';">
+            <input type="checkbox" name="potvrzeni" required
+                   oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+                   oninput="this.setCustomValidity('')" /> Opravdu si přejete odstranit svůj účet? <br />
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
+                   oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+                   oninput="this.setCustomValidity('')" /><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
     </section>
 </article>
+<script src="~/js/nastaveni.js" asp-append-version="true"></script>

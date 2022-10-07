@@ -21,56 +21,36 @@ namespace Spravce_hesel.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Spravce_hesel.Models.heslo", b =>
+            modelBuilder.Entity("Spravce_hesel.Models.Heslo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Hash")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Hash")
-                        .IsRequired()
+                    b.Property<string>("Jmeno")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sifra")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("heslo");
-                });
-
-            modelBuilder.Entity("Spravce_hesel.Models.sdileni", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Id_hesla")
-                        .HasColumnType("int");
-
-                    b.Property<string>("email")
-                        .IsRequired()
+                    b.Property<string>("Sluzba")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("sdilena_sifra")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UzivatelskeID")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
-                    b.ToTable("sdileni");
+                    b.ToTable("Hesla");
                 });
 
-            modelBuilder.Entity("Spravce_hesel.Models.uzivatel", b =>
+            modelBuilder.Entity("Spravce_hesel.Models.SdileneHeslo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,17 +62,37 @@ namespace Spravce_hesel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Heslo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdHesla")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("SdilenaSifra")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("uzivatel");
+                    b.ToTable("Sdilena_hesla");
+                });
+
+            modelBuilder.Entity("Spravce_hesel.Models.Uzivatel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Heslo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Jmeno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Uzivatele");
                 });
 #pragma warning restore 612, 618
         }

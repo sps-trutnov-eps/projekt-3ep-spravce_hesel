@@ -1,39 +1,36 @@
 ﻿@{
-    Layout = "_Layout";
     ViewData["Title"] = "Přidat heslo";
 }
 
-<article class="pridat">
+<article class="pridat split">
     <h2>Přidat záznam hesla</h2>
     <section>
-        <div>
-            <h3>Informace o záznamu</h3>
-            <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
-                <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" /><br />
-                <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" /><br />
-                <input name="heslo" placeholder="Zadejte heslo používané pro danou službu..." type="password" id="gen_vystup" />
-                <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button>
-                <button type="button" id="gen_hesel_tlacitko" class="icon-left" onclick="gen_zapnuti()"></button><br />
-                <input value="Přidat záznam" type="submit"/>
-            </form>
-        </div>
+        <h3>Informace o záznamu</h3>
+        <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
+            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" /><br />
+            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" /><br />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" required />
+            <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
+            <input value="Přidat záznam" type="submit"/>
+        </form>
+    </section>
 
-        <div id="gen_hesel" class="skryty">
-            <h3>Generátor hesla</h3>
-            <form onchange="generace(this)" onkeydown="return event.key != 'Enter';">
-                <div>
-                    <h4>Délka hesla</h4>
-                    <input type="range" min="4" max="64" value="16" id="gen_delka" /><input type="text" id="posuvnikvystup" onchange="delka_hesla_zapis()" value="16" />
-                </div>
+    <section>
+        <h3>Generátor hesla</h3>
+        <form onchange="generace(this)" onkeydown="return event.key != 'Enter';">
+            <div>
+                <h4>Délka hesla</h4>
+                <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikvystup" onchange="delka_hesla_zapis()" value="16" placeholder="16" />
+            </div>
 
-                <div>
-                    <h4>Složení hesla</h4>
-                    <input type="checkbox" checked id="gen_mala" /> Malá písmena<br />
-                    <input type="checkbox" checked id="gen_velka" /> Velká písmena<br />
-                    <input type="checkbox" id="gen_cisla" /> Čísla<br />
-                    <input type="checkbox" id="gen_znaky" /> Speciální znaky<br />
-                </div>
-            </form>
-        </div>
+            <div>
+                <h4>Složení hesla</h4>
+                <input type="checkbox" checked id="gen_mala" /> Malá písmena<br />
+                <input type="checkbox" checked id="gen_velka" /> Velká písmena<br />
+                <input type="checkbox" id="gen_cisla" /> Čísla<br />
+                <input type="checkbox" id="gen_znaky" /> Speciální znaky<br />
+            </div>
+        </form>
     </section>
 </article>
+<script src="~/js/generator.js" asp-append-version="true"></script>
