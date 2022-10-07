@@ -167,20 +167,47 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult ZmenaJmena(string novejmeno, string heslo)
+        public IActionResult ZmenaJmena(string novejmeno, Uzivatel obj)
         {
-            int? uzivatelID = HttpContext.Session.GetInt32("ID");
-            if (uzivatelID != null)
-            {
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
-                {
-                    // Sem piš logiku
+            ModelState.Clear();
 
-                    return RedirectToAction("Nastaveni");
-                }
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            if (uzivatelID == null)
+            {
+                return RedirectToAction("Error", "Home", 404);
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            Uzivatel? prihlaseny_uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+
+            if (prihlaseny_uzivatel != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlaseny_uzivatel.Heslo))
+                {
+                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home", 404);
+            }
+
+            if (ModelState.IsValid)
+            {
+                obj.Email = prihlaseny_uzivatel.Email;
+                obj.Jmeno = novejmeno;
+                obj.Id = prihlaseny_uzivatel.Id;
+                obj.Heslo = prihlaseny_uzivatel.Heslo;
+                Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
+                Databaze.Uzivatele.Add(obj);
+                Databaze.SaveChanges();
+
+                HttpContext.Session.SetInt32("ID", obj.Id);
+                HttpContext.Session.SetString("Klic", obj.Heslo);
+
+                return RedirectToAction("Zobrazeni", "Hesla");
+            }
+
+            return View();
         }
 
         // Změna hesla
