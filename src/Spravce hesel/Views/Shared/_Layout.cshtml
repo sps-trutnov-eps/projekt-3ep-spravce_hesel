@@ -1,8 +1,8 @@
 ﻿@{
     string BarevnyMotiv = "svetly";
-    if (HttpContextAccessor.HttpContext.Request.Cookies["Motiv"] != null)
+    if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
     {
-        BarevnyMotiv = HttpContextAccessor.HttpContext.Request.Cookies["Motiv"];
+        BarevnyMotiv = "tmavy";
     }
     int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 }
@@ -18,7 +18,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
     </head>
 
-<body class="@BarevnyMotiv">
+    <body class="@BarevnyMotiv">
         <div id="container">
             <header>
                 <h1><a href="/Home/Index">Správce hesel</a></h1>
@@ -28,13 +28,13 @@
                         @if (BarevnyMotiv == "svetly")
                         {
                             <div class="item item-icon">
-                                <a href="JavaScript:void(0)" onclick="PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
+                                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
                             </div>
                         }
                         else
                         {
-                        <div class="item item-icon">
-                                <a href="JavaScript:void(0)" onclick="PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
+                            <div class="item item-icon">
+                                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
                             </div>
                         }
                     </div>
