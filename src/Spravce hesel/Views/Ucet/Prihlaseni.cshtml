@@ -3,23 +3,18 @@
     ViewData["Title"] = "Přihlášení";
 }
 
-<article class="center login">
-    <section>
-        <h2>Přihlášení</h2>
-        <div><a href="javascript:void(0)" class="odkaz-vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div>
-    </section>
-
-    <section>
-        <form action="/Ucet/Prihlaseni" method="post">
-            <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
-            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-            oninput="this.setCustomValidity('')"/>
-            <span asp-validation-for="Email" class="chyba"></span><br />
-            <input type="password" name="heslo" placeholder="Zadejte heslo..." required
-            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-            oninput="this.setCustomValidity('')"/>
-            <span asp-validation-for="Heslo" class="chyba"></span><br />
-            <input type="submit" value="Přihlásit se" />
-        </form>
-    </section>
+<article class="center">
+    <h2>Přihlášení</h2>
+    <div class="login_vyber"><a href="javascript:void(0)" class="vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div><br />
+    <form action="/Ucet/Prihlaseni" method="post">
+        <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
+        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Email" class="chyba"></span><br />
+        <input type="password" name="heslo" placeholder="Zadejte heslo..." required
+        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Heslo" class="chyba"></span><br />
+        <input type="submit" value="Přihlásit se" />
+    </form>
 </article>

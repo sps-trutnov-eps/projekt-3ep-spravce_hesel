@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Spravce_hesel.Models;
-using System.Diagnostics;
 
 namespace Spravce_hesel.Controllers
 {
@@ -12,15 +10,11 @@ namespace Spravce_hesel.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult ZmenitBarevneTema()
+        [Route("/Home/Error/{code:int}")]
+        public IActionResult Error(int code)
         {
-            if (HttpContext.Session.GetString("Tema") == null || HttpContext.Session.GetString("Tema") == "light")
-                HttpContext.Session.SetString("Tema", "dark");
-            else
-                HttpContext.Session.SetString("Tema", "light");
-
-            return RedirectToAction("Index");
+            ViewData["Chyba"] = $"{code}";
+            return View();
         }
     }
 }

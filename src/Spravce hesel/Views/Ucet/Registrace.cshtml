@@ -3,29 +3,24 @@
     ViewData["Title"] = "Registrace";
 }
 
-<article class="center login">
-    <section>
-        <h2>Přihlášení</h2>
-        <div><a href="/Ucet/Prihlaseni">Přihlášení</a> | <a href="javascript:void(0)" class="odkaz-vybran">Registrace</a></div>
-    </section>
-
-    <section>
-        <form action="/Ucet/Registrace" method="post">
-            <input type="text" class="username" asp-for="Jmeno" placeholder="Zadejte uživatelské jméno..." required minlength="3"
-            oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
-            oninput="this.setCustomValidity('')"/><br />
-            <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
-            oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
-            oninput="setCustomValidity('')"/>
-            <span asp-validation-for="Email" class="chyba"></span><br />
-            <input type="password" asp-for="Heslo" placeholder="Zadejte nové heslo..." required minlength="8"
-            oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
-            oninput="this.setCustomValidity('')"/><br />
-            <input type="password" name="Kontrola_hesla" placeholder="Znovu pro kontrolu..." required minlength="8"
-            oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
-            oninput="this.setCustomValidity('')"/>
-            <span asp-validation-for="Heslo" class="chyba"></span><br />
-            <input type="submit" value="Zaregistrovat se" />
-        </form>
-    </section>
+<article class="center">
+    <h2>Přihlášení</h2>
+    <div class="login_vyber"><a href="/Ucet/Prihlaseni">Přihlášení</a> | <a href="javascript:void(0)" class="vybran">Registrace</a></div><br />
+    <form action="/Ucet/Registrace" method="post">
+        <input type="text" class="username" asp-for="Jmeno" placeholder="Zadejte uživatelské jméno..." required minlength="3"
+        oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
+        oninput="this.setCustomValidity('')"/><br />
+        <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
+        oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
+        oninput="setCustomValidity('')"/>
+        <span asp-validation-for="Email" class="chyba"></span><br />
+        <input type="password" asp-for="Heslo" placeholder="Zadejte nové heslo..." required minlength="8"
+        oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
+        oninput="this.setCustomValidity('')"/><br />
+        <input type="password" name="Kontrola_hesla" placeholder="Znovu pro kontrolu..." required minlength="8"
+        oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Heslo" class="chyba"></span><br />
+        <input type="submit" value="Zaregistrovat se" />
+    </form>
 </article>

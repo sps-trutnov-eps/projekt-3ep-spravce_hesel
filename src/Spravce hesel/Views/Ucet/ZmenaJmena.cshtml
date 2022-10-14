@@ -1,15 +1,19 @@
-﻿@{
+﻿@model Uzivatel
+@{
     ViewData["Title"] = "Změna jména";
 }
 
 <article class="center">
-    <section>
-        <h2>Změna jména</h2>
+    <h2>Změna jména</h2>
 
-        <form action="/Ucet/ZmenaJmena" method="post">
-            <input name="novejmeno" placeholder="Zadejte nové jméno..." class="username" type="text" required /><br />
-            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required /><br />
-            <input type="submit" value="Potvrdit" />
-        </form>
-    </section>
+    <form action="/Ucet/ZmenaJmena" method="post">
+        <input name="novejmeno" placeholder="Zadejte nové jméno..." class="username" type="text" required minlength="3"
+        oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
+        oninput="this.setCustomValidity('')"/><br />
+        <input asp-for="Heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
+        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Heslo" class="chyba"></span><br />
+        <input type="submit" value="Potvrdit" />
+    </form>
 </article>

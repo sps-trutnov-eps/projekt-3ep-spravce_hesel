@@ -46,7 +46,7 @@ form {
         padding: 20px;
         margin: 8px 0;
         border: 2px solid $barva-text-sekundar;
-        border-radius: 4px;
+        border-radius: 2px;
         background-color: $barva-pozadi-sekundar;
         background-size: 1em;
         background-position: 15px 50%;
@@ -105,7 +105,7 @@ form {
 
 button {
     border: 2px solid $barva-text-sekundar;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: .25em .5em;
     margin-block: .25em;
 }
@@ -120,7 +120,7 @@ span.chyba {
     line-height: 60px;
     padding-top: 8px;
     padding-left: 1rem;
-    color: red;
+    color: red !important;
     font-weight: bold;
 }
 
@@ -136,11 +136,20 @@ section.skryty {
     display: none !important;
 }
 
-// Barevné motivy
-// Světlý motiv
+.chyba {
+    color: $barva-text-sekundar;
+
+    h2 {
+        font-size: 2em;
+    }
+
+    div {
+        font-size: 4em;
+    }
+}
 
 // Tmavý motiv
-.dark {
+.tmavy {
     $barva-text: #c4c2c2;
     $barva-text-sekundar: lightblue;
     $barva-pozadi: #252931;
@@ -153,9 +162,8 @@ section.skryty {
         color: $barva-text;
     }
 
-    a.odkaz-vybran {
-        font-weight: bold;
-        color: $barva-text-sekundar !important;
+    .login_vyber a.vybran {
+        color: $barva-text-sekundar;
     }
 
     header {
@@ -169,7 +177,7 @@ section.skryty {
     button {
         background-color: $barva-pozadi-sekundar;
         color: $barva-text;
-        border-color: $barva-text-sekundar !important;
+        border-color: $barva-text-sekundar;
     }
 
     form {
@@ -181,11 +189,11 @@ section.skryty {
 
 
         input[type=range]::-webkit-slider-thumb {
-            background-color: $barva-text-sekundar !important;
+            background-color: $barva-text-sekundar;
         }
 
         input[type=range]::-moz-range-thumb {
-            background-color: $barva-text-sekundar !important;
+            background-color: $barva-text-sekundar;
         }
     }
 
@@ -200,6 +208,10 @@ section.skryty {
                 background-color: $barva-pozadi-sekundar;
             }
         }
+    }
+
+    .chyba {
+        color: $barva-text-sekundar;
     }
 }
 
@@ -266,7 +278,7 @@ header {
                 > div {
                     border: 2px solid $barva-text-sekundar;
                     background-color: $barva-pozadi-sekundar;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     padding: 0;
                     margin: 0;
                     width: calc(100% - 4px);
@@ -327,24 +339,17 @@ footer {
     max-width: calc(1000px - 2em);
 }
 
-// Specifické stránky
 // Přihlášení a registrace
-.login {
-    text-align: center;
-
+.login_vyber {
     a {
         text-decoration: none;
+        font-weight: bold;
     }
 
-    a.odkaz-vybran {
-        font-weight: bold;
+    a.vybran {
         color: $barva-text-sekundar;
     }
 }
-
-// Zobrazení hesel
-
-// Oznámení
 
 // Přidávání hesel
 .pridat {
@@ -367,5 +372,3 @@ footer {
         }
     }
 }
-
-// Správa účtu
