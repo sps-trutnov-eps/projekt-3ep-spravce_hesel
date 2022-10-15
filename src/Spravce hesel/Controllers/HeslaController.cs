@@ -25,13 +25,21 @@ namespace Spravce_hesel.Controllers
             {
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
-                    // Sem piš logiku
+                    List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
 
-                    return View();
+                    return View(Hesla);
                 }
             }
 
             return RedirectToAction("Error", "Home", 404);
+        }
+
+        [HttpGet] 
+        public IActionResult DetailHesla(int id)
+        {
+            Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+
+            return Ok(Json(heslo));
         }
 
         [HttpGet]
@@ -60,7 +68,7 @@ namespace Spravce_hesel.Controllers
                 {
                     int delka = klic.Length;
 
-                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
+                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymyslet jak ho vyrobit
 
                     int hash = heslo.GetHashCode();
                     heslo = Sifrovani.Zasifrovat(klic, heslo);

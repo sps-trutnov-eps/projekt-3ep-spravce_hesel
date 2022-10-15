@@ -1,0 +1,91 @@
+﻿// Tmavý motiv
+.tmavy {
+    $barva-text: #c4c2c2;
+    $barva-text-sekundar: lightblue;
+    $barva-pozadi: #252931;
+    $barva-pozadi-sekundar: #4a4a4b;
+    $barva-pozadi-tercial: #1e3d4661;
+    $barva-zesednuti: #00000077;
+
+    background-color: $barva-pozadi;
+    color: $barva-text;
+
+    a {
+        color: $barva-text;
+    }
+
+    .login_vyber a.vybran {
+        color: $barva-text-sekundar;
+    }
+
+    header {
+        border-bottom-color: $barva-text-sekundar;
+    }
+
+    footer {
+        border-top-color: $barva-text-sekundar;
+    }
+
+    button {
+        background-color: $barva-pozadi-sekundar;
+        color: $barva-text;
+        border-color: $barva-text-sekundar;
+    }
+
+    form {
+        input {
+            background-color: $barva-pozadi-sekundar;
+            color: $barva-text;
+            border-color: $barva-text-sekundar;
+        }
+
+
+        input[type=range]::-webkit-slider-thumb {
+            background-color: $barva-text-sekundar;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            background-color: $barva-text-sekundar;
+        }
+    }
+
+    div.item {
+        div.submenu {
+            a:not(:last-of-type) {
+                border-bottom-color: $barva-text-sekundar;
+            }
+
+            > div {
+                border-color: $barva-text-sekundar;
+                background-color: $barva-pozadi-sekundar;
+            }
+        }
+    }
+
+    .chyba {
+        color: $barva-text-sekundar;
+    }
+
+    .heslo_div {
+        border-color: $barva-text-sekundar;
+        background-color: $barva-pozadi-tercial;
+
+        .sluzba {
+            border-bottom-color: $barva-text-sekundar;
+            background-color: $barva-pozadi-tercial;
+        }
+    }
+
+    #detaily {
+        background-color: $barva-pozadi-tercial;
+        border-color: $barva-text-sekundar;
+
+        #sluzba {
+            border-bottom-color: $barva-text-sekundar;
+        }
+    }
+
+    #detaily_pozadi {
+        background-color: $barva-zesednuti;
+    }
+}
