@@ -35,11 +35,11 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpGet] 
-        public JsonResult DetailHesla(int idhesla)
+        public IActionResult DetailHesla(int id)
         {
-            Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == idhesla).FirstOrDefault();
+            Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
 
-            return Json(heslo);
+            return Ok(Json(heslo));
         }
 
         [HttpGet]

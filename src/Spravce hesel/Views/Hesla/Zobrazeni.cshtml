@@ -10,7 +10,7 @@
         foreach (Heslo heslo in Model)
         {
             <div class="heslo_div">
-                <div class="sluzba"><a title="Zobrazit heslo" href="JavaScript:zobrazitHeslo(@heslo.ID)">@heslo.Sluzba</a><span><a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit"></a><a class="icon-bin" title="Odstranit heslo" href="/Hesla/Odstranit"></a></span></div>
+                <div class="sluzba"><a title="Zobrazit heslo" href="JavaScript:zobrazitHeslo(@heslo.ID)">@heslo.Sluzba @heslo.ID</a><span><a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit"></a><a class="icon-bin" title="Odstranit heslo" href="/Hesla/Odstranit"></a></span></div>
                 <div class="jmeno">@heslo.Jmeno</div>
             </div>
         }
@@ -18,6 +18,16 @@
         {
             <p>Zatím nemáte pøidané žádné heslo</p>
             <p><a href="/Hesla/Pridat">Pøidat?</a></p>
+        }
+        else
+        {
+            <div class="skryty" id="detaily">
+                <div>
+                    <div id="sluzba"></div>
+                    <div id="jmeno"></div>
+                    <div id="heslo"></div>
+                </div>
+            </div>
         }
     }
 </article>

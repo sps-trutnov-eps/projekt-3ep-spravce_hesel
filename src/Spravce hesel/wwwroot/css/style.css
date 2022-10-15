@@ -306,6 +306,23 @@ footer {
   right: 0;
 }
 
+#detaily {
+  margin: 0 auto;
+  position: fixed;
+  height: 100%;
+  width: 1000px;
+  left: calc(50% - 500px);
+  top: 0;
+}
+#detaily > div {
+  margin: auto auto;
+  width: max-content;
+}
+
+#detaily.skryty {
+  display: none;
+}
+
 .heslo_div:not(:last-of-type) {
   margin-bottom: 2em;
 }

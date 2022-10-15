@@ -8,10 +8,29 @@
     }
 
     window.location.reload();
-}
+    }
 
 function zobrazitHeslo(id) {
-    fetch("/Hesla/DetailHesla/" + id, {
-        method: "GET"
-        }).then(data => data.json()).then(data => console.log(data));
+    $.ajax({
+        type: "GET",
+        url: "/Hesla/DetailHesla/" +  id,
+        dataType: "JSON",
+        data: JSON.stringify(id),
+        contentType: "application/json; charset=utf-8",
+        
+        success: function (res) {
+            document.getElementById("detaily").className = "";
+            console.log(res.value.sifra);
+
+            document.getElementById("sluzba").innerHTML = res.value.sluzba;
+            document.getElementById("jmeno").innerHTML = res.value.jmeno;
+            document.getElementById("heslo").innerHTML = res.value.sifra;
+        }
+    });
+
+    // fetch("/Hesla/DetailHesla/" + id, { method: "GET", dataType: "JSON", url: "/Hesla/DetailHesla/" + id, }).then(data => data.json()).then(data => console.log(data));
+}
+
+function skrytInformace() {
+    document.getElementById("detaily").className = "skryty";
 }
