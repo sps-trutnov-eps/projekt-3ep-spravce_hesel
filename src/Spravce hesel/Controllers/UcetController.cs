@@ -143,6 +143,7 @@ namespace Spravce_hesel.Controllers
                 Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == HttpContext.Session.GetInt32("ID")).FirstOrDefault();
                 if (uzivatel != null)
                 {
+                    ViewData["Pocethesel"] = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList().Count;
                     return View(uzivatel);
                 }
             }

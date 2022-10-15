@@ -1,4 +1,7 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+﻿@import "styleTmavy.scss";
+@import "styleNavigace.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @charset "UTF-8";
 
 // Barevné schéma
@@ -6,6 +9,8 @@ $barva-text: black;
 $barva-text-sekundar: cornflowerblue;
 $barva-pozadi: white;
 $barva-pozadi-sekundar: #f4f7fc;
+$barva-pozadi-tercial: #e1e9f7;
+$barva-zesednuti: #00000033;
 
 // Základní elementy
 html, body, #container {
@@ -148,73 +153,6 @@ section.skryty {
     }
 }
 
-// Tmavý motiv
-.tmavy {
-    $barva-text: #c4c2c2;
-    $barva-text-sekundar: lightblue;
-    $barva-pozadi: #252931;
-    $barva-pozadi-sekundar: #4a4a4b;
-
-    background-color: $barva-pozadi;
-    color: $barva-text;
-
-    a {
-        color: $barva-text;
-    }
-
-    .login_vyber a.vybran {
-        color: $barva-text-sekundar;
-    }
-
-    header {
-        border-bottom-color: $barva-text-sekundar;
-    }
-
-    footer {
-        border-top-color: $barva-text-sekundar;
-    }
-
-    button {
-        background-color: $barva-pozadi-sekundar;
-        color: $barva-text;
-        border-color: $barva-text-sekundar;
-    }
-
-    form {
-        input {
-            background-color: $barva-pozadi-sekundar;
-            color: $barva-text;
-            border-color: $barva-text-sekundar;
-        }
-
-
-        input[type=range]::-webkit-slider-thumb {
-            background-color: $barva-text-sekundar;
-        }
-
-        input[type=range]::-moz-range-thumb {
-            background-color: $barva-text-sekundar;
-        }
-    }
-
-    div.item {
-        div.submenu {
-            a:not(:last-of-type) {
-                border-bottom-color: $barva-text-sekundar;
-            }
-
-            > div {
-                border-color: $barva-text-sekundar;
-                background-color: $barva-pozadi-sekundar;
-            }
-        }
-    }
-
-    .chyba {
-        color: $barva-text-sekundar;
-    }
-}
-
 // Container
 #container {
     font-family: 'Source Sans Pro', sans-serif;
@@ -226,94 +164,6 @@ section.skryty {
     > * {
         padding: 1em;
         width: calc(100% - 2em);
-    }
-}
-
-// Header
-header {
-    text-align: center;
-    border-bottom: 1px solid $barva-text-sekundar;
-
-    nav {
-        > div {
-            display: inline-block;
-            min-width: 4em;
-
-            div.item:not(:first-of-type) {
-                padding-left: 1em;
-            }
-        }
-
-        div.nav-vlevo {
-            float: left;
-        }
-
-        div.nav-vpravo {
-            float: right;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        div.item {
-            display: inline-block;
-            position: relative;
-            width: 10em;
-
-            div.submenu {
-                display: none;
-                position: absolute;
-                width: 10em;
-                top: 0;
-
-                > a {
-                    display: block;
-                    font-size: 0;
-                    height: 2rem;
-                    width: 10rem;
-                    margin: 0 auto;
-                }
-
-                > div {
-                    border: 2px solid $barva-text-sekundar;
-                    background-color: $barva-pozadi-sekundar;
-                    border-radius: 2px;
-                    padding: 0;
-                    margin: 0;
-                    width: calc(100% - 4px);
-                    height: 100%;
-
-                    a {
-                        display: block;
-                        padding: .25em;
-                    }
-
-                    a:not(:last-of-type) {
-                        border-bottom: $barva-text-sekundar solid 1px;
-                    }
-                }
-            }
-        }
-
-        div.item-icon {
-            width: 22px;
-
-            div.submenu {
-                > a {
-                    width: 1.5rem;
-                }
-
-                top: 0;
-                left: calc((-10em + 22px) / 2);
-            }
-        }
-
-        div.item:hover {
-            div.submenu {
-                display: block;
-            }
-        }
     }
 }
 
@@ -349,6 +199,81 @@ footer {
     a.vybran {
         color: $barva-text-sekundar;
     }
+}
+
+// Zobrzování hesel
+.heslo_div {
+    width: calc(100% - 4px);
+    background-color: $barva-pozadi-tercial;
+    border: 2px solid $barva-text-sekundar;
+    border-radius: 2px;
+
+    * {
+        padding: .5em;
+    }
+
+    .sluzba {
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 1px solid $barva-text-sekundar;
+        background-color: $barva-pozadi-sekundar;
+        position: relative;
+
+        span {
+            position: absolute;
+            padding: 0;
+            right: 0;
+        }
+    }
+}
+
+#detaily {
+    margin: 0 auto;
+    position: fixed;
+    height: max-content;
+    width: 500px;
+    padding: 1em;
+    left: calc(50% - (500px + 2em)/2);
+    top: auto;
+    background-color: $barva-pozadi-tercial;
+    border: 2px solid $barva-text-sekundar;
+    border-radius: 2px;
+
+    > div {
+        margin: auto auto;
+        padding-block: .5em;
+        text-align: center;
+    }
+
+    #sluzba {
+        font-weight: bold;
+        border-bottom: 1px solid $barva-text-sekundar;
+        margin-bottom: .5em;
+    }
+
+    #jmeno {
+        font-style: italic;
+    }
+}
+
+#detaily_pozadi {
+    background-color: $barva-zesednuti;
+    position: fixed;
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+}
+
+#detaily.skryty, #detaily_pozadi.skryty {
+    display: none;
+}
+
+.heslo_div:not(:last-of-type) {
+    margin-bottom: 2em;
 }
 
 // Přidávání hesel

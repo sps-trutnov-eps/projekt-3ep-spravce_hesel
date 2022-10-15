@@ -12,10 +12,11 @@
         <button type="button" onclick="zobrazit_odstraneni()">Odstranění účtu</button>
     </section>
 
-    <section id="informace"> @*Zde dodělat zobrazení informací u účtu*@
+    <section id="informace">
         <h3>Informace o účtu</h3>
         <p><b>Uživatelské jméno:</b> @Model.Jmeno</p>
         <p><b>E-Mail:</b> @Model.Email</p>
+        <p><b>Počet mých hesel:</b> @ViewData["Pocethesel"]</p>
     </section>
 
     <section id="zmena_jmena" class="skryty">
