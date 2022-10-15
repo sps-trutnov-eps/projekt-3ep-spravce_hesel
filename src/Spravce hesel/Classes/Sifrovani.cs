@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NuGet.Packaging;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -63,7 +64,35 @@ namespace Spravce_hesel.Classes
                 }
             }
 
+        }
 
+        public static string HesloNaKlic(string heslo)
+        {
+            byte[] bytyHesla = Encoding.ASCII.GetBytes(heslo);
+
+            int delka = bytyHesla.Length;
+
+            byte[] bytes = new byte[32];
+            
+            for (int i = 0; i < delka; i++)
+            {
+                bytes[i] = bytyHesla[i];
+            }
+
+
+            int pozice = delka;
+            while(delka < 32)
+            {
+                pozice++;
+                bytes[pozice] = 1;
+                delka = bytes.Length;
+            }
+
+
+            string klic = Encoding.ASCII.GetString(bytes);
+
+
+            return klic;
         }
     }
 }

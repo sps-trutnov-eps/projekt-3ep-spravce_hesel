@@ -5,6 +5,7 @@ using Spravce_hesel.Data;
 using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
 using Spravce_hesel.Classes;
+using System.Diagnostics;
 
 namespace Spravce_hesel.Controllers
 {
@@ -60,7 +61,7 @@ namespace Spravce_hesel.Controllers
                 {
                     int delka = klic.Length;
 
-                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
+                    klic = Sifrovani.HesloNaKlic(heslo);
 
                     int hash = heslo.GetHashCode();
                     heslo = Sifrovani.Zasifrovat(klic, heslo);
@@ -76,6 +77,7 @@ namespace Spravce_hesel.Controllers
 
                     Databaze.Hesla.Add(h);
                     Databaze.SaveChanges();
+
 
                     return RedirectToAction("Zobrazeni");
                 }
