@@ -13,14 +13,14 @@
 function zobrazitHeslo(id) {
     $.ajax({
         type: "GET",
-        url: "/Hesla/DetailHesla/" +  id,
+        url: "/Hesla/DetailHesla/" + id,
         dataType: "JSON",
         data: JSON.stringify(id),
         contentType: "application/json; charset=utf-8",
         
-        success: function (res) {
+        success: (res) => {
+            document.getElementById("detaily_pozadi").className = "";
             document.getElementById("detaily").className = "";
-            console.log(res.value.sifra);
 
             document.getElementById("sluzba").innerHTML = res.value.sluzba;
             document.getElementById("jmeno").innerHTML = res.value.jmeno;
@@ -31,6 +31,7 @@ function zobrazitHeslo(id) {
     // fetch("/Hesla/DetailHesla/" + id, { method: "GET", dataType: "JSON", url: "/Hesla/DetailHesla/" + id, }).then(data => data.json()).then(data => console.log(data));
 }
 
-function skrytInformace() {
+function skrytHeslo() {
     document.getElementById("detaily").className = "skryty";
+    document.getElementById("detaily_pozadi").className = "skryty";
 }
