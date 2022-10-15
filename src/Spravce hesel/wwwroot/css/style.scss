@@ -6,6 +6,7 @@ $barva-text: black;
 $barva-text-sekundar: cornflowerblue;
 $barva-pozadi: white;
 $barva-pozadi-sekundar: #f4f7fc;
+$barva-pozadi-tercial: #e1e9f7;
 
 // Základní elementy
 html, body, #container {
@@ -154,6 +155,7 @@ section.skryty {
     $barva-text-sekundar: lightblue;
     $barva-pozadi: #252931;
     $barva-pozadi-sekundar: #4a4a4b;
+    $barva-pozadi-tercial: #1e3d4661;
 
     background-color: $barva-pozadi;
     color: $barva-text;
@@ -212,6 +214,15 @@ section.skryty {
 
     .chyba {
         color: $barva-text-sekundar;
+    }
+
+    .heslo_div {
+        border-color: $barva-text-sekundar;
+        background-color: $barva-pozadi-tercial;
+
+        .sluzba {
+            border-bottom-color: $barva-text-sekundar;
+        }
     }
 }
 
@@ -349,6 +360,35 @@ footer {
     a.vybran {
         color: $barva-text-sekundar;
     }
+}
+
+// Zobrzování hesel
+.heslo_div {
+    width: calc(100% - 4px);
+    border: 2px solid $barva-text-sekundar;
+    background-color: $barva-pozadi-tercial;
+    border-radius: 2px;
+
+    * {
+        padding: .5em;
+    }
+
+    .sluzba {
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 2px solid $barva-text-sekundar;
+        position: relative;
+
+        span {
+            position: absolute;
+            padding: 0;
+            right: 0;
+        }
+    }
+}
+
+.heslo_div:not(:last-of-type) {
+    margin-bottom: 2em;
 }
 
 // Přidávání hesel

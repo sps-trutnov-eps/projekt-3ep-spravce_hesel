@@ -169,6 +169,13 @@ section.skryty {
 .tmavy .chyba {
   color: lightblue;
 }
+.tmavy .heslo_div {
+  border-color: lightblue;
+  background-color: rgba(30, 61, 70, 0.3803921569);
+}
+.tmavy .heslo_div .sluzba {
+  border-bottom-color: lightblue;
+}
 
 #container {
   font-family: "Source Sans Pro", sans-serif;
@@ -276,6 +283,31 @@ footer {
 }
 .login_vyber a.vybran {
   color: cornflowerblue;
+}
+
+.heslo_div {
+  width: calc(100% - 4px);
+  border: 2px solid cornflowerblue;
+  background-color: #e1e9f7;
+  border-radius: 2px;
+}
+.heslo_div * {
+  padding: 0.5em;
+}
+.heslo_div .sluzba {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid cornflowerblue;
+  position: relative;
+}
+.heslo_div .sluzba span {
+  position: absolute;
+  padding: 0;
+  right: 0;
+}
+
+.heslo_div:not(:last-of-type) {
+  margin-bottom: 2em;
 }
 
 .pridat form {

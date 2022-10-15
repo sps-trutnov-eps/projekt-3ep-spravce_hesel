@@ -9,3 +9,9 @@
 
     window.location.reload();
 }
+
+function zobrazitHeslo(id) {
+    fetch("/Hesla/DetailHesla/" + id, {
+        method: "GET"
+        }).then(data => data.json()).then(data => console.log(data));
+}

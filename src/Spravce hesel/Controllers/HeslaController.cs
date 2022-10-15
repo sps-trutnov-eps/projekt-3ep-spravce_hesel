@@ -34,6 +34,14 @@ namespace Spravce_hesel.Controllers
             return RedirectToAction("Error", "Home", 404);
         }
 
+        [HttpGet] 
+        public JsonResult DetailHesla(int idhesla)
+        {
+            Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == idhesla).FirstOrDefault();
+
+            return Json(heslo);
+        }
+
         [HttpGet]
         public IActionResult Pridat()
         {
