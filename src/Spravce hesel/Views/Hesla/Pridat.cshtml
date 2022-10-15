@@ -17,7 +17,7 @@
 
     <section>
         <h3>Generátor hesla</h3>
-        <form onchange="generace(this)" onkeydown="return event.key != 'Enter';">
+        <form id="generator" onchange="delka_hesla_aktualizace()" onkeydown="return event.key != 'Enter';">
             <div>
                 <h4>Délka hesla</h4>
                 <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikvystup" onchange="delka_hesla_zapis()" value="16" placeholder="16" />
@@ -28,7 +28,12 @@
                 <input type="checkbox" checked id="gen_mala" /> Malá písmena<br />
                 <input type="checkbox" checked id="gen_velka" /> Velká písmena<br />
                 <input type="checkbox" id="gen_cisla" /> Čísla<br />
-                <input type="checkbox" id="gen_znaky" /> Speciální znaky<br />
+                <input type="checkbox" id="gen_znaky" /> Speciální znaky
+            </div>
+
+            <div>
+                <br />
+                <button type="button" onclick="generace()">Generovat</button>
             </div>
         </form>
     </section>

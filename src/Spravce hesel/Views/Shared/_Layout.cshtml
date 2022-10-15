@@ -40,9 +40,6 @@
                     </div>
 
                     <div class="nav-stred">
-                        <div class="item">
-                            <a href="/Home/Index">Domovská stránka</a>
-                        </div>
                         @if (uzivatel != null)
                         {
                             <div class="item">
@@ -54,6 +51,12 @@
                                         <a href="/Hesla/Pridat">Přidat</a>
                                     </div>
                                 </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <a href="/Home/Index">Domovská stránka</a>
                             </div>
                         }
                     </div>
