@@ -25,20 +25,9 @@ namespace Spravce_hesel.Controllers
             {
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
-                    // Sem piš logiku
-                    IEnumerable<Heslo> objCategoryList = Databaze.Hesla;
-                    List<Heslo> nevim = new List<Heslo>();
-                    foreach (var obj in objCategoryList)
-                    {
-                        if (uzivatelID == obj.UzivatelskeID)
-                        {
-                            
-                            nevim.Add(obj);
-                        }
-                    }
+                    List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
 
-                    return View(nevim);
-                    // Sem nepiš logiku
+                    return View(Hesla);
                 }
             }
 
