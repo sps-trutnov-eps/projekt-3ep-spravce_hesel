@@ -26,8 +26,19 @@ namespace Spravce_hesel.Controllers
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
                     // Sem piš logiku
+                    IEnumerable<Heslo> objCategoryList = Databaze.Hesla;
+                    List<Heslo> nevim = new List<Heslo>();
+                    foreach (var obj in objCategoryList)
+                    {
+                        if (uzivatelID == obj.UzivatelskeID)
+                        {
+                            
+                            nevim.Add(obj);
+                        }
+                    }
 
-                    return View();
+                    return View(nevim);
+                    // Sem nepiš logiku
                 }
             }
 
@@ -60,7 +71,7 @@ namespace Spravce_hesel.Controllers
                 {
                     int delka = klic.Length;
 
-                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymislet jak ho vyrobit
+                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymyslet jak ho vyrobit
 
                     int hash = heslo.GetHashCode();
                     heslo = Sifrovani.Zasifrovat(klic, heslo);

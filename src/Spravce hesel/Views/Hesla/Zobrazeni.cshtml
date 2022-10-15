@@ -1,6 +1,15 @@
+@model List<Heslo>
 @{
     ViewData["Title"] = "Moje hesla";
 }
 <article>
     <h2>Moje hesla</h2>
+    @{
+        foreach (var bruh in Model)
+        {
+            <p>@bruh.Sluzba</p><br />
+            <p>@bruh.Jmeno</p><br />
+            <p>@bruh.Sifra</p><br /><br />
+        }
+    }
 </article>
