@@ -30,13 +30,22 @@ namespace Spravce_hesel.Controllers
                 {
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
 
+                    List<Heslo> desifrovano = new List<Heslo>();
                     foreach(Heslo heslo in Hesla)
                     {
-                        string hesl = heslo.Sifra;
-                        heslo.Sifra = Sifrovani.Desifrovat(klic, hesl);
+                        Heslo _desforave = new Heslo();
+                         _desforave.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
+                        Debug.Print(_desforave.Sifra);
+                        Debug.Print(Sifrovani.Desifrovat(klic, heslo.Sifra));
+                        _desforave.Sluzba = heslo.Sluzba;
+                        _desforave.Jmeno = heslo.Jmeno;
+                        _desforave.UzivatelskeID = heslo.UzivatelskeID;
+                        _desforave.ID = heslo.ID;
+                        _desforave.Hash = heslo.Hash;
+                        desifrovano.Add(_desforave);
                     }
 
-                    return View(Hesla);
+                    return View(desifrovano);
                 }
             }
 
