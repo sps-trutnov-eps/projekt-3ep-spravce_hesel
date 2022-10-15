@@ -42,8 +42,11 @@ namespace Spravce_hesel.Classes
 
         public static string Desifrovat(string Klic, string Sifra)
         {
+
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(Sifra);
+
+            
 
             using (Aes aes = Aes.Create())
             {
@@ -58,6 +61,7 @@ namespace Spravce_hesel.Classes
                     {
                         using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
                         {
+                            
                             return streamReader.ReadToEnd();
                         }
                     }
@@ -71,6 +75,11 @@ namespace Spravce_hesel.Classes
             byte[] bytyHesla = Encoding.ASCII.GetBytes(heslo);
 
             int delka = bytyHesla.Length;
+
+            if (delka > 32)
+            {
+                delka = 32;
+            }
 
             byte[] bytes = new byte[32];
             

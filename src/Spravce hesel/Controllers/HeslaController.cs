@@ -22,11 +22,19 @@ namespace Spravce_hesel.Controllers
         public IActionResult Zobrazeni()
         {
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
-            if (uzivatelID != null)
+            string? klic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID != null && klic != null)
             {
+                klic = Sifrovani.HesloNaKlic(klic);
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
+
+                    foreach(Heslo heslo in Hesla)
+                    {
+                        string hesl = heslo.Sifra;
+                        heslo.Sifra = Sifrovani.Desifrovat(klic, hesl);
+                    }
 
                     return View(Hesla);
                 }
@@ -69,7 +77,7 @@ namespace Spravce_hesel.Controllers
                 {
                     int delka = klic.Length;
 
-                    klic = "b14ca5898a4e4133bbce2ea2315a1916"; // docasny klic, pak musim vymyslet jak ho vyrobit
+                    klic = Sifrovani.HesloNaKlic(klic);
 
                     int hash = heslo.GetHashCode();
                     heslo = Sifrovani.Zasifrovat(klic, heslo);
@@ -85,6 +93,8 @@ namespace Spravce_hesel.Controllers
 
                     Databaze.Hesla.Add(h);
                     Databaze.SaveChanges();
+
+                    
 
                     return RedirectToAction("Zobrazeni");
                 }
