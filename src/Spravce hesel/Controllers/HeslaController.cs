@@ -33,15 +33,18 @@ namespace Spravce_hesel.Controllers
                     List<Heslo> desifrovano = new List<Heslo>();
                     foreach(Heslo heslo in Hesla)
                     {
-                        Heslo _desforave = new Heslo();
-                         _desforave.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
+                        Heslo _desforave = new Heslo() {
+                            ID = heslo.ID,
+                            UzivatelskeID = heslo.UzivatelskeID,
+                            Sluzba = heslo.Sluzba,
+                            Jmeno = heslo.Jmeno,
+                            Hash = heslo.Hash,
+                            Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra)
+                        };
+
                         Debug.Print(_desforave.Sifra);
                         Debug.Print(Sifrovani.Desifrovat(klic, heslo.Sifra));
-                        _desforave.Sluzba = heslo.Sluzba;
-                        _desforave.Jmeno = heslo.Jmeno;
-                        _desforave.UzivatelskeID = heslo.UzivatelskeID;
-                        _desforave.ID = heslo.ID;
-                        _desforave.Hash = heslo.Hash;
+
                         desifrovano.Add(_desforave);
                     }
 
@@ -55,9 +58,23 @@ namespace Spravce_hesel.Controllers
         [HttpGet] 
         public IActionResult DetailHesla(int id)
         {
-            Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            string? klic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID != null && klic != null)
+            {
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+                    Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+                    if (heslo.UzivatelskeID == uzivatelID)
+                    {
+                        klic = Sifrovani.HesloNaKlic(klic);
+                        heslo.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
+                        return Ok(Json(heslo));
+                    }
+                }
+            }
 
-            return Ok(Json(heslo));
+            return RedirectToAction("Error", "Home", 404);
         }
 
         [HttpGet]
