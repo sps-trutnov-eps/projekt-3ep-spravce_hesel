@@ -13,7 +13,7 @@
         foreach (Heslo heslo in Model)
         {
             <div class="heslo_div">
-                <div class="sluzba"><a title="Zobrazit heslo" href="JavaScript:zobrazitHeslo(@heslo.ID)">@heslo.Sluzba</a><span><a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit"></a><a class="icon-bin" title="Odstranit heslo" asp-action="Odstranit" asp-route-id="@heslo.ID"></a></span></div>
+                <div class="sluzba"><a title="Zobrazit heslo" href="JavaScript:zobrazitHeslo(@heslo.ID)">@heslo.Sluzba</a><span><a class="icon-edit" title="Upravit heslo" asp-action="Upravit" asp-route-id="@heslo.ID"></a><a class="icon-bin" title="Odstranit heslo" asp-action="Odstranit" asp-route-id="@heslo.ID"></a></span></div>
                 <div class="jmeno">@heslo.Jmeno</div><div class="heslo">��������</div>
             </div>
         }

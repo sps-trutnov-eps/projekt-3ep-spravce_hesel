@@ -144,5 +144,66 @@ namespace Spravce_hesel.Controllers
 
             return RedirectToAction("Zobrazeni");
         }
+
+        [HttpGet]
+        public IActionResult Upravit(int? id)
+        {
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            string? klic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID != null)
+            {
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+
+                    Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+                    //KUBO ROZŠIFRUJ TO HESLO
+                    return View(heslo);
+                }
+            }
+
+            return RedirectToAction("Error", "Home", 404);
+        }
+
+        [HttpPost]
+        public IActionResult Upravit(string sluzba, string jmeno, string heslo, int id)
+        {
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            string? klic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID != null && klic != null)
+            {
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                {
+
+                    Heslo? heslo1 = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+
+                    int delka = klic.Length;
+
+                    klic = Sifrovani.HesloNaKlic(klic);
+
+                    int hash = heslo.GetHashCode();
+                    heslo = Sifrovani.Zasifrovat(klic, heslo);
+
+                    Heslo h = new Heslo()
+                    {
+                        UzivatelskeID = (int)uzivatelID,
+                        Sluzba = sluzba,
+                        Jmeno = jmeno,
+                        Hash = hash,
+                        Sifra = heslo,
+                        ID = id
+                    };
+
+                    Databaze.Hesla.Remove(heslo1);
+                    Databaze.Hesla.Add(h);
+                    Databaze.SaveChanges();
+
+
+
+                    return RedirectToAction("Zobrazeni");
+                }
+            }
+
+            return RedirectToAction("Error", "Home", 404);
+        }
     }
 }
