@@ -8,4 +8,30 @@
     }
 
     window.location.reload();
+    }
+
+function zobrazitHeslo(id) {
+    $.ajax({
+        type: "GET",
+        url: "/Hesla/DetailHesla/" + id,
+        dataType: "JSON",
+        data: JSON.stringify(id),
+        contentType: "application/json; charset=utf-8",
+        
+        success: (res) => {
+            document.getElementById("detaily_pozadi").className = "";
+            document.getElementById("detaily").className = "";
+
+            document.getElementById("sluzba").innerHTML = res.value.sluzba;
+            document.getElementById("jmeno").innerHTML = res.value.jmeno;
+            document.getElementById("heslo").innerHTML = res.value.sifra;
+        }
+    });
+
+    // fetch("/Hesla/DetailHesla/" + id, { method: "GET", dataType: "JSON", url: "/Hesla/DetailHesla/" + id, }).then(data => data.json()).then(data => console.log(data));
+}
+
+function skrytHeslo() {
+    document.getElementById("detaily").className = "skryty";
+    document.getElementById("detaily_pozadi").className = "skryty";
 }

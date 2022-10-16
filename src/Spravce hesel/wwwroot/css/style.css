@@ -1,4 +1,133 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+.tmavy {
+  background-color: #252931;
+  color: #c4c2c2;
+}
+.tmavy a {
+  color: #c4c2c2;
+}
+.tmavy .login_vyber a.vybran {
+  color: lightblue;
+}
+.tmavy header {
+  border-bottom-color: lightblue;
+}
+.tmavy footer {
+  border-top-color: lightblue;
+}
+.tmavy button {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue;
+}
+.tmavy form input {
+  background-color: #4a4a4b;
+  color: #c4c2c2;
+  border-color: lightblue;
+}
+.tmavy form input[type=range]::-webkit-slider-thumb {
+  background-color: lightblue;
+}
+.tmavy form input[type=range]::-moz-range-thumb {
+  background-color: lightblue;
+}
+.tmavy div.item div.submenu a:not(:last-of-type) {
+  border-bottom-color: lightblue;
+}
+.tmavy div.item div.submenu > div {
+  border-color: lightblue;
+  background-color: #4a4a4b;
+}
+.tmavy .chyba {
+  color: lightblue;
+}
+.tmavy .heslo_div {
+  border-color: lightblue;
+  background-color: rgba(30, 61, 70, 0.3803921569);
+}
+.tmavy .heslo_div .sluzba {
+  border-bottom-color: lightblue;
+  background-color: rgba(30, 61, 70, 0.3803921569);
+}
+.tmavy #detaily {
+  background-color: rgba(30, 61, 70, 0.3803921569);
+  border-color: lightblue;
+}
+.tmavy #detaily #sluzba {
+  border-bottom-color: lightblue;
+}
+.tmavy #detaily_pozadi {
+  background-color: rgba(0, 0, 0, 0.4666666667);
+}
+
+header {
+  text-align: center;
+  border-bottom: 1px solid cornflowerblue;
+}
+header nav > div {
+  display: inline-block;
+  min-width: 4em;
+}
+header nav > div div.item:not(:first-of-type) {
+  padding-left: 1em;
+}
+header nav div.nav-vlevo {
+  float: left;
+}
+header nav div.nav-vpravo {
+  float: right;
+}
+header nav a {
+  text-decoration: none;
+}
+header nav div.item {
+  display: inline-block;
+  position: relative;
+  width: 10em;
+}
+header nav div.item div.submenu {
+  display: none;
+  position: absolute;
+  width: 10em;
+  top: 0;
+}
+header nav div.item div.submenu > a {
+  display: block;
+  font-size: 0;
+  height: 2rem;
+  width: 10rem;
+  margin: 0 auto;
+}
+header nav div.item div.submenu > div {
+  border: 2px solid cornflowerblue;
+  background-color: #f4f7fc;
+  border-radius: 2px;
+  padding: 0;
+  margin: 0;
+  width: calc(100% - 4px);
+  height: 100%;
+}
+header nav div.item div.submenu > div a {
+  display: block;
+  padding: 0.25em;
+}
+header nav div.item div.submenu > div a:not(:last-of-type) {
+  border-bottom: cornflowerblue solid 1px;
+}
+header nav div.item-icon {
+  width: 22px;
+}
+header nav div.item-icon div.submenu {
+  top: 0;
+  left: calc((-10em + 22px) / 2);
+}
+header nav div.item-icon div.submenu > a {
+  width: 1.5rem;
+}
+header nav div.item:hover div.submenu {
+  display: block;
+}
+
 html, body, #container {
   min-height: 100vh;
   margin: 0;
@@ -127,49 +256,6 @@ section.skryty {
   font-size: 4em;
 }
 
-.tmavy {
-  background-color: #252931;
-  color: #c4c2c2;
-}
-.tmavy a {
-  color: #c4c2c2;
-}
-.tmavy .login_vyber a.vybran {
-  color: lightblue;
-}
-.tmavy header {
-  border-bottom-color: lightblue;
-}
-.tmavy footer {
-  border-top-color: lightblue;
-}
-.tmavy button {
-  background-color: #4a4a4b;
-  color: #c4c2c2;
-  border-color: lightblue;
-}
-.tmavy form input {
-  background-color: #4a4a4b;
-  color: #c4c2c2;
-  border-color: lightblue;
-}
-.tmavy form input[type=range]::-webkit-slider-thumb {
-  background-color: lightblue;
-}
-.tmavy form input[type=range]::-moz-range-thumb {
-  background-color: lightblue;
-}
-.tmavy div.item div.submenu a:not(:last-of-type) {
-  border-bottom-color: lightblue;
-}
-.tmavy div.item div.submenu > div {
-  border-color: lightblue;
-  background-color: #4a4a4b;
-}
-.tmavy .chyba {
-  color: lightblue;
-}
-
 #container {
   font-family: "Source Sans Pro", sans-serif;
   min-width: 500px;
@@ -180,74 +266,6 @@ section.skryty {
 #container > * {
   padding: 1em;
   width: calc(100% - 2em);
-}
-
-header {
-  text-align: center;
-  border-bottom: 1px solid cornflowerblue;
-}
-header nav > div {
-  display: inline-block;
-  min-width: 4em;
-}
-header nav > div div.item:not(:first-of-type) {
-  padding-left: 1em;
-}
-header nav div.nav-vlevo {
-  float: left;
-}
-header nav div.nav-vpravo {
-  float: right;
-}
-header nav a {
-  text-decoration: none;
-}
-header nav div.item {
-  display: inline-block;
-  position: relative;
-  width: 10em;
-}
-header nav div.item div.submenu {
-  display: none;
-  position: absolute;
-  width: 10em;
-  top: 0;
-}
-header nav div.item div.submenu > a {
-  display: block;
-  font-size: 0;
-  height: 2rem;
-  width: 10rem;
-  margin: 0 auto;
-}
-header nav div.item div.submenu > div {
-  border: 2px solid cornflowerblue;
-  background-color: #f4f7fc;
-  border-radius: 2px;
-  padding: 0;
-  margin: 0;
-  width: calc(100% - 4px);
-  height: 100%;
-}
-header nav div.item div.submenu > div a {
-  display: block;
-  padding: 0.25em;
-}
-header nav div.item div.submenu > div a:not(:last-of-type) {
-  border-bottom: cornflowerblue solid 1px;
-}
-header nav div.item-icon {
-  width: 22px;
-}
-header nav div.item-icon div.submenu {
-  top: 0;
-  left: calc((-10em + 22px) / 2);
-}
-header nav div.item-icon div.submenu > a {
-  width: 1.5rem;
-}
-header nav div.item:hover div.submenu {
-  display: block;
 }
 
 main {
@@ -276,6 +294,74 @@ footer {
 }
 .login_vyber a.vybran {
   color: cornflowerblue;
+}
+
+.heslo_div {
+  width: calc(100% - 4px);
+  background-color: #e1e9f7;
+  border: 2px solid cornflowerblue;
+  border-radius: 2px;
+}
+.heslo_div * {
+  padding: 0.5em;
+}
+.heslo_div .sluzba {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid cornflowerblue;
+  background-color: #f4f7fc;
+  position: relative;
+}
+.heslo_div .sluzba span {
+  position: absolute;
+  padding: 0;
+  right: 0;
+}
+
+#detaily {
+  margin: 0 auto;
+  position: fixed;
+  height: max-content;
+  width: 500px;
+  padding: 1em;
+  left: calc(50% - (500px + 2em) / 2);
+  top: auto;
+  background-color: #e1e9f7;
+  border: 2px solid cornflowerblue;
+  border-radius: 2px;
+}
+#detaily > div {
+  margin: auto auto;
+  padding-block: 0.5em;
+  text-align: center;
+}
+#detaily #sluzba {
+  font-weight: bold;
+  border-bottom: 1px solid cornflowerblue;
+  margin-bottom: 0.5em;
+}
+#detaily #jmeno {
+  font-style: italic;
+}
+
+#detaily_pozadi {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+}
+
+#detaily.skryty, #detaily_pozadi.skryty {
+  display: none;
+}
+
+.heslo_div:not(:last-of-type) {
+  margin-bottom: 2em;
 }
 
 .pridat form {
