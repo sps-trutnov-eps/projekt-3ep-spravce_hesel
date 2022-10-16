@@ -156,7 +156,8 @@ namespace Spravce_hesel.Controllers
                 {
 
                     Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
-                    //KUBO ROZŠIFRUJ TO HESLO
+                    klic = Sifrovani.HesloNaKlic(klic);
+                    heslo.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
                     return View(heslo);
                 }
             }
