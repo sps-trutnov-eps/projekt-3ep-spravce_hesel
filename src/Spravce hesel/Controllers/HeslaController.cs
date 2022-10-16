@@ -131,5 +131,18 @@ namespace Spravce_hesel.Controllers
 
             return RedirectToAction("Error", "Home", 404);
         }
+
+        [HttpGet]
+        public IActionResult Odstranit(int? id)
+        {
+            var heslo = Databaze.Hesla.Find(id);
+
+
+            Databaze.Hesla.Remove(heslo);
+            Databaze.SaveChanges();
+
+
+            return RedirectToAction("Zobrazeni");
+        }
     }
 }
