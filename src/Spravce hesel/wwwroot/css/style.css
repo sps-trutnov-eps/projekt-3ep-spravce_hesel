@@ -43,14 +43,14 @@
 }
 .tmavy .heslo_div {
   border-color: lightblue;
-  background-color: rgba(30, 61, 70, 0.3803921569);
+  background-color: #172e34;
 }
 .tmavy .heslo_div .sluzba {
   border-bottom-color: lightblue;
-  background-color: rgba(30, 61, 70, 0.3803921569);
+  background-color: #172e34;
 }
 .tmavy #detaily {
-  background-color: rgba(30, 61, 70, 0.3803921569);
+  background-color: #172e34;
   border-color: lightblue;
 }
 .tmavy #detaily #sluzba {
@@ -317,15 +317,23 @@ footer {
   padding: 0;
   right: 0;
 }
+.heslo_div .jmeno {
+  display: inline-block;
+}
+.heslo_div .heslo {
+  display: inline-block;
+  float: right;
+}
 
 #detaily {
   margin: 0 auto;
   position: fixed;
-  height: max-content;
+  line-height: 1.25em;
+  height: 7.25em;
   width: 500px;
   padding: 1em;
   left: calc(50% - (500px + 2em) / 2);
-  top: auto;
+  top: calc(50% - 3.625em);
   background-color: #e1e9f7;
   border: 2px solid cornflowerblue;
   border-radius: 2px;

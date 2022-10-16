@@ -29,8 +29,8 @@ namespace Spravce_hesel.Controllers
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-
                     List<Heslo> desifrovano = new List<Heslo>();
+
                     foreach(Heslo heslo in Hesla)
                     {
                         Heslo _desforave = new Heslo() {

@@ -225,16 +225,26 @@ footer {
             right: 0;
         }
     }
+
+    .jmeno {
+        display: inline-block;
+    }
+
+    .heslo {
+        display: inline-block;
+        float: right;
+    }
 }
 
 #detaily {
     margin: 0 auto;
     position: fixed;
-    height: max-content;
+    line-height: 1.25em;
+    height: calc(2.25em * 3 + .5em);
     width: 500px;
     padding: 1em;
     left: calc(50% - (500px + 2em)/2);
-    top: auto;
+    top: calc(50% - (2.25em * 3 + .5em) / 2);
     background-color: $barva-pozadi-tercial;
     border: 2px solid $barva-text-sekundar;
     border-radius: 2px;
