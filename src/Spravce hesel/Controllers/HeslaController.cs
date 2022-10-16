@@ -65,11 +65,14 @@ namespace Spravce_hesel.Controllers
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
                     Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
-                    if (heslo.UzivatelskeID == uzivatelID)
+                    if (heslo != null)
                     {
-                        klic = Sifrovani.HesloNaKlic(klic);
-                        heslo.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
-                        return Ok(Json(heslo));
+                        if (heslo.UzivatelskeID == uzivatelID)
+                        {
+                            klic = Sifrovani.HesloNaKlic(klic);
+                            heslo.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
+                            return Ok(Json(heslo));
+                        }
                     }
                 }
             }
