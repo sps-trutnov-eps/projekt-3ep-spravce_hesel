@@ -6,7 +6,9 @@
 
 <article>
     <h2>Moje hesla</h2>
-    <p class="center"><button type="button" class="icon-plus" action="/Heslo/Pridat">Pøidat heslo</button></p>
+    <p class="center">
+        <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Pøidat heslo</button>
+    </p>
     @{
         foreach (Heslo heslo in Model)
         {
