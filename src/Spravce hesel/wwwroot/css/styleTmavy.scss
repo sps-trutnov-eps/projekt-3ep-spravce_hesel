@@ -76,16 +76,16 @@
         }
     }
 
-    #detaily {
-        background-color: $barva-pozadi-tercial;
-        border-color: $barva-text-sekundar;
-
-        #sluzba {
-            border-bottom-color: $barva-text-sekundar;
-        }
+    #detaily #sluzba {
+        border-bottom-color: $barva-text-sekundar;
     }
 
-    #detaily_pozadi {
+    .POPup {
+        background-color: $barva-pozadi-tercial;
+        border-color: $barva-text-sekundar;
+    }
+
+    .POPupPozadi {
         background-color: $barva-zesednuti;
     }
 }

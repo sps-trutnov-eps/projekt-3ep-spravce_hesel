@@ -237,17 +237,12 @@ footer {
 }
 
 #detaily {
-    margin: 0 auto;
-    position: fixed;
     line-height: 1.25em;
     height: calc(2.25em * 3 + .5em);
     width: 500px;
     padding: 1em;
     left: calc(50% - (500px + 2em)/2);
     top: calc(50% - (2.25em * 3 + .5em) / 2);
-    background-color: $barva-pozadi-tercial;
-    border: 2px solid $barva-text-sekundar;
-    border-radius: 2px;
 
     > div {
         margin: auto auto;
@@ -266,7 +261,14 @@ footer {
     }
 }
 
-#detaily_pozadi {
+.POPup {
+    position: fixed;
+    background-color: $barva-pozadi-tercial;
+    border: 2px solid $barva-text-sekundar;
+    border-radius: 2px;
+}
+
+.POPupPozadi {
     background-color: $barva-zesednuti;
     position: fixed;
     display: block;

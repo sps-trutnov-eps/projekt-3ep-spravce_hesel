@@ -1,4 +1,4 @@
-﻿function PrepnoutBarevnyMotiv() {
+function PrepnoutBarevnyMotiv() {
     if (!document.cookie.includes("TmavyMotiv"))
         document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     else
@@ -7,7 +7,7 @@
     window.location.reload();
     }
 
-function zobrazitHeslo(id) {
+function vyzadatHeslo(id) {
     $.ajax({
         type: "GET",
         url: "/Hesla/DetailHesla/" + id,
@@ -16,9 +16,7 @@ function zobrazitHeslo(id) {
         contentType: "application/json; charset=utf-8",
         
         success: (res) => {
-            document.getElementById("detaily_pozadi").className = "";
-            document.getElementById("detaily").className = "";
-
+            zobrazitPOPup();
             document.getElementById("sluzba").innerHTML = res.value.sluzba;
             document.getElementById("jmeno").innerHTML = res.value.jmeno;
             document.getElementById("heslo").innerHTML = res.value.sifra;
@@ -26,7 +24,12 @@ function zobrazitHeslo(id) {
     });
 }
 
-function skrytHeslo() {
-    document.getElementById("detaily").className = "skryty";
-    document.getElementById("detaily_pozadi").className = "skryty";
+function zobrazitPOPup() {
+    document.getElementsByClassName("POPup")[0].className = "POPup";
+    document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi";
+}
+
+function skrytPOPUp() {
+    document.getElementsByClassName("POPup")[0].className = "POPup skryty";
+    document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi skryty";
 }

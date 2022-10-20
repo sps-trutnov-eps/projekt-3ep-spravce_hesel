@@ -49,14 +49,14 @@
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
-.tmavy #detaily {
-  background-color: #172e34;
-  border-color: lightblue;
-}
 .tmavy #detaily #sluzba {
   border-bottom-color: lightblue;
 }
-.tmavy #detaily_pozadi {
+.tmavy .POPup {
+  background-color: #172e34;
+  border-color: lightblue;
+}
+.tmavy .POPupPozadi {
   background-color: rgba(0, 0, 0, 0.4666666667);
 }
 
@@ -326,17 +326,12 @@ footer {
 }
 
 #detaily {
-  margin: 0 auto;
-  position: fixed;
   line-height: 1.25em;
   height: 7.25em;
   width: 500px;
   padding: 1em;
   left: calc(50% - (500px + 2em) / 2);
   top: calc(50% - 3.625em);
-  background-color: #e1e9f7;
-  border: 2px solid cornflowerblue;
-  border-radius: 2px;
 }
 #detaily > div {
   margin: auto auto;
@@ -352,7 +347,14 @@ footer {
   font-style: italic;
 }
 
-#detaily_pozadi {
+.POPup {
+  position: fixed;
+  background-color: #e1e9f7;
+  border: 2px solid cornflowerblue;
+  border-radius: 2px;
+}
+
+.POPupPozadi {
   background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   display: block;
