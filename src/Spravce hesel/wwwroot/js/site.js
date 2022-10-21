@@ -1,3 +1,4 @@
+// Barevný motiv
 function PrepnoutBarevnyMotiv() {
     if (!document.cookie.includes("TmavyMotiv"))
         document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
@@ -7,6 +8,7 @@ function PrepnoutBarevnyMotiv() {
     window.location.reload();
     }
 
+// Vyžádání hesla
 function vyzadatHeslo(id) {
     $.ajax({
         type: "GET",
@@ -24,27 +26,26 @@ function vyzadatHeslo(id) {
     });
 }
 
+// Vyžádání potvrzení odstranìní
 function vyzadatOdstraneni(id) {
     document.getElementById("odstraneni").action = "/Hesla/Odstranit/" + id;
     zobrazitPOPup("odstranit");
 }
 
+// pop-up
 function zobrazitPOPup(id) {
     skrytPOPUp();
     document.getElementsByClassName("POPup")[id].className = "POPup";
-    document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi";
 }
 
 function skrytPOPUp() {
-    const POPupy = document.getElementsByClassName("POPup");
-    const POPupPozadi = document.getElementsByClassName("POPupPozadi");
-
-    for (let div of POPupy) {
+    for (let div of document.getElementsByClassName("POPup")) {
         div.className = "POPup skryty";
-    };
-
-    for (let div of POPupPozadi) {
-        div.className = "POPupPozadi skryty";
     };
 }
 
+$('div.POPup').click(function (e) {
+    if (e.target == this) {
+        skrytPOPUp()
+    }
+});

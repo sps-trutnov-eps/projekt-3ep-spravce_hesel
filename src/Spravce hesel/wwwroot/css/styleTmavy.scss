@@ -76,16 +76,12 @@
         }
     }
 
+    #container div.POPup > div {
+        border-color: $barva-text-sekundar;
+        background-color: $barva-pozadi-tercial;
+    }
+
     .popupnadpis {
         border-bottom-color: $barva-text-sekundar;
-    }
-
-    .POPup {
-        background-color: $barva-pozadi-tercial;
-        border-color: $barva-text-sekundar;
-    }
-
-    .POPupPozadi {
-        background-color: $barva-zesednuti;
     }
 }

@@ -1,14 +1,15 @@
 ﻿@*@model List<SdileneHeslo>*@
-<a class="POPupPozadi skryty" href="JavaScript:skrytPOPUp('oznameni')"></a>
-
 <div class="POPup skryty" id="oznameni">
-    <h3 class="popupnadpis">Oznámení</h3>
-@*    @{
-        foreach(SdileneHeslo heslo in Model)
-        {
-            <div class="heslo_div">
-                <div class="sluzba"><a title="Zobrazit heslo" href="">@heslo.Id</a></div>
-            </div>
-        }
-    }*@
+    <div>
+        <h3 class="popupnadpis">Oznámení</h3>
+    @*    @{
+            foreach(SdileneHeslo heslo in Model)
+            {
+                <div class="heslo_div">
+                    <div class="sluzba"><a title="Zobrazit heslo" href="">@heslo.Id</a></div>
+                </div>
+            }
+        }*@
+
+    </div>
 </div>
