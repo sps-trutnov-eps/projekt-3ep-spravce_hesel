@@ -24,6 +24,11 @@ function vyzadatHeslo(id) {
     });
 }
 
+function vyzadatOdstraneni(id) {
+    document.getElementById("odstraneni").action = "/Hesla/Odstranit/" + id;
+    zobrazitPOPup("odstranit");
+}
+
 function zobrazitPOPup(id) {
     skrytPOPUp();
     document.getElementsByClassName("POPup")[id].className = "POPup";
@@ -42,3 +47,4 @@ function skrytPOPUp() {
         div.className = "POPupPozadi skryty";
     };
 }
+
