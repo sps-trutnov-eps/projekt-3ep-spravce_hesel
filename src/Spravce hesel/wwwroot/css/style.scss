@@ -137,10 +137,6 @@ article.split section {
     vertical-align: top;
 }
 
-section.skryty {
-    display: none !important;
-}
-
 .chyba {
     color: $barva-text-sekundar;
 
@@ -204,7 +200,7 @@ footer {
 // Zobrzování hesel
 .heslo_div {
     width: calc(100% - 4px);
-    background-color: $barva-pozadi-tercial;
+    background-color: $barva-pozadi-sekundar;
     border: 2px solid $barva-text-sekundar;
     border-radius: 2px;
 
@@ -216,7 +212,7 @@ footer {
         text-align: center;
         font-weight: bold;
         border-bottom: 1px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-sekundar;
+        background-color: $barva-pozadi-tercial;
         position: relative;
 
         span {
@@ -237,12 +233,12 @@ footer {
 }
 
 #detaily {
-    line-height: 1.25em;
-    height: calc(2.25em * 3 + .5em);
+    line-height: 1em;
+    height: calc(2em * 2 + 4em + .5em);
     width: 500px;
     padding: 1em;
     left: calc(50% - (500px + 2em)/2);
-    top: calc(50% - (2.25em * 3 + .5em) / 2);
+    top: calc(50% - (2em * 2 + 6.75em) / 2);
 
     > div {
         margin: auto auto;
@@ -250,21 +246,28 @@ footer {
         text-align: center;
     }
 
-    #sluzba {
-        font-weight: bold;
-        border-bottom: 1px solid $barva-text-sekundar;
-        margin-bottom: .5em;
-    }
-
     #jmeno {
         font-style: italic;
     }
 }
 
+.heslo_div:not(:last-of-type) {
+    margin-bottom: 2em;
+}
+
+// Oznámení
+#oznameni {
+    height: calc(100vh - 6em);
+    top: 2em;
+    right: 2em;
+    width: 500px;
+}
+
+// Pop-up
 .POPup {
     position: fixed;
-    background-color: $barva-pozadi-tercial;
     border: 2px solid $barva-text-sekundar;
+    background-color: $barva-pozadi-tercial;
     border-radius: 2px;
 }
 
@@ -280,12 +283,18 @@ footer {
     top: 0;
 }
 
-#detaily.skryty, #detaily_pozadi.skryty {
-    display: none;
+.popupnadpis {
+    font-weight: bold;
+    line-height: 2rem;
+    border-bottom: 1px solid $barva-text-sekundar;
+    margin: auto auto;
+    margin-bottom: .5em;
+    padding-block: .5em;
+    text-align: center;
 }
 
-.heslo_div:not(:last-of-type) {
-    margin-bottom: 2em;
+.skryty {
+    display: none !important;
 }
 
 // Přidávání hesel

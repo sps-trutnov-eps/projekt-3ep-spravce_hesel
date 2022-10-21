@@ -49,7 +49,7 @@
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
-.tmavy #detaily #sluzba {
+.tmavy .popupnadpis {
   border-bottom-color: lightblue;
 }
 .tmavy .POPup {
@@ -242,10 +242,6 @@ article.split section {
   vertical-align: top;
 }
 
-section.skryty {
-  display: none !important;
-}
-
 .chyba {
   color: cornflowerblue;
 }
@@ -298,7 +294,7 @@ footer {
 
 .heslo_div {
   width: calc(100% - 4px);
-  background-color: #e1e9f7;
+  background-color: #f4f7fc;
   border: 2px solid cornflowerblue;
   border-radius: 2px;
 }
@@ -309,7 +305,7 @@ footer {
   text-align: center;
   font-weight: bold;
   border-bottom: 1px solid cornflowerblue;
-  background-color: #f4f7fc;
+  background-color: #e1e9f7;
   position: relative;
 }
 .heslo_div .sluzba span {
@@ -326,31 +322,37 @@ footer {
 }
 
 #detaily {
-  line-height: 1.25em;
-  height: 7.25em;
+  line-height: 1em;
+  height: 8.5em;
   width: 500px;
   padding: 1em;
   left: calc(50% - (500px + 2em) / 2);
-  top: calc(50% - 3.625em);
+  top: calc(50% - 5.375em);
 }
 #detaily > div {
   margin: auto auto;
   padding-block: 0.5em;
   text-align: center;
 }
-#detaily #sluzba {
-  font-weight: bold;
-  border-bottom: 1px solid cornflowerblue;
-  margin-bottom: 0.5em;
-}
 #detaily #jmeno {
   font-style: italic;
 }
 
+.heslo_div:not(:last-of-type) {
+  margin-bottom: 2em;
+}
+
+#oznameni {
+  height: calc(100vh - 6em);
+  top: 2em;
+  right: 2em;
+  width: 500px;
+}
+
 .POPup {
   position: fixed;
-  background-color: #e1e9f7;
   border: 2px solid cornflowerblue;
+  background-color: #e1e9f7;
   border-radius: 2px;
 }
 
@@ -366,12 +368,18 @@ footer {
   top: 0;
 }
 
-#detaily.skryty, #detaily_pozadi.skryty {
-  display: none;
+.popupnadpis {
+  font-weight: bold;
+  line-height: 2rem;
+  border-bottom: 1px solid cornflowerblue;
+  margin: auto auto;
+  margin-bottom: 0.5em;
+  padding-block: 0.5em;
+  text-align: center;
 }
 
-.heslo_div:not(:last-of-type) {
-  margin-bottom: 2em;
+.skryty {
+  display: none !important;
 }
 
 .pridat form {

@@ -31,9 +31,10 @@ namespace Spravce_hesel.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdHesla = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SdilenaSifra = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ZakladatelID = table.Column<int>(type: "int", nullable: false),
+                    UzivatelskeID = table.Column<int>(type: "int", nullable: false),
+                    Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Potvrzeno = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

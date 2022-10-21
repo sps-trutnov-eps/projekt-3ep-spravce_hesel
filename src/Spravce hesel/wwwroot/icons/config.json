@@ -181,6 +181,18 @@
       "css": "error",
       "code": 59407,
       "src": "typicons"
+    },
+    {
+      "uid": "5211af474d3a9848f67f945e2ccaf143",
+      "css": "cancel",
+      "code": 59408,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "cd21cbfb28ad4d903cede582157f65dc",
+      "css": "bell",
+      "code": 59409,
+      "src": "fontawesome"
     }
   ]
 }

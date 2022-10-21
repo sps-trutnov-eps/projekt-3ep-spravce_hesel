@@ -16,7 +16,7 @@ function vyzadatHeslo(id) {
         contentType: "application/json; charset=utf-8",
         
         success: (res) => {
-            zobrazitPOPup();
+            zobrazitPOPup("detaily");
             document.getElementById("sluzba").innerHTML = res.value.sluzba;
             document.getElementById("jmeno").innerHTML = res.value.jmeno;
             document.getElementById("heslo").innerHTML = res.value.sifra;
@@ -24,12 +24,21 @@ function vyzadatHeslo(id) {
     });
 }
 
-function zobrazitPOPup() {
-    document.getElementsByClassName("POPup")[0].className = "POPup";
+function zobrazitPOPup(id) {
+    skrytPOPUp();
+    document.getElementsByClassName("POPup")[id].className = "POPup";
     document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi";
 }
 
 function skrytPOPUp() {
-    document.getElementsByClassName("POPup")[0].className = "POPup skryty";
-    document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi skryty";
+    const POPupy = document.getElementsByClassName("POPup");
+    const POPupPozadi = document.getElementsByClassName("POPupPozadi");
+
+    for (let div of POPupy) {
+        div.className = "POPup skryty";
+    };
+
+    for (let div of POPupPozadi) {
+        div.className = "POPupPozadi skryty";
+    };
 }
