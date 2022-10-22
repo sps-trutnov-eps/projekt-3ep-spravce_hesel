@@ -6,15 +6,24 @@
     <div>
         <h3>Oznámení</h3>
         @{
-            if (hesla.Count != 0)
+            if (hesla != null && hesla.Count != 0)
             {
                 foreach(SdileneHeslo heslo in hesla)
                 {
-                    <div class="oznameni">
-                        <h4>@heslo.Sluzba</h4>
-                        <div>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</div>
-                        <button type="button" onclick="window.location.href = '/Hesla/PotvrditSdileni/@heslo.Id'">Potvrdit</button>
-                        <button type="button" onclick="window.location.href = '/Hesla/ZrusitSdileni/@heslo.Id'">Zrušit</button>
+                    <div class="oznameni @heslo.Id">
+                        @if (heslo.Sluzba == "" || heslo.Sluzba == null)
+                        {
+                            <h4><i>Neznámá služba</i></h4>
+                        }
+                        else
+                        {
+                            <h4>@heslo.Sluzba</h4>
+                        }
+                        <p>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</p>
+                        <p>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, true)">Potvrdit</button>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, false)">Zrušit</button>
+                        </p>
                     </div>
                 }
             }

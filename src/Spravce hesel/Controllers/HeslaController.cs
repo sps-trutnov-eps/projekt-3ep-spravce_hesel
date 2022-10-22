@@ -231,7 +231,7 @@ namespace Spravce_hesel.Controllers
             return RedirectToAction("Error", "Home", 404);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult PotvrditSdileni(int id)
         {
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
@@ -258,14 +258,14 @@ namespace Spravce_hesel.Controllers
                     Databaze.Sdilena_hesla.Add(potvrzeno);
                     Databaze.SaveChanges();
 
-                    return RedirectToAction("Zobrazeni");
+                    return Ok(Json("ok"));
                 }
             }
 
             return RedirectToAction("Error", "Home", 404);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult ZrusitSdileni(int id)
         {
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
@@ -278,7 +278,7 @@ namespace Spravce_hesel.Controllers
                     Databaze.Sdilena_hesla.Remove(heslo);
                     Databaze.SaveChanges();
 
-                    return RedirectToAction("Zobrazeni");
+                    return Ok(Json("ok"));
                 }
             }
 
