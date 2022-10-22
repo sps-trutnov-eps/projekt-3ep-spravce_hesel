@@ -115,6 +115,10 @@ button {
     margin-block: .25em;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .center {
     text-align: center;
 }
@@ -248,6 +252,19 @@ footer {
 
     > div {
         height: calc(100vh - 5em);
+
+        .oznameni {
+            padding-block: .5em;
+            border-bottom: 1px solid $barva-text-sekundar;
+        }
+
+        h4 {
+            margin-top: 1em;
+        }
+    }
+
+    h3 {
+        margin: 0 !important;
     }
 }
 
@@ -263,6 +280,7 @@ footer {
     height: 100vh;
     padding: 0;
     background-color: $barva-zesednuti;
+    z-index: 999;
 
     > div {
         margin: 1em;
@@ -274,19 +292,19 @@ footer {
         padding: 1em;
         text-align: center;
 
+        h3 {
+            font-weight: bold;
+            border-bottom: 1px solid $barva-text-sekundar;
+            margin: auto;
+            margin-bottom: .5em;
+            padding-block: .5em;
+            text-align: center;
+        }
+
         > div {
             padding-block: .5em;
         }
     }
-}
-
-.popupnadpis {
-    font-weight: bold;
-    border-bottom: 1px solid $barva-text-sekundar;
-    margin: auto;
-    margin-bottom: .5em;
-    padding-block: .5em;
-    text-align: center;
 }
 
 .skryty {

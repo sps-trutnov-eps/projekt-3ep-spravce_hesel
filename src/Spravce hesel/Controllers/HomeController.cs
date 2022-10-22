@@ -25,22 +25,5 @@ namespace Spravce_hesel.Controllers
             ViewData["Chyba"] = $"{code}";
             return View();
         }
-
-        [HttpGet]
-        public IActionResult Oznameni()
-        {
-            int? uzivatelID = HttpContext.Session.GetInt32("ID");
-            string? klic = HttpContext.Session.GetString("Klic");
-            if (uzivatelID != null && klic != null)
-            {
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
-                {
-                    List<SdileneHeslo> hesla = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == false).ToList();
-                    return Ok(Json(hesla));
-                }
-            }
-
-            return RedirectToAction("Error", "Home", 404);
-        }
     }
 }

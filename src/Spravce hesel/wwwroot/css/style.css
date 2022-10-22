@@ -53,8 +53,11 @@
   border-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .popupnadpis {
+.tmavy #container div.POPup h3 {
   border-bottom-color: lightblue;
+}
+.tmavy #oznameni .oznameni {
+  border-bottom: 1px solid lightblue;
 }
 
 header {
@@ -93,7 +96,7 @@ header nav div.item div.submenu {
   position: absolute;
   width: 10em;
   top: 0;
-  z-index: 999;
+  z-index: 998;
 }
 header nav div.item div.submenu > a {
   display: block;
@@ -224,6 +227,10 @@ button {
   margin-block: 0.25em;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .center {
   text-align: center;
 }
@@ -339,6 +346,16 @@ footer {
 #oznameni > div {
   height: calc(100vh - 5em);
 }
+#oznameni > div .oznameni {
+  padding-block: 0.5em;
+  border-bottom: 1px solid cornflowerblue;
+}
+#oznameni > div h4 {
+  margin-top: 1em;
+}
+#oznameni h3 {
+  margin: 0 !important;
+}
 
 #container div.POPup {
   position: fixed;
@@ -351,6 +368,7 @@ footer {
   height: 100vh;
   padding: 0;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
 }
 #container div.POPup > div {
   margin: 1em;
@@ -362,17 +380,16 @@ footer {
   padding: 1em;
   text-align: center;
 }
-#container div.POPup > div > div {
-  padding-block: 0.5em;
-}
-
-.popupnadpis {
+#container div.POPup > div h3 {
   font-weight: bold;
   border-bottom: 1px solid cornflowerblue;
   margin: auto;
   margin-bottom: 0.5em;
   padding-block: 0.5em;
   text-align: center;
+}
+#container div.POPup > div > div {
+  padding-block: 0.5em;
 }
 
 .skryty {

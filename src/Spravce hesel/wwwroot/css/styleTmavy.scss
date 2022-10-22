@@ -76,12 +76,20 @@
         }
     }
 
-    #container div.POPup > div {
-        border-color: $barva-text-sekundar;
-        background-color: $barva-pozadi-tercial;
+    #container div.POPup {
+        > div {
+            border-color: $barva-text-sekundar;
+            background-color: $barva-pozadi-tercial;
+        }
+
+        h3 {
+            border-bottom-color: $barva-text-sekundar;
+        }
     }
 
-    .popupnadpis {
-        border-bottom-color: $barva-text-sekundar;
+    #oznameni {
+        .oznameni {
+            border-bottom: 1px solid $barva-text-sekundar;
+        }
     }
 }

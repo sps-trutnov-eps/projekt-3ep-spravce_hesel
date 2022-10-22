@@ -1,15 +1,27 @@
-﻿@*@model List<SdileneHeslo>*@
+﻿@{
+    dynamic? hesla = ViewData["Oznameni"];
+}
+
 <div class="POPup skryty" id="oznameni">
     <div>
-        <h3 class="popupnadpis">Oznámení</h3>
-    @*    @{
-            foreach(SdileneHeslo heslo in Model)
+        <h3>Oznámení</h3>
+        @{
+            if (hesla.Count != 0)
             {
-                <div class="heslo_div">
-                    <div class="sluzba"><a title="Zobrazit heslo" href="">@heslo.Id</a></div>
-                </div>
+                foreach(SdileneHeslo heslo in hesla)
+                {
+                    <div class="oznameni">
+                        <h4>@heslo.Sluzba</h4>
+                        <div>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</div>
+                        <button type="button" onclick="window.location.href = '/Hesla/PotvrditSdileni/@heslo.Id'">Potvrdit</button>
+                        <button type="button" onclick="window.location.href = '/Hesla/ZrusitSdileni/@heslo.Id'">Zrušit</button>
+                    </div>
+                }
             }
-        }*@
-
+            else
+            {
+                <p>Nemáte žádná oznámení</p>
+            }
+        }
     </div>
 </div>
