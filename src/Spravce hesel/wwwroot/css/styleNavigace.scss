@@ -12,21 +12,26 @@ header {
     border-bottom: 1px solid $barva-text-sekundar;
 
     nav {
-        > div {
+        position: relative;
+
+        div.item:not(:first-of-type) {
+            margin-left: 1em;
+        }
+
+        > * {
             display: inline-block;
-            min-width: 4em;
-
-            div.item:not(:first-of-type) {
-                padding-left: 1em;
-            }
         }
 
-        div.nav-vlevo {
-            float: left;
+        span.nav-vlevo {
+            padding: 0;
+            left: 0;
+            position: absolute;
         }
 
-        div.nav-vpravo {
-            float: right;
+        span.nav-vpravo {
+            padding: 0;
+            right: 0;
+            position: absolute;
         }
 
         a {
@@ -43,6 +48,7 @@ header {
                 position: absolute;
                 width: 10em;
                 top: 0;
+                z-index: 998;
 
                 > a {
                     display: block;

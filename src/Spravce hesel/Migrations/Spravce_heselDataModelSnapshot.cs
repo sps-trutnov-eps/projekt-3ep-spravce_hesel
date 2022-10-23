@@ -58,14 +58,29 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Jmeno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Potvrzeno")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PuvodniHesloID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sifra")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdHesla")
+                    b.Property<string>("Sluzba")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UzivatelskeID")
                         .HasColumnType("int");
 
-                    b.Property<string>("SdilenaSifra")
+                    b.Property<int>("ZakladatelID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZakladatelJmeno")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

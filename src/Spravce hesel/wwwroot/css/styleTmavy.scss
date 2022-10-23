@@ -4,7 +4,7 @@
     $barva-text-sekundar: lightblue;
     $barva-pozadi: #252931;
     $barva-pozadi-sekundar: #4a4a4b;
-    $barva-pozadi-tercial: #1e3d4661;
+    $barva-pozadi-tercial: #172e34;
     $barva-zesednuti: #00000077;
 
     background-color: $barva-pozadi;
@@ -76,16 +76,20 @@
         }
     }
 
-    #detaily {
-        background-color: $barva-pozadi-tercial;
-        border-color: $barva-text-sekundar;
+    #container div.POPup {
+        > div {
+            border-color: $barva-text-sekundar;
+            background-color: $barva-pozadi-tercial;
+        }
 
-        #sluzba {
+        h3 {
             border-bottom-color: $barva-text-sekundar;
         }
     }
 
-    #detaily_pozadi {
-        background-color: $barva-zesednuti;
+    #oznameni {
+        .oznameni {
+            border-bottom: 1px solid $barva-text-sekundar;
+        }
     }
 }

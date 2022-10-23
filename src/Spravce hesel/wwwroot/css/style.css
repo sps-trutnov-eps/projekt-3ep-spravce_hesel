@@ -43,39 +43,45 @@
 }
 .tmavy .heslo_div {
   border-color: lightblue;
-  background-color: rgba(30, 61, 70, 0.3803921569);
+  background-color: #172e34;
 }
 .tmavy .heslo_div .sluzba {
   border-bottom-color: lightblue;
-  background-color: rgba(30, 61, 70, 0.3803921569);
+  background-color: #172e34;
 }
-.tmavy #detaily {
-  background-color: rgba(30, 61, 70, 0.3803921569);
+.tmavy #container div.POPup > div {
   border-color: lightblue;
+  background-color: #172e34;
 }
-.tmavy #detaily #sluzba {
+.tmavy #container div.POPup h3 {
   border-bottom-color: lightblue;
 }
-.tmavy #detaily_pozadi {
-  background-color: rgba(0, 0, 0, 0.4666666667);
+.tmavy #oznameni .oznameni {
+  border-bottom: 1px solid lightblue;
 }
 
 header {
   text-align: center;
   border-bottom: 1px solid cornflowerblue;
 }
-header nav > div {
+header nav {
+  position: relative;
+}
+header nav div.item:not(:first-of-type) {
+  margin-left: 1em;
+}
+header nav > * {
   display: inline-block;
-  min-width: 4em;
 }
-header nav > div div.item:not(:first-of-type) {
-  padding-left: 1em;
+header nav span.nav-vlevo {
+  padding: 0;
+  left: 0;
+  position: absolute;
 }
-header nav div.nav-vlevo {
-  float: left;
-}
-header nav div.nav-vpravo {
-  float: right;
+header nav span.nav-vpravo {
+  padding: 0;
+  right: 0;
+  position: absolute;
 }
 header nav a {
   text-decoration: none;
@@ -90,6 +96,7 @@ header nav div.item div.submenu {
   position: absolute;
   width: 10em;
   top: 0;
+  z-index: 998;
 }
 header nav div.item div.submenu > a {
   display: block;
@@ -220,6 +227,10 @@ button {
   margin-block: 0.25em;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .center {
   text-align: center;
 }
@@ -240,10 +251,6 @@ article.split section {
   margin: 0;
   padding: 0;
   vertical-align: top;
-}
-
-section.skryty {
-  display: none !important;
 }
 
 .chyba {
@@ -298,7 +305,7 @@ footer {
 
 .heslo_div {
   width: calc(100% - 4px);
-  background-color: #e1e9f7;
+  background-color: #f4f7fc;
   border: 2px solid cornflowerblue;
   border-radius: 2px;
 }
@@ -309,7 +316,7 @@ footer {
   text-align: center;
   font-weight: bold;
   border-bottom: 1px solid cornflowerblue;
-  background-color: #f4f7fc;
+  background-color: #e1e9f7;
   position: relative;
 }
 .heslo_div .sluzba span {
@@ -317,51 +324,76 @@ footer {
   padding: 0;
   right: 0;
 }
+.heslo_div .jmeno {
+  display: inline-block;
+}
+.heslo_div .heslo {
+  display: inline-block;
+  float: right;
+}
 
-#detaily {
-  margin: 0 auto;
-  position: fixed;
-  height: max-content;
-  width: 500px;
-  padding: 1em;
-  left: calc(50% - (500px + 2em) / 2);
-  top: auto;
-  background-color: #e1e9f7;
-  border: 2px solid cornflowerblue;
-  border-radius: 2px;
-}
-#detaily > div {
-  margin: auto auto;
-  padding-block: 0.5em;
-  text-align: center;
-}
-#detaily #sluzba {
-  font-weight: bold;
-  border-bottom: 1px solid cornflowerblue;
-  margin-bottom: 0.5em;
-}
-#detaily #jmeno {
+#detaily > div #jmeno {
   font-style: italic;
-}
-
-#detaily_pozadi {
-  background-color: rgba(0, 0, 0, 0.2);
-  position: fixed;
-  display: block;
-  height: 100vh;
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  left: 0;
-  top: 0;
-}
-
-#detaily.skryty, #detaily_pozadi.skryty {
-  display: none;
 }
 
 .heslo_div:not(:last-of-type) {
   margin-bottom: 2em;
+}
+
+#oznameni {
+  justify-content: end !important;
+}
+#oznameni > div {
+  height: calc(100vh - 5em);
+}
+#oznameni > div .oznameni {
+  padding-block: 0.5em;
+  border-bottom: 1px solid cornflowerblue;
+}
+#oznameni > div h4 {
+  margin-top: 1em;
+}
+#oznameni h3 {
+  margin: 0 !important;
+}
+
+#container div.POPup {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+#container div.POPup > div {
+  margin: 1em;
+  min-width: 500px;
+  width: max-content;
+  border: 2px solid cornflowerblue;
+  background-color: #e1e9f7;
+  border-radius: 2px;
+  padding: 1em;
+  text-align: center;
+}
+#container div.POPup > div h3 {
+  font-weight: bold;
+  border-bottom: 1px solid cornflowerblue;
+  margin: auto;
+  margin-bottom: 0.5em;
+  padding-block: 0.5em;
+  text-align: center;
+}
+#container div.POPup > div > div {
+  padding-block: 0.5em;
+}
+
+.skryty {
+  display: none !important;
 }
 
 .pridat form {
