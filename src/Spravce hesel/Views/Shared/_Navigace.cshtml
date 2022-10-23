@@ -8,7 +8,7 @@
 }
 
 <nav>
-    <div class="nav-vlevo">
+    <span class="nav-vlevo">
         @if (BarevnyMotiv == "svetly")
         {
             <div class="item item-icon">
@@ -21,31 +21,29 @@
                 <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
             </div>
         }
-    </div>
+    </span>
 
-    <div class="nav-stred">
-        @if (uzivatel != null)
-        {
-            <div class="item">
-                <a href="/Hesla/Zobrazeni">Moje hesla</a>
-                <div class="submenu">
-                    <a href="/Hesla/Zobrazeni" title="Moje hesla"></a>
-                    <div>
-                        <a href="/Hesla/Zobrazeni">Zobrazení</a>
-                        <a href="/Hesla/Pridat">Přidat</a>
-                    </div>
+    @if (uzivatel != null)
+    {
+        <div class="item">
+            <a href="/Hesla/Zobrazeni">Moje hesla</a>
+            <div class="submenu">
+                <a href="/Hesla/Zobrazeni" title="Moje hesla"></a>
+                <div>
+                    <a href="/Hesla/Zobrazeni">Zobrazení</a>
+                    <a href="/Hesla/Pridat">Přidat</a>
                 </div>
             </div>
-        }
-        else
-        {
-            <div class="item">
-                <a href="/Home/Index">Domovská stránka</a>
-            </div>
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <div class="item">
+            <a href="/Home/Index">Domovská stránka</a>
+        </div>
+    }
 
-    <div class="nav-vpravo">
+    <span class="nav-vpravo">
         @if (uzivatel == null)
         {
             <div class="item item-icon">
@@ -62,9 +60,6 @@
         else
         {
             <div class="item item-icon">
-                <a href="JavaScript:zobrazitPOPup('oznameni')" title="Oznámení" class="icon-bell"></a>
-            </div>
-            <div class="item item-icon">
                 <a href="/Ucet/Nastaveni" title="Nastavení účtu" class="icon-settings"></a>
                 <div class="submenu">
                     <a href="/Ucet/Nastaveni" title="Nastavení účtu"></a>
@@ -79,5 +74,5 @@
                 <a href="/Ucet/Odhlaseni" title="Odhlášení" class="icon-logout"></a>
             </div>
         }
-    </div>
+    </span>
 </nav>

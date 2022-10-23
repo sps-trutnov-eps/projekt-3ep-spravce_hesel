@@ -49,33 +49,39 @@
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .popupnadpis {
+.tmavy #container div.POPup > div {
+  border-color: lightblue;
+  background-color: #172e34;
+}
+.tmavy #container div.POPup h3 {
   border-bottom-color: lightblue;
 }
-.tmavy .POPup {
-  background-color: #172e34;
-  border-color: lightblue;
-}
-.tmavy .POPupPozadi {
-  background-color: rgba(0, 0, 0, 0.4666666667);
+.tmavy #oznameni .oznameni {
+  border-bottom: 1px solid lightblue;
 }
 
 header {
   text-align: center;
   border-bottom: 1px solid cornflowerblue;
 }
-header nav > div {
+header nav {
+  position: relative;
+}
+header nav div.item:not(:first-of-type) {
+  margin-left: 1em;
+}
+header nav > * {
   display: inline-block;
-  min-width: 4em;
 }
-header nav > div div.item:not(:first-of-type) {
-  padding-left: 1em;
+header nav span.nav-vlevo {
+  padding: 0;
+  left: 0;
+  position: absolute;
 }
-header nav div.nav-vlevo {
-  float: left;
-}
-header nav div.nav-vpravo {
-  float: right;
+header nav span.nav-vpravo {
+  padding: 0;
+  right: 0;
+  position: absolute;
 }
 header nav a {
   text-decoration: none;
@@ -90,6 +96,7 @@ header nav div.item div.submenu {
   position: absolute;
   width: 10em;
   top: 0;
+  z-index: 998;
 }
 header nav div.item div.submenu > a {
   display: block;
@@ -220,6 +227,10 @@ button {
   margin-block: 0.25em;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .center {
   text-align: center;
 }
@@ -321,20 +332,7 @@ footer {
   float: right;
 }
 
-#detaily {
-  line-height: 1em;
-  height: 8.5em;
-  width: 500px;
-  padding: 1em;
-  left: calc(50% - (500px + 2em) / 2);
-  top: calc(50% - 5.375em);
-}
-#detaily > div {
-  margin: auto auto;
-  padding-block: 0.5em;
-  text-align: center;
-}
-#detaily #jmeno {
+#detaily > div #jmeno {
   font-style: italic;
 }
 
@@ -343,39 +341,55 @@ footer {
 }
 
 #oznameni {
-  height: calc(100vh - 6em);
-  top: 2em;
-  right: 2em;
-  width: 500px;
+  justify-content: end !important;
+}
+#oznameni > div {
+  height: calc(100vh - 5em);
+}
+#oznameni > div .oznameni {
+  padding-block: 0.5em;
+  border-bottom: 1px solid cornflowerblue;
+}
+#oznameni > div h4 {
+  margin-top: 1em;
+}
+#oznameni h3 {
+  margin: 0 !important;
 }
 
-.POPup {
+#container div.POPup {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+#container div.POPup > div {
+  margin: 1em;
+  min-width: 500px;
+  width: max-content;
   border: 2px solid cornflowerblue;
   background-color: #e1e9f7;
   border-radius: 2px;
+  padding: 1em;
+  text-align: center;
 }
-
-.POPupPozadi {
-  background-color: rgba(0, 0, 0, 0.2);
-  position: fixed;
-  display: block;
-  height: 100vh;
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  left: 0;
-  top: 0;
-}
-
-.popupnadpis {
+#container div.POPup > div h3 {
   font-weight: bold;
-  line-height: 2rem;
   border-bottom: 1px solid cornflowerblue;
-  margin: auto auto;
+  margin: auto;
   margin-bottom: 0.5em;
   padding-block: 0.5em;
   text-align: center;
+}
+#container div.POPup > div > div {
+  padding-block: 0.5em;
 }
 
 .skryty {

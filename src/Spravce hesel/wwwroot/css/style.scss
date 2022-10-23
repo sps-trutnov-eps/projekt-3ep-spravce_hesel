@@ -115,6 +115,10 @@ button {
     margin-block: .25em;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .center {
     text-align: center;
 }
@@ -232,20 +236,7 @@ footer {
     }
 }
 
-#detaily {
-    line-height: 1em;
-    height: calc(2em * 2 + 4em + .5em);
-    width: 500px;
-    padding: 1em;
-    left: calc(50% - (500px + 2em)/2);
-    top: calc(50% - (2em * 2 + 6.75em) / 2);
-
-    > div {
-        margin: auto auto;
-        padding-block: .5em;
-        text-align: center;
-    }
-
+#detaily > div {
     #jmeno {
         font-style: italic;
     }
@@ -257,40 +248,63 @@ footer {
 
 // Oznámení
 #oznameni {
-    height: calc(100vh - 6em);
-    top: 2em;
-    right: 2em;
-    width: 500px;
+    justify-content: end !important;
+
+    > div {
+        height: calc(100vh - 5em);
+
+        .oznameni {
+            padding-block: .5em;
+            border-bottom: 1px solid $barva-text-sekundar;
+        }
+
+        h4 {
+            margin-top: 1em;
+        }
+    }
+
+    h3 {
+        margin: 0 !important;
+    }
 }
 
 // Pop-up
-.POPup {
+#container div.POPup {
     position: fixed;
-    border: 2px solid $barva-text-sekundar;
-    background-color: $barva-pozadi-tercial;
-    border-radius: 2px;
-}
-
-.POPupPozadi {
-    background-color: $barva-zesednuti;
-    position: fixed;
-    display: block;
-    height: 100vh;
-    width: 100vw;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     left: 0;
     top: 0;
-}
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background-color: $barva-zesednuti;
+    z-index: 999;
 
-.popupnadpis {
-    font-weight: bold;
-    line-height: 2rem;
-    border-bottom: 1px solid $barva-text-sekundar;
-    margin: auto auto;
-    margin-bottom: .5em;
-    padding-block: .5em;
-    text-align: center;
+    > div {
+        margin: 1em;
+        min-width: 500px;
+        width: max-content;
+        border: 2px solid $barva-text-sekundar;
+        background-color: $barva-pozadi-tercial;
+        border-radius: 2px;
+        padding: 1em;
+        text-align: center;
+
+        h3 {
+            font-weight: bold;
+            border-bottom: 1px solid $barva-text-sekundar;
+            margin: auto;
+            margin-bottom: .5em;
+            padding-block: .5em;
+            text-align: center;
+        }
+
+        > div {
+            padding-block: .5em;
+        }
+    }
 }
 
 .skryty {

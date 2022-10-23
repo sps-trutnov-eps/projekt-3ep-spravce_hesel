@@ -1,14 +1,36 @@
-﻿@*@model List<SdileneHeslo>*@
-<a class="POPupPozadi skryty" href="JavaScript:skrytPOPUp('oznameni')"></a>
+﻿@{
+    dynamic? hesla = ViewData["Oznameni"];
+}
 
 <div class="POPup skryty" id="oznameni">
-    <h3 class="popupnadpis">Oznámení</h3>
-@*    @{
-        foreach(SdileneHeslo heslo in Model)
-        {
-            <div class="heslo_div">
-                <div class="sluzba"><a title="Zobrazit heslo" href="">@heslo.Id</a></div>
-            </div>
+    <div>
+        <h3>Oznámení</h3>
+        @{
+            if (hesla != null && hesla.Count != 0)
+            {
+                foreach(SdileneHeslo heslo in hesla)
+                {
+                    <div class="oznameni @heslo.Id">
+                        @if (heslo.Sluzba == "" || heslo.Sluzba == null)
+                        {
+                            <h4><i>Neznámá služba</i></h4>
+                        }
+                        else
+                        {
+                            <h4>@heslo.Sluzba</h4>
+                        }
+                        <p>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</p>
+                        <p>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, true)">Potvrdit</button>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, false)">Zrušit</button>
+                        </p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Nemáte žádná oznámení</p>
+            }
         }
-    }*@
+    </div>
 </div>

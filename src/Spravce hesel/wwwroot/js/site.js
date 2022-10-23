@@ -1,3 +1,4 @@
+// Barevný motiv
 function PrepnoutBarevnyMotiv() {
     if (!document.cookie.includes("TmavyMotiv"))
         document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
@@ -7,6 +8,7 @@ function PrepnoutBarevnyMotiv() {
     window.location.reload();
     }
 
+// Vyžádání hesla
 function vyzadatHeslo(id) {
     $.ajax({
         type: "GET",
@@ -24,27 +26,63 @@ function vyzadatHeslo(id) {
     });
 }
 
+// Vyžádání potvrzení odstranìní
 function vyzadatOdstraneni(id) {
     document.getElementById("odstraneni").action = "/Hesla/Odstranit/" + id;
     zobrazitPOPup("odstranit");
 }
 
+// Vyžádání potvrzení
+let zmenyVPotvrzeni = false;
+function vyzadatPotvrzeni(id, rozhodnuti) {
+    if (rozhodnuti == true) {
+        $.ajax({
+            type: "POST",
+            url: "/Hesla/PotvrditSdileni/" + id,
+            dataType: "JSON",
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+
+            success: (res) => {
+                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnuti ulozeno</p>";
+            }
+        });
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/Hesla/ZrusitSdileni/" + id,
+            dataType: "JSON",
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+
+            success: (res) => {
+                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnuti ulozeno</p>";
+            }
+        });
+    }
+
+    zmenyVPotvrzeni = true;
+}
+
+// pop-up
 function zobrazitPOPup(id) {
     skrytPOPUp();
     document.getElementsByClassName("POPup")[id].className = "POPup";
-    document.getElementsByClassName("POPupPozadi")[0].className = "POPupPozadi";
 }
 
 function skrytPOPUp() {
-    const POPupy = document.getElementsByClassName("POPup");
-    const POPupPozadi = document.getElementsByClassName("POPupPozadi");
-
-    for (let div of POPupy) {
-        div.className = "POPup skryty";
-    };
-
-    for (let div of POPupPozadi) {
-        div.className = "POPupPozadi skryty";
-    };
+    if (zmenyVPotvrzeni == true)
+        window.location.reload();
+    else {
+        for (let div of document.getElementsByClassName("POPup")) {
+            div.className = "POPup skryty";
+        };
+    }
 }
 
+$('div.POPup').click(function (e) {
+    if (e.target == this) {
+        skrytPOPUp()
+    }
+});
