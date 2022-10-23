@@ -14,7 +14,7 @@ namespace Spravce_hesel.Models
         public int Hash { get; set; }
 
         [Required]
-        public string Sifra { get; set; }
+        public byte[] Sifra { get; set; }
 
         public string? Sluzba { get; set; } = null;
 
