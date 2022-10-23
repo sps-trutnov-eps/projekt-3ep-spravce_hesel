@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Data;
@@ -101,6 +101,8 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Pridat(string sluzba, string jmeno, string heslo)
         {
+            ModelState.Clear();
+
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             string? klic = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && klic != null)
@@ -108,38 +110,48 @@ namespace Spravce_hesel.Controllers
                 Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if (uzivatel != null)
                 {
-                    int delka = klic.Length;
-
-                    klic = Sifrovani.HesloNaKlic(klic);
-
-                    int hash = heslo.GetHashCode();
-                    heslo = Sifrovani.Zasifrovat(klic, heslo);
-
-                    Heslo h = new()
+                    if (heslo == null || heslo.Length == 0)
                     {
-                        UzivatelskeID = (int)uzivatelID,
-                        Sluzba = sluzba,
-                        Jmeno = jmeno,
-                        Hash = hash,
-                        Sifra = heslo
-                    };
-
-                    SdileneHeslo sh = new()
+                        ModelState.AddModelError("Jmeno", "Vyplňte toto pole!");
+                    }
+                    if (ModelState.IsValid)
                     {
-                        PuvodniHesloID = h.ID,
-                        ZakladatelID = (int)uzivatelID,
-                        ZakladatelJmeno = uzivatel.Jmeno,
-                        UzivatelskeID = (int)uzivatelID,
-                        Sluzba = sluzba,
-                        Jmeno = jmeno,
-                        Sifra = heslo,
-                    };
+                        int delka = klic.Length;
 
-                    Databaze.Hesla.Add(h);
-                    Databaze.Sdilena_hesla.Add(sh);
-                    Databaze.SaveChanges();
+                        klic = Sifrovani.HesloNaKlic(klic);
 
-                    return RedirectToAction("Zobrazeni");
+                        int hash = heslo.GetHashCode();
+                        heslo = Sifrovani.Zasifrovat(klic, heslo);
+
+                        Heslo h = new()
+                        {
+                            UzivatelskeID = (int)uzivatelID,
+                            Sluzba = sluzba,
+                            Jmeno = jmeno,
+                            Hash = hash,
+                            Sifra = heslo
+                        };
+
+                        SdileneHeslo sh = new()
+                        {
+                            PuvodniHesloID = h.ID,
+                            ZakladatelID = (int)uzivatelID,
+                            ZakladatelJmeno = uzivatel.Jmeno,
+                            UzivatelskeID = (int)uzivatelID,
+                            Sluzba = sluzba,
+                            Jmeno = jmeno,
+                            Sifra = heslo,
+                        };
+
+
+                        Databaze.Hesla.Add(h);
+                        Databaze.Sdilena_hesla.Add(sh);
+                        Databaze.SaveChanges();
+
+                        return RedirectToAction("Zobrazeni");
+                    }
+
+                    return View();
                 }
             }
 
