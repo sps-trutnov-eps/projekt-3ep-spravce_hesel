@@ -1,10 +1,12 @@
-﻿@{
+@{
     string BarevnyMotiv = "svetly";
     if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
     {
         BarevnyMotiv = "tmavy";
     }
     int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
+
+    string souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
 }
 
 <!DOCTYPE html>
@@ -13,8 +15,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Spravce Hesel</title>
-        <link rel="stylesheet" href="~/css/style.css" />
-        <link rel="stylesheet" href="~/icons/css/icons.css" />
+        <link rel="stylesheet" href="~/css/style.css" charset="utf-8" />
+        <link rel="stylesheet" href="~/icons/css/icons.css" charset="utf-8" />
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     </head>
@@ -32,10 +34,17 @@
             </main>
             
             <footer>
-                <div><b>&copy; Spravce Hesel 2022</b> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
+                @if (souhlas == null)
+                {
+                    <div class="upozorneniCookies">Tento web využívá pro svoje fungování cookies a JavaScript   <button type="button" onclick="udeleniSouhlasu()">Souhlasím</button></div>
+                }
+                else
+                {
+                    <div><b>&copy; Spravce Hesel 2022</b> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
+                }
             </footer>
 
-            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/site.js" asp-append-version="true" charset="utf-8"></script>
 
             @await RenderSectionAsync("Scripts", required: false)
         </div>

@@ -193,6 +193,12 @@
       "css": "bell",
       "code": 59409,
       "src": "fontawesome"
+    },
+    {
+      "uid": "91426c82d94428a33353e495418435e3",
+      "css": "share",
+      "code": 59410,
+      "src": "entypo"
     }
   ]
 }

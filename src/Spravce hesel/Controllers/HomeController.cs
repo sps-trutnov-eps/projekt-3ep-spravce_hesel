@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Classes;
 using Spravce_hesel.Data;
 using Spravce_hesel.Models;

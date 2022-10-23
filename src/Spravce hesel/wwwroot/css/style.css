@@ -57,7 +57,11 @@
   border-bottom-color: lightblue;
 }
 .tmavy #oznameni .oznameni {
-  border-bottom: 1px solid lightblue;
+  border-bottom-color: lightblue;
+}
+.tmavy .upozorneniCookies {
+  background-color: #172e34;
+  border-color: lightblue;
 }
 
 header {
@@ -355,6 +359,14 @@ footer {
 }
 #oznameni h3 {
   margin: 0 !important;
+}
+
+.upozorneniCookies {
+  background-color: #f4f7fc;
+  border: 2px solid cornflowerblue;
+}
+.upozorneniCookies button {
+  margin-left: 1em;
 }
 
 #container div.POPup {
