@@ -313,7 +313,7 @@ footer {
   border: 2px solid cornflowerblue;
   border-radius: 2px;
 }
-.heslo_div * {
+.heslo_div div, .heslo_div a {
   padding: 0.5em;
 }
 .heslo_div .sluzba {
