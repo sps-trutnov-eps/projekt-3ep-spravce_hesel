@@ -13,7 +13,7 @@ namespace Spravce_hesel.Classes
     {
         //kod prevat z https://gist.github.com/mazhar-ansari-ardeh/d200d91fbafc1af03a0bc0588ef7ffd0
 
-        static byte[] Zasifrovat(string heslo, byte[] klic)
+        public static byte[] Zasifrovat(string heslo, byte[] klic)
         {
             byte[] zasifrovano; //deklaruje novy seznam bytu do ktereho se pozdeji ulozi zasiforvane heslo
             using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider()) //vytvori novou metodu aes
@@ -40,7 +40,7 @@ namespace Spravce_hesel.Classes
             return zasifrovano;
         }
         
-        static string Desifrovat(byte[] sifra, byte[] klic)
+        public static string Desifrovat(byte[] sifra, byte[] klic)
         {
             string desifrovano;
             using(AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
@@ -70,7 +70,7 @@ namespace Spravce_hesel.Classes
 
 
         //vlatni kod
-        public static string HesloNaKlic(string heslo)
+        public static byte[] HesloNaKlic(string heslo)
         {
             byte[] bytyHesla = Encoding.UTF8.GetBytes(heslo);
 
@@ -98,10 +98,7 @@ namespace Spravce_hesel.Classes
             }
 
 
-            string klic = Encoding.UTF8.GetString(bytes);
-
-
-            return klic;
+            return bytes;
         }
     }
 }
