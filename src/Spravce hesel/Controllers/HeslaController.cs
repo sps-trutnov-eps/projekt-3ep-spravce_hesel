@@ -30,7 +30,21 @@ namespace Spravce_hesel.Controllers
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-                    
+                    List<Heslo> desifrovane = new List<Heslo>();
+
+                    foreach(Heslo heslo in Hesla)
+                    {
+                        Heslo _desifrovane = new Heslo()
+                        {
+                            ID = heslo.ID,
+                            UzivatelskeID = heslo.UzivatelskeID,
+                            Sluzba = heslo.Sluzba,
+                            Jmeno = heslo.Jmeno,
+                            Hash = heslo.Hash,
+                            Sifra = heslo.Sifra,
+                            desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic)
+                        };
+                    }
 
 
                     List<SdileneHeslo> hesla = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == false).ToList();
@@ -52,23 +66,14 @@ namespace Spravce_hesel.Controllers
             {
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
-                    Heslo? puvodni_heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
-                    if (puvodni_heslo != null)
+                    Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+                    if (heslo != null)
                     {
-                        if (puvodni_heslo.UzivatelskeID == uzivatelID)
+                        if (heslo.UzivatelskeID == uzivatelID)
                         {
                             byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatel);
-                            string desifrovano = Sifrovani.Desifrovat(puvodni_heslo.Sifra, klic);
-                            var heslo = new
-                            {
-                                id = puvodni_heslo.ID,
-                                UzivatelskeID = puvodni_heslo.UzivatelskeID,
-                                hash = puvodni_heslo.Hash,
-                                heslo = desifrovano,
-                                sluzba = puvodni_heslo.Sluzba
-
-
-                            };
+                            heslo.desifrovano = (Sifrovani.Desifrovat(heslo.Sifra, klic));
+                            
 
                             return Ok(Json(heslo));
                         }
@@ -178,8 +183,10 @@ namespace Spravce_hesel.Controllers
 
                     Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
-                    heslo.Sifra = Sifrovani.Desifrovat(klic, klic);
-                    return View(heslo);
+                    heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic);
+
+                   
+                    return View();
                 }
             }
 

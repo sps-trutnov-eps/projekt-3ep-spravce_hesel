@@ -21,7 +21,7 @@ namespace Spravce_hesel.Classes
                 aes.Key = klic; //nastavi klic pro aes na predem vytvoreny klic
                 aes.GenerateIV(); //vygeneruje IV vektor
 
-                aes.Mode = CipherMode.CBC; //nastavi mod aes
+                aes.Mode = CipherMode.CFB; //nastavi mod aes
                 aes.Padding = PaddingMode.PKCS7; //nastavi odsazeni bytu
 
                 using (MemoryStream msEncrypt = new MemoryStream())
@@ -48,8 +48,8 @@ namespace Spravce_hesel.Classes
 
                 //nastaveni aes
                 aes.Key = klic;
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CFB;
+                aes.Padding = PaddingMode.Zeros;
 
                 using (MemoryStream msDecryptor = new MemoryStream(sifra))
                 {
@@ -76,12 +76,12 @@ namespace Spravce_hesel.Classes
 
             int delka = bytyHesla.Length;
 
-            if (delka > 256)
+            if (delka > 32)
             {
-                delka = 256;
+                delka = 32;
             }
 
-            byte[] bytes = new byte[256];
+            byte[] bytes = new byte[32];
             
             for (int i = 0; i < delka; i++)
             {
@@ -90,7 +90,7 @@ namespace Spravce_hesel.Classes
 
 
             int pozice = delka;
-            while(delka < 256)
+            while(delka < 32)
             {
                 pozice++;
                 bytes[pozice] = 1;
