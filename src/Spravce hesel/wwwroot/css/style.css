@@ -349,6 +349,7 @@ footer {
 }
 #oznameni > div {
   height: calc(100vh - 5em);
+  overflow-y: auto;
 }
 #oznameni > div .oznameni {
   padding-block: 0.5em;
@@ -383,6 +384,7 @@ footer {
   z-index: 999;
 }
 #container div.POPup > div {
+  position: relative;
   margin: 1em;
   min-width: 500px;
   width: max-content;
@@ -391,6 +393,13 @@ footer {
   border-radius: 2px;
   padding: 1em;
   text-align: center;
+}
+#container div.POPup > div > a {
+  position: absolute;
+  line-height: 1rem;
+  right: 1em;
+  top: 1.25em;
+  padding: 0.5em;
 }
 #container div.POPup > div h3 {
   font-weight: bold;

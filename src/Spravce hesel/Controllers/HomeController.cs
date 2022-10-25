@@ -7,12 +7,6 @@ namespace Spravce_hesel.Controllers
 {
     public class HomeController : Controller
     {
-        private Spravce_heselData Databaze { get; set; }
-        public HomeController(Spravce_heselData databaze)
-        {
-            Databaze = databaze;
-        }
-
         [HttpGet]
         public IActionResult Index()
         {
