@@ -11,60 +11,89 @@ namespace Spravce_hesel.Classes
 {
     public class Sifrovani
     {
-        //kod prevat z https://gist.github.com/mazhar-ansari-ardeh/d200d91fbafc1af03a0bc0588ef7ffd0
+        //kod prevat z https://learn.microsoft.com/cs-cz/dotnet/api/system.security.cryptography.aes?view=net-6.0
 
-        public static byte[] Zasifrovat(string heslo, byte[] klic)
+        public static byte[] Zasifrovat(string plainText, byte[] Key, byte[] IV)
         {
-            byte[] zasifrovano; //deklaruje novy seznam bytu do ktereho se pozdeji ulozi zasiforvane heslo
-            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider()) //vytvori novou metodu aes
+            // Check arguments.
+            if (plainText == null || plainText.Length <= 0)
+                throw new ArgumentNullException("plainText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+            byte[] encrypted;
+
+            // Create an Aes object
+            // with the specified key and IV.
+            using (Aes aesAlg = Aes.Create())
             {
-                aes.Key = klic; //nastavi klic pro aes na predem vytvoreny klic
-                aes.GenerateIV(); //vygeneruje IV vektor
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
 
-                aes.Mode = CipherMode.CFB; //nastavi mod aes
-                aes.Padding = PaddingMode.PKCS7; //nastavi odsazeni bytu
+                // Create an encryptor to perform the stream transform.
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
+                // Create the streams used for encryption.
                 using (MemoryStream msEncrypt = new MemoryStream())
                 {
-                    msEncrypt.Write(aes.IV, 0, aes.IV.Length);
-                    ICryptoTransform encoder = aes.CreateEncryptor();
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encoder, CryptoStreamMode.Write))
-                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        swEncrypt.Write(heslo);
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            //Write all data to the stream.
+                            swEncrypt.Write(plainText);
+                        }
+                        encrypted = msEncrypt.ToArray();
                     }
-                    zasifrovano = msEncrypt.ToArray();
                 }
             }
 
-            return zasifrovano;
+            // Return the encrypted bytes from the memory stream.
+            return encrypted;
         }
         
-        public static string Desifrovat(byte[] sifra, byte[] klic)
+        public static string Desifrovat(byte[] cipherText, byte[] Key, byte[] IV)
         {
-            string desifrovano;
-            using(AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+            // Check arguments.
+            if (cipherText == null || cipherText.Length <= 0)
+                throw new ArgumentNullException("cipherText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+
+            // Declare the string used to hold
+            // the decrypted text.
+            string plaintext = null;
+
+            // Create an Aes object
+            // with the specified key and IV.
+            using (Aes aesAlg = Aes.Create())
             {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
 
-                //nastaveni aes
-                aes.Key = klic;
-                aes.Mode = CipherMode.CFB;
-                aes.Padding = PaddingMode.Zeros;
+                // Create a decryptor to perform the stream transform.
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
-                using (MemoryStream msDecryptor = new MemoryStream(sifra))
+                // Create the streams used for decryption.
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
                 {
-                    byte[] readIV = new byte[16];
-                    msDecryptor.Write(readIV, 0, 16);
-                    aes.IV = readIV;
-                    ICryptoTransform decoder = aes.CreateDecryptor();
-                    using (CryptoStream csDecryptor = new CryptoStream(msDecryptor, decoder, CryptoStreamMode.Read))
-                    using (StreamReader srReader = new StreamReader(csDecryptor))
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        desifrovano = srReader.ReadToEnd();
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            // Read the decrypted bytes from the decrypting stream
+                            // and place them in a string.
+                            plaintext = srDecrypt.ReadToEnd();
+                        }
                     }
                 }
             }
-            return desifrovano;
+
+            return plaintext;
         }
 
 
