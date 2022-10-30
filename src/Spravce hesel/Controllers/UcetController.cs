@@ -82,6 +82,8 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Registrace(Uzivatel obj, string kontrola_hesla)
         {
+            ModelState.Clear();
+
             IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
