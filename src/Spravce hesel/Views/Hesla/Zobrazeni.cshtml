@@ -1,6 +1,7 @@
 @model List<Heslo>
 @{
     ViewData["Title"] = "Moje hesla";
+    dynamic? hesla_zobrazeni = ViewData["sdilene_hesla"];
 }
 
 <article>
@@ -25,7 +26,7 @@
                     }
                     </a>
                     <span>
-                        <a class="icon-share" title="Sdílet heslo" href=""></a>
+                        <a class="icon-share" title="Sdílet heslo" href="/Hesla/Sdileni/@heslo.ID"></a>
                         <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.ID"></a>
                         <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.ID)"></a>
                     </span>
@@ -38,6 +39,37 @@
                     else
                     {
                         @heslo.Jmeno
+                    }
+                </div>
+                <div class="heslo">••••••••</div>
+            </div>
+        }
+        foreach (SdileneHeslo h in hesla_zobrazeni)
+        {
+            <div class="heslo_div">
+                <div class="sluzba">
+                    <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id)">
+                        @if (h.Sluzba == null || h.Sluzba.Trim() == "")
+                        {
+                            <i>Neznámá služba</i>
+                        }
+                        else
+                        {
+                            @h.Sluzba
+                        }
+                    </a>
+                    <span>
+                        <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@h.Id)"></a>
+                    </span>
+                </div>
+                <div class="jmeno">
+                    @if (h.Jmeno == null || h.Jmeno.Trim() == "")
+                    {
+                        <i>Neznámé jméno</i>
+                    }
+                    else
+                    {
+                        @h.Jmeno
                     }
                 </div>
                 <div class="heslo">••••••••</div>
