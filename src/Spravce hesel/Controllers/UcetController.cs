@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Data;
 using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Spravce_hesel.Controllers
 {

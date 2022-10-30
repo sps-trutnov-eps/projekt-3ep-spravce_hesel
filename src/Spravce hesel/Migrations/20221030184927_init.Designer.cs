@@ -12,7 +12,7 @@ using Spravce_hesel.Data;
 namespace Spravce_hesel.Migrations
 {
     [DbContext(typeof(Spravce_heselData))]
-    [Migration("20221023174359_init")]
+    [Migration("20221030184927_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,6 +103,10 @@ namespace Spravce_hesel.Migrations
                     b.Property<string>("Heslo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("IV")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Id")
                         .HasColumnType("int");

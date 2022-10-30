@@ -54,7 +54,8 @@ namespace Spravce_hesel.Migrations
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Heslo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Heslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IV = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {

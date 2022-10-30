@@ -102,6 +102,10 @@ namespace Spravce_hesel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("IV")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
