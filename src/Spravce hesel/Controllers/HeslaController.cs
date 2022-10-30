@@ -6,6 +6,8 @@ using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
 using Spravce_hesel.Classes;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Connections.Features;
+using System.Linq;
 
 namespace Spravce_hesel.Controllers
 {
@@ -48,7 +50,9 @@ namespace Spravce_hesel.Controllers
                 }
 
                 List<SdileneHeslo> hesla = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == false).ToList();
+                List<SdileneHeslo> hesla_zobrazeni = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == true).ToList();
                 ViewData["Oznameni"] = hesla;
+                ViewData["sdilene_hesla"] = hesla_zobrazeni;
 
                 return View(desifrovano);
             }
@@ -293,25 +297,46 @@ namespace Spravce_hesel.Controllers
                 && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
             {
                 ModelState.Clear();
-                Uzivatel u = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
+
+                IEnumerable<SdileneHeslo> objCategoryList = Databaze.Sdilena_hesla;
+
+                Uzivatel? u = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault(); // 
                 Heslo h = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
                 Uzivatel u2 = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
 
-                SdileneHeslo sh = new()
+                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
                 {
-                    PuvodniHesloID = h.ID,
-                    ZakladatelID = (int)uzivatelID,
-                    ZakladatelJmeno = u2.Jmeno,
-                    UzivatelskeID = u.Id,
-                    Sluzba = h.Sluzba,
-                    Jmeno = h.Jmeno,
-                    Sifra = h.Sifra,
-                };
+                    ModelState.AddModelError("Email", "◀ Uživatel neexistuje.");
+                }
 
-                Databaze.Sdilena_hesla.Add(sh);
-                Databaze.SaveChanges();
+                foreach (var heslo in objCategoryList)
+                {
+                    if (h.ID == heslo.PuvodniHesloID && u.Id == heslo.UzivatelskeID)
+                    {
+                        ModelState.AddModelError("Email", "◀ Toto heslo už sdílíte.");
+                    }
+                }
+                
+                if (ModelState.IsValid)
+                {
+                    SdileneHeslo sh = new()
+                    {
+                        PuvodniHesloID = h.ID,
+                        ZakladatelID = (int)uzivatelID,
+                        ZakladatelJmeno = u2.Jmeno,
+                        UzivatelskeID = u.Id,
+                        Sluzba = h.Sluzba,
+                        Jmeno = h.Jmeno,
+                        Sifra = h.Sifra,
+                    };
+                
+                    Databaze.Sdilena_hesla.Add(sh);
+                    Databaze.SaveChanges();
 
-                return RedirectToAction("Zobrazeni");
+                    return RedirectToAction("Zobrazeni");
+                }
+
+                return View();
             }
             return RedirectToAction("Error", "Home", 404);
         }
