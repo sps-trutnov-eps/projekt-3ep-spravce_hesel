@@ -107,6 +107,11 @@ namespace Spravce_hesel.Controllers
                 obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
             }
 
+            using (Aes aesAlg = Aes.Create())
+            {
+                obj.IV = aesAlg.IV;
+            }
+
             bool kontrola = true;
             Random randID = new Random();
             while (kontrola) {
