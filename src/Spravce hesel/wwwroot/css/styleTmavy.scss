@@ -1,12 +1,15 @@
-﻿// Tmavý motiv
-.tmavy {
-    $barva-text: #c4c2c2;
-    $barva-text-sekundar: lightblue;
-    $barva-pozadi: #252931;
-    $barva-pozadi-sekundar: #4a4a4b;
-    $barva-pozadi-tercial: #1e3d4661;
-    $barva-zesednuti: #00000077;
+// Barevné schéma
+$barva-text: #c4c2c2;
+$barva-text-sekundar: lightblue;
+$barva-sdilene-heslo: #5b8dd7;
+$barva-pozadi: #252931;
+$barva-pozadi-sekundar: #4a4a4b;
+$barva-pozadi-heslo: #172e34;
+$barva-pozadi-sdilene-heslo: #172534;
+$barva-zesednuti: #00000077;
 
+// Tmavý motiv
+.tmavy {
     background-color: $barva-pozadi;
     color: $barva-text;
 
@@ -68,24 +71,52 @@
 
     .heslo_div {
         border-color: $barva-text-sekundar;
-        background-color: $barva-pozadi-tercial;
+        background-color: $barva-pozadi-heslo;
 
         .sluzba {
             border-bottom-color: $barva-text-sekundar;
-            background-color: $barva-pozadi-tercial;
+            background-color: $barva-pozadi-heslo;
         }
     }
 
-    #detaily {
-        background-color: $barva-pozadi-tercial;
-        border-color: $barva-text-sekundar;
+    .heslo_div.sdileneheslo {
+        background-color: $barva-pozadi-sdilene-heslo;
+        border-color: $barva-sdilene-heslo;
 
-        #sluzba {
+        .sluzba {
+            border-bottom-color: $barva-sdilene-heslo;
+            background-color: $barva-pozadi-sdilene-heslo;
+        }
+    }
+
+    #detaily > div.sdileneheslo {
+        background-color: $barva-pozadi-sdilene-heslo !important;
+        border-color: $barva-sdilene-heslo !important;
+
+        h3 {
+            border-bottom-color: $barva-sdilene-heslo !important;
+        }
+    }
+
+    #container div.POPup {
+        > div {
+            border-color: $barva-text-sekundar;
+            background-color: $barva-pozadi-heslo;
+        }
+
+        h3 {
             border-bottom-color: $barva-text-sekundar;
         }
     }
 
-    #detaily_pozadi {
-        background-color: $barva-zesednuti;
+    #oznameni {
+        .oznameni {
+            border-bottom-color: $barva-text-sekundar;
+        }
+    }
+
+    .upozorneniCookies {
+        background-color: $barva-pozadi-heslo;
+        border-color: $barva-text-sekundar;
     }
 }

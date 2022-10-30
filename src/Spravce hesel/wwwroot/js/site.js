@@ -1,37 +1,104 @@
-﻿function PrepnoutBarevnyMotiv() {
-    let cookies = document.cookie;
-
-    if (cookies.length == 0)
+// Barevný motiv
+function PrepnoutBarevnyMotiv() {
+    if (!document.cookie.includes("TmavyMotiv"))
         document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-    else {
+    else
         document.cookie = "TmavyMotiv=; path=/; max-age=0";
-    }
 
     window.location.reload();
     }
 
-function zobrazitHeslo(id) {
+// Vyžádání hesla
+function vyzadatHeslo(id, norm = true) {
+    let url = "DetailSdilenehoHesla";
+    if (norm == true)
+        url = "DetailHesla";
+
     $.ajax({
         type: "GET",
-        url: "/Hesla/DetailHesla/" + id,
+        url: "/Hesla/" + url + "/" + id,
         dataType: "JSON",
         data: JSON.stringify(id),
         contentType: "application/json; charset=utf-8",
         
         success: (res) => {
-            document.getElementById("detaily_pozadi").className = "";
-            document.getElementById("detaily").className = "";
+            zobrazitPOPup("detaily");
+            if (res.value.sluzba == null || res.value.sluzba.trim() == "")
+                document.getElementById("sluzba").innerHTML = decodeURIComponent("<i>Neznámá služba</i>");
+            else
+                document.getElementById("sluzba").innerHTML = decodeURIComponent(res.value.sluzba);
 
-            document.getElementById("sluzba").innerHTML = res.value.sluzba;
-            document.getElementById("jmeno").innerHTML = res.value.jmeno;
-            document.getElementById("heslo").innerHTML = res.value.sifra;
+            if (res.value.jmeno == null || res.value.jmeno.trim() == "")
+                document.getElementById("jmeno").innerHTML = decodeURIComponent("<i>Neznámé jméno</i>");
+            else
+                document.getElementById("jmeno").innerHTML = decodeURIComponent(res.value.jmeno);
+
+            document.getElementById("heslo").innerHTML = decodeURIComponent(res.value.sifra);
+
+            if (norm == true)
+                document.getElementById("detaily").firstElementChild.className = "";
+            else
+                document.getElementById("detaily").firstElementChild.className = "sdileneheslo";
         }
     });
-
-    // fetch("/Hesla/DetailHesla/" + id, { method: "GET", dataType: "JSON", url: "/Hesla/DetailHesla/" + id, }).then(data => data.json()).then(data => console.log(data));
 }
 
-function skrytHeslo() {
-    document.getElementById("detaily").className = "skryty";
-    document.getElementById("detaily_pozadi").className = "skryty";
+// Vyžádání potvrzení odstranění
+function vyzadatOdstraneni(id, norm = true) {
+    let url = "OdstranitSdilene";
+    if (norm == true) {
+        url = "Odstranit";
+    }
+    document.getElementById("odstraneni").action = "/Hesla/" + url + "/" + id;
+    zobrazitPOPup("odstranit");
 }
+
+// Vyžádání potvrzení
+let zmenyVPotvrzeni = false;
+function vyzadatPotvrzeni(id, rozhodnuti = true) {
+    let url = "ZrusitSdileni";
+    if (rozhodnuti == true)
+        url = "PotvrditSdileni";
+
+    $.ajax({
+        type: "POST",
+        url: "/Hesla/" + url + "/" + id,
+        dataType: "JSON",
+        data: JSON.stringify(id),
+        contentType: "application/json; charset=utf-8",
+
+        success: (res) => {
+            document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnutí uloženo</p>";
+            zmenyVPotvrzeni = true;
+        }
+    });
+}
+
+// pop-up
+function zobrazitPOPup(id) {
+    skrytPOPUp();
+    document.getElementsByClassName("POPup")[id].className = "POPup";
+}
+
+function skrytPOPUp() {
+    if (zmenyVPotvrzeni == true)
+        window.location.href = "/Hesla/Zobrazeni";
+    else {
+        for (let div of document.getElementsByClassName("POPup")) {
+            div.className = "POPup skryty";
+        };
+    }
+}
+
+$('div.POPup').click(function (e) {
+    if (e.target == this) {
+        skrytPOPUp()
+    }
+});
+
+// Udělení souhlasu
+function udeleniSouhlasu() {
+    document.cookie = "Souhlas=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    window.location.reload();
+}
+

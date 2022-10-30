@@ -1,0 +1,37 @@
+@{
+    List<SdileneHeslo>? hesla = (List<SdileneHeslo>?)ViewData["oznameni"];
+}
+
+<div class="POPup skryty" id="oznameni">
+    <div>
+        <a class="icon-cancel" title="Zavřít" href="JavaScript:skrytPOPUp()"></a>
+        <h3>Oznámení</h3>
+        @{
+            if (hesla != null && hesla.Count != 0)
+            {
+                foreach(SdileneHeslo heslo in hesla)
+                {
+                    <div class="oznameni @heslo.Id">
+                        @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
+                        {
+                            <h4><i>Neznámá služba</i></h4>
+                        }
+                        else
+                        {
+                            <h4>@heslo.Sluzba</h4>
+                        }
+                        <p>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</p>
+                        <p>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, true)">Potvrdit</button>
+                            <button type="button" onclick="vyzadatPotvrzeni(@heslo.Id, false)">Zrušit</button>
+                        </p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Nemáte žádná oznámení</p>
+            }
+        }
+    </div>
+</div>

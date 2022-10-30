@@ -1,10 +1,11 @@
-﻿// Barevné schéma
-$barva-text: black;
-$barva-text-sekundar: cornflowerblue;
-$barva-pozadi: white;
+// Barevné schéma
+$barva-text: #000000;
+$barva-text-sekundar: #6495ed;
+$barva-sdilene-heslo: #ffff82;
+$barva-pozadi: #ffffff;
 $barva-pozadi-sekundar: #f4f7fc;
-$barva-pozadi-tercial: #e1e9f7;
-$barva-zesednuti: #00000040;
+$barva-pozadi-heslo: #e1e9f7;
+$barva-zesednuti: #00000033;
 
 // Header
 header {
@@ -12,21 +13,26 @@ header {
     border-bottom: 1px solid $barva-text-sekundar;
 
     nav {
-        > div {
+        position: relative;
+
+        div.item:not(:first-of-type) {
+            margin-left: 1em;
+        }
+
+        > * {
             display: inline-block;
-            min-width: 4em;
-
-            div.item:not(:first-of-type) {
-                padding-left: 1em;
-            }
         }
 
-        div.nav-vlevo {
-            float: left;
+        span.nav-vlevo {
+            padding: 0;
+            left: 0;
+            position: absolute;
         }
 
-        div.nav-vpravo {
-            float: right;
+        span.nav-vpravo {
+            padding: 0;
+            right: 0;
+            position: absolute;
         }
 
         a {
@@ -43,6 +49,7 @@ header {
                 position: absolute;
                 width: 10em;
                 top: 0;
+                z-index: 998;
 
                 > a {
                     display: block;

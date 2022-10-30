@@ -15,3 +15,6 @@
 .icon-right:before { content: '\e80d'; } /* '' */
 .icon-server:before { content: '\e80e'; } /* '' */
 .icon-error:before { content: '\e80f'; } /* '' */
+.icon-cancel:before { content: '\e810'; } /* '' */
+.icon-bell:before { content: '\e811'; } /* '' */
+.icon-share:before { content: '\e812'; } /* '' */

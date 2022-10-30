@@ -1,4 +1,4 @@
-﻿@model Uzivatel
+@model Uzivatel
 @{
     ViewData["Title"] = "Přihlášení";
 }
@@ -8,8 +8,8 @@
     <div class="login_vyber"><a href="javascript:void(0)" class="vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div><br />
     <form action="/Ucet/Prihlaseni" method="post">
         <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
-        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-        oninput="this.setCustomValidity('')"/>
+        oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
+        oninput="setCustomValidity('')" />
         <span asp-validation-for="Email" class="chyba"></span><br />
         <input type="password" name="heslo" placeholder="Zadejte heslo..." required
         oninvalid="this.setCustomValidity('Vyplňte toto pole!')"

@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Přidat heslo";
 }
 
@@ -7,8 +7,12 @@
     <section>
         <h3>Informace o záznamu</h3>
         <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
-            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" /><br />
-            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" /><br />
+            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')"/><br />
+            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')" /><br />
             <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" required />
             <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
             <input value="Přidat záznam" type="submit"/>
@@ -38,4 +42,4 @@
         </form>
     </section>
 </article>
-<script src="~/js/generator.js" asp-append-version="true"></script>
+<script src="~/js/generator.js" asp-append-version="true" charset="utf-8"></script>
