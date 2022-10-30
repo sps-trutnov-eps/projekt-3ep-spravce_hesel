@@ -21,7 +21,7 @@ function vyzadatHeslo(id) {
             zobrazitPOPup("detaily");
             document.getElementById("sluzba").innerHTML = res.value.sluzba;
             document.getElementById("jmeno").innerHTML = res.value.jmeno;
-            document.getElementById("heslo").innerHTML = res.value.desifrovano;
+            document.getElementById("heslo").innerHTML = res.value.sifra;
         }
     });
 }
@@ -80,10 +80,6 @@ function skrytPOPUp() {
         };
     }
 }
-
-
-
-
 
 $('div.POPup').click(function (e) {
     if (e.target == this) {
