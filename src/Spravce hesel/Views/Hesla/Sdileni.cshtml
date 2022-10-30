@@ -1,0 +1,16 @@
+﻿@model Uzivatel
+@{
+    ViewData["Title"] = "Sdílet heslo";
+    dynamic id = ViewData["id"];
+}
+
+<article>
+    <h2>Sdílet heslo</h2>
+    <form method="post" action="/hesla/Sdileni/@id">
+        <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
+               oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+               oninput="this.setCustomValidity('')" />
+        <input type="submit" value="Sdílet" />
+    </form>
+    
+</article>
