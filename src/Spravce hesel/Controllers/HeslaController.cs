@@ -26,8 +26,9 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
+                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                if (uzivatel != null)
                 {
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
                     List<Heslo> desifrovane = new List<Heslo>();
@@ -42,7 +43,7 @@ namespace Spravce_hesel.Controllers
                             Jmeno = heslo.Jmeno,
                             Hash = heslo.Hash,
                             Sifra = heslo.Sifra,
-                            desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic)
+                            desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV)
                         };
                     }
 
@@ -64,7 +65,8 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatel = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatel != null)
             {
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                if (uzivatel != null)
                 {
                     Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
                     if (heslo != null)
@@ -72,7 +74,7 @@ namespace Spravce_hesel.Controllers
                         if (heslo.UzivatelskeID == uzivatelID)
                         {
                             byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatel);
-                            heslo.desifrovano = (Sifrovani.Desifrovat(heslo.Sifra, klic));
+                            heslo.desifrovano = (Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV));
                             
 
                             return Ok(Json(heslo));
@@ -114,7 +116,7 @@ namespace Spravce_hesel.Controllers
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
 
                     int hash = heslo.GetHashCode();
-                    byte[] zasifrovano = Sifrovani.Zasifrovat(heslo, klic);
+                    byte[] zasifrovano = Sifrovani.Zasifrovat(heslo, klic, uzivatel.IV);
 
                     Heslo h = new()
                     {
@@ -178,12 +180,13 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null)
             {
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                if (uzivatel != null)
                 {
 
                     Heslo heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
-                    heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic);
+                    heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
 
                    
                     return View();
@@ -200,7 +203,8 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                if (uzivatel != null)
                 {
                     Heslo? heslo1 = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
 
@@ -209,7 +213,7 @@ namespace Spravce_hesel.Controllers
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
 
                     int hash = heslo.GetHashCode();
-                    byte[] zasifrovane = Sifrovani.Zasifrovat(heslo, klic);
+                    byte[] zasifrovane = Sifrovani.Zasifrovat(heslo, klic, uzivatel.IV);
 
                     Heslo h = new Heslo()
                     {
