@@ -57,7 +57,11 @@
   border-bottom-color: lightblue;
 }
 .tmavy #oznameni .oznameni {
-  border-bottom: 1px solid lightblue;
+  border-bottom-color: lightblue;
+}
+.tmavy .upozorneniCookies {
+  background-color: #172e34;
+  border-color: lightblue;
 }
 
 header {
@@ -309,7 +313,7 @@ footer {
   border: 2px solid cornflowerblue;
   border-radius: 2px;
 }
-.heslo_div * {
+.heslo_div div, .heslo_div a {
   padding: 0.5em;
 }
 .heslo_div .sluzba {
@@ -345,6 +349,7 @@ footer {
 }
 #oznameni > div {
   height: calc(100vh - 5em);
+  overflow-y: auto;
 }
 #oznameni > div .oznameni {
   padding-block: 0.5em;
@@ -355,6 +360,14 @@ footer {
 }
 #oznameni h3 {
   margin: 0 !important;
+}
+
+.upozorneniCookies {
+  background-color: #f4f7fc;
+  border: 2px solid cornflowerblue;
+}
+.upozorneniCookies button {
+  margin-left: 1em;
 }
 
 #container div.POPup {
@@ -371,6 +384,7 @@ footer {
   z-index: 999;
 }
 #container div.POPup > div {
+  position: relative;
   margin: 1em;
   min-width: 500px;
   width: max-content;
@@ -379,6 +393,13 @@ footer {
   border-radius: 2px;
   padding: 1em;
   text-align: center;
+}
+#container div.POPup > div > a {
+  position: absolute;
+  line-height: 1rem;
+  right: 1em;
+  top: 1.25em;
+  padding: 0.5em;
 }
 #container div.POPup > div h3 {
   font-weight: bold;

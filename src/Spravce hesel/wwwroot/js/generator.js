@@ -1,4 +1,4 @@
-﻿function NahodneCislo(max) {
+function NahodneCislo(max) {
     return Math.floor(Math.random() * max);
 }
 

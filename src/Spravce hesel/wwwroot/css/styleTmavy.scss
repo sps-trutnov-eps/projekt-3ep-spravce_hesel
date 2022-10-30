@@ -1,4 +1,4 @@
-﻿// Tmavý motiv
+// Tmavý motiv
 .tmavy {
     $barva-text: #c4c2c2;
     $barva-text-sekundar: lightblue;
@@ -89,7 +89,12 @@
 
     #oznameni {
         .oznameni {
-            border-bottom: 1px solid $barva-text-sekundar;
+            border-bottom-color: $barva-text-sekundar;
         }
+    }
+
+    .upozorneniCookies {
+        background-color: $barva-pozadi-tercial;
+        border-color: $barva-text-sekundar;
     }
 }

@@ -1,4 +1,4 @@
-﻿let zmena_jmena = document.getElementById("zmena_jmena");
+let zmena_jmena = document.getElementById("zmena_jmena");
 let zmena_hesla = document.getElementById("zmena_hesla");
 let odstraneni = document.getElementById("odstraneni");
 let informace = document.getElementById("informace");

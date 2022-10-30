@@ -1,4 +1,4 @@
-// Barevn˝ motiv
+// Barevn√Ω motiv
 function PrepnoutBarevnyMotiv() {
     if (!document.cookie.includes("TmavyMotiv"))
         document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
@@ -8,7 +8,7 @@ function PrepnoutBarevnyMotiv() {
     window.location.reload();
     }
 
-// Vyû·d·nÌ hesla
+// Vy≈æ√°d√°n√≠ hesla
 function vyzadatHeslo(id) {
     $.ajax({
         type: "GET",
@@ -19,20 +19,28 @@ function vyzadatHeslo(id) {
         
         success: (res) => {
             zobrazitPOPup("detaily");
-            document.getElementById("sluzba").innerHTML = res.value.sluzba;
-            document.getElementById("jmeno").innerHTML = res.value.jmeno;
-            document.getElementById("heslo").innerHTML = res.value.sifra;
+            if (res.value.sluzba == null || res.value.sluzba.trim() == "")
+                document.getElementById("sluzba").innerHTML = decodeURIComponent("<i>Nezn√°m√° slu≈æba</i>");
+            else
+                document.getElementById("sluzba").innerHTML = decodeURIComponent(res.value.sluzba);
+
+            if (res.value.jmeno == null || res.value.jmeno.trim() == "")
+                document.getElementById("jmeno").innerHTML = decodeURIComponent("<i>Nezn√°m√© jm√©no</i>");
+            else
+                document.getElementById("jmeno").innerHTML = decodeURIComponent(res.value.jmeno);
+
+            document.getElementById("heslo").innerHTML = decodeURIComponent(res.value.sifra);
         }
     });
 }
 
-// Vyû·d·nÌ potvrzenÌ odstranÏnÌ
+// Vy≈æ√°d√°n√≠ potvrzen√≠ odstranƒõn√≠
 function vyzadatOdstraneni(id) {
     document.getElementById("odstraneni").action = "/Hesla/Odstranit/" + id;
     zobrazitPOPup("odstranit");
 }
 
-// Vyû·d·nÌ potvrzenÌ
+// Vy≈æ√°d√°n√≠ potvrzen√≠
 let zmenyVPotvrzeni = false;
 function vyzadatPotvrzeni(id, rozhodnuti) {
     if (rozhodnuti == true) {
@@ -44,7 +52,7 @@ function vyzadatPotvrzeni(id, rozhodnuti) {
             contentType: "application/json; charset=utf-8",
 
             success: (res) => {
-                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnuti ulozeno</p>";
+                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnut√≠ ulo≈æeno</p>";
             }
         });
     }
@@ -57,7 +65,7 @@ function vyzadatPotvrzeni(id, rozhodnuti) {
             contentType: "application/json; charset=utf-8",
 
             success: (res) => {
-                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnuti ulozeno</p>";
+                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnut√≠ ulo≈æeno</p>";
             }
         });
     }
@@ -86,3 +94,10 @@ $('div.POPup').click(function (e) {
         skrytPOPUp()
     }
 });
+
+// Udƒõlen√≠ souhlasu
+function udeleniSouhlasu() {
+    document.cookie = "Souhlas=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    window.location.reload();
+}
+
