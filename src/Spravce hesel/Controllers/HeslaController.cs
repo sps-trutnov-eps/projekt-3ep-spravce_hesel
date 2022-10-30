@@ -30,11 +30,12 @@ namespace Spravce_hesel.Controllers
             {
                 klic = Sifrovani.HesloNaKlic(klic);
                 List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-                List<Heslo> desifrovano = new List<Heslo>();
+                List<Heslo> desifrovano = new();
 
-                foreach(Heslo heslo in Hesla)
+                foreach (Heslo heslo in Hesla)
                 {
-                    Heslo _desforave = new Heslo() {
+                    Heslo _desforave = new()
+                    {
                         ID = heslo.ID,
                         UzivatelskeID = heslo.UzivatelskeID,
                         Sluzba = heslo.Sluzba,
@@ -49,10 +50,10 @@ namespace Spravce_hesel.Controllers
                     desifrovano.Add(_desforave);
                 }
 
-                List<SdileneHeslo> hesla = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == false).ToList();
-                List<SdileneHeslo> hesla_zobrazeni = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.Potvrzeno == true).ToList();
-                ViewData["Oznameni"] = hesla;
-                ViewData["sdilene_hesla"] = hesla_zobrazeni;
+                ViewData["Oznameni"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
+                    .Where(heslo => heslo.Potvrzeno == false).ToList();
+                ViewData["sdilene_hesla"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
+                    .Where(heslo => heslo.Potvrzeno == true).ToList();
 
                 return View(desifrovano);
             }
@@ -78,6 +79,23 @@ namespace Spravce_hesel.Controllers
             return RedirectToAction("Error", "Home", 404);
         }
 
+        [HttpGet]
+        public IActionResult DetailSdilenehoHesla(int id = 0)
+        {
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            string? klic = HttpContext.Session.GetString("Klic");
+            SdileneHeslo? heslo = Databaze.Sdilena_hesla.Where(heslo => heslo.Id == id).FirstOrDefault();
+            if (uzivatelID != null && klic != null && heslo != null
+                && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null
+                && heslo.UzivatelskeID == uzivatelID)
+            {
+                klic = Sifrovani.HesloNaKlic(klic);
+                heslo.Sifra = Sifrovani.Desifrovat(klic, heslo.Sifra);
+                return Ok(Json(heslo));
+            }
+
+            return RedirectToAction("Error", "Home", 404);
+        }
         [HttpGet]
         public IActionResult Pridat()
         {
@@ -148,9 +166,34 @@ namespace Spravce_hesel.Controllers
                 Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).Where(heslo => heslo.ID == id).FirstOrDefault();
                 if (heslo != null && heslo.UzivatelskeID == uzivatelID)
                 {
+                    List<SdileneHeslo> Sdileni = Databaze.Sdilena_hesla.Where(heslo => heslo.PuvodniHesloID == id).ToList();
+
                     Databaze.Hesla.Remove(heslo);
+                    Databaze.RemoveRange(Sdileni);
+
                     Databaze.SaveChanges();
                     
+                    return RedirectToAction("Zobrazeni");
+                }
+            }
+
+            return RedirectToAction("Error", "Home", 404);
+        }
+
+        [HttpPost]
+        public IActionResult OdstranitSdilene(int id = 0)
+        {
+            int? uzivatelID = HttpContext.Session.GetInt32("ID");
+            string? klic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID != null && klic != null
+                && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
+            {
+                SdileneHeslo? heslo = Databaze.Sdilena_hesla.Where(heslo => heslo.Id == id).FirstOrDefault();
+                if (heslo != null)
+                {
+                    Databaze.Sdilena_hesla.Remove(heslo);
+                    Databaze.SaveChanges();
+
                     return RedirectToAction("Zobrazeni");
                 }
             }
@@ -197,7 +240,7 @@ namespace Spravce_hesel.Controllers
                     int hash = heslo.GetHashCode();
                     heslo = Sifrovani.Zasifrovat(klic, heslo);
 
-                    Heslo h = new Heslo()
+                    Heslo h = new()
                     {
                         UzivatelskeID = (int)uzivatelID,
                         Sluzba = sluzba,
@@ -289,55 +332,58 @@ namespace Spravce_hesel.Controllers
         }
     
         [HttpPost]
-        public IActionResult Sdileni(int id, Uzivatel obj)
+        public IActionResult Sdileni(int? id, Uzivatel? obj)
         {
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             string? klic = HttpContext.Session.GetString("Klic");
-            if (uzivatelID != null && klic != null
+            if (uzivatelID != null && klic != null && obj != null
                 && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
             {
                 ModelState.Clear();
 
-                IEnumerable<SdileneHeslo> objCategoryList = Databaze.Sdilena_hesla;
+                Uzivatel? u = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
+                Heslo? h = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
+                Uzivatel? u2 = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
 
-                Uzivatel? u = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault(); // 
-                Heslo h = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
-                Uzivatel u2 = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
-
-                if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
+                if (u != null && h != null && u2 != null)
                 {
-                    ModelState.AddModelError("Email", "◀ Uživatel neexistuje.");
-                }
+                    SdileneHeslo? existujiciHeslo = Databaze.Sdilena_hesla
+                        .Where(heslo => heslo.PuvodniHesloID == h.ID)
+                        .Where(heslo => heslo.UzivatelskeID == u.Id).FirstOrDefault();
 
-                foreach (var heslo in objCategoryList)
-                {
-                    if (h.ID == heslo.PuvodniHesloID && u.Id == heslo.UzivatelskeID)
+                    if (existujiciHeslo != null)
                     {
                         ModelState.AddModelError("Email", "◀ Toto heslo už sdílíte.");
                     }
-                }
-                
-                if (ModelState.IsValid)
-                {
-                    SdileneHeslo sh = new()
+
+                    if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
                     {
-                        PuvodniHesloID = h.ID,
-                        ZakladatelID = (int)uzivatelID,
-                        ZakladatelJmeno = u2.Jmeno,
-                        UzivatelskeID = u.Id,
-                        Sluzba = h.Sluzba,
-                        Jmeno = h.Jmeno,
-                        Sifra = h.Sifra,
-                    };
+                        ModelState.AddModelError("Email", "◀ Uživatel neexistuje.");
+                    }
                 
-                    Databaze.Sdilena_hesla.Add(sh);
-                    Databaze.SaveChanges();
+                    if (ModelState.IsValid)
+                    {
+                        SdileneHeslo sh = new()
+                        {
+                            PuvodniHesloID = h.ID,
+                            ZakladatelID = (int)uzivatelID,
+                            ZakladatelJmeno = u2.Jmeno,
+                            UzivatelskeID = u.Id,
+                            Sluzba = h.Sluzba,
+                            Jmeno = h.Jmeno,
+                            Sifra = h.Sifra,
+                        };
+                
+                        Databaze.Sdilena_hesla.Add(sh);
+                        Databaze.SaveChanges();
 
-                    return RedirectToAction("Zobrazeni");
+                        return RedirectToAction("Zobrazeni");
+                    }
+
+                    return View();
                 }
-
-                return View();
             }
+
             return RedirectToAction("Error", "Home", 404);
         }
     }

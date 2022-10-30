@@ -4,14 +4,15 @@
     dynamic id = ViewData["id"];
 }
 
-<article>
+<article class="center">
     <h2>Sdílet heslo</h2>
-    <form method="post" action="/hesla/Sdileni/@id">
-        <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
-        oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
-        oninput="setCustomValidity('')"/>
-        <span asp-validation-for="Email" class="chyba"></span><br />
-        <input type="submit" value="Sdílet" />
-    </form>
-    
+    <section>
+        <form method="post" action="/hesla/Sdileni/@id">
+            <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
+            oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
+            oninput="setCustomValidity('')"/>
+            <span asp-validation-for="Email" class="chyba"></span><br />
+            <input type="submit" value="Sdílet" />
+        </form>
+    </section>
 </article>

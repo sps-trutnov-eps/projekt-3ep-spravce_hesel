@@ -9,10 +9,14 @@ function PrepnoutBarevnyMotiv() {
     }
 
 // Vyžádání hesla
-function vyzadatHeslo(id) {
+function vyzadatHeslo(id, norm = true) {
+    let url = "DetailSdilenehoHesla";
+    if (norm == true)
+        url = "DetailHesla";
+
     $.ajax({
         type: "GET",
-        url: "/Hesla/DetailHesla/" + id,
+        url: "/Hesla/" + url + "/" + id,
         dataType: "JSON",
         data: JSON.stringify(id),
         contentType: "application/json; charset=utf-8",
@@ -30,47 +34,44 @@ function vyzadatHeslo(id) {
                 document.getElementById("jmeno").innerHTML = decodeURIComponent(res.value.jmeno);
 
             document.getElementById("heslo").innerHTML = decodeURIComponent(res.value.sifra);
+
+            if (norm == true)
+                document.getElementById("detaily").firstElementChild.className = "";
+            else
+                document.getElementById("detaily").firstElementChild.className = "sdileneheslo";
         }
     });
 }
 
 // Vyžádání potvrzení odstranění
-function vyzadatOdstraneni(id) {
-    document.getElementById("odstraneni").action = "/Hesla/Odstranit/" + id;
+function vyzadatOdstraneni(id, norm = true) {
+    let url = "OdstranitSdilene";
+    if (norm == true) {
+        url = "Odstranit";
+    }
+    document.getElementById("odstraneni").action = "/Hesla/" + url + "/" + id;
     zobrazitPOPup("odstranit");
 }
 
 // Vyžádání potvrzení
 let zmenyVPotvrzeni = false;
-function vyzadatPotvrzeni(id, rozhodnuti) {
-    if (rozhodnuti == true) {
-        $.ajax({
-            type: "POST",
-            url: "/Hesla/PotvrditSdileni/" + id,
-            dataType: "JSON",
-            data: JSON.stringify(id),
-            contentType: "application/json; charset=utf-8",
+function vyzadatPotvrzeni(id, rozhodnuti = true) {
+    let url = "ZrusitSdileni";
+    if (rozhodnuti == true)
+        url = "PotvrditSdileni";
 
-            success: (res) => {
-                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnutí uloženo</p>";
-            }
-        });
-    }
-    else {
-        $.ajax({
-            type: "POST",
-            url: "/Hesla/ZrusitSdileni/" + id,
-            dataType: "JSON",
-            data: JSON.stringify(id),
-            contentType: "application/json; charset=utf-8",
+    $.ajax({
+        type: "POST",
+        url: "/Hesla/" + url + "/" + id,
+        dataType: "JSON",
+        data: JSON.stringify(id),
+        contentType: "application/json; charset=utf-8",
 
-            success: (res) => {
-                document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnutí uloženo</p>";
-            }
-        });
-    }
-
-    zmenyVPotvrzeni = true;
+        success: (res) => {
+            document.getElementsByClassName("oznameni " + id)[0].innerHTML = "<p>Rozhodnutí uloženo</p>";
+            zmenyVPotvrzeni = true;
+        }
+    });
 }
 
 // pop-up
@@ -81,7 +82,7 @@ function zobrazitPOPup(id) {
 
 function skrytPOPUp() {
     if (zmenyVPotvrzeni == true)
-        window.location.reload();
+        window.location.href = "/Hesla/Zobrazeni";
     else {
         for (let div of document.getElementsByClassName("POPup")) {
             div.className = "POPup skryty";
