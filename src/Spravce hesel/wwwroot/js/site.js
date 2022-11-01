@@ -24,16 +24,16 @@ function vyzadatHeslo(id, norm = true) {
         success: (res) => {
             zobrazitPOPup("detaily");
             if (res.value.sluzba == null || res.value.sluzba.trim() == "")
-                document.getElementById("sluzba").innerHTML = decodeURIComponent("<i>Neznámá služba</i>");
+                document.getElementById("sluzba").innerHTML = "<i>Neznámá služba</i>";
             else
-                document.getElementById("sluzba").innerHTML = decodeURIComponent(res.value.sluzba);
+                document.getElementById("sluzba").innerHTML = res.value.sluzba;
 
             if (res.value.jmeno == null || res.value.jmeno.trim() == "")
-                document.getElementById("jmeno").innerHTML = decodeURIComponent("<i>Neznámé jméno</i>");
+                document.getElementById("jmeno").innerHTML = "<i>Neznámé jméno</i>";
             else
-                document.getElementById("jmeno").innerHTML = decodeURIComponent(res.value.jmeno);
+                document.getElementById("jmeno").innerHTML = res.value.jmeno;
 
-            document.getElementById("heslo").innerHTML = decodeURIComponent(res.value.sifra);
+            document.getElementById("heslo").innerHTML = res.value.sifra;
 
             if (norm == true)
                 document.getElementById("detaily").firstElementChild.className = "";
