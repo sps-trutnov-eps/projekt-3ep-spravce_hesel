@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,7 +17,8 @@ namespace Spravce_hesel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UzivatelskeID = table.Column<int>(type: "int", nullable: false),
                     Hash = table.Column<int>(type: "int", nullable: false),
-                    Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -36,7 +38,8 @@ namespace Spravce_hesel.Migrations
                     ZakladatelJmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UzivatelskeID = table.Column<int>(type: "int", nullable: false),
                     Potvrzeno = table.Column<bool>(type: "bit", nullable: false),
-                    Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -52,7 +55,8 @@ namespace Spravce_hesel.Migrations
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Heslo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Heslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IV = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {

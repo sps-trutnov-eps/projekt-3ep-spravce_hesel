@@ -33,7 +33,7 @@ function vyzadatHeslo(id, norm = true) {
             else
                 document.getElementById("jmeno").innerHTML = res.value.jmeno;
 
-            document.getElementById("heslo").innerHTML = res.value.sifra;
+            document.getElementById("heslo").innerHTML = res.value.desifrovano;
 
             if (norm == true)
                 document.getElementById("detaily").firstElementChild.className = "";
