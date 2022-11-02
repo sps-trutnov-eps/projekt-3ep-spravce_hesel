@@ -23,7 +23,9 @@ namespace Spravce_hesel.Models
         public bool Potvrzeno { get; set; } = false;
 
         [Required]
-        public string Sifra { get; set; }
+        public byte[] Sifra { get; set; }
+
+        public string? desifrovano { get; set; } = null;
 
         public string? Sluzba { get; set; } = null;
 

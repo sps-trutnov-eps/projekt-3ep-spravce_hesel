@@ -10,78 +10,97 @@ namespace Spravce_hesel.Classes
 {
     public class Sifrovani
     {
-        //Kod prevzat z https://www.c-sharpcorner.com/article/encryption-and-decryption-using-a-symmetric-key-in-c-sharp/
+        //kod prevat z https://learn.microsoft.com/cs-cz/dotnet/api/system.security.cryptography.aes?view=net-6.0
 
-        public static string Zasifrovat(string Klic, string Text)
+        public static byte[] Zasifrovat(string plainText, byte[] Key, byte[] IV)
         {
-            byte[] iv = new byte[16];
-            byte[] array;
+            // Check arguments.
+            if (plainText == null || plainText.Length <= 0)
+                throw new ArgumentNullException("plainText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+            byte[] encrypted;
 
-            using (Aes aes = Aes.Create())
+            // Create an Aes object
+            // with the specified key and IV.
+            using (Aes aesAlg = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(Klic);
-                aes.IV = iv;
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
 
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                // Create an encryptor to perform the stream transform.
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
-                using (MemoryStream memoryStream = new MemoryStream())
+                // Create the streams used for encryption.
+                using (MemoryStream msEncrypt = new MemoryStream())
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-                            streamWriter.Write(Text);
+                            //Write all data to the stream.
+                            swEncrypt.Write(plainText);
                         }
-                        array = memoryStream.ToArray();
+                        encrypted = msEncrypt.ToArray();
                     }
                 }
             }
 
-
-                return Convert.ToBase64String(array);
+            // Return the encrypted bytes from the memory stream.
+            return encrypted;
         }
 
-        public static string Desifrovat(string Klic, string Sifra)
+        public static string Desifrovat(byte[] cipherText, byte[] Key, byte[] IV)
         {
+            // Check arguments.
+            if (cipherText == null || cipherText.Length <= 0)
+                throw new ArgumentNullException("cipherText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
 
-            byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(Sifra);
+            // Declare the string used to hold
+            // the decrypted text.
+            string plaintext = null;
 
-            
-
-            using (Aes aes = Aes.Create())
+            // Create an Aes object
+            // with the specified key and IV.
+            using (Aes aesAlg = Aes.Create())
             {
-                aes.Mode = CipherMode.ECB; aes.KeySize = 128; aes.BlockSize = 128; aes.FeedbackSize = 128; aes.Padding = PaddingMode.None; aes.Key = Encoding.UTF8.GetBytes(Klic); aes.IV = iv;
-                aes.Key = Encoding.UTF8.GetBytes(Klic);
-                aes.IV = iv;
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
 
+                // Create a decryptor to perform the stream transform.
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
-
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-
-                
-
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                // Create the streams used for decryption.
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
                 {
-                    
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                         {
-                            
-                            return streamReader.ReadToEnd();
+
+                            // Read the decrypted bytes from the decrypting stream
+                            // and place them in a string.
+                            plaintext = srDecrypt.ReadToEnd();
                         }
                     }
                 }
             }
 
+            return plaintext;
         }
 
-        public static string HesloNaKlic(string heslo)
+
+
+        //vlatni kod
+        public static byte[] HesloNaKlic(string heslo)
         {
-            byte[] bytyHesla = Encoding.ASCII.GetBytes(heslo);
+            byte[] bytyHesla = Encoding.UTF8.GetBytes(heslo);
 
             int delka = bytyHesla.Length;
 
@@ -91,7 +110,7 @@ namespace Spravce_hesel.Classes
             }
 
             byte[] bytes = new byte[32];
-            
+
             for (int i = 0; i < delka; i++)
             {
                 bytes[i] = bytyHesla[i];
@@ -99,7 +118,7 @@ namespace Spravce_hesel.Classes
 
 
             int pozice = delka;
-            while(delka < 32)
+            while (delka < 32)
             {
                 pozice++;
                 bytes[pozice] = 1;
@@ -107,10 +126,7 @@ namespace Spravce_hesel.Classes
             }
 
 
-            string klic = Encoding.ASCII.GetString(bytes);
-
-
-            return klic;
+            return bytes;
         }
     }
 }
