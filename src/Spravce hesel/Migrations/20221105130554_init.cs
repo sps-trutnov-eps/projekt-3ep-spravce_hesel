@@ -38,10 +38,12 @@ namespace Spravce_hesel.Migrations
                     ZakladatelJmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UzivatelskeID = table.Column<int>(type: "int", nullable: false),
                     Potvrzeno = table.Column<bool>(type: "bit", nullable: false),
+                    zmeneno = table.Column<bool>(type: "bit", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DocasnyStringProKlic = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

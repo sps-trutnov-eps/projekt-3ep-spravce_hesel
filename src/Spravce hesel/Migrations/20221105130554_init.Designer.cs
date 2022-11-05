@@ -12,7 +12,7 @@ using Spravce_hesel.Data;
 namespace Spravce_hesel.Migrations
 {
     [DbContext(typeof(Spravce_heselData))]
-    [Migration("20221102190142_init")]
+    [Migration("20221105130554_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,9 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("DocasnyStringProKlic")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Jmeno")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,6 +95,9 @@ namespace Spravce_hesel.Migrations
 
                     b.Property<string>("desifrovano")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("zmeneno")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

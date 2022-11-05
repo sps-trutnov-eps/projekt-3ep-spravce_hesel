@@ -128,5 +128,13 @@ namespace Spravce_hesel.Classes
 
             return bytes;
         }
+
+        public static string Nahodne_info_pro_klic(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }
