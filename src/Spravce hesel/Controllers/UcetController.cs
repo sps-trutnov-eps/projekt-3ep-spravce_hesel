@@ -6,6 +6,8 @@ using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Spravce_hesel.Controllers
 {
@@ -86,6 +88,19 @@ namespace Spravce_hesel.Controllers
 
             IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
+            if (obj.Jmeno != null)
+            {
+                string jmeno = obj.Jmeno;
+
+                if (jmeno.Contains(" "))
+                {
+                    ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
+                }
+            }else
+            {
+                ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
+            }
+
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
                 ModelState.AddModelError("email", "Tento email už existuje");
@@ -96,13 +111,13 @@ namespace Spravce_hesel.Controllers
                 ModelState.AddModelError("Heslo", "Hesla se neshodují");
             }
 
-            foreach (var nah in objCategoryList)
-            {
-                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
-                {
-                    ModelState.AddModelError("Heslo", "Toto heslo používá už uživatel " + nah.Jmeno);
-                }
-            }
+            //foreach (var nah in objCategoryList)
+            //{
+            //    if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
+            //    {
+            //        ModelState.AddModelError("Heslo", "Toto heslo používá už uživatel " + nah.Jmeno);
+            //    }
+            //}
 
             if (obj.Heslo != null && obj.Heslo.Length > 7)
             {
