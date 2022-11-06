@@ -1,16 +1,20 @@
 // Barevné schéma
 $barva-text: #000000;
 $barva-text-sekundar: #6495ed;
-$barva-sdilene-heslo: #ffff82;
+$barva-sdilene-heslo: #3e27ea;
+$barva-oznameni: #f1ab58;
 $barva-pozadi: #ffffff;
 $barva-pozadi-sekundar: #f4f7fc;
 $barva-pozadi-heslo: #e1e9f7;
-$barva-zesednuti: #00000033;
+$barva-pozadi-sdilene-heslo: #f5f5ff;
+$barva-pozadi-sdilene-heslo2: #e0e0f7;
+$barva-zesednuti: #00000066;
 
 // Header
 header {
     text-align: center;
     border-bottom: 1px solid $barva-text-sekundar;
+    border-image: linear-gradient(to right, $barva-text-sekundar, $barva-sdilene-heslo, $barva-text-sekundar) 1;
 
     nav {
         position: relative;

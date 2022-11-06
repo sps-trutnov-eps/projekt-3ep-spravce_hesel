@@ -14,7 +14,7 @@ $barva-pozadi-sekundar: #f4f7fc;
 $barva-pozadi-heslo: #e1e9f7;
 $barva-pozadi-sdilene-heslo: #f5f5ff;
 $barva-pozadi-sdilene-heslo2: #e0e0f7;
-$barva-zesednuti: #00000033;
+$barva-zesednuti: #00000066;
 
 // Základní elementy
 html, body, #container {
@@ -183,6 +183,7 @@ section:not(:last-of-type) {
 // Footer
 footer {
     border-top: 1px solid $barva-text-sekundar;
+    border-image: linear-gradient(to right, $barva-text-sekundar, $barva-sdilene-heslo, $barva-text-sekundar) 1;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -354,6 +355,31 @@ footer {
 
 .skryty {
     display: none !important;
+}
+
+// Načítání
+#nacitani {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background-color: $barva-zesednuti;
+    z-index: 999;
+
+    div {
+        font-size: 1.5em;
+        background-color: $barva-pozadi-heslo;
+        border: 2px solid $barva-text-sekundar;
+        border-image: linear-gradient(to right, $barva-text-sekundar, $barva-sdilene-heslo, $barva-text-sekundar) 1;
+        padding: 1em;
+        border-radius: 2px;
+    }
 }
 
 // Přidávání hesel

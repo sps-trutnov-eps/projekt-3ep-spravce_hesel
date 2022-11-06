@@ -2,6 +2,7 @@
 $barva-text: #c4c2c2;
 $barva-text-sekundar: lightblue;
 $barva-sdilene-heslo: #5b8dd7;
+$barva-oznameni: #f1ab58;
 $barva-pozadi: #252931;
 $barva-pozadi-sekundar: #4a4a4b;
 $barva-pozadi-heslo: #172e34;
@@ -22,11 +23,11 @@ $barva-zesednuti: #00000077;
     }
 
     header {
-        border-bottom-color: $barva-text-sekundar;
+        border-image: linear-gradient(to right, $barva-sdilene-heslo, $barva-text-sekundar, $barva-sdilene-heslo) 1;
     }
 
     footer {
-        border-top-color: $barva-text-sekundar;
+        border-image: linear-gradient(to right, $barva-sdilene-heslo, $barva-text-sekundar, $barva-sdilene-heslo) 1;
     }
 
     button {
@@ -118,5 +119,12 @@ $barva-zesednuti: #00000077;
     .upozorneniCookies {
         background-color: $barva-pozadi-heslo;
         border-color: $barva-text-sekundar;
+    }
+
+    #nacitani div {
+        border: 2px solid $barva-text-sekundar;
+        background-color: $barva-pozadi-heslo;
+        border-image: linear-gradient(to right, $barva-sdilene-heslo, $barva-text-sekundar, $barva-sdilene-heslo) 1;
+        animation: nacitaniPozadi 6s infinite linear;
     }
 }

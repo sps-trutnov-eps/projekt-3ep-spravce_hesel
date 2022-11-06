@@ -102,3 +102,15 @@ function udeleniSouhlasu() {
     window.location.reload();
 }
 
+// Načítání
+$('form').submit(function (e) {
+    console.log("ookk");
+    if (e.target == this) {
+        document.querySelector("#nacitani").className = "";
+    }
+});
+
+//window.onload = (() => {
+//    document.querySelector("#nacitani").className = "skryty";
+//})
+
