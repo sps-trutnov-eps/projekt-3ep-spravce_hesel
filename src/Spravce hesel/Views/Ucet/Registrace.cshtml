@@ -9,7 +9,8 @@
     <form action="/Ucet/Registrace" method="post">
         <input type="text" class="username" asp-for="Jmeno" placeholder="Zadejte uživatelské jméno..." required minlength="3"
         oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
-        oninput="this.setCustomValidity('')"/><br />
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Jmeno" class="chyba"></span><br />
         <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
         oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
         oninput="setCustomValidity('')"/>

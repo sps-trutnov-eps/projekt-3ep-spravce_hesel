@@ -9,18 +9,7 @@
 
 <nav>
     <span class="nav-vlevo">
-        @if (BarevnyMotiv == "svetly")
-        {
-            <div class="item item-icon">
-                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
-            </div>
-        }
-        else
-        {
-            <div class="item item-icon">
-                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
-            </div>
-        }
+        <h1><a href="/Home/Index" class="icon-key"><span>Správce hesel</span></a></h1>
     </span>
 
     @if (uzivatel != null)
@@ -28,7 +17,6 @@
         <div class="item">
             <a href="/Hesla/Zobrazeni">Moje hesla</a>
             <div class="submenu">
-                <a href="/Hesla/Zobrazeni" title="Moje hesla"></a>
                 <div>
                     <a href="/Hesla/Zobrazeni">Zobrazení</a>
                     <a href="/Hesla/Pridat">Přidat</a>
@@ -44,12 +32,23 @@
     }
 
     <span class="nav-vpravo">
+        @if (BarevnyMotiv == "svetly")
+        {
+            <div class="item item-icon">
+                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
+            </div>
+        }
+        else
+        {
+            <div class="item item-icon">
+                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
+            </div>
+        }
         @if (uzivatel == null)
         {
             <div class="item item-icon">
                 <a href="/Ucet/Prihlaseni" title="Přihlášení a registrace" class="icon-user"></a>
                 <div class="submenu">
-                    <a href="/Ucet/Prihlaseni" title="Přihlášení a registrace"></a>
                     <div>
                         <a href="/Ucet/Prihlaseni">Přihlášení</a>
                         <a href="/Ucet/Registrace">Registrace</a>
@@ -62,7 +61,6 @@
             <div class="item item-icon">
                 <a href="/Ucet/Nastaveni" title="Nastavení účtu" class="icon-settings"></a>
                 <div class="submenu">
-                    <a href="/Ucet/Nastaveni" title="Nastavení účtu"></a>
                     <div>
                         <a href="/Ucet/ZmenaJmena">Změna jména účtu</a>
                         <a href="/Ucet/ZmenaHesla">Změna hesla k účtu</a>

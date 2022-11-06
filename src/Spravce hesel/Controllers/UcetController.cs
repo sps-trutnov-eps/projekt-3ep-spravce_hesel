@@ -42,13 +42,13 @@ namespace Spravce_hesel.Controllers
 
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
             {
-                ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
+                ModelState.AddModelError("Heslo", "E-Mail a heslo se neshodují");
             }
             else
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
+                    ModelState.AddModelError("Heslo", "E-Mail a heslo se neshodují");
                 }
 
                 if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
@@ -86,22 +86,28 @@ namespace Spravce_hesel.Controllers
 
             IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
+            if (obj.Jmeno != null)
+            {
+                string jmeno = obj.Jmeno;
+
+                if (jmeno.Contains(" "))
+                {
+                    ModelState.AddModelError("Jmeno", "Jméno nesmí obsahovat mezery.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Jmeno", "Jméno nesmí obsahovat mezery.");
+            }
+
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
-                ModelState.AddModelError("email", "◀ Tento email už existuje");
+                ModelState.AddModelError("email", "Tento email už existuje");
             }
 
             if (obj.Heslo != kontrola_hesla)
             {
-                ModelState.AddModelError("Heslo", "◀ Hesla se neshodují");
-            }
-
-            foreach (var nah in objCategoryList)
-            {
-                if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
-                {
-                    ModelState.AddModelError("Heslo", "◀ Toto heslo používá už uživatel " + nah.Jmeno);
-                }
+                ModelState.AddModelError("Heslo", "Hesla se neshodují");
             }
 
             if (obj.Heslo != null && obj.Heslo.Length > 7)
@@ -193,7 +199,7 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
@@ -253,7 +259,7 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
@@ -263,7 +269,7 @@ namespace Spravce_hesel.Controllers
 
             if (noveheslo != noveheslokontrola)
             {
-                ModelState.AddModelError("Heslo", "◀ Hesla se neshodují");
+                ModelState.AddModelError("Heslo", "Hesla se neshodují");
             }
 
             if (noveheslo != null && noveheslo.Length > 7)
@@ -322,7 +328,7 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
