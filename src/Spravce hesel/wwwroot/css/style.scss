@@ -270,18 +270,26 @@ footer {
     }
 }
 
-#detaily > div {
-    #jmeno {
+#detaily {
+    > div #jmeno {
         font-style: italic;
     }
-}
 
-#detaily > div.sdileneheslo {
-    background-color: $barva-pozadi-sdilene-heslo;
-    border-color: $barva-sdilene-heslo !important;
+    > div.sdileneheslo {
+        background-color: $barva-pozadi-sdilene-heslo;
+        border-color: $barva-sdilene-heslo !important;
 
-    h3 {
-        border-bottom-color: $barva-sdilene-heslo !important;
+        h3 {
+            border-bottom-color: $barva-sdilene-heslo !important;
+        }
+    }
+
+    #sdileno_od {
+        font-size: .75rem;
+    }
+
+    #sdileno_od:empty {
+        display: none;
     }
 }
 

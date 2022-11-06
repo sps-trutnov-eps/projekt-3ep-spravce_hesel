@@ -424,13 +424,18 @@ footer {
 #detaily > div #jmeno {
   font-style: italic;
 }
-
 #detaily > div.sdileneheslo {
   background-color: #f5f5ff;
   border-color: #3e27ea !important;
 }
 #detaily > div.sdileneheslo h3 {
   border-bottom-color: #3e27ea !important;
+}
+#detaily #sdileno_od {
+  font-size: 0.75rem;
+}
+#detaily #sdileno_od:empty {
+  display: none;
 }
 
 .heslo_div:not(:last-of-type) {
