@@ -1,5 +1,6 @@
 @import "styleTmavy.scss";
 @import "styleNavigace.scss";
+@import "styleMobil.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @charset "UTF-8";
@@ -17,12 +18,7 @@ $barva-pozadi-sdilene-heslo2: #e0e0f7;
 $barva-zesednuti: #00000066;
 
 // Základní elementy
-html, body, #container {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
+// Nadpisy
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 
@@ -45,11 +41,13 @@ h4, h5, h6 {
     margin-bottom: 0;
 }
 
+// Odkaz
 a {
     text-decoration: underline solid 1px auto;
     color: $barva-text;
 }
 
+// Form a button
 form {
     input {
         padding: 20px;
@@ -123,18 +121,9 @@ button:hover {
     cursor: pointer;
 }
 
+// Vlastní třídy
 .center {
     text-align: center;
-}
-
-span.chyba {
-    position: absolute;
-    height: 60px;
-    line-height: 60px;
-    padding-top: 8px;
-    padding-left: 1rem;
-    color: red !important;
-    font-weight: bold;
 }
 
 article.split section {
@@ -145,6 +134,31 @@ article.split section {
     vertical-align: top;
 }
 
+// Chyba ve formu
+span.chyba {
+    position: absolute;
+    margin-left: 3em;
+    height: 60px;
+    margin-top: .4em;
+    line-height: 60px;
+    padding-inline: .5em;
+    color: red !important;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+span.chyba:not(:empty) {
+    border: 2px solid red;
+    border-radius: 2px;
+}
+
+span.chyba:not(:empty):before {
+    content: '◀';
+    position: absolute;
+    left: -1.5em;
+}
+
+// Chybová stránka
 .chyba {
     color: $barva-text-sekundar;
 
@@ -157,10 +171,10 @@ article.split section {
     }
 }
 
-// Container
+// Container, html, body
 #container {
     font-family: 'Source Sans Pro', sans-serif;
-    min-width: 500px;
+    min-width: 330px;
     max-width: 1000px;
     margin: 0 auto !important;
     position: relative;
@@ -169,6 +183,12 @@ article.split section {
         padding: 1em;
         width: calc(100% - 2em);
     }
+}
+
+html, body, #container {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 // Main a jeho součásti
@@ -190,7 +210,7 @@ footer {
     height: 2em;
     line-height: 2em;
     margin: 0 auto;
-    min-width: calc(500px - 2em);
+    width: 100vw;
     max-width: calc(1000px - 2em);
 }
 
@@ -270,11 +290,11 @@ footer {
 }
 
 // Oznámení
-#oznameni {
-    justify-content: end !important;
+#container div.POPup#oznameni {
+    justify-content: end;
 
     > div {
-        height: calc(100vh - 5em);
+        height: calc(100vh - 4px - 4em);
         overflow-y: auto;
         
         .oznameni {
@@ -295,6 +315,7 @@ footer {
 .upozorneniOznameni {
     border-color: $barva-oznameni !important;
 }
+
 // Upozornění na cookies
 .upozorneniCookies {
     background-color: $barva-pozadi-sekundar;

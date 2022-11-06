@@ -373,7 +373,7 @@ namespace Spravce_hesel.Controllers
                 Uzivatel? u2 = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if (u == null)
                 {
-                    ModelState.AddModelError("Email", "◀ Tento uživatel neexistuje.");
+                    ModelState.AddModelError("Email", "Tento uživatel neexistuje.");
                     return View();
                 }
                 if (u != null && h != null && u2 != null)
@@ -384,12 +384,12 @@ namespace Spravce_hesel.Controllers
 
                     if (existujiciHeslo != null)
                     {
-                        ModelState.AddModelError("Email", "◀ Toto heslo už sdílíte.");
+                        ModelState.AddModelError("Email", "Toto heslo už sdílíte.");
                     }
 
                     if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
                     {
-                        ModelState.AddModelError("Email", "◀ Uživatel neexistuje.");
+                        ModelState.AddModelError("Email", "Uživatel neexistuje.");
                     }
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     string desifrovano = Sifrovani.Desifrovat(h.Sifra, klic, u2.IV);

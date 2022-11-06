@@ -31,6 +31,16 @@ header {
             padding: 0;
             left: 0;
             position: absolute;
+
+            .icon-key:before {
+                color: $barva-text-sekundar;
+                margin-right: .5rem;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 1rem;
+            }
         }
 
         span.nav-vpravo {
@@ -54,14 +64,8 @@ header {
                 width: 10em;
                 top: 0;
                 z-index: 998;
-
-                > a {
-                    display: block;
-                    font-size: 0;
-                    height: 2rem;
-                    width: 10rem;
-                    margin: 0 auto;
-                }
+                padding-top: 0.8rem;
+                margin-top: 1.2rem;
 
                 > div {
                     border: 2px solid $barva-text-sekundar;

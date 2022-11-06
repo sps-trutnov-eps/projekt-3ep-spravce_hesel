@@ -30,6 +30,10 @@ $barva-zesednuti: #00000077;
         border-image: linear-gradient(to right, $barva-sdilene-heslo, $barva-text-sekundar, $barva-sdilene-heslo) 1;
     }
 
+    span.nav-vlevo .icon-key:before {
+        color: $barva-text-sekundar;
+    }
+
     button {
         background-color: $barva-pozadi-sekundar;
         color: $barva-text;
@@ -110,7 +114,7 @@ $barva-zesednuti: #00000077;
         }
     }
 
-    #oznameni {
+    #container div.POPup#oznameni {
         .oznameni {
             border-bottom-color: $barva-text-sekundar;
         }
