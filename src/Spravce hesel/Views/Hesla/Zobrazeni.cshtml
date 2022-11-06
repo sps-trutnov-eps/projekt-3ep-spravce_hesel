@@ -1,29 +1,38 @@
 @model List<Heslo>
 @{
     ViewData["Title"] = "Moje hesla";
-    dynamic? hesla_zobrazeni = ViewData["sdilene_hesla"];
+    List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdilene_hesla"];
+    List<SdileneHeslo>? oznameni = (List<SdileneHeslo>?)ViewData["oznameni"];
 }
 
 <article>
     <h2>Moje hesla</h2>
     <p class="center">
         <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Přidat heslo</button>
-        <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
+        @if (oznameni != null && oznameni.Count == 0)
+        {
+            <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
+        }
+        else
+        {
+            <button type="button" class="icon-bell upozorneniOznameni" onclick="zobrazitPOPup('oznameni')">Oznámení (@oznameni.Count)</button>
+        }
     </p>
 
     @{
         foreach (Heslo heslo in Model)
         {
             <div class="heslo_div">
-                <div class="sluzba"><a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.ID)">
-                    @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
-                    {
-                        <i>Neznámá služba</i>
-                    }
-                    else
-                    {
-                        @heslo.Sluzba
-                    }
+                <div class="sluzba">
+                    <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.ID)">
+                        @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
+                        {
+                            <i>Neznámá služba</i>
+                        }
+                        else
+                        {
+                            @heslo.Sluzba
+                        }
                     </a>
                     <span>
                         <a class="icon-share" title="Sdílet heslo" href="/Hesla/Sdileni/@heslo.ID"></a>
@@ -44,11 +53,11 @@
                 <div class="heslo">••••••••</div>
             </div>
         }
-        foreach (SdileneHeslo h in hesla_zobrazeni)
+        foreach (SdileneHeslo h in sdileneHesla)
         {
-            <div class="heslo_div">
+            <div class="heslo_div sdileneheslo">
                 <div class="sluzba">
-                    <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id)">
+                    <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id, 'sdilene')">
                         @if (h.Sluzba == null || h.Sluzba.Trim() == "")
                         {
                             <i>Neznámá služba</i>
@@ -59,7 +68,7 @@
                         }
                     </a>
                     <span>
-                        <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@h.Id)"></a>
+                        <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@h.Id, 'sdilene')"></a>
                     </span>
                 </div>
                 <div class="jmeno">
@@ -76,7 +85,7 @@
             </div>
         }
 
-        if (Model.Count == 0)
+        if (Model.Count == 0 && sdileneHesla != null & sdileneHesla.Count == 0)
         {
             <p>Zatím nemáte přidané žádné heslo</p>
         }

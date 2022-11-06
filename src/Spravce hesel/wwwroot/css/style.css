@@ -49,6 +49,21 @@
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
+.tmavy .heslo_div.sdileneheslo {
+  background-color: #172534;
+  border-color: #5b8dd7;
+}
+.tmavy .heslo_div.sdileneheslo .sluzba {
+  border-bottom-color: #5b8dd7;
+  background-color: #172534;
+}
+.tmavy #detaily > div.sdileneheslo {
+  background-color: #172534 !important;
+  border-color: #5b8dd7 !important;
+}
+.tmavy #detaily > div.sdileneheslo h3 {
+  border-bottom-color: #5b8dd7 !important;
+}
 .tmavy #container div.POPup > div {
   border-color: lightblue;
   background-color: #172e34;
@@ -66,7 +81,7 @@
 
 header {
   text-align: center;
-  border-bottom: 1px solid cornflowerblue;
+  border-bottom: 1px solid #6495ed;
 }
 header nav {
   position: relative;
@@ -110,7 +125,7 @@ header nav div.item div.submenu > a {
   margin: 0 auto;
 }
 header nav div.item div.submenu > div {
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
   background-color: #f4f7fc;
   border-radius: 2px;
   padding: 0;
@@ -123,7 +138,7 @@ header nav div.item div.submenu > div a {
   padding: 0.25em;
 }
 header nav div.item div.submenu > div a:not(:last-of-type) {
-  border-bottom: cornflowerblue solid 1px;
+  border-bottom: #6495ed solid 1px;
 }
 header nav div.item-icon {
   width: 22px;
@@ -168,13 +183,13 @@ h4, h5, h6 {
 
 a {
   text-decoration: underline solid 1px auto;
-  color: black;
+  color: #000000;
 }
 
 form input {
   padding: 20px;
   margin: 8px 0;
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
   border-radius: 2px;
   background-color: #f4f7fc;
   background-size: 1em;
@@ -207,14 +222,14 @@ form input[type=range]::-webkit-slider-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background-color: cornflowerblue;
+  background-color: #6495ed;
   cursor: pointer;
 }
 form input[type=range]::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background-color: cornflowerblue;
+  background-color: #6495ed;
   cursor: pointer;
 }
 form #posuvnikvystup {
@@ -225,7 +240,7 @@ form #posuvnikvystup {
 }
 
 button {
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
   border-radius: 2px;
   padding: 0.25em 0.5em;
   margin-block: 0.25em;
@@ -258,7 +273,7 @@ article.split section {
 }
 
 .chyba {
-  color: cornflowerblue;
+  color: #6495ed;
 }
 .chyba h2 {
   font-size: 2em;
@@ -288,7 +303,7 @@ section:not(:last-of-type) {
 }
 
 footer {
-  border-top: 1px solid cornflowerblue;
+  border-top: 1px solid #6495ed;
   text-align: center;
   position: absolute;
   bottom: 0;
@@ -304,13 +319,13 @@ footer {
   font-weight: bold;
 }
 .login_vyber a.vybran {
-  color: cornflowerblue;
+  color: #6495ed;
 }
 
 .heslo_div {
   width: calc(100% - 4px);
   background-color: #f4f7fc;
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
   border-radius: 2px;
 }
 .heslo_div div, .heslo_div a {
@@ -319,7 +334,7 @@ footer {
 .heslo_div .sluzba {
   text-align: center;
   font-weight: bold;
-  border-bottom: 1px solid cornflowerblue;
+  border-bottom: 1px solid #6495ed;
   background-color: #e1e9f7;
   position: relative;
 }
@@ -332,12 +347,28 @@ footer {
   display: inline-block;
 }
 .heslo_div .heslo {
-  display: inline-block;
   float: right;
+}
+
+.heslo_div.sdileneheslo {
+  background-color: #f5f5ff;
+  border: 2px solid #3e27ea;
+}
+.heslo_div.sdileneheslo .sluzba {
+  border-bottom-color: #3e27ea;
+  background-color: #e0e0f7;
 }
 
 #detaily > div #jmeno {
   font-style: italic;
+}
+
+#detaily > div.sdileneheslo {
+  background-color: #f5f5ff;
+  border-color: #3e27ea !important;
+}
+#detaily > div.sdileneheslo h3 {
+  border-bottom-color: #3e27ea !important;
 }
 
 .heslo_div:not(:last-of-type) {
@@ -353,7 +384,7 @@ footer {
 }
 #oznameni > div .oznameni {
   padding-block: 0.5em;
-  border-bottom: 1px solid cornflowerblue;
+  border-bottom: 1px solid #6495ed;
 }
 #oznameni > div h4 {
   margin-top: 1em;
@@ -362,9 +393,13 @@ footer {
   margin: 0 !important;
 }
 
+.upozorneniOznameni {
+  border-color: #f1ab58 !important;
+}
+
 .upozorneniCookies {
   background-color: #f4f7fc;
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
 }
 .upozorneniCookies button {
   margin-left: 1em;
@@ -388,7 +423,7 @@ footer {
   margin: 1em;
   min-width: 500px;
   width: max-content;
-  border: 2px solid cornflowerblue;
+  border: 2px solid #6495ed;
   background-color: #e1e9f7;
   border-radius: 2px;
   padding: 1em;
@@ -403,7 +438,7 @@ footer {
 }
 #container div.POPup > div h3 {
   font-weight: bold;
-  border-bottom: 1px solid cornflowerblue;
+  border-bottom: 1px solid #6495ed;
   margin: auto;
   margin-bottom: 0.5em;
   padding-block: 0.5em;

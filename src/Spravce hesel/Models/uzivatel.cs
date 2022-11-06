@@ -15,5 +15,8 @@ namespace Spravce_hesel.Models
 
         [Required]
         public string Heslo { get; set; }
+
+        [Required]
+        public byte[] IV { get; set; } //slouzi k sifrovani
     }
 }

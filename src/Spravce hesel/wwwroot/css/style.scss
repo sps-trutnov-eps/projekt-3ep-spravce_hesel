@@ -5,11 +5,15 @@
 @charset "UTF-8";
 
 // Barevné schéma
-$barva-text: black;
-$barva-text-sekundar: cornflowerblue;
-$barva-pozadi: white;
+$barva-text: #000000;
+$barva-text-sekundar: #6495ed;
+$barva-sdilene-heslo: #3e27ea;
+$barva-oznameni: #f1ab58;
+$barva-pozadi: #ffffff;
 $barva-pozadi-sekundar: #f4f7fc;
-$barva-pozadi-tercial: #e1e9f7;
+$barva-pozadi-heslo: #e1e9f7;
+$barva-pozadi-sdilene-heslo: #f5f5ff;
+$barva-pozadi-sdilene-heslo2: #e0e0f7;
 $barva-zesednuti: #00000033;
 
 // Základní elementy
@@ -216,7 +220,7 @@ footer {
         text-align: center;
         font-weight: bold;
         border-bottom: 1px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-tercial;
+        background-color: $barva-pozadi-heslo;
         position: relative;
 
         span {
@@ -231,14 +235,32 @@ footer {
     }
 
     .heslo {
-        display: inline-block;
         float: right;
+    }
+}
+
+.heslo_div.sdileneheslo {
+    background-color: $barva-pozadi-sdilene-heslo;
+    border: 2px solid $barva-sdilene-heslo;
+
+    .sluzba {
+        border-bottom-color: $barva-sdilene-heslo;
+        background-color: $barva-pozadi-sdilene-heslo2;
     }
 }
 
 #detaily > div {
     #jmeno {
         font-style: italic;
+    }
+}
+
+#detaily > div.sdileneheslo {
+    background-color: $barva-pozadi-sdilene-heslo;
+    border-color: $barva-sdilene-heslo !important;
+
+    h3 {
+        border-bottom-color: $barva-sdilene-heslo !important;
     }
 }
 
@@ -269,6 +291,9 @@ footer {
     }
 }
 
+.upozorneniOznameni {
+    border-color: $barva-oznameni !important;
+}
 // Upozornění na cookies
 .upozorneniCookies {
     background-color: $barva-pozadi-sekundar;
@@ -299,7 +324,7 @@ footer {
         min-width: 500px;
         width: max-content;
         border: 2px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-tercial;
+        background-color: $barva-pozadi-heslo;
         border-radius: 2px;
         padding: 1em;
         text-align: center;
