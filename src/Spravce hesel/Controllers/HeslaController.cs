@@ -389,7 +389,7 @@ namespace Spravce_hesel.Controllers
 
                     if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() == Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault())
                     {
-                        ModelState.AddModelError("Email", "◀ Nemůžete sdílet heslo sami se sebou.");
+                        ModelState.AddModelError("Email", "Nemůžete sdílet heslo sami se sebou.");
                     }
 
                     if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
