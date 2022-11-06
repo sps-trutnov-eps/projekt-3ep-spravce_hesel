@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Data;
 using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Spravce_hesel.Controllers
 {
@@ -80,6 +82,8 @@ namespace Spravce_hesel.Controllers
         [HttpPost]
         public IActionResult Registrace(Uzivatel obj, string kontrola_hesla)
         {
+            ModelState.Clear();
+
             IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
@@ -117,6 +121,11 @@ namespace Spravce_hesel.Controllers
                         kontrola = true;
                     }
                 }
+            }
+
+            using (Aes aesAlg = Aes.Create())
+            {
+                obj.IV = aesAlg.IV;
             }
 
             if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
