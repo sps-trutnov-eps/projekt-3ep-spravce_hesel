@@ -48,8 +48,6 @@ namespace Spravce_hesel.Controllers
                             desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV)
                         };
 
-
-
                         desifrovano.Add(_desforave);
                     }
 
@@ -408,7 +406,7 @@ namespace Spravce_hesel.Controllers
                         {
                             PuvodniHesloID = h.ID,
                             ZakladatelID = (int)uzivatelID,
-                            ZakladatelJmeno = u2.Jmeno,
+                            ZakladatelJmeno = u2.Jmeno + " (" + u2.Email + ")",
                             UzivatelskeID = u.Id,
                             Sluzba = h.Sluzba,
                             Jmeno = h.Jmeno,
