@@ -1,10 +1,15 @@
 @{
     string BarevnyMotiv = "svetly";
-    if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+    int? uzivatel = null;
+
+    if (HttpContextAccessor.HttpContext != null)
     {
-        BarevnyMotiv = "tmavy";
+        if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+        {
+            BarevnyMotiv = "tmavy";
+        }
+        uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
     }
-    int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 }
 
 <nav>

@@ -9,7 +9,7 @@ builder.Services.AddDbContext<Spravce_hesel.Data.Spravce_heselData>(options =>
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession(options =>
 {
-    options.Cookie.Name = ".Spravce_hesel";
+    options.Cookie.Name = ".SpravceHesel";
     options.Cookie.IsEssential = true;
     options.IdleTimeout = TimeSpan.FromMinutes(15);
 });
@@ -20,10 +20,10 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseExceptionHandler("/Home/Error");
 }
 
-app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+app.UseExceptionHandler("/Error");
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

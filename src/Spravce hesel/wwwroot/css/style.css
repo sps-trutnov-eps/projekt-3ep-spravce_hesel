@@ -85,8 +85,6 @@
 .tmavy #nacitani div {
   border: 2px solid lightblue;
   background-color: #172e34;
-  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
-  animation: nacitaniPozadi 6s infinite linear;
 }
 
 header {
@@ -184,8 +182,6 @@ header nav div.item:hover div.submenu {
     min-width: 0 !important;
     height: calc(100vh - 4em - 4px) !important;
     overflow-wrap: break-word;
-    hyphens: manual;
-    -webkit-hyphens: manual;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -330,10 +326,10 @@ span.chyba:not(:empty):before {
 .chyba {
   color: #6495ed;
 }
-.chyba h2 {
+.chyba * {
   font-size: 2em;
 }
-.chyba div {
+.chyba .icon-error {
   font-size: 4em;
 }
 
@@ -537,7 +533,6 @@ footer {
   font-size: 1.5em;
   background-color: #e1e9f7;
   border: 2px solid #6495ed;
-  border-image: linear-gradient(to right, #6495ed, #3e27ea, #6495ed) 1;
   padding: 1em;
   border-radius: 2px;
 }

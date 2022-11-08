@@ -128,7 +128,5 @@ $barva-zesednuti: #00000077;
     #nacitani div {
         border: 2px solid $barva-text-sekundar;
         background-color: $barva-pozadi-heslo;
-        border-image: linear-gradient(to right, $barva-sdilene-heslo, $barva-text-sekundar, $barva-sdilene-heslo) 1;
-        animation: nacitaniPozadi 6s infinite linear;
     }
 }

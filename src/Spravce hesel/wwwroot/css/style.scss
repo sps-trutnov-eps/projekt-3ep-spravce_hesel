@@ -162,11 +162,11 @@ span.chyba:not(:empty):before {
 .chyba {
     color: $barva-text-sekundar;
 
-    h2 {
+    * {
         font-size: 2em;
     }
 
-    div {
+    .icon-error {
         font-size: 4em;
     }
 }
@@ -405,7 +405,6 @@ footer {
         font-size: 1.5em;
         background-color: $barva-pozadi-heslo;
         border: 2px solid $barva-text-sekundar;
-        border-image: linear-gradient(to right, $barva-text-sekundar, $barva-sdilene-heslo, $barva-text-sekundar) 1;
         padding: 1em;
         border-radius: 2px;
     }
