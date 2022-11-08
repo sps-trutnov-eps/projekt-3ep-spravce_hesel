@@ -215,8 +215,21 @@ namespace Spravce_hesel.Controllers
                 obj.Jmeno = novejmeno;
                 obj.Id = prihlaseny_uzivatel.Id;
                 obj.Heslo = prihlaseny_uzivatel.Heslo;
+                obj.IV = prihlaseny_uzivatel.IV;
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.Uzivatele.Add(obj);
+
+                List<SdileneHeslo> sdilenaHesla = Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == obj.Id).ToList();
+                Databaze.RemoveRange(sdilenaHesla);
+                Databaze.SaveChanges();
+                
+                foreach (SdileneHeslo sh in sdilenaHesla)
+                {
+                    sh.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")";
+                    sh.Id = 0;
+                    Databaze.Sdilena_hesla.Add(sh);
+                }
+
                 Databaze.SaveChanges();
 
                 HttpContext.Session.SetInt32("ID", obj.Id);
