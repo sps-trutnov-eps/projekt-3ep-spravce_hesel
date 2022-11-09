@@ -34,14 +34,14 @@ function vyzadatHeslo(id, norm = true) {
                 document.getElementById("jmeno").innerHTML = res.value.jmeno;
 
             document.getElementById("heslo").innerHTML = res.value.desifrovano;
-            document.getElementById("sdileno_od").innerHTML = "";
+            document.getElementById("sdilenoOd").innerHTML = "";
 
             if (norm == true) {
                 document.getElementById("detaily").firstElementChild.className = "";
             }
             else {
                 document.getElementById("detaily").firstElementChild.className = "sdileneheslo";
-                document.getElementById("sdileno_od").innerHTML = "<i>Sdíleno od " + res.value.zakladatelJmeno + "</i>";
+                document.getElementById("sdilenoOd").innerHTML = "<i>Sdíleno od " + res.value.zakladatelJmeno + "</i>";
             }
 
         }

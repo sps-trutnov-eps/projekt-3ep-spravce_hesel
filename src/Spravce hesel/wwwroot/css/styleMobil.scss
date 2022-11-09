@@ -18,7 +18,7 @@
         > div {
             width: calc(100vw - 4em - 4px) !important;
             min-width: 0 !important;
-            height: calc(100vh - 4em - 4px) !important;
+            max-height: calc(100vh - 4em - 4px) !important;
             overflow-wrap: break-word;
         }
     }
@@ -37,5 +37,9 @@
 
     span.chyba:empty {
         display: none;
+    }
+
+    header nav div.item:hover div.submenu {
+        display: none !important;
     }
 }
