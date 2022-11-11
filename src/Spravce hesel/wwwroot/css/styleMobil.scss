@@ -1,0 +1,45 @@
+﻿@media screen and (max-width: 600px) {
+    main article.split section {
+        width: initial;
+        display: initial;
+    }
+
+    header nav {
+        span.nav-vlevo h1 a span {
+            display: none;
+        }
+    }
+
+    footer span {
+        display: none;
+    }
+
+    #container div.POPup {
+        > div {
+            width: calc(100vw - 4em - 4px) !important;
+            min-width: 0 !important;
+            max-height: calc(100vh - 4em - 4px) !important;
+            overflow-wrap: break-word;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    span.chyba {
+        display: block;
+        position: initial !important;
+        padding: .5em !important;
+        margin: 1em auto 0 auto !important;
+        line-height: initial !important;
+        height: initial !important;
+        width: max-content;
+    }
+
+    span.chyba:empty {
+        display: none;
+    }
+
+    header nav div.item:hover div.submenu {
+        display: none !important;
+    }
+}

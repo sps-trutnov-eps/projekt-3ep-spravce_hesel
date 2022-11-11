@@ -6,8 +6,6 @@ using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Spravce_hesel.Controllers
 {
@@ -28,7 +26,7 @@ namespace Spravce_hesel.Controllers
             {
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
-                    return RedirectToAction("Error", "Home", 404);
+                    return RedirectToAction("Zobrazeni", "Hesla");
                 }
             }
 
@@ -42,15 +40,15 @@ namespace Spravce_hesel.Controllers
 
             Uzivatel? prihlasujiciseuzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
 
-            if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
+            if (prihlasujiciseuzivatel == null)
             {
-                ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
+                ModelState.AddModelError("Heslo", "E-Mail a heslo se neshodují");
             }
             else
             {
                 if (BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlasujiciseuzivatel.Heslo) == false)
                 {
-                    ModelState.AddModelError("Heslo", "◀ E-Mail a heslo se neshodují");
+                    ModelState.AddModelError("Heslo", "E-Mail a heslo se neshodují");
                 }
 
                 if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
@@ -74,7 +72,7 @@ namespace Spravce_hesel.Controllers
             {
                 if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
                 {
-                    return RedirectToAction("Error", "Home", 404);
+                    return RedirectToAction("Zobrazeni", "Hesla");
                 }
             }
 
@@ -82,76 +80,71 @@ namespace Spravce_hesel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registrace(Uzivatel obj, string kontrola_hesla)
+        public IActionResult Registrace(Uzivatel obj, string? kontrola_hesla)
         {
             ModelState.Clear();
 
             IEnumerable<Uzivatel> objCategoryList = Databaze.Uzivatele;
 
-            if (obj.Jmeno != null)
+            if (obj == null)
             {
-                string jmeno = obj.Jmeno;
+                return StatusCode(500);
+            }
 
-                if (jmeno.Contains(" "))
-                {
-                    ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
-                }
-            }else
+            obj.Jmeno = obj.Jmeno.Trim();
+
+            if (obj.Jmeno.Length < 4 || obj.Jmeno == null)
             {
-                ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
+                ModelState.AddModelError("Jmeno", "Jméno nesmí obsahovat mezery.");
             }
 
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
             {
-                ModelState.AddModelError("email", "◀ Tento email už existuje");
+                ModelState.AddModelError("email", "Tento email už existuje");
             }
 
-            if (obj.Heslo != kontrola_hesla)
+            if (kontrola_hesla == null || obj.Heslo != kontrola_hesla)
             {
-                ModelState.AddModelError("Heslo", "◀ Hesla se neshodují");
+                ModelState.AddModelError("Heslo", "Hesla se neshodují");
             }
 
-            //foreach (var nah in objCategoryList)
-            //{
-            //    if (BCrypt.Net.BCrypt.Verify(obj.Heslo, nah.Heslo))
-            //    {
-            //        ModelState.AddModelError("Heslo", "◀ Toto heslo používá už uživatel " + nah.Jmeno);
-            //    }
-            //}
-
-            if (obj.Heslo != null && obj.Heslo.Length > 7)
+            if (obj.Heslo == null || obj.Heslo.Length < 8)
+            {
+                ModelState.AddModelError("Heslo", "Heslo musí mít alespoň 8 znaků");
+            }
+            else 
             {
                 obj.Heslo = BCrypt.Net.BCrypt.HashPassword(obj.Heslo);
-            }
 
-            bool kontrola = true;
-            Random randID = new Random();
-            while (kontrola) {
-                obj.Id = randID.Next(1, 1000000);
-                kontrola = false;
-                foreach (var nah in objCategoryList)
-                {
-                    if (nah.Id == obj.Id)
+                bool kontrola = true;
+                Random randID = new Random();
+                while (kontrola) {
+                    obj.Id = randID.Next(1, 1000000);
+                    kontrola = false;
+                    foreach (var nah in objCategoryList)
                     {
-                        kontrola = true;
+                        if (nah.Id == obj.Id)
+                        {
+                            kontrola = true;
+                        }
                     }
                 }
-            }
 
-            using (Aes aesAlg = Aes.Create())
-            {
-                obj.IV = aesAlg.IV;
-            }
+                using (Aes aesAlg = Aes.Create())
+                {
+                    obj.IV = aesAlg.IV;
+                }
 
-            if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
-            {
-                Databaze.Uzivatele.Add(obj);
-                Databaze.SaveChanges();
+                if (ModelState.IsValid && (HttpContext.Session.GetInt32("ID") == null || HttpContext.Session.GetString("Klic") == null))
+                {
+                    Databaze.Uzivatele.Add(obj);
+                    Databaze.SaveChanges();
 
-                HttpContext.Session.SetInt32("ID", obj.Id);
-                HttpContext.Session.SetString("Klic", obj.Heslo);
+                    HttpContext.Session.SetInt32("ID", obj.Id);
+                    HttpContext.Session.SetString("Klic", obj.Heslo);
 
-                return RedirectToAction("Zobrazeni", "Hesla");
+                    return RedirectToAction("Zobrazeni", "Hesla");
+                }
             }
 
             return View();
@@ -172,7 +165,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         // Změna jména
@@ -188,7 +181,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpPost]
@@ -199,7 +192,7 @@ namespace Spravce_hesel.Controllers
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             if (uzivatelID == null)
             {
-                return RedirectToAction("Error", "Home", 404);
+                return StatusCode(401);
             }
 
             Uzivatel? prihlaseny_uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
@@ -208,12 +201,12 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
             {
-                return RedirectToAction("Error", "Home", 404);
+                return StatusCode(401);
             }
 
             if (ModelState.IsValid)
@@ -222,8 +215,21 @@ namespace Spravce_hesel.Controllers
                 obj.Jmeno = novejmeno;
                 obj.Id = prihlaseny_uzivatel.Id;
                 obj.Heslo = prihlaseny_uzivatel.Heslo;
+                obj.IV = prihlaseny_uzivatel.IV;
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.Uzivatele.Add(obj);
+
+                List<SdileneHeslo> sdilenaHesla = Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == obj.Id).ToList();
+                Databaze.RemoveRange(sdilenaHesla);
+                Databaze.SaveChanges();
+                
+                foreach (SdileneHeslo sh in sdilenaHesla)
+                {
+                    sh.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")";
+                    sh.Id = 0;
+                    Databaze.Sdilena_hesla.Add(sh);
+                }
+
                 Databaze.SaveChanges();
 
                 HttpContext.Session.SetInt32("ID", obj.Id);
@@ -248,7 +254,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpPost]
@@ -259,7 +265,7 @@ namespace Spravce_hesel.Controllers
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             if (uzivatelID == null)
             {
-                return RedirectToAction("Error", "Home", 404);
+                return StatusCode(401);
             }
 
             Uzivatel? prihlaseny_uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
@@ -268,17 +274,17 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(obj.Heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
             {
-                return RedirectToAction("Error", "Home", 404);
+                StatusCode(500);
             }
 
             if (noveheslo != noveheslokontrola)
             {
-                ModelState.AddModelError("Heslo", "◀ Hesla se neshodují");
+                ModelState.AddModelError("Heslo", "Hesla se neshodují");
             }
 
             if (noveheslo != null && noveheslo.Length > 7)
@@ -317,7 +323,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpPost]
@@ -328,7 +334,7 @@ namespace Spravce_hesel.Controllers
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             if (uzivatelID == null)
             {
-                return RedirectToAction("Error", "Home", 404);
+                return StatusCode(401);
             }
 
             Uzivatel? prihlaseny_uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
@@ -337,12 +343,12 @@ namespace Spravce_hesel.Controllers
             {
                 if (!BCrypt.Net.BCrypt.Verify(heslo, prihlaseny_uzivatel.Heslo))
                 {
-                    ModelState.AddModelError("Heslo", "◀ Špatné heslo");
+                    ModelState.AddModelError("Heslo", "Špatné heslo");
                 }
             }
             else
             {
-                return RedirectToAction("Error", "Home", 404);
+                return StatusCode(500);
             }
 
             if (ModelState.IsValid)

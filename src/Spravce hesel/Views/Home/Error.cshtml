@@ -1,8 +1,30 @@
-@{
-    ViewData["Title"] = "Chyba";
-}
+@model int;
+@using Microsoft.AspNetCore.WebUtilities
 
 <article class="center chyba">
-    <h2>Nastala chyba</h2>
-    <div class="icon-error"><br />@ViewData["Chyba"]</div>
+    <h2>Jejda!<br />Tohle se nemìlo stát!</h2>
+    <div class="icon-error"><br />@Model</div>
+    <div>
+        @switch (Model)
+        {
+            case 400:
+                <text>Neplatný požadavek.</text>
+                break;
+            case 401:
+                <text>Neautorizovaný pøístup.</text>
+                break;
+            case 403:
+                <text>Zakázaný pøístup.</text>
+                break;
+            case 404:
+                <text>Stránka nenalezena.</text>
+                break;
+            case 500:
+                <text>Interní chyba.</text>
+                break;
+            default:
+                <text>@ReasonPhrases.GetReasonPhrase(Model)</text>
+                break;
+        }
+    </div>
 </article>

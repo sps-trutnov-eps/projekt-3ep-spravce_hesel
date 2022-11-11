@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 .tmavy {
   background-color: #252931;
@@ -6,14 +7,17 @@
 .tmavy a {
   color: #c4c2c2;
 }
-.tmavy .login_vyber a.vybran {
+.tmavy .loginVyber a.vybran {
   color: lightblue;
 }
 .tmavy header {
-  border-bottom-color: lightblue;
+  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
+}
+.tmavy span.nav-vlevo .icon-key:before {
+  color: lightblue;
 }
 .tmavy footer {
-  border-top-color: lightblue;
+  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
 }
 .tmavy button {
   background-color: #4a4a4b;
@@ -41,19 +45,19 @@
 .tmavy .chyba {
   color: lightblue;
 }
-.tmavy .heslo_div {
+.tmavy .zobrazeniHeslo {
   border-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .heslo_div .sluzba {
+.tmavy .zobrazeniHeslo .sluzba {
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .heslo_div.sdileneheslo {
+.tmavy .zobrazeniHeslo.sdileneheslo {
   background-color: #172534;
   border-color: #5b8dd7;
 }
-.tmavy .heslo_div.sdileneheslo .sluzba {
+.tmavy .zobrazeniHeslo.sdileneheslo .sluzba {
   border-bottom-color: #5b8dd7;
   background-color: #172534;
 }
@@ -71,17 +75,22 @@
 .tmavy #container div.POPup h3 {
   border-bottom-color: lightblue;
 }
-.tmavy #oznameni .oznameni {
+.tmavy #container div.POPup#oznameni .oznameni {
   border-bottom-color: lightblue;
 }
 .tmavy .upozorneniCookies {
   background-color: #172e34;
   border-color: lightblue;
 }
+.tmavy #nacitani div {
+  border: 2px solid lightblue;
+  background-color: #172e34;
+}
 
 header {
   text-align: center;
   border-bottom: 1px solid #6495ed;
+  border-image: linear-gradient(to right, #6495ed, #3e27ea, #6495ed) 1;
 }
 header nav {
   position: relative;
@@ -96,6 +105,14 @@ header nav span.nav-vlevo {
   padding: 0;
   left: 0;
   position: absolute;
+}
+header nav span.nav-vlevo .icon-key:before {
+  color: #6495ed;
+  margin-right: 0.5rem;
+}
+header nav span.nav-vlevo h1 {
+  margin: 0;
+  font-size: 1rem;
 }
 header nav span.nav-vpravo {
   padding: 0;
@@ -116,13 +133,8 @@ header nav div.item div.submenu {
   width: 10em;
   top: 0;
   z-index: 998;
-}
-header nav div.item div.submenu > a {
-  display: block;
-  font-size: 0;
-  height: 2rem;
-  width: 10rem;
-  margin: 0 auto;
+  padding-top: 0.8rem;
+  margin-top: 1.2rem;
 }
 header nav div.item div.submenu > div {
   border: 2px solid #6495ed;
@@ -154,12 +166,41 @@ header nav div.item:hover div.submenu {
   display: block;
 }
 
-html, body, #container {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+@media screen and (max-width: 600px) {
+  main article.split section {
+    width: initial;
+    display: initial;
+  }
+  header nav span.nav-vlevo h1 a span {
+    display: none;
+  }
+  footer span {
+    display: none;
+  }
+  #container div.POPup > div {
+    width: calc(100vw - 4em - 4px) !important;
+    min-width: 0 !important;
+    max-height: calc(100vh - 4em - 4px) !important;
+    overflow-wrap: break-word;
+  }
 }
-
+@media screen and (max-width: 1000px) {
+  span.chyba {
+    display: block;
+    position: initial !important;
+    padding: 0.5em !important;
+    margin: 1em auto 0 auto !important;
+    line-height: initial !important;
+    height: initial !important;
+    width: max-content;
+  }
+  span.chyba:empty {
+    display: none;
+  }
+  header nav div.item:hover div.submenu {
+    display: none !important;
+  }
+}
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
@@ -187,10 +228,10 @@ a {
 }
 
 form input {
-  padding: 20px;
-  margin: 8px 0;
   border: 2px solid #6495ed;
   border-radius: 2px;
+  padding: 20px;
+  margin: 8px 0;
   background-color: #f4f7fc;
   background-size: 1em;
   background-position: 15px 50%;
@@ -232,7 +273,7 @@ form input[type=range]::-moz-range-thumb {
   background-color: #6495ed;
   cursor: pointer;
 }
-form #posuvnikvystup {
+form #posuvnikVystup {
   height: 1em;
   width: 1.1em;
   padding: 0.5em;
@@ -254,16 +295,6 @@ button:hover {
   text-align: center;
 }
 
-span.chyba {
-  position: absolute;
-  height: 60px;
-  line-height: 60px;
-  padding-top: 8px;
-  padding-left: 1rem;
-  color: red !important;
-  font-weight: bold;
-}
-
 article.split section {
   width: calc(50% - 2px);
   display: inline-block;
@@ -272,19 +303,42 @@ article.split section {
   vertical-align: top;
 }
 
+span.chyba {
+  position: absolute;
+  margin-left: 3em;
+  height: 60px;
+  margin-top: 0.4em;
+  line-height: 60px;
+  padding-inline: 0.5em;
+  color: red !important;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+span.chyba:not(:empty) {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+span.chyba:not(:empty):before {
+  content: "◀";
+  position: absolute;
+  left: -1.5em;
+}
+
 .chyba {
   color: #6495ed;
 }
-.chyba h2 {
+.chyba * {
   font-size: 2em;
 }
-.chyba div {
+.chyba .icon-error {
   font-size: 4em;
 }
 
 #container {
   font-family: "Source Sans Pro", sans-serif;
-  min-width: 500px;
+  min-width: 330px;
   max-width: 1000px;
   margin: 0 auto !important;
   position: relative;
@@ -292,6 +346,12 @@ article.split section {
 #container > * {
   padding: 1em;
   width: calc(100% - 2em);
+}
+
+html, body, #container {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 main {
@@ -304,57 +364,59 @@ section:not(:last-of-type) {
 
 footer {
   border-top: 1px solid #6495ed;
+  border-image: linear-gradient(to right, #6495ed, #3e27ea, #6495ed) 1;
   text-align: center;
   position: absolute;
   bottom: 0;
   height: 2em;
   line-height: 2em;
   margin: 0 auto;
-  min-width: calc(500px - 2em);
+  width: 100vw;
   max-width: calc(1000px - 2em);
 }
 
-.login_vyber a {
+.loginVyber a {
   text-decoration: none;
   font-weight: bold;
 }
-.login_vyber a.vybran {
+.loginVyber a.vybran {
   color: #6495ed;
 }
 
-.heslo_div {
-  width: calc(100% - 4px);
-  background-color: #f4f7fc;
+.zobrazeniHeslo {
   border: 2px solid #6495ed;
   border-radius: 2px;
+  width: calc(100% - 4px);
+  background-color: #f4f7fc;
 }
-.heslo_div div, .heslo_div a {
+.zobrazeniHeslo div, .zobrazeniHeslo a {
   padding: 0.5em;
 }
-.heslo_div .sluzba {
+.zobrazeniHeslo .sluzba {
   text-align: center;
   font-weight: bold;
   border-bottom: 1px solid #6495ed;
   background-color: #e1e9f7;
   position: relative;
 }
-.heslo_div .sluzba span {
+.zobrazeniHeslo .sluzba span {
   position: absolute;
   padding: 0;
   right: 0;
 }
-.heslo_div .jmeno {
+.zobrazeniHeslo .jmeno {
   display: inline-block;
 }
-.heslo_div .heslo {
+.zobrazeniHeslo .heslo {
   float: right;
 }
 
-.heslo_div.sdileneheslo {
-  background-color: #f5f5ff;
+.zobrazeniHeslo.sdileneheslo {
   border: 2px solid #3e27ea;
+  border-radius: 2px;
+  background-color: #f5f5ff;
 }
-.heslo_div.sdileneheslo .sluzba {
+.zobrazeniHeslo.sdileneheslo .sluzba {
   border-bottom-color: #3e27ea;
   background-color: #e0e0f7;
 }
@@ -362,7 +424,6 @@ footer {
 #detaily > div #jmeno {
   font-style: italic;
 }
-
 #detaily > div.sdileneheslo {
   background-color: #f5f5ff;
   border-color: #3e27ea !important;
@@ -370,26 +431,32 @@ footer {
 #detaily > div.sdileneheslo h3 {
   border-bottom-color: #3e27ea !important;
 }
+#detaily #sdilenoOd {
+  font-size: 0.75rem;
+}
+#detaily #sdilenoOd:empty {
+  display: none;
+}
 
-.heslo_div:not(:last-of-type) {
+.zobrazeniHeslo:not(:last-of-type) {
   margin-bottom: 2em;
 }
 
-#oznameni {
-  justify-content: end !important;
+#container div.POPup#oznameni {
+  justify-content: end;
 }
-#oznameni > div {
-  height: calc(100vh - 5em);
+#container div.POPup#oznameni > div {
+  height: calc(100vh - 4px - 4em);
   overflow-y: auto;
 }
-#oznameni > div .oznameni {
+#container div.POPup#oznameni > div .oznameni {
   padding-block: 0.5em;
   border-bottom: 1px solid #6495ed;
 }
-#oznameni > div h4 {
+#container div.POPup#oznameni > div h4 {
   margin-top: 1em;
 }
-#oznameni h3 {
+#container div.POPup#oznameni h3 {
   margin: 0 !important;
 }
 
@@ -398,8 +465,9 @@ footer {
 }
 
 .upozorneniCookies {
-  background-color: #f4f7fc;
   border: 2px solid #6495ed;
+  border-radius: 2px;
+  background-color: #f4f7fc;
 }
 .upozorneniCookies button {
   margin-left: 1em;
@@ -415,17 +483,17 @@ footer {
   width: 100vw;
   height: 100vh;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
 }
 #container div.POPup > div {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
   position: relative;
   margin: 1em;
   min-width: 500px;
   width: max-content;
-  border: 2px solid #6495ed;
   background-color: #e1e9f7;
-  border-radius: 2px;
   padding: 1em;
   text-align: center;
 }
@@ -452,6 +520,28 @@ footer {
   display: none !important;
 }
 
+#nacitani {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+#nacitani div {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
+  font-size: 1.5em;
+  background-color: #e1e9f7;
+  padding: 1em;
+}
+
 .pridat form {
   width: 100%;
 }
@@ -466,6 +556,18 @@ footer {
   width: 50%;
   background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
+}
+
+.sdileniUpozorneni {
+  border: 2px solid #f1ab58;
+  border-radius: 2px;
+  padding: 1em;
+  width: max-content;
+  margin: auto;
+  text-align: center;
+}
+.sdileniUpozorneni h3 {
+  margin: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
