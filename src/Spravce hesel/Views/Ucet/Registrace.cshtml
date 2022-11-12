@@ -18,7 +18,7 @@
         <input type="password" asp-for="Heslo" placeholder="Zadejte nové heslo..." required minlength="8"
         oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
         oninput="this.setCustomValidity('')"/><br />
-        <input type="password" name="Kontrola_hesla" placeholder="Znovu pro kontrolu..." required minlength="8"
+        <input type="password" name="kontrolaHesla" placeholder="Znovu pro kontrolu..." required minlength="8"
         oninvalid="this.setCustomValidity('Heslo musí být nejméně 8 znaků dlouhé.')"
         oninput="this.setCustomValidity('')"/>
         <span asp-validation-for="Heslo" class="chyba"></span><br />

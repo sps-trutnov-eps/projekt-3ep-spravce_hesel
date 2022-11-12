@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<Spravce_hesel.Data.Spravce_heselData>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Spravce_heselDB")));
+builder.Services.AddDbContext<Spravce_hesel.Data.SpravceHeselData>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SpravceHesel")));
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession(options =>
