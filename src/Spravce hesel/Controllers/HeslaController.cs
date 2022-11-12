@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Connections.Features;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Spravce_hesel.Controllers
 {
@@ -34,10 +35,38 @@ namespace Spravce_hesel.Controllers
                 {
                     List<Heslo> hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeId == uzivatelId).ToList();
 
-                    List<string> upozorneni = new()
+                    List<string[]> upozorneni = new List<string[]>();
+                    List<string> idHesel = new List<string>();
+                    byte[] klic = Sifrovani.HesloNaKlic(hesloUzivatele);
+
+                    for (int i = 0; i < hesla.Count; i++)
+                    {
+                        for (int l = 0; l < hesla.Count; l++)
                         {
-                            "Upozornění první", "Upozornění druhé", "Ještě udělat jak detekovat podobnost"
-                        };
+                            if (Sifrovani.Desifrovat(hesla[i].Sifra, klic, uzivatel.IV) == Sifrovani.Desifrovat(hesla[l].Sifra, klic, uzivatel.IV) && i != l)
+                            {
+                                if (i < l)
+                                {
+                                    idHesel.Add(i.ToString() + ";" + l.ToString());
+                                }
+                                else
+                                {
+                                    idHesel.Add(l.ToString() + ";" + i.ToString());
+                                }
+                            }
+                        }
+                    }
+
+                    idHesel = idHesel.Distinct().ToList();
+
+
+
+                    foreach (string s in idHesel)
+                    {
+                        string[] jmena = { hesla[int.Parse(s.Substring(0, s.IndexOf(';')))].Jmeno, hesla[int.Parse(s.Substring(s.LastIndexOf(';') + 1))].Jmeno };
+
+                        upozorneni.Add(jmena);
+                    }
 
                     ViewData["Oznameni"] = Databaze.SdilenaHesla.Where(heslo => heslo.UzivatelskeId == uzivatelId)
                         .Where(heslo => heslo.Potvrzeno == false).ToList();
