@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spravce_hesel.Data;
 
@@ -11,11 +10,10 @@ using Spravce_hesel.Data;
 
 namespace Spravce_hesel.Migrations
 {
-    [DbContext(typeof(Spravce_heselData))]
-    [Migration("20221111224231_inti")]
-    partial class inti
+    [DbContext(typeof(SpravceHeselData))]
+    partial class SpravceHeselDataModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,11 +24,14 @@ namespace Spravce_hesel.Migrations
 
             modelBuilder.Entity("Spravce_hesel.Models.Heslo", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Desifrovano")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Hash")
                         .HasColumnType("int");
@@ -45,13 +46,10 @@ namespace Spravce_hesel.Migrations
                     b.Property<string>("Sluzba")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzivatelskeID")
+                    b.Property<int>("UzivatelskeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("desifrovano")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Hesla");
                 });
@@ -64,6 +62,9 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Desifrovano")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DocasnyStringProKlic")
                         .HasColumnType("nvarchar(max)");
 
@@ -73,7 +74,7 @@ namespace Spravce_hesel.Migrations
                     b.Property<bool>("Potvrzeno")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PuvodniHesloID")
+                    b.Property<int>("PuvodniHesloId")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("Sifra")
@@ -83,29 +84,26 @@ namespace Spravce_hesel.Migrations
                     b.Property<string>("Sluzba")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UzivatelskeID")
+                    b.Property<int>("UzivatelskeId")
                         .HasColumnType("int");
 
                     b.Property<string>("UzivatelskeJmeno")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ZakladatelID")
+                    b.Property<int>("ZakladatelId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZakladatelJmeno")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("desifrovano")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("zmeneno")
+                    b.Property<bool>("Zmeneno")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sdilena_hesla");
+                    b.ToTable("SdilenaHesla");
                 });
 
             modelBuilder.Entity("Spravce_hesel.Models.Uzivatel", b =>

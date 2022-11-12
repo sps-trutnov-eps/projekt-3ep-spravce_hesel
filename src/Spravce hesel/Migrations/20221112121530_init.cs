@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Spravce_hesel.Migrations
 {
-    public partial class inti : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,42 +13,42 @@ namespace Spravce_hesel.Migrations
                 name: "Hesla",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UzivatelskeID = table.Column<int>(type: "int", nullable: false),
+                    UzivatelskeId = table.Column<int>(type: "int", nullable: false),
                     Hash = table.Column<int>(type: "int", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hesla", x => x.ID);
+                    table.PrimaryKey("PK_Hesla", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sdilena_hesla",
+                name: "SdilenaHesla",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PuvodniHesloID = table.Column<int>(type: "int", nullable: false),
-                    ZakladatelID = table.Column<int>(type: "int", nullable: false),
+                    PuvodniHesloId = table.Column<int>(type: "int", nullable: false),
+                    ZakladatelId = table.Column<int>(type: "int", nullable: false),
                     ZakladatelJmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UzivatelskeID = table.Column<int>(type: "int", nullable: false),
+                    UzivatelskeId = table.Column<int>(type: "int", nullable: false),
                     UzivatelskeJmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Potvrzeno = table.Column<bool>(type: "bit", nullable: false),
-                    zmeneno = table.Column<bool>(type: "bit", nullable: false),
+                    Zmeneno = table.Column<bool>(type: "bit", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DocasnyStringProKlic = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sdilena_hesla", x => x.Id);
+                    table.PrimaryKey("PK_SdilenaHesla", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +73,7 @@ namespace Spravce_hesel.Migrations
                 name: "Hesla");
 
             migrationBuilder.DropTable(
-                name: "Sdilena_hesla");
+                name: "SdilenaHesla");
 
             migrationBuilder.DropTable(
                 name: "Uzivatele");

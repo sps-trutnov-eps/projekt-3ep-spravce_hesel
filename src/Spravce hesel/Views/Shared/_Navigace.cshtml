@@ -1,12 +1,12 @@
 @{
-    string BarevnyMotiv = "svetly";
+    string barevnyMotiv = "svetly";
     int? uzivatel = null;
 
     if (HttpContextAccessor.HttpContext != null)
     {
         if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
         {
-            BarevnyMotiv = "tmavy";
+            barevnyMotiv = "tmavy";
         }
         uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
     }
@@ -37,7 +37,7 @@
     }
 
     <span class="nav-vpravo">
-        @if (BarevnyMotiv == "svetly")
+        @if (barevnyMotiv == "svetly")
         {
             <div class="item item-icon">
                 <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>

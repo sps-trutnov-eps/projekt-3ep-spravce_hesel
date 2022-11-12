@@ -49,7 +49,7 @@
             {
                 <div class="zobrazeniHeslo">
                     <div class="sluzba">
-                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.ID)">
+                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.Id)">
                             @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
                             {
                                 <i>Neznámá služba</i>
@@ -60,9 +60,9 @@
                             }
                         </a>
                         <span>
-                            <a class="icon-share" title="Sdílet heslo" href="/Hesla/Sdileni/@heslo.ID"></a>
-                            <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.ID"></a>
-                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.ID)"></a>
+                            <a class="icon-share" title="Nastavení sdílení" href="/Hesla/Sdileni/@heslo.Id"></a>
+                            <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.Id"></a>
+                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.Id)"></a>
                         </span>
                     </div>
                     <div class="jmeno">

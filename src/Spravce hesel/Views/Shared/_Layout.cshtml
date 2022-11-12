@@ -1,12 +1,12 @@
 @{
     int? uzivatel = null;
     string? souhlas = null;
-    string BarevnyMotiv = "svetly";
+    string barevnyMotiv = "svetly";
     if (HttpContextAccessor.HttpContext != null)
     {
         if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
         {
-            BarevnyMotiv = "tmavy";
+            barevnyMotiv = "tmavy";
         }
         uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 
@@ -27,7 +27,7 @@
         <link rel="icon" type="image/svg" href="~/favicon.svg" />
     </head>
 
-    <body class="@BarevnyMotiv">
+    <body class="@barevnyMotiv">
         <div id="container">
             <header>
                 <partial name="_Navigace" />

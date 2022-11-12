@@ -8,16 +8,16 @@ namespace Spravce_hesel.Models
         public int Id { get; set; }
 
         [Required]
-        public int PuvodniHesloID { get; set; }
+        public int PuvodniHesloId { get; set; }
 
         [Required]
-        public int ZakladatelID { get; set; }
+        public int ZakladatelId { get; set; }
 
         [Required]
         public string ZakladatelJmeno { get; set; }
 
         [Required]
-        public int UzivatelskeID { get; set; }
+        public int UzivatelskeId { get; set; }
 
         [Required]
         public string UzivatelskeJmeno { get; set; }
@@ -26,12 +26,12 @@ namespace Spravce_hesel.Models
         public bool Potvrzeno { get; set; } = false;
 
         [Required]
-        public bool zmeneno { get; set; } = false;
+        public bool Zmeneno { get; set; } = false;
 
         [Required]
         public byte[] Sifra { get; set; }
 
-        public string? desifrovano { get; set; } = null;
+        public string? Desifrovano { get; set; } = null;
 
         public string? Sluzba { get; set; } = null;
 
