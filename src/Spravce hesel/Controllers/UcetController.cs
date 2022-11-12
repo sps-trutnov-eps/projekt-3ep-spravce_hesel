@@ -92,11 +92,18 @@ namespace Spravce_hesel.Controllers
                 return StatusCode(500);
             }
 
-            obj.Jmeno = obj.Jmeno.Trim();
-
-            if (obj.Jmeno.Length < 4 || obj.Jmeno == null)
+            if (obj.Jmeno != null)
             {
-                ModelState.AddModelError("Jmeno", "Jméno nesmí obsahovat mezery.");
+                string jmeno = obj.Jmeno;
+
+                if (jmeno.Contains(" "))
+                {
+                    ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Jmeno", "◀ Jméno nesmí obsahovat mezery.");
             }
 
             if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() != null)
@@ -356,7 +363,26 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid)
             {
-                Databaze.Hesla.RemoveRange(Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList());
+                List<Heslo> hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
+                if (hesla != null)
+                {
+                    foreach (Heslo h in hesla)
+                    {
+                        Databaze.Hesla.Remove(h);
+                    }
+                }
+
+                Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == uzivatelID).ToList();
+
+                List<SdileneHeslo> sdilenaHesla = Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == uzivatelID).ToList();
+                if (sdilenaHesla != null)
+                {
+                    foreach (var h in sdilenaHesla)
+                    {
+                        Databaze.Sdilena_hesla.Remove(h);
+                    }
+                }
+
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.SaveChanges();
 
