@@ -15,13 +15,24 @@
                 <section>
                     @foreach (string[] pozor in upozorneni)
                     {
+                        @if (pozor[1] != null){
                         <div class="upozorneni">
                             <span class="icon-error ikona"></span>
                             <div>
                                 <h3>Upozornění</h3>
-                                <div>Heslo s uživatelským jménem <i>@pozor[0]</i> se shoduje s heslem s uživatelským jménem <i>@pozor[1]</i>.</div>
+                                <div>Hesla k <i>@pozor[0]</i> a k <i>@pozor[1]</i> jsou shodná!</div>
                             </div>
                         </div>
+                        }else{
+                            <div class="upozorneni">
+                            <span class="icon-error ikona"></span>
+                            <div>
+                                <h3>Upozornění</h3>
+                                <div>Heslo k službě <i>@pozor[0]</i> je krátké!</div>
+                            </div>
+                        </div>
+                        }
+                        
                     }
                 </section>
             }

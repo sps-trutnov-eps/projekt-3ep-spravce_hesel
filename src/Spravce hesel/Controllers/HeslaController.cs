@@ -59,15 +59,20 @@ namespace Spravce_hesel.Controllers
 
                     idHesel = idHesel.Distinct().ToList();
 
-
-
                     foreach (string s in idHesel)
                     {
-                        string[] jmena = { hesla[int.Parse(s.Substring(0, s.IndexOf(';')))].Jmeno, hesla[int.Parse(s.Substring(s.LastIndexOf(';') + 1))].Jmeno };
+                        string[] jmena = { hesla[int.Parse(s.Substring(0, s.IndexOf(';')))].Sluzba, hesla[int.Parse(s.Substring(s.LastIndexOf(';') + 1))].Sluzba };
 
                         upozorneni.Add(jmena);
                     }
 
+                    for (int i = 0; i < hesla.Count; i++)
+                    {
+                        if (Sifrovani.Desifrovat(hesla[i].Sifra, klic, uzivatel.IV).Length < 8)
+                        {
+                            upozorneni.Add(new string[] {hesla[i].Sluzba, null});
+                        }
+                    }
                     ViewData["Oznameni"] = Databaze.SdilenaHesla.Where(heslo => heslo.UzivatelskeId == uzivatelId)
                         .Where(heslo => heslo.Potvrzeno == false).ToList();
                     ViewData["sdilene_hesla"] = Databaze.SdilenaHesla.Where(heslo => heslo.UzivatelskeId == uzivatelId)
