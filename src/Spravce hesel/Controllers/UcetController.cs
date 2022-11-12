@@ -6,6 +6,7 @@ using Spravce_hesel.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
+using Spravce_hesel.Classes;
 
 namespace Spravce_hesel.Controllers
 {
@@ -219,16 +220,8 @@ namespace Spravce_hesel.Controllers
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.Uzivatele.Add(obj);
 
-                List<SdileneHeslo> sdilenaHesla = Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == obj.Id).ToList();
-                Databaze.RemoveRange(sdilenaHesla);
-                Databaze.SaveChanges();
-                
-                foreach (SdileneHeslo sh in sdilenaHesla)
-                {
-                    sh.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")";
-                    sh.Id = 0;
-                    Databaze.Sdilena_hesla.Add(sh);
-                }
+                Databaze.Sdilena_hesla.Where(heslo => heslo.ZakladatelID == obj.Id).ToList()
+                    .ForEach(heslo => heslo.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")");
 
                 Databaze.SaveChanges();
 
@@ -263,7 +256,8 @@ namespace Spravce_hesel.Controllers
             ModelState.Clear();
 
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
-            if (uzivatelID == null)
+            string? uzivatelKlic = HttpContext.Session.GetString("Klic");
+            if (uzivatelID == null || uzivatelKlic == null)
             {
                 return StatusCode(401);
             }
@@ -297,10 +291,19 @@ namespace Spravce_hesel.Controllers
                 obj.Email = prihlaseny_uzivatel.Email;
                 obj.Jmeno = prihlaseny_uzivatel.Jmeno;
                 obj.Id = prihlaseny_uzivatel.Id;
+                obj.IV = prihlaseny_uzivatel.IV;
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.Uzivatele.Add(obj);
                 Databaze.SaveChanges();
 
+                byte[] klic = Sifrovani.HesloNaKlic(uzivatelKlic);
+                byte[] klicNovy = Sifrovani.HesloNaKlic(noveheslo);
+                Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == obj.Id).ToList()
+                    .ForEach(heslo => heslo.Sifra = Sifrovani.Zasifrovat(Sifrovani.Desifrovat(heslo.Sifra, klic, prihlaseny_uzivatel.IV), klicNovy, prihlaseny_uzivatel.IV));
+                // Tohle z nějakého nefunguje, zkuste to někdo. Třeba budete mít štěstí
+
+                Databaze.SaveChanges();
+                
                 HttpContext.Session.SetInt32("ID", obj.Id);
                 HttpContext.Session.SetString("Klic", obj.Heslo);
 
@@ -353,15 +356,7 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid)
             {
-                List<Heslo> hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-                if (hesla != null)
-                {
-                    foreach (Heslo h in hesla)
-                    {
-                        Databaze.Hesla.Remove(h);
-                    }
-                }
-
+                Databaze.Hesla.RemoveRange(Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList());
                 Databaze.Uzivatele.Remove(prihlaseny_uzivatel);
                 Databaze.SaveChanges();
 

@@ -3,15 +3,35 @@
     ViewData["Title"] = "Moje hesla";
     List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdilene_hesla"];
     List<SdileneHeslo>? oznameni = (List<SdileneHeslo>?)ViewData["oznameni"];
+    List<string>? upozorneni = (List<String>?)ViewData["upozorneni"];
 }
 
 <article>
     <h2>Moje hesla</h2>
+    
+        @{
+            @if (upozorneni != null && upozorneni.Count != 0)
+            {
+                <section>
+                    @foreach (string pozor in upozorneni)
+                    {
+                        <div class="upozorneni">
+                            <span class="icon-error ikona"></span>
+                            <div>
+                                <h3>Upozornění</h3>
+                                <div>@pozor</div>
+                            </div>
+                        </div>
+                    }
+                </section>
+            }
+        }
+
     <p class="center">
         <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Přidat heslo</button>
         @if (oznameni != null)
         {
-            if (oznameni.Count == 0)
+            @if (oznameni.Count == 0)
             {
                 <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
             }

@@ -34,29 +34,20 @@ namespace Spravce_hesel.Controllers
                 {
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-                    List<Heslo> desifrovano = new();
 
-                    foreach (Heslo heslo in Hesla)
-                    {
-                        Heslo _desforave = new()
-                        {
-                            ID = heslo.ID,
-                            UzivatelskeID = heslo.UzivatelskeID,
-                            Sluzba = heslo.Sluzba,
-                            Jmeno = heslo.Jmeno,
-                            Hash = heslo.Hash,
-                            desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV)
-                        };
+                    List<string> upozorneni = new();
+                    upozorneni.Add("Upozornění první");
+                    upozorneni.Add("Upozornění druhé");
+                    upozorneni.Add("Ještě udělat jak detekovat podobnost");
 
-                        desifrovano.Add(_desforave);
-                    }
 
                     ViewData["Oznameni"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
                         .Where(heslo => heslo.Potvrzeno == false).ToList();
                     ViewData["sdilene_hesla"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
                         .Where(heslo => heslo.Potvrzeno == true).ToList();
+                    ViewData["upozorneni"] = upozorneni;
 
-                    return View(desifrovano);
+                    return View(Hesla);
                 }
             }
             return StatusCode(401);
@@ -134,8 +125,6 @@ namespace Spravce_hesel.Controllers
                     }
                     else if (ModelState.IsValid)
                     {
-                        int delka = heslo_uzivatele.Length;
-
                         byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
 
                         int hash = heslo.GetHashCode();
@@ -224,9 +213,14 @@ namespace Spravce_hesel.Controllers
                     {
                         byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                         heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
+
+                        List<string> sdilenoPro = new();
+                        Databaze.Sdilena_hesla.Where(hesl => hesl.PuvodniHesloID == id).ToList().ForEach(hesl => sdilenoPro.Add(hesl.UzivatelskeJmeno));
+                        ViewData["sdilenoPro"] = sdilenoPro.Distinct().ToList();
+
+                        return View(heslo);
                     }
 
-                    return View(heslo);
                 }
             }
 
@@ -298,6 +292,7 @@ namespace Spravce_hesel.Controllers
                             ZakladatelID = heslo.ZakladatelID,
                             ZakladatelJmeno = heslo.ZakladatelJmeno,
                             UzivatelskeID = heslo.UzivatelskeID,
+                            UzivatelskeJmeno = heslo.UzivatelskeJmeno,
                             Potvrzeno = true,
                             Sifra = Sifrovani.Zasifrovat(desifrovane, klic, uzivatel.IV),
                             Sluzba = heslo.Sluzba,
@@ -346,6 +341,7 @@ namespace Spravce_hesel.Controllers
                 && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
             {
                 ViewData["id"] = id;
+                ViewData["sdileneHesla"] = Databaze.Sdilena_hesla.Where(heslo => heslo.PuvodniHesloID == id).ToList();
                 return View();
             }
             return StatusCode(401);
@@ -402,6 +398,7 @@ namespace Spravce_hesel.Controllers
                             ZakladatelID = (int)uzivatelID,
                             ZakladatelJmeno = u2.Jmeno + " (" + u2.Email + ")",
                             UzivatelskeID = u.Id,
+                            UzivatelskeJmeno = u.Jmeno + " (" + u.Email + ")",
                             Sluzba = h.Sluzba,
                             Jmeno = h.Jmeno,
                             Sifra = Sifrovani.Zasifrovat(desifrovano, klic2, u.IV),
