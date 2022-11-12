@@ -12,23 +12,23 @@ namespace Spravce_hesel.Classes
     {
         //kod prevat z https://learn.microsoft.com/cs-cz/dotnet/api/system.security.cryptography.aes?view=net-6.0
 
-        public static byte[] Zasifrovat(string plainText, byte[] Key, byte[] IV)
+        public static byte[] Zasifrovat(string plainText, byte[] key, byte[] iv)
         {
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
                 throw new ArgumentNullException("plainText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (key == null || key.Length <= 0)
+                throw new ArgumentNullException("key");
+            if (iv == null || iv.Length <= 0)
+                throw new ArgumentNullException("iv");
             byte[] encrypted;
 
             // Create an Aes object
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
 
                 // Create an encryptor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
@@ -52,15 +52,15 @@ namespace Spravce_hesel.Classes
             return encrypted;
         }
 
-        public static string Desifrovat(byte[] cipherText, byte[] Key, byte[] IV)
+        public static string Desifrovat(byte[] cipherText, byte[] key, byte[] iv)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
                 throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (key == null || key.Length <= 0)
+                throw new ArgumentNullException("key");
+            if (iv == null || iv.Length <= 0)
+                throw new ArgumentNullException("iv");
 
             // Declare the string used to hold
             // the decrypted text.
@@ -70,8 +70,8 @@ namespace Spravce_hesel.Classes
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
 
                 // Create a decryptor to perform the stream transform.
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);

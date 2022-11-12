@@ -3,15 +3,35 @@
     ViewData["Title"] = "Moje hesla";
     List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdilene_hesla"];
     List<SdileneHeslo>? oznameni = (List<SdileneHeslo>?)ViewData["oznameni"];
+    List<string>? upozorneni = (List<String>?)ViewData["upozorneni"];
 }
 
 <article>
     <h2>Moje hesla</h2>
+    
+        @{
+            @if (upozorneni != null && upozorneni.Count != 0)
+            {
+                <section>
+                    @foreach (string pozor in upozorneni)
+                    {
+                        <div class="upozorneni">
+                            <span class="icon-error ikona"></span>
+                            <div>
+                                <h3>Upozornění</h3>
+                                <div>@pozor</div>
+                            </div>
+                        </div>
+                    }
+                </section>
+            }
+        }
+
     <p class="center">
         <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Přidat heslo</button>
         @if (oznameni != null)
         {
-            if (oznameni.Count == 0)
+            @if (oznameni.Count == 0)
             {
                 <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
             }
@@ -29,7 +49,7 @@
             {
                 <div class="zobrazeniHeslo">
                     <div class="sluzba">
-                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.ID)">
+                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.Id)">
                             @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
                             {
                                 <i>Neznámá služba</i>
@@ -40,9 +60,9 @@
                             }
                         </a>
                         <span>
-                            <a class="icon-share" title="Sdílet heslo" href="/Hesla/Sdileni/@heslo.ID"></a>
-                            <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.ID"></a>
-                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.ID)"></a>
+                            <a class="icon-share" title="Nastavení sdílení" href="/Hesla/Sdileni/@heslo.Id"></a>
+                            <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.Id"></a>
+                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.Id)"></a>
                         </span>
                     </div>
                     <div class="jmeno">

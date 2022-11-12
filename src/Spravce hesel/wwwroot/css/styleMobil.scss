@@ -22,6 +22,10 @@
             overflow-wrap: break-word;
         }
     }
+
+    .upozorneni {
+        grid-template-columns: 12% 88% !important;
+    }
 }
 
 @media screen and (max-width: 1000px) {

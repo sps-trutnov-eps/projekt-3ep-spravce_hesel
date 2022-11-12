@@ -1,18 +1,35 @@
-@model Heslo
+@model Heslo;
 @{
     ViewData["Title"] = "Upravit heslo";
+    string? sdilenoPro = (string?)ViewData["sdilenoPro"];
+}
+
+@{
+    @if (sdilenoPro != null)
+    {
+        <article>
+            <section class="upozorneni">
+                <span class="icon-error ikona"></span>
+                <div>
+                    <h3>Upozornění</h3>
+                    <div>Toto heslo již sdílíte s <i>@sdilenoPro</i></div>
+                </div>
+            </section>
+        </article>
+    }
 }
 
 <article class="pridat split">
     <h2>Upravit záznam hesla</h2>
+    
     <section>
         <h3>Informace o záznamu</h3>
-        <form asp-action="Upravit" asp-route-id="@Model.ID" method="post" onkeydown="return event.key != 'Enter';">
+        <form href="/Hesla/Upravit/Model.Id" method="post" onkeydown="return event.key != 'Enter';">
             <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" value="@Model.Sluzba"/><br />
             <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" value="@Model.Jmeno"/><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.Sifra" required />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.Desifrovano" required />
             <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
-            <input value="Přidat záznam" type="submit"/>
+            <input value="Upravit záznam" type="submit"/>
         </form>
     </section>
 

@@ -83,8 +83,15 @@
   border-color: lightblue;
 }
 .tmavy #nacitani div {
-  border: 2px solid lightblue;
+  border-color: lightblue;
   background-color: #172e34;
+}
+.tmavy .upozorneni {
+  border-color: #f1ab58;
+  background-color: rgba(58, 34, 5, 0.3019607843);
+}
+.tmavy .upozorneni .ikona {
+  border-right-color: #f1ab58;
 }
 
 header {
@@ -183,6 +190,9 @@ header nav div.item:hover div.submenu {
     max-height: calc(100vh - 4em - 4px) !important;
     overflow-wrap: break-word;
   }
+  .upozorneni {
+    grid-template-columns: 12% 88% !important;
+  }
 }
 @media screen and (max-width: 1000px) {
   span.chyba {
@@ -214,7 +224,6 @@ h1, h2 {
 
 h3 {
   font-size: 1.5rem;
-  margin-bottom: 0;
 }
 
 h4, h5, h6 {
@@ -359,7 +368,7 @@ main {
 }
 
 section:not(:last-of-type) {
-  padding-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 footer {
@@ -558,16 +567,38 @@ footer {
   padding-left: 40px;
 }
 
-.sdileniUpozorneni {
+.upozorneni {
   border: 2px solid #f1ab58;
   border-radius: 2px;
-  padding: 1em;
-  width: max-content;
-  margin: auto;
-  text-align: center;
+  padding-block: 1em;
+  margin-block: 1em;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 5% 95%;
+  background-color: rgba(255, 138, 0, 0.1215686275);
 }
-.sdileniUpozorneni h3 {
-  margin: 0;
+.upozorneni .ikona {
+  border-right: 1px solid #f1ab58;
+  grid-column: 1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upozorneni .ikona * {
+  padding: 0;
+}
+.upozorneni > div {
+  grid-column: 2;
+  padding-inline: 1em;
+}
+.upozorneni > div h3 {
+  grid-column: 2;
+  margin: 0 0 0.5em 0;
+}
+
+.upozorneniHesla:last-of-type {
+  margin-bottom: 2em;
 }
 
 /*# sourceMappingURL=style.css.map */

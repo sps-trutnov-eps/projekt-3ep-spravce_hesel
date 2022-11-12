@@ -1,26 +1,30 @@
 @model int;
 @using Microsoft.AspNetCore.WebUtilities
 
+@{
+    ViewData["Title"] = "Chyba";
+}
+
 <article class="center chyba">
-    <h2>Jejda!<br />Tohle se nemìlo stát!</h2>
+    <h2>Jejda!<br />Tohle se nemÄ›lo stÃ¡t!</h2>
     <div class="icon-error"><br />@Model</div>
     <div>
         @switch (Model)
         {
             case 400:
-                <text>Neplatnı poadavek.</text>
+                <text>NeplatnÃ½ poÅ¾adavek.</text>
                 break;
             case 401:
-                <text>Neautorizovanı pøístup.</text>
+                <text>NeautorizovanÃ½ pÅ™Ã­stup.</text>
                 break;
             case 403:
-                <text>Zakázanı pøístup.</text>
+                <text>ZakÃ¡zanÃ½ pÅ™Ã­stup.</text>
                 break;
             case 404:
-                <text>Stránka nenalezena.</text>
+                <text>StrÃ¡nka nenalezena.</text>
                 break;
             case 500:
-                <text>Interní chyba.</text>
+                <text>InternÃ­ chyba.</text>
                 break;
             default:
                 <text>@ReasonPhrases.GetReasonPhrase(Model)</text>

@@ -6,19 +6,20 @@
 @charset "UTF-8";
 
 // Barevné schéma
-$barva-text: #000000;
-$barva-text-sekundar: #6495ed;
-$barva-sdilene-heslo: #3e27ea;
-$barva-oznameni: #f1ab58;
-$barva-pozadi: #ffffff;
-$barva-pozadi-sekundar: #f4f7fc;
-$barva-pozadi-heslo: #e1e9f7;
-$barva-pozadi-sdilene-heslo: #f5f5ff;
-$barva-pozadi-sdilene-heslo2: #e0e0f7;
-$barva-zesednuti: #00000066;
+$text: #000000;
+$text-sekundarni: #6495ed;
+$sdilene-heslo: #3e27ea;
+$upozorneni: #f1ab58;
+$upozorneni-pozadi: #ff8a001f;
+$pozadi: #ffffff;
+$pozadi-sekundarni: #f4f7fc;
+$pozadi-heslo: #e1e9f7;
+$pozadi-sdilene-heslo: #f5f5ff;
+$pozadi-sdilene-heslo-header: #e0e0f7;
+$zesednuti: #00000066;
 
 // Mixins
-@mixin border($barva: $barva-text-sekundar) {
+@mixin border($barva: $text-sekundarni) {
     border: 2px solid $barva;
     border-radius: 2px;
 }
@@ -39,7 +40,6 @@ h1, h2 {
 
 h3 {
     font-size: 1.5rem;
-    margin-bottom: 0;
 }
 
 h4, h5, h6 {
@@ -50,7 +50,7 @@ h4, h5, h6 {
 // Odkaz
 a {
     text-decoration: underline solid 1px auto;
-    color: $barva-text;
+    color: $text;
 }
 
 // Form a button
@@ -59,7 +59,7 @@ form {
         @include border;
         padding: 20px;
         margin: 8px 0;
-        background-color: $barva-pozadi-sekundar;
+        background-color: $pozadi-sekundarni;
         background-size: 1em;
         background-position: 15px 50%;
         background-repeat: no-repeat;
@@ -95,7 +95,7 @@ form {
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        background-color: $barva-text-sekundar;
+        background-color: $text-sekundarni;
         cursor: pointer;
     }
 
@@ -103,7 +103,7 @@ form {
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        background-color: $barva-text-sekundar;
+        background-color: $text-sekundarni;
         cursor: pointer;
     }
 
@@ -164,7 +164,7 @@ span.chyba:not(:empty):before {
 
 // Chybová stránka
 .chyba {
-    color: $barva-text-sekundar;
+    color: $text-sekundarni;
 
     * {
         font-size: 2em;
@@ -201,13 +201,13 @@ main {
 }
 
 section:not(:last-of-type) {
-    padding-bottom: 2em;
+    margin-bottom: 2em;
 }
 
 // Footer
 footer {
-    border-top: 1px solid $barva-text-sekundar;
-    border-image: linear-gradient(to right, $barva-text-sekundar, $barva-sdilene-heslo, $barva-text-sekundar) 1;
+    border-top: 1px solid $text-sekundarni;
+    border-image: linear-gradient(to right, $text-sekundarni, $sdilene-heslo, $text-sekundarni) 1;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -226,7 +226,7 @@ footer {
     }
 
     a.vybran {
-        color: $barva-text-sekundar;
+        color: $text-sekundarni;
     }
 }
 
@@ -234,7 +234,7 @@ footer {
 .zobrazeniHeslo {
     @include border;
     width: calc(100% - 4px);
-    background-color: $barva-pozadi-sekundar;
+    background-color: $pozadi-sekundarni;
 
     div, a {
         padding: .5em;
@@ -243,8 +243,8 @@ footer {
     .sluzba {
         text-align: center;
         font-weight: bold;
-        border-bottom: 1px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-heslo;
+        border-bottom: 1px solid $text-sekundarni;
+        background-color: $pozadi-heslo;
         position: relative;
 
         span {
@@ -264,12 +264,12 @@ footer {
 }
 
 .zobrazeniHeslo.sdileneheslo {
-    @include border($barva-sdilene-heslo);
-    background-color: $barva-pozadi-sdilene-heslo;
+    @include border($sdilene-heslo);
+    background-color: $pozadi-sdilene-heslo;
 
     .sluzba {
-        border-bottom-color: $barva-sdilene-heslo;
-        background-color: $barva-pozadi-sdilene-heslo2;
+        border-bottom-color: $sdilene-heslo;
+        background-color: $pozadi-sdilene-heslo-header;
     }
 }
 
@@ -279,11 +279,11 @@ footer {
     }
 
     > div.sdileneheslo {
-        background-color: $barva-pozadi-sdilene-heslo;
-        border-color: $barva-sdilene-heslo !important;
+        background-color: $pozadi-sdilene-heslo;
+        border-color: $sdilene-heslo !important;
 
         h3 {
-            border-bottom-color: $barva-sdilene-heslo !important;
+            border-bottom-color: $sdilene-heslo !important;
         }
     }
 
@@ -310,7 +310,7 @@ footer {
         
         .oznameni {
             padding-block: .5em;
-            border-bottom: 1px solid $barva-text-sekundar;
+            border-bottom: 1px solid $text-sekundarni;
         }
 
         h4 {
@@ -324,13 +324,13 @@ footer {
 }
 
 .upozorneniOznameni {
-    border-color: $barva-oznameni !important;
+    border-color: $upozorneni !important;
 }
 
 // Upozornění na cookies
 .upozorneniCookies {
     @include border;
-    background-color: $barva-pozadi-sekundar;
+    background-color: $pozadi-sekundarni;
 
     button {
         margin-left: 1em;
@@ -348,7 +348,7 @@ footer {
     width: 100vw;
     height: 100vh;
     padding: 0;
-    background-color: $barva-zesednuti;
+    background-color: $zesednuti;
     z-index: 999;
 
     > div {
@@ -357,7 +357,7 @@ footer {
         margin: 1em;
         min-width: 500px;
         width: max-content;
-        background-color: $barva-pozadi-heslo;
+        background-color: $pozadi-heslo;
         padding: 1em;
         text-align: center;
 
@@ -371,7 +371,7 @@ footer {
 
         h3 {
             font-weight: bold;
-            border-bottom: 1px solid $barva-text-sekundar;
+            border-bottom: 1px solid $text-sekundarni;
             margin: auto;
             margin-bottom: .5em;
             padding-block: .5em;
@@ -400,13 +400,13 @@ footer {
     width: 100vw;
     height: 100vh;
     padding: 0;
-    background-color: $barva-zesednuti;
+    background-color: $zesednuti;
     z-index: 999;
 
     div {
         @include border;
         font-size: 1.5em;
-        background-color: $barva-pozadi-heslo;
+        background-color: $pozadi-heslo;
         padding: 1em;
     }
 }
@@ -433,15 +433,40 @@ footer {
     }
 }
 
-// Sdílení hesel
-.sdileniUpozorneni {
-    @include border($barva-oznameni);
-    padding: 1em;
-    width: max-content;
-    margin: auto;
-    text-align: center;
+// Upozornení na nebezpečí
+.upozorneni {
+    @include border($upozorneni);
+    padding-block: 1em;
+    margin-block: 1em;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 5% 95%;
+    background-color: $upozorneni-pozadi;
 
-    h3 {
-        margin: 0;
+    .ikona {
+        border-right: 1px solid $upozorneni;
+        grid-column: 1;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        * {
+            padding: 0;
+        }
     }
+
+    > div {
+        grid-column: 2;
+        padding-inline: 1em;
+
+        h3 {
+            grid-column: 2;
+            margin: 0 0 .5em 0;
+        }
+    }
+}
+
+.upozorneniHesla:last-of-type {
+    margin-bottom: 2em;
 }
