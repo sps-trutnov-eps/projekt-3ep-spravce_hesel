@@ -7,17 +7,17 @@
 .tmavy a {
   color: #c4c2c2;
 }
-.tmavy .login_vyber a.vybran {
+.tmavy .loginVyber a.vybran {
   color: lightblue;
 }
 .tmavy header {
   border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
 }
-.tmavy footer {
-  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
-}
 .tmavy span.nav-vlevo .icon-key:before {
   color: lightblue;
+}
+.tmavy footer {
+  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
 }
 .tmavy button {
   background-color: #4a4a4b;
@@ -45,19 +45,19 @@
 .tmavy .chyba {
   color: lightblue;
 }
-.tmavy .heslo_div {
+.tmavy .zobrazeniHeslo {
   border-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .heslo_div .sluzba {
+.tmavy .zobrazeniHeslo .sluzba {
   border-bottom-color: lightblue;
   background-color: #172e34;
 }
-.tmavy .heslo_div.sdileneheslo {
+.tmavy .zobrazeniHeslo.sdileneheslo {
   background-color: #172534;
   border-color: #5b8dd7;
 }
-.tmavy .heslo_div.sdileneheslo .sluzba {
+.tmavy .zobrazeniHeslo.sdileneheslo .sluzba {
   border-bottom-color: #5b8dd7;
   background-color: #172534;
 }
@@ -83,10 +83,15 @@
   border-color: lightblue;
 }
 .tmavy #nacitani div {
-  border: 2px solid lightblue;
+  border-color: lightblue;
   background-color: #172e34;
-  border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
-  animation: nacitaniPozadi 6s infinite linear;
+}
+.tmavy .upozorneni {
+  border-color: #f1ab58;
+  background-color: rgba(58, 34, 5, 0.3019607843);
+}
+.tmavy .upozorneni .ikona {
+  border-right-color: #f1ab58;
 }
 
 header {
@@ -182,10 +187,11 @@ header nav div.item:hover div.submenu {
   #container div.POPup > div {
     width: calc(100vw - 4em - 4px) !important;
     min-width: 0 !important;
-    height: calc(100vh - 4em - 4px) !important;
+    max-height: calc(100vh - 4em - 4px) !important;
     overflow-wrap: break-word;
-    hyphens: manual;
-    -webkit-hyphens: manual;
+  }
+  .upozorneni {
+    grid-template-columns: 12% 88% !important;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -201,6 +207,9 @@ header nav div.item:hover div.submenu {
   span.chyba:empty {
     display: none;
   }
+  header nav div.item:hover div.submenu {
+    display: none !important;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -215,7 +224,6 @@ h1, h2 {
 
 h3 {
   font-size: 1.5rem;
-  margin-bottom: 0;
 }
 
 h4, h5, h6 {
@@ -229,10 +237,10 @@ a {
 }
 
 form input {
-  padding: 20px;
-  margin: 8px 0;
   border: 2px solid #6495ed;
   border-radius: 2px;
+  padding: 20px;
+  margin: 8px 0;
   background-color: #f4f7fc;
   background-size: 1em;
   background-position: 15px 50%;
@@ -274,7 +282,7 @@ form input[type=range]::-moz-range-thumb {
   background-color: #6495ed;
   cursor: pointer;
 }
-form #posuvnikvystup {
+form #posuvnikVystup {
   height: 1em;
   width: 1.1em;
   padding: 0.5em;
@@ -330,10 +338,10 @@ span.chyba:not(:empty):before {
 .chyba {
   color: #6495ed;
 }
-.chyba h2 {
+.chyba * {
   font-size: 2em;
 }
-.chyba div {
+.chyba .icon-error {
   font-size: 4em;
 }
 
@@ -360,7 +368,7 @@ main {
 }
 
 section:not(:last-of-type) {
-  padding-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 footer {
@@ -376,47 +384,48 @@ footer {
   max-width: calc(1000px - 2em);
 }
 
-.login_vyber a {
+.loginVyber a {
   text-decoration: none;
   font-weight: bold;
 }
-.login_vyber a.vybran {
+.loginVyber a.vybran {
   color: #6495ed;
 }
 
-.heslo_div {
-  width: calc(100% - 4px);
-  background-color: #f4f7fc;
+.zobrazeniHeslo {
   border: 2px solid #6495ed;
   border-radius: 2px;
+  width: calc(100% - 4px);
+  background-color: #f4f7fc;
 }
-.heslo_div div, .heslo_div a {
+.zobrazeniHeslo div, .zobrazeniHeslo a {
   padding: 0.5em;
 }
-.heslo_div .sluzba {
+.zobrazeniHeslo .sluzba {
   text-align: center;
   font-weight: bold;
   border-bottom: 1px solid #6495ed;
   background-color: #e1e9f7;
   position: relative;
 }
-.heslo_div .sluzba span {
+.zobrazeniHeslo .sluzba span {
   position: absolute;
   padding: 0;
   right: 0;
 }
-.heslo_div .jmeno {
+.zobrazeniHeslo .jmeno {
   display: inline-block;
 }
-.heslo_div .heslo {
+.zobrazeniHeslo .heslo {
   float: right;
 }
 
-.heslo_div.sdileneheslo {
-  background-color: #f5f5ff;
+.zobrazeniHeslo.sdileneheslo {
   border: 2px solid #3e27ea;
+  border-radius: 2px;
+  background-color: #f5f5ff;
 }
-.heslo_div.sdileneheslo .sluzba {
+.zobrazeniHeslo.sdileneheslo .sluzba {
   border-bottom-color: #3e27ea;
   background-color: #e0e0f7;
 }
@@ -424,7 +433,6 @@ footer {
 #detaily > div #jmeno {
   font-style: italic;
 }
-
 #detaily > div.sdileneheslo {
   background-color: #f5f5ff;
   border-color: #3e27ea !important;
@@ -432,8 +440,14 @@ footer {
 #detaily > div.sdileneheslo h3 {
   border-bottom-color: #3e27ea !important;
 }
+#detaily #sdilenoOd {
+  font-size: 0.75rem;
+}
+#detaily #sdilenoOd:empty {
+  display: none;
+}
 
-.heslo_div:not(:last-of-type) {
+.zobrazeniHeslo:not(:last-of-type) {
   margin-bottom: 2em;
 }
 
@@ -460,8 +474,9 @@ footer {
 }
 
 .upozorneniCookies {
-  background-color: #f4f7fc;
   border: 2px solid #6495ed;
+  border-radius: 2px;
+  background-color: #f4f7fc;
 }
 .upozorneniCookies button {
   margin-left: 1em;
@@ -481,13 +496,13 @@ footer {
   z-index: 999;
 }
 #container div.POPup > div {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
   position: relative;
   margin: 1em;
   min-width: 500px;
   width: max-content;
-  border: 2px solid #6495ed;
   background-color: #e1e9f7;
-  border-radius: 2px;
   padding: 1em;
   text-align: center;
 }
@@ -529,12 +544,11 @@ footer {
   z-index: 999;
 }
 #nacitani div {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
   font-size: 1.5em;
   background-color: #e1e9f7;
-  border: 2px solid #6495ed;
-  border-image: linear-gradient(to right, #6495ed, #3e27ea, #6495ed) 1;
   padding: 1em;
-  border-radius: 2px;
 }
 
 .pridat form {
@@ -551,6 +565,40 @@ footer {
   width: 50%;
   background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
+}
+
+.upozorneni {
+  border: 2px solid #f1ab58;
+  border-radius: 2px;
+  padding-block: 1em;
+  margin-block: 1em;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 5% 95%;
+  background-color: rgba(255, 138, 0, 0.1215686275);
+}
+.upozorneni .ikona {
+  border-right: 1px solid #f1ab58;
+  grid-column: 1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upozorneni .ikona * {
+  padding: 0;
+}
+.upozorneni > div {
+  grid-column: 2;
+  padding-inline: 1em;
+}
+.upozorneni > div h3 {
+  grid-column: 2;
+  margin: 0 0 0.5em 0;
+}
+
+.upozorneniHesla:last-of-type {
+  margin-bottom: 2em;
 }
 
 /*# sourceMappingURL=style.css.map */

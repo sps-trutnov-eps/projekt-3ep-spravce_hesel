@@ -17,11 +17,11 @@ function zobrazeni_hesla() {
 }
 
 function delka_hesla_aktualizace() {
-    document.getElementById("posuvnikvystup").value = document.getElementById("gen_delka").value;
+    document.getElementById("posuvnikVystup").value = document.getElementById("gen_delka").value;
 }
 
 function delka_hesla_zapis() {
-    document.getElementById("gen_delka").value = document.getElementById("posuvnikvystup").value;
+    document.getElementById("gen_delka").value = document.getElementById("posuvnikVystup").value;
 }
 
 function generace() {

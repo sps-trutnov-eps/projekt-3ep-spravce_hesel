@@ -1,12 +1,17 @@
 @{
-    string BarevnyMotiv = "svetly";
-    if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+    int? uzivatel = null;
+    string? souhlas = null;
+    string barevnyMotiv = "svetly";
+    if (HttpContextAccessor.HttpContext != null)
     {
-        BarevnyMotiv = "tmavy";
-    }
-    int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
+        if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+        {
+            barevnyMotiv = "tmavy";
+        }
+        uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 
-    string souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
+        souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
+    }
 }
 
 <!DOCTYPE html>
@@ -22,7 +27,7 @@
         <link rel="icon" type="image/svg" href="~/favicon.svg" />
     </head>
 
-    <body class="@BarevnyMotiv">
+    <body class="@barevnyMotiv">
         <div id="container">
             <header>
                 <partial name="_Navigace" />

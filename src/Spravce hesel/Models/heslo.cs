@@ -5,10 +5,10 @@ namespace Spravce_hesel.Models
     public class Heslo
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public int UzivatelskeID { get; set; }
+        public int UzivatelskeId { get; set; }
 
         [Required]
         public int Hash { get; set; }
@@ -16,7 +16,7 @@ namespace Spravce_hesel.Models
         [Required]
         public byte[] Sifra { get; set; }
 
-        public string? desifrovano { get; set; } = null;
+        public string? Desifrovano { get; set; } = null;
 
         public string? Sluzba { get; set; } = null;
 

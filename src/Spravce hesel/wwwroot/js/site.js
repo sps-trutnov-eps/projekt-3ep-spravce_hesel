@@ -34,11 +34,16 @@ function vyzadatHeslo(id, norm = true) {
                 document.getElementById("jmeno").innerHTML = res.value.jmeno;
 
             document.getElementById("heslo").innerHTML = res.value.desifrovano;
+            document.getElementById("sdilenoOd").innerHTML = "";
 
-            if (norm == true)
+            if (norm == true) {
                 document.getElementById("detaily").firstElementChild.className = "";
-            else
+            }
+            else {
                 document.getElementById("detaily").firstElementChild.className = "sdileneheslo";
+                document.getElementById("sdilenoOd").innerHTML = "<i>Sdíleno od " + res.value.zakladatelJmeno + "</i>";
+            }
+
         }
     });
 }

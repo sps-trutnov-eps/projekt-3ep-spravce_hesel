@@ -1,18 +1,62 @@
 ﻿@model Uzivatel
 @{
     ViewData["Title"] = "Sdílet heslo";
-    dynamic id = ViewData["id"];
+    dynamic? id = ViewData["id"];
+    List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdileneHesla"];
 }
 
 <article class="center">
     <h2>Sdílet heslo</h2>
+    <section class="upozorneni">
+        <span class="icon-error ikona"></span>
+        <div>
+            <h3>Upozornění</h3>
+            <div>
+                Sdílení hesel může být nebezpečné.<br/>
+                Věnujte tomuto procesu dostatečnou pozornost a zvažte, zda je toto heslo opravdu potřeba sdílet.
+            </div>
+        </div>
+    </section>
+
     <section>
+        <h3>Adresát</h3>
         <form method="post" action="/hesla/Sdileni/@id">
             <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
-            oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
-            oninput="setCustomValidity('')"/>
-            <span asp-validation-for="Email" class="chyba"></span><br />
-            <input type="submit" value="Sdílet" />
+                   oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
+                   oninput="setCustomValidity('')"/>
+            <span asp-validation-for="Email" class="chyba"></span><br/>
+            <input type="submit" value="Sdílet"/>
         </form>
     </section>
+    
+    @{
+        @if (sdileneHesla != null && sdileneHesla.Count != 0)
+        {
+            <section>
+                <h3>Správa již sdílených</h3>
+                @foreach (SdileneHeslo sh in sdileneHesla)
+                {
+                    <div class="zobrazeniHeslo sdileneheslo">
+                        <div class="sluzba">
+                            @if (sh.Sluzba == null || sh.Sluzba.Trim() == "")
+                            {
+                                <i>Neznámá služba</i>
+                            }
+                            else
+                            {
+                                @sh.Sluzba
+                            }
+                            <span>
+                                <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@sh.Id, 'sdilene')"></a>
+                            </span>
+                        </div>
+                        <div class="jmeno">
+                            Sdíleno pro: <i>@sh.UzivatelskeJmeno</i>
+                        </div>
+                    </div>
+                }
+                <partial name="_OdstranitHeslo" />
+            </section>
+        }
+    }
 </article>

@@ -1,10 +1,15 @@
 @{
-    string BarevnyMotiv = "svetly";
-    if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+    string barevnyMotiv = "svetly";
+    int? uzivatel = null;
+
+    if (HttpContextAccessor.HttpContext != null)
     {
-        BarevnyMotiv = "tmavy";
+        if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+        {
+            barevnyMotiv = "tmavy";
+        }
+        uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
     }
-    int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 }
 
 <nav>
@@ -32,7 +37,7 @@
     }
 
     <span class="nav-vpravo">
-        @if (BarevnyMotiv == "svetly")
+        @if (barevnyMotiv == "svetly")
         {
             <div class="item item-icon">
                 <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
