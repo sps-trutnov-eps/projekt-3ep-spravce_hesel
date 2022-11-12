@@ -349,3 +349,5 @@ healthchecksdb
 MigrationBackup/
 
 src/Spravce hesel/.vscode/
+.vscode/launch.json
+.vscode/tasks.json
