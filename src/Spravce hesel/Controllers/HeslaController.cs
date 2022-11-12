@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Spravce_hesel.Data;
@@ -29,41 +29,28 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if (uzivatel != null)
                 {
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     List<Heslo> Hesla = Databaze.Hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID).ToList();
-                    List<Heslo> desifrovano = new();
 
-                    foreach (Heslo heslo in Hesla)
-                    {
-                        Heslo _desforave = new()
-                        {
-                            ID = heslo.ID,
-                            UzivatelskeID = heslo.UzivatelskeID,
-                            Sluzba = heslo.Sluzba,
-                            Jmeno = heslo.Jmeno,
-                            Hash = heslo.Hash,
-                            desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV)
-                        };
+                    List<string> upozorneni = new();
+                    upozorneni.Add("Upozornění první");
+                    upozorneni.Add("Upozornění druhé");
+                    upozorneni.Add("Ještě udělat jak detekovat podobnost");
 
-
-
-                        desifrovano.Add(_desforave);
-                    }
 
                     ViewData["Oznameni"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
                         .Where(heslo => heslo.Potvrzeno == false).ToList();
                     ViewData["sdilene_hesla"] = Databaze.Sdilena_hesla.Where(heslo => heslo.UzivatelskeID == uzivatelID)
                         .Where(heslo => heslo.Potvrzeno == true).ToList();
+                    ViewData["upozorneni"] = upozorneni;
 
-                    return View(desifrovano);
+                    return View(Hesla);
                 }
-               
             }
-
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpGet] 
@@ -72,20 +59,19 @@ namespace Spravce_hesel.Controllers
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
-            if (uzivatelID != null && heslo_uzivatele != null && heslo != null
-                && heslo.UzivatelskeID == uzivatelID)
+            if (uzivatelID != null && heslo_uzivatele != null && heslo != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
-                if (uzivatel != null)
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                if (uzivatel != null
+                    && heslo.UzivatelskeID == uzivatelID)
                 {
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
                     return Ok(Json(heslo));
                 }
-                
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpGet]
@@ -94,21 +80,21 @@ namespace Spravce_hesel.Controllers
             int? uzivatelID = HttpContext.Session.GetInt32("ID");
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             SdileneHeslo? heslo = Databaze.Sdilena_hesla.Where(heslo => heslo.Id == id).FirstOrDefault();
-            if (uzivatelID != null && heslo_uzivatele != null && heslo != null
-                && heslo.UzivatelskeID == uzivatelID)
+            if (uzivatelID != null && heslo_uzivatele != null && heslo != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
-                if (uzivatel != null)
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                if (uzivatel != null
+                    && heslo.UzivatelskeID == uzivatelID)
                 {
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
                     return Ok(Json(heslo));
                 }
-                
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
+
         [HttpGet]
         public IActionResult Pridat()
         {
@@ -118,7 +104,7 @@ namespace Spravce_hesel.Controllers
                 return View();
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpPost]
@@ -137,10 +123,8 @@ namespace Spravce_hesel.Controllers
                     {
                         ModelState.AddModelError("Jmeno", "Vyplňte toto pole!");
                     }
-                    if (ModelState.IsValid)
+                    else if (ModelState.IsValid)
                     {
-                        int delka = heslo_uzivatele.Length;
-
                         byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
 
                         int hash = heslo.GetHashCode();
@@ -165,7 +149,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpPost]
@@ -190,7 +174,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpPost]
@@ -211,7 +195,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpGet]
@@ -221,7 +205,7 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if (uzivatel != null)
                 {
                     Heslo? heslo = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
@@ -229,14 +213,18 @@ namespace Spravce_hesel.Controllers
                     {
                         byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                         heslo.desifrovano = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
+
+                        List<string> sdilenoPro = new();
+                        Databaze.Sdilena_hesla.Where(hesl => hesl.PuvodniHesloID == id).ToList().ForEach(hesl => sdilenoPro.Add(hesl.UzivatelskeJmeno));
+                        ViewData["sdilenoPro"] = sdilenoPro.Distinct().ToList();
+
+                        return View(heslo);
                     }
 
-                    return View(heslo);
                 }
-                
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
 
         [HttpPost]
@@ -246,7 +234,7 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if (uzivatel != null)
                 {
                     Heslo? heslo1 = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
@@ -276,10 +264,9 @@ namespace Spravce_hesel.Controllers
                         return RedirectToAction("Zobrazeni");
                     }
                 }
-                
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpPost]
@@ -289,11 +276,11 @@ namespace Spravce_hesel.Controllers
             string? heslo_uzivatele = HttpContext.Session.GetString("Klic");
             if (uzivatelID != null && heslo_uzivatele != null)
             {
-                Uzivatel uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
+                Uzivatel? uzivatel = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
                 if(uzivatel != null)
                 {
                     SdileneHeslo? heslo = Databaze.Sdilena_hesla.Where(heslo => heslo.Id == id).FirstOrDefault();
-                    if (heslo != null)
+                    if (heslo != null && heslo.DocasnyStringProKlic != null)
                     {
                         byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                         byte[] klic2 = Sifrovani.HesloNaKlic(heslo.DocasnyStringProKlic);
@@ -305,6 +292,7 @@ namespace Spravce_hesel.Controllers
                             ZakladatelID = heslo.ZakladatelID,
                             ZakladatelJmeno = heslo.ZakladatelJmeno,
                             UzivatelskeID = heslo.UzivatelskeID,
+                            UzivatelskeJmeno = heslo.UzivatelskeJmeno,
                             Potvrzeno = true,
                             Sifra = Sifrovani.Zasifrovat(desifrovane, klic, uzivatel.IV),
                             Sluzba = heslo.Sluzba,
@@ -318,10 +306,9 @@ namespace Spravce_hesel.Controllers
                         return Ok(Json("ok"));
                     }
                 }
-                
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpPost]
@@ -342,7 +329,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
 
         [HttpGet]
@@ -354,9 +341,10 @@ namespace Spravce_hesel.Controllers
                 && Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() != null)
             {
                 ViewData["id"] = id;
+                ViewData["sdileneHesla"] = Databaze.Sdilena_hesla.Where(heslo => heslo.PuvodniHesloID == id).ToList();
                 return View();
             }
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(401);
         }
     
         [HttpPost]
@@ -372,7 +360,11 @@ namespace Spravce_hesel.Controllers
                 Uzivatel? u = Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault();
                 Heslo? h = Databaze.Hesla.Where(heslo => heslo.ID == id).FirstOrDefault();
                 Uzivatel? u2 = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault();
-
+                if (u == null)
+                {
+                    ModelState.AddModelError("Email", "Tento uživatel neexistuje.");
+                    return View();
+                }
                 if (u != null && h != null && u2 != null)
                 {
                     SdileneHeslo? existujiciHeslo = Databaze.Sdilena_hesla
@@ -381,18 +373,22 @@ namespace Spravce_hesel.Controllers
 
                     if (existujiciHeslo != null)
                     {
-                        ModelState.AddModelError("Email", "◀ Toto heslo už sdílíte.");
+                        ModelState.AddModelError("Email", "Toto heslo už sdílíte.");
+                    }
+
+                    if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == uzivatelID).FirstOrDefault() == Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault())
+                    {
+                        ModelState.AddModelError("Email", "Nemůžete sdílet heslo sami se sebou.");
                     }
 
                     if (Databaze.Uzivatele.Where(uzivatel => uzivatel.Email == obj.Email).FirstOrDefault() == null)
                     {
-                        ModelState.AddModelError("Email", "◀ Uživatel neexistuje.");
+                        ModelState.AddModelError("Email", "Uživatel neexistuje.");
                     }
                     byte[] klic = Sifrovani.HesloNaKlic(heslo_uzivatele);
                     string desifrovano = Sifrovani.Desifrovat(h.Sifra, klic, u2.IV);
                     string string_docasneho_klice = Sifrovani.Nahodne_info_pro_klic(12);
                     byte[] klic2 = Sifrovani.HesloNaKlic(string_docasneho_klice);
-                    byte[] IV;
                     
                     if (ModelState.IsValid)
                     {
@@ -400,8 +396,9 @@ namespace Spravce_hesel.Controllers
                         {
                             PuvodniHesloID = h.ID,
                             ZakladatelID = (int)uzivatelID,
-                            ZakladatelJmeno = u2.Jmeno,
+                            ZakladatelJmeno = u2.Jmeno + " (" + u2.Email + ")",
                             UzivatelskeID = u.Id,
+                            UzivatelskeJmeno = u.Jmeno + " (" + u.Email + ")",
                             Sluzba = h.Sluzba,
                             Jmeno = h.Jmeno,
                             Sifra = Sifrovani.Zasifrovat(desifrovano, klic2, u.IV),
@@ -418,7 +415,7 @@ namespace Spravce_hesel.Controllers
                 }
             }
 
-            return RedirectToAction("Error", "Home", 404);
+            return StatusCode(500);
         }
     }
 }

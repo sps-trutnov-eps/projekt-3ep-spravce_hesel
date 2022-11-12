@@ -20,6 +20,9 @@ namespace Spravce_hesel.Models
         public int UzivatelskeID { get; set; }
 
         [Required]
+        public string UzivatelskeJmeno { get; set; }
+
+        [Required]
         public bool Potvrzeno { get; set; } = false;
 
         [Required]

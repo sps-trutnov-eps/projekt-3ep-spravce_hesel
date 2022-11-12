@@ -34,11 +34,16 @@ function vyzadatHeslo(id, norm = true) {
                 document.getElementById("jmeno").innerHTML = res.value.jmeno;
 
             document.getElementById("heslo").innerHTML = res.value.desifrovano;
+            document.getElementById("sdilenoOd").innerHTML = "";
 
-            if (norm == true)
+            if (norm == true) {
                 document.getElementById("detaily").firstElementChild.className = "";
-            else
+            }
+            else {
                 document.getElementById("detaily").firstElementChild.className = "sdileneheslo";
+                document.getElementById("sdilenoOd").innerHTML = "<i>Sdíleno od " + res.value.zakladatelJmeno + "</i>";
+            }
+
         }
     });
 }
@@ -101,4 +106,16 @@ function udeleniSouhlasu() {
     document.cookie = "Souhlas=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     window.location.reload();
 }
+
+// Načítání
+$('form').submit(function (e) {
+    console.log("ookk");
+    if (e.target == this) {
+        document.querySelector("#nacitani").className = "";
+    }
+});
+
+//window.onload = (() => {
+//    document.querySelector("#nacitani").className = "skryty";
+//})
 

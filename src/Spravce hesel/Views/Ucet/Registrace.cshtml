@@ -5,11 +5,12 @@
 
 <article class="center">
     <h2>Přihlášení</h2>
-    <div class="login_vyber"><a href="/Ucet/Prihlaseni">Přihlášení</a> | <a href="javascript:void(0)" class="vybran">Registrace</a></div><br />
+    <div class="loginVyber"><a href="/Ucet/Prihlaseni">Přihlášení</a> | <a href="javascript:void(0)" class="vybran">Registrace</a></div><br />
     <form action="/Ucet/Registrace" method="post">
         <input type="text" class="username" asp-for="Jmeno" placeholder="Zadejte uživatelské jméno..." required minlength="3"
         oninvalid="this.setCustomValidity('Jméno musí být nejméně 3 znaky dlouhé.')"
-        oninput="this.setCustomValidity('')"/><br />
+        oninput="this.setCustomValidity('')"/>
+        <span asp-validation-for="Jmeno" class="chyba"></span><br />
         <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
         oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
         oninput="setCustomValidity('')"/>

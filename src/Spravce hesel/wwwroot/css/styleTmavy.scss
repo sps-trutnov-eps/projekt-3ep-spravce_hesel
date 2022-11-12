@@ -1,122 +1,144 @@
 // Barevné schéma
-$barva-text: #c4c2c2;
-$barva-text-sekundar: lightblue;
-$barva-sdilene-heslo: #5b8dd7;
-$barva-pozadi: #252931;
-$barva-pozadi-sekundar: #4a4a4b;
-$barva-pozadi-heslo: #172e34;
-$barva-pozadi-sdilene-heslo: #172534;
-$barva-zesednuti: #00000077;
+$text: #c4c2c2;
+$text-sekundarni: lightblue;
+$sdilene-heslo: #5b8dd7;
+$upozorneni: #f1ab58;
+$upozorneni-pozadi: #3a22054d;
+$pozadi: #252931;
+$pozadi-sekundarni: #4a4a4b;
+$pozadi-heslo: #172e34;
+$pozadi-sdilene-heslo: #172534;
+$zesednuti: #00000077;
 
 // Tmavý motiv
 .tmavy {
-    background-color: $barva-pozadi;
-    color: $barva-text;
-
+    // Pozadí
+    background-color: $pozadi;
+    color: $text;
+    // Odkaz
     a {
-        color: $barva-text;
+        color: $text;
     }
-
-    .login_vyber a.vybran {
-        color: $barva-text-sekundar;
+    // Výběr
+    .loginVyber a.vybran {
+        color: $text-sekundarni;
     }
-
+    // Header
     header {
-        border-bottom-color: $barva-text-sekundar;
+        border-image: linear-gradient(to right, $sdilene-heslo, $text-sekundarni, $sdilene-heslo) 1;
     }
-
+    // Logo
+    span.nav-vlevo .icon-key:before {
+        color: $text-sekundarni;
+    }
+    // Footer
     footer {
-        border-top-color: $barva-text-sekundar;
+        border-image: linear-gradient(to right, $sdilene-heslo, $text-sekundarni, $sdilene-heslo) 1;
     }
-
+    // Tlačítko
     button {
-        background-color: $barva-pozadi-sekundar;
-        color: $barva-text;
-        border-color: $barva-text-sekundar;
+        background-color: $pozadi-sekundarni;
+        color: $text;
+        border-color: $text-sekundarni;
     }
-
+    // Form
     form {
         input {
-            background-color: $barva-pozadi-sekundar;
-            color: $barva-text;
-            border-color: $barva-text-sekundar;
+            background-color: $pozadi-sekundarni;
+            color: $text;
+            border-color: $text-sekundarni;
         }
 
 
         input[type=range]::-webkit-slider-thumb {
-            background-color: $barva-text-sekundar;
+            background-color: $text-sekundarni;
         }
 
         input[type=range]::-moz-range-thumb {
-            background-color: $barva-text-sekundar;
+            background-color: $text-sekundarni;
         }
     }
-
+    // Podmenu
     div.item {
         div.submenu {
             a:not(:last-of-type) {
-                border-bottom-color: $barva-text-sekundar;
+                border-bottom-color: $text-sekundarni;
             }
 
             > div {
-                border-color: $barva-text-sekundar;
-                background-color: $barva-pozadi-sekundar;
+                border-color: $text-sekundarni;
+                background-color: $pozadi-sekundarni;
             }
         }
     }
-
+    // Chyba
     .chyba {
-        color: $barva-text-sekundar;
+        color: $text-sekundarni;
     }
-
-    .heslo_div {
-        border-color: $barva-text-sekundar;
-        background-color: $barva-pozadi-heslo;
+    // Heslo
+    .zobrazeniHeslo {
+        border-color: $text-sekundarni;
+        background-color: $pozadi-heslo;
 
         .sluzba {
-            border-bottom-color: $barva-text-sekundar;
-            background-color: $barva-pozadi-heslo;
+            border-bottom-color: $text-sekundarni;
+            background-color: $pozadi-heslo;
         }
     }
-
-    .heslo_div.sdileneheslo {
-        background-color: $barva-pozadi-sdilene-heslo;
-        border-color: $barva-sdilene-heslo;
+    // Sdílené heslo
+    .zobrazeniHeslo.sdileneheslo {
+        background-color: $pozadi-sdilene-heslo;
+        border-color: $sdilene-heslo;
 
         .sluzba {
-            border-bottom-color: $barva-sdilene-heslo;
-            background-color: $barva-pozadi-sdilene-heslo;
+            border-bottom-color: $sdilene-heslo;
+            background-color: $pozadi-sdilene-heslo;
         }
     }
-
+    // Detail o sdíleném heslu
     #detaily > div.sdileneheslo {
-        background-color: $barva-pozadi-sdilene-heslo !important;
-        border-color: $barva-sdilene-heslo !important;
+        background-color: $pozadi-sdilene-heslo !important;
+        border-color: $sdilene-heslo !important;
 
         h3 {
-            border-bottom-color: $barva-sdilene-heslo !important;
+            border-bottom-color: $sdilene-heslo !important;
         }
     }
-
+    // POP-up
     #container div.POPup {
         > div {
-            border-color: $barva-text-sekundar;
-            background-color: $barva-pozadi-heslo;
+            border-color: $text-sekundarni;
+            background-color: $pozadi-heslo;
         }
 
         h3 {
-            border-bottom-color: $barva-text-sekundar;
+            border-bottom-color: $text-sekundarni;
         }
     }
-
-    #oznameni {
+    // Oznámení
+    #container div.POPup#oznameni {
         .oznameni {
-            border-bottom-color: $barva-text-sekundar;
+            border-bottom-color: $text-sekundarni;
         }
     }
-
+    // Upozornění na Cookies
     .upozorneniCookies {
-        background-color: $barva-pozadi-heslo;
-        border-color: $barva-text-sekundar;
+        background-color: $pozadi-heslo;
+        border-color: $text-sekundarni;
+    }
+    // Načítání
+    #nacitani div {
+        border-color: $text-sekundarni;
+        background-color: $pozadi-heslo;
+    }
+
+    // Upozornení na nebezpečí
+    .upozorneni {
+        border-color: $upozorneni;
+        background-color: $upozorneni-pozadi;
+
+        .ikona {
+            border-right-color: $upozorneni;
+        }
     }
 }

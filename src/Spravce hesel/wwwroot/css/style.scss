@@ -1,28 +1,31 @@
 @import "styleTmavy.scss";
 @import "styleNavigace.scss";
+@import "styleMobil.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @charset "UTF-8";
 
 // Barevné schéma
-$barva-text: #000000;
-$barva-text-sekundar: #6495ed;
-$barva-sdilene-heslo: #3e27ea;
-$barva-oznameni: #f1ab58;
-$barva-pozadi: #ffffff;
-$barva-pozadi-sekundar: #f4f7fc;
-$barva-pozadi-heslo: #e1e9f7;
-$barva-pozadi-sdilene-heslo: #f5f5ff;
-$barva-pozadi-sdilene-heslo2: #e0e0f7;
-$barva-zesednuti: #00000033;
+$text: #000000;
+$text-sekundarni: #6495ed;
+$sdilene-heslo: #3e27ea;
+$upozorneni: #f1ab58;
+$upozorneni-pozadi: #ff8a001f;
+$pozadi: #ffffff;
+$pozadi-sekundarni: #f4f7fc;
+$pozadi-heslo: #e1e9f7;
+$pozadi-sdilene-heslo: #f5f5ff;
+$pozadi-sdilene-heslo-header: #e0e0f7;
+$zesednuti: #00000066;
 
-// Základní elementy
-html, body, #container {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+// Mixins
+@mixin border($barva: $text-sekundarni) {
+    border: 2px solid $barva;
+    border-radius: 2px;
 }
 
+// Základní elementy
+// Nadpisy
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 
@@ -37,7 +40,6 @@ h1, h2 {
 
 h3 {
     font-size: 1.5rem;
-    margin-bottom: 0;
 }
 
 h4, h5, h6 {
@@ -45,18 +47,19 @@ h4, h5, h6 {
     margin-bottom: 0;
 }
 
+// Odkaz
 a {
     text-decoration: underline solid 1px auto;
-    color: $barva-text;
+    color: $text;
 }
 
+// Form a button
 form {
     input {
+        @include border;
         padding: 20px;
         margin: 8px 0;
-        border: 2px solid $barva-text-sekundar;
-        border-radius: 2px;
-        background-color: $barva-pozadi-sekundar;
+        background-color: $pozadi-sekundarni;
         background-size: 1em;
         background-position: 15px 50%;
         background-repeat: no-repeat;
@@ -92,7 +95,7 @@ form {
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        background-color: $barva-text-sekundar;
+        background-color: $text-sekundarni;
         cursor: pointer;
     }
 
@@ -100,11 +103,11 @@ form {
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        background-color: $barva-text-sekundar;
+        background-color: $text-sekundarni;
         cursor: pointer;
     }
 
-    #posuvnikvystup {
+    #posuvnikVystup {
         height: 1em;
         width: 1.1em;
         padding: .5em;
@@ -113,8 +116,7 @@ form {
 }
 
 button {
-    border: 2px solid $barva-text-sekundar;
-    border-radius: 2px;
+    @include border;
     padding: .25em .5em;
     margin-block: .25em;
 }
@@ -123,18 +125,9 @@ button:hover {
     cursor: pointer;
 }
 
+// Vlastní třídy
 .center {
     text-align: center;
-}
-
-span.chyba {
-    position: absolute;
-    height: 60px;
-    line-height: 60px;
-    padding-top: 8px;
-    padding-left: 1rem;
-    color: red !important;
-    font-weight: bold;
 }
 
 article.split section {
@@ -145,22 +138,47 @@ article.split section {
     vertical-align: top;
 }
 
-.chyba {
-    color: $barva-text-sekundar;
+// Chyba ve formu
+span.chyba {
+    position: absolute;
+    margin-left: 3em;
+    height: 60px;
+    margin-top: .4em;
+    line-height: 60px;
+    padding-inline: .5em;
+    color: red !important;
+    font-weight: bold;
+    white-space: nowrap;
+}
 
-    h2 {
+span.chyba:not(:empty) {
+    border: 2px solid red;
+    border-radius: 2px;
+}
+
+span.chyba:not(:empty):before {
+    content: '◀';
+    position: absolute;
+    left: -1.5em;
+}
+
+// Chybová stránka
+.chyba {
+    color: $text-sekundarni;
+
+    * {
         font-size: 2em;
     }
 
-    div {
+    .icon-error {
         font-size: 4em;
     }
 }
 
-// Container
+// Container, html, body
 #container {
     font-family: 'Source Sans Pro', sans-serif;
-    min-width: 500px;
+    min-width: 330px;
     max-width: 1000px;
     margin: 0 auto !important;
     position: relative;
@@ -171,46 +189,52 @@ article.split section {
     }
 }
 
+html, body, #container {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 // Main a jeho součásti
 main {
     padding-bottom: 5em !important;
 }
 
 section:not(:last-of-type) {
-    padding-bottom: 2em;
+    margin-bottom: 2em;
 }
 
 // Footer
 footer {
-    border-top: 1px solid $barva-text-sekundar;
+    border-top: 1px solid $text-sekundarni;
+    border-image: linear-gradient(to right, $text-sekundarni, $sdilene-heslo, $text-sekundarni) 1;
     text-align: center;
     position: absolute;
     bottom: 0;
     height: 2em;
     line-height: 2em;
     margin: 0 auto;
-    min-width: calc(500px - 2em);
+    width: 100vw;
     max-width: calc(1000px - 2em);
 }
 
 // Přihlášení a registrace
-.login_vyber {
+.loginVyber {
     a {
         text-decoration: none;
         font-weight: bold;
     }
 
     a.vybran {
-        color: $barva-text-sekundar;
+        color: $text-sekundarni;
     }
 }
 
 // Zobrzování hesel
-.heslo_div {
+.zobrazeniHeslo {
+    @include border;
     width: calc(100% - 4px);
-    background-color: $barva-pozadi-sekundar;
-    border: 2px solid $barva-text-sekundar;
-    border-radius: 2px;
+    background-color: $pozadi-sekundarni;
 
     div, a {
         padding: .5em;
@@ -219,8 +243,8 @@ footer {
     .sluzba {
         text-align: center;
         font-weight: bold;
-        border-bottom: 1px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-heslo;
+        border-bottom: 1px solid $text-sekundarni;
+        background-color: $pozadi-heslo;
         position: relative;
 
         span {
@@ -239,46 +263,54 @@ footer {
     }
 }
 
-.heslo_div.sdileneheslo {
-    background-color: $barva-pozadi-sdilene-heslo;
-    border: 2px solid $barva-sdilene-heslo;
+.zobrazeniHeslo.sdileneheslo {
+    @include border($sdilene-heslo);
+    background-color: $pozadi-sdilene-heslo;
 
     .sluzba {
-        border-bottom-color: $barva-sdilene-heslo;
-        background-color: $barva-pozadi-sdilene-heslo2;
+        border-bottom-color: $sdilene-heslo;
+        background-color: $pozadi-sdilene-heslo-header;
     }
 }
 
-#detaily > div {
-    #jmeno {
+#detaily {
+    > div #jmeno {
         font-style: italic;
     }
-}
 
-#detaily > div.sdileneheslo {
-    background-color: $barva-pozadi-sdilene-heslo;
-    border-color: $barva-sdilene-heslo !important;
+    > div.sdileneheslo {
+        background-color: $pozadi-sdilene-heslo;
+        border-color: $sdilene-heslo !important;
 
-    h3 {
-        border-bottom-color: $barva-sdilene-heslo !important;
+        h3 {
+            border-bottom-color: $sdilene-heslo !important;
+        }
+    }
+
+    #sdilenoOd {
+        font-size: .75rem;
+    }
+
+    #sdilenoOd:empty {
+        display: none;
     }
 }
 
-.heslo_div:not(:last-of-type) {
+.zobrazeniHeslo:not(:last-of-type) {
     margin-bottom: 2em;
 }
 
 // Oznámení
-#oznameni {
-    justify-content: end !important;
+#container div.POPup#oznameni {
+    justify-content: end;
 
     > div {
-        height: calc(100vh - 5em);
+        height: calc(100vh - 4px - 4em);
         overflow-y: auto;
         
         .oznameni {
             padding-block: .5em;
-            border-bottom: 1px solid $barva-text-sekundar;
+            border-bottom: 1px solid $text-sekundarni;
         }
 
         h4 {
@@ -292,12 +324,13 @@ footer {
 }
 
 .upozorneniOznameni {
-    border-color: $barva-oznameni !important;
+    border-color: $upozorneni !important;
 }
+
 // Upozornění na cookies
 .upozorneniCookies {
-    background-color: $barva-pozadi-sekundar;
-    border: 2px solid $barva-text-sekundar;
+    @include border;
+    background-color: $pozadi-sekundarni;
 
     button {
         margin-left: 1em;
@@ -315,17 +348,16 @@ footer {
     width: 100vw;
     height: 100vh;
     padding: 0;
-    background-color: $barva-zesednuti;
+    background-color: $zesednuti;
     z-index: 999;
 
     > div {
+        @include border;
         position: relative;
         margin: 1em;
         min-width: 500px;
         width: max-content;
-        border: 2px solid $barva-text-sekundar;
-        background-color: $barva-pozadi-heslo;
-        border-radius: 2px;
+        background-color: $pozadi-heslo;
         padding: 1em;
         text-align: center;
 
@@ -339,12 +371,12 @@ footer {
 
         h3 {
             font-weight: bold;
-            border-bottom: 1px solid $barva-text-sekundar;
+            border-bottom: 1px solid $text-sekundarni;
             margin: auto;
             margin-bottom: .5em;
             padding-block: .5em;
             text-align: center;
-        }           
+        }
 
         > div {
             padding-block: .5em;
@@ -354,6 +386,29 @@ footer {
 
 .skryty {
     display: none !important;
+}
+
+// Načítání
+#nacitani {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background-color: $zesednuti;
+    z-index: 999;
+
+    div {
+        @include border;
+        font-size: 1.5em;
+        background-color: $pozadi-heslo;
+        padding: 1em;
+    }
 }
 
 // Přidávání hesel
@@ -376,4 +431,42 @@ footer {
             padding-left: 40px;
         }
     }
+}
+
+// Upozornení na nebezpečí
+.upozorneni {
+    @include border($upozorneni);
+    padding-block: 1em;
+    margin-block: 1em;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 5% 95%;
+    background-color: $upozorneni-pozadi;
+
+    .ikona {
+        border-right: 1px solid $upozorneni;
+        grid-column: 1;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        * {
+            padding: 0;
+        }
+    }
+
+    > div {
+        grid-column: 2;
+        padding-inline: 1em;
+
+        h3 {
+            grid-column: 2;
+            margin: 0 0 .5em 0;
+        }
+    }
+}
+
+.upozorneniHesla:last-of-type {
+    margin-bottom: 2em;
 }

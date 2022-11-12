@@ -5,7 +5,7 @@
 
 <article class="center">
     <h2>Přihlášení</h2>
-    <div class="login_vyber"><a href="javascript:void(0)" class="vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div><br />
+    <div class="loginVyber"><a href="javascript:void(0)" class="vybran">Přihlášení</a> | <a href="/Ucet/Registrace">Registrace</a></div><br />
     <form action="/Ucet/Prihlaseni" method="post">
         <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
         oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"

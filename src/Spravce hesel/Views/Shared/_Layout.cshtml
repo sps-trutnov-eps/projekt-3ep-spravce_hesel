@@ -1,12 +1,17 @@
 @{
+    int? uzivatel = null;
+    string? souhlas = null;
     string BarevnyMotiv = "svetly";
-    if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+    if (HttpContextAccessor.HttpContext != null)
     {
-        BarevnyMotiv = "tmavy";
-    }
-    int? uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
+        if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+        {
+            BarevnyMotiv = "tmavy";
+        }
+        uzivatel = HttpContextAccessor.HttpContext.Session.GetInt32("ID");
 
-    string souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
+        souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
+    }
 }
 
 <!DOCTYPE html>
@@ -25,8 +30,6 @@
     <body class="@BarevnyMotiv">
         <div id="container">
             <header>
-                <h1><a href="/Home/Index">Správce hesel</a></h1>
-
                 <partial name="_Navigace" />
             </header>
 
@@ -41,13 +44,15 @@
                 }
                 else
                 {
-                    <div><b>&copy; Spravce Hesel 2022</b> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</div>
+                    <div><b>&copy; Spravce Hesel 2022</b><span> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</span></div>
                 }
             </footer>
 
             <script src="~/js/site.js" asp-append-version="true" charset="utf-8"></script>
 
             @await RenderSectionAsync("Scripts", required: false)
+
+            <partial name="_Nacitani" />
         </div>
     </body>
 </html>
