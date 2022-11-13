@@ -16,7 +16,6 @@ namespace Spravce_hesel.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UzivatelskeId = table.Column<int>(type: "int", nullable: false),
-                    Hash = table.Column<int>(type: "int", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),

@@ -33,9 +33,6 @@ namespace Spravce_hesel.Migrations
                     b.Property<string>("Desifrovano")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Hash")
-                        .HasColumnType("int");
-
                     b.Property<string>("Jmeno")
                         .HasColumnType("nvarchar(max)");
 

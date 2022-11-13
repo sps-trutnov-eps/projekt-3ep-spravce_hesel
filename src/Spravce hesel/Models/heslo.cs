@@ -11,9 +11,6 @@ namespace Spravce_hesel.Models
         public int UzivatelskeId { get; set; }
 
         [Required]
-        public int Hash { get; set; }
-
-        [Required]
         public byte[] Sifra { get; set; }
 
         public string? Desifrovano { get; set; } = null;
