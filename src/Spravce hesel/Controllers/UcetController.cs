@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 using Spravce_hesel.Classes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spravce_hesel.Controllers
 {
@@ -219,21 +220,17 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid)
             {
-                obj.Email = prihlasenyUzivatel.Email;
-                obj.Jmeno = novejmeno;
-                obj.Id = prihlasenyUzivatel.Id;
-                obj.Heslo = prihlasenyUzivatel.Heslo;
-                obj.IV = prihlasenyUzivatel.IV;
-                Databaze.Uzivatele.Remove(prihlasenyUzivatel);
-                Databaze.Uzivatele.Add(obj);
+                prihlasenyUzivatel.Jmeno = novejmeno;
 
-                Databaze.SdilenaHesla.Where(heslo => heslo.ZakladatelId == obj.Id).ToList()
-                    .ForEach(heslo => heslo.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")");
+                Databaze.Entry(prihlasenyUzivatel).State = EntityState.Modified;
+
+                Databaze.SdilenaHesla.Where(heslo => heslo.ZakladatelId == prihlasenyUzivatel.Id).ToList()
+                    .ForEach(heslo => heslo.ZakladatelJmeno = prihlasenyUzivatel.Jmeno + " (" + prihlasenyUzivatel.Email + ")");
 
                 Databaze.SaveChanges();
 
-                HttpContext.Session.SetInt32("ID", obj.Id);
-                HttpContext.Session.SetString("Klic", obj.Heslo);
+                HttpContext.Session.SetInt32("ID", prihlasenyUzivatel.Id);
+                HttpContext.Session.SetString("Klic", prihlasenyUzivatel.Heslo);
 
                 return RedirectToAction("Zobrazeni", "Hesla");
             }
