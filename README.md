@@ -6,7 +6,7 @@ Webová aplikace pro uschovávání a snadnou správu hesel k různým službám
 
 - Umožňuje snadnou generaci hesel podle parametrů, které si zvolí uživatel.
 - Snadná správa, úprava, mazání hesel.
-- Hesla jsou uložená a bezpečně zašifrována na serveru Správce Hesel.
+- Hesla jsou uložená a bezpečně zašifrována na serveru Správce hesel.
 - Upozornění na duplicitu a krátká hesla.
 - Sdílení hesel od sdílených tarifů s ostatními příslušníky.
 - Optimalizováno pro použití i na mobilních zařízeních.
@@ -17,7 +17,7 @@ Aplikace je postavena na frameworku **.NET 6**. *Ke stažení na stránkách [do
 
 Po stažení a nainstalování .NET můžete aplikaci spustit příkazem `dotnet run` v adresáři, kde se nachází soubor `Spravce hesel.csproj`.
 
-`dotnet --project Spravce hesel.csproj`
+`dotnet run --project Spravce hesel.csproj`
 
 Alternativně je možné aplikaci spustit přes *IIS Express* nebo přes vývojové prostředí *Visual Studio 2022*.
 
