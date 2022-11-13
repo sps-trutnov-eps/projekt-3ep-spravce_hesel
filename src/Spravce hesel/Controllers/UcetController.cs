@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 using Spravce_hesel.Classes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spravce_hesel.Controllers
 {
@@ -168,7 +169,9 @@ namespace Spravce_hesel.Controllers
                 Uzivatel? uzivatel = Databaze.Uzivatele.FirstOrDefault(uzivatel => uzivatel.Id == HttpContext.Session.GetInt32("ID"));
                 if (uzivatel != null)
                 {
-                    ViewData["Pocethesel"] = Databaze.Hesla.Where(heslo => heslo.UzivatelskeId == uzivatelId).ToList().Count;
+                    ViewData["pocetHesel"] = Databaze.Hesla.Where(heslo => heslo.UzivatelskeId == uzivatelId).ToList().Count;
+                    ViewData["pocetMnouSdilenychHesel"] = Databaze.SdilenaHesla.Where(heslo => heslo.ZakladatelId == uzivatelId).ToList().Count;
+                    ViewData["pocetMneSdilenychHesel"] = Databaze.SdilenaHesla.Where(heslo => heslo.UzivatelskeId == uzivatelId).ToList().Count;
                     return View(uzivatel);
                 }
             }
@@ -219,21 +222,17 @@ namespace Spravce_hesel.Controllers
 
             if (ModelState.IsValid)
             {
-                obj.Email = prihlasenyUzivatel.Email;
-                obj.Jmeno = novejmeno;
-                obj.Id = prihlasenyUzivatel.Id;
-                obj.Heslo = prihlasenyUzivatel.Heslo;
-                obj.IV = prihlasenyUzivatel.IV;
-                Databaze.Uzivatele.Remove(prihlasenyUzivatel);
-                Databaze.Uzivatele.Add(obj);
+                prihlasenyUzivatel.Jmeno = novejmeno;
 
-                Databaze.SdilenaHesla.Where(heslo => heslo.ZakladatelId == obj.Id).ToList()
-                    .ForEach(heslo => heslo.ZakladatelJmeno = obj.Jmeno + " (" + obj.Email + ")");
+                Databaze.Entry(prihlasenyUzivatel).State = EntityState.Modified;
+
+                Databaze.SdilenaHesla.Where(heslo => heslo.ZakladatelId == prihlasenyUzivatel.Id).ToList()
+                    .ForEach(heslo => heslo.ZakladatelJmeno = prihlasenyUzivatel.Jmeno + " (" + prihlasenyUzivatel.Email + ")");
 
                 Databaze.SaveChanges();
 
-                HttpContext.Session.SetInt32("ID", obj.Id);
-                HttpContext.Session.SetString("Klic", obj.Heslo);
+                HttpContext.Session.SetInt32("ID", prihlasenyUzivatel.Id);
+                HttpContext.Session.SetString("Klic", prihlasenyUzivatel.Heslo);
 
                 return RedirectToAction("Zobrazeni", "Hesla");
             }
@@ -307,7 +306,7 @@ namespace Spravce_hesel.Controllers
                 byte[] klicNovy = Sifrovani.HesloNaKlic(noveheslo);
                 Databaze.Hesla.Where(heslo => heslo.UzivatelskeId == obj.Id).ToList()
                     .ForEach(heslo => heslo.Sifra = Sifrovani.Zasifrovat(Sifrovani.Desifrovat(heslo.Sifra, klic, prihlasenyUzivatel.IV), klicNovy, prihlasenyUzivatel.IV));
-                // Tohle z nějakého nefunguje, zkuste to někdo. Třeba budete mít štěstí
+                // Tohle z nějakého důvodu nefunguje, zkuste to někdo. Třeba budete mít štěstí
 
                 Databaze.SaveChanges();
                 
