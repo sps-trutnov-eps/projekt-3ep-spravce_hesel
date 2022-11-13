@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spravce_hesel.Controllers
 {
@@ -188,8 +189,7 @@ namespace Spravce_hesel.Controllers
                     else if (ModelState.IsValid)
                     {
                         byte[] klic = Sifrovani.HesloNaKlic(hesloUzivatele);
-
-                        int hash = heslo.GetHashCode();
+                        
                         byte[] sifra = Sifrovani.Zasifrovat(heslo, klic, uzivatel.IV);
 
                         Heslo h = new()
@@ -197,7 +197,6 @@ namespace Spravce_hesel.Controllers
                             UzivatelskeId = (int)uzivatelId,
                             Sluzba = sluzba,
                             Jmeno = jmeno,
-                            Hash = hash,
                             Sifra = sifra
                         };
 
@@ -302,61 +301,26 @@ namespace Spravce_hesel.Controllers
                     Heslo? heslo1 = Databaze.Hesla.FirstOrDefault(hesl => hesl.Id == id);
                     if (heslo1 != null)
                     {
-                        SdileneHeslo[] sdilena_hesla = Databaze.SdilenaHesla.Where(heslo => heslo.PuvodniHesloId == id).ToArray();
-                        if (sdilena_hesla.Length > 0)
-                        {
-                            Databaze.SdilenaHesla.RemoveRange(sdilena_hesla);
-                            foreach (SdileneHeslo sdileneHeslo in sdilena_hesla)
+                        List<SdileneHeslo> sdileneHesla = Databaze.SdilenaHesla.Where(heslo => heslo.PuvodniHesloId == id).ToList();
+                        sdileneHesla.ForEach(hsl =>
                             {
-                                Uzivatel? sdileny = Databaze.Uzivatele.Where(uzivatel => uzivatel.Id == sdileneHeslo.UzivatelskeId).FirstOrDefault();
-                                if (sdileny != null)
+                                byte[]? iv = Databaze.Uzivatele.FirstOrDefault(uzivatel => uzivatel.Id == hsl.UzivatelskeId).IV;
+                                if (iv != null)
                                 {
-                                    string docasnystring = Sifrovani.Nahodne_info_pro_klic(8);
-                                    byte[] klic_sdileni = Sifrovani.HesloNaKlic(docasnystring);
-                                    SdileneHeslo upravene = new SdileneHeslo
-                                    {
-                                        
-                                        PuvodniHesloId = sdileneHeslo.PuvodniHesloId,
-                                        ZakladatelId = sdileneHeslo.ZakladatelId,
-                                        ZakladatelJmeno = sdileneHeslo.ZakladatelJmeno,
-                                        UzivatelskeId = sdileneHeslo.UzivatelskeId,
-                                        UzivatelskeJmeno = sdileneHeslo.UzivatelskeJmeno,
-                                        Potvrzeno = sdileneHeslo.Potvrzeno,
-                                        Zmeneno = true,
-                                        Sifra = Sifrovani.Zasifrovat(heslo, klic_sdileni, sdileny.IV),
-                                        Sluzba = sdileneHeslo.Sluzba,
-                                        Jmeno = sdileneHeslo.Jmeno,
-                                        DocasnyStringProKlic = docasnystring,
-                                    };
-                                    Databaze.SdilenaHesla.Add(upravene);
+                                    string docasnyString = Sifrovani.InfoProKlic(8);
+                                    hsl.Zmeneno = true;
+                                    hsl.Sluzba = sluzba;
+                                    hsl.Jmeno = jmeno;
+                                    hsl.Sifra = Sifrovani.Zasifrovat(heslo, Sifrovani.HesloNaKlic(docasnyString), iv);
+                                    hsl.DocasnyStringProKlic = docasnyString;
                                 }
-                                    
-                                    
+                            });
 
+                        heslo1.Sluzba = sluzba;
+                        heslo1.Jmeno = jmeno;
+                        heslo1.Sifra = Sifrovani.Zasifrovat(heslo, Sifrovani.HesloNaKlic(hesloUzivatele), uzivatel.IV);
 
-                                    
-                             }
-
-
-                            
-                        }
-                        byte[] klic = Sifrovani.HesloNaKlic(hesloUzivatele);
-
-                        int hash = heslo.GetHashCode();
-                        byte[] sifra = Sifrovani.Zasifrovat(heslo, klic, uzivatel.IV);
-
-                        Heslo h = new()
-                        {
-                            UzivatelskeId = (int)uzivatelId,
-                            Sluzba = sluzba,
-                            Jmeno = jmeno,
-                            Hash = hash,
-                            Sifra = sifra,
-                            Id = id
-                        };
-
-                        Databaze.Hesla.Remove(heslo1);
-                        Databaze.Hesla.Add(h);
+                        Databaze.Entry(heslo1).State = EntityState.Modified;
                         Databaze.SaveChanges();
 
                         return RedirectToAction("Zobrazeni");
@@ -378,27 +342,13 @@ namespace Spravce_hesel.Controllers
                 if(uzivatel != null)
                 {
                     SdileneHeslo? heslo = Databaze.SdilenaHesla.FirstOrDefault(heslo => heslo.Id == id);
-                    if (heslo != null && heslo.DocasnyStringProKlic != null && heslo.Potvrzeno == false)
+                    if (heslo is { DocasnyStringProKlic: { }, Potvrzeno: false })
                     {
-                        byte[] klic = Sifrovani.HesloNaKlic(hesloUzivatele);
-                        byte[] klic2 = Sifrovani.HesloNaKlic(heslo.DocasnyStringProKlic);
-                        string desifrovane = Sifrovani.Desifrovat(heslo.Sifra, klic2, uzivatel.IV);
-                        SdileneHeslo potvrzeno = new()
-                        {
-                            Id = heslo.Id,
-                            PuvodniHesloId = heslo.PuvodniHesloId,
-                            ZakladatelId = heslo.ZakladatelId,
-                            ZakladatelJmeno = heslo.ZakladatelJmeno,
-                            UzivatelskeId = heslo.UzivatelskeId,
-                            UzivatelskeJmeno = heslo.UzivatelskeJmeno,
-                            Potvrzeno = true,
-                            Sifra = Sifrovani.Zasifrovat(desifrovane, klic, uzivatel.IV),
-                            Sluzba = heslo.Sluzba,
-                            Jmeno = heslo.Jmeno
-                        };
+                        heslo.Potvrzeno = true;
+                        heslo.Sifra = Sifrovani.Zasifrovat(Sifrovani.Desifrovat(heslo.Sifra, Sifrovani.HesloNaKlic(heslo.DocasnyStringProKlic),
+                            uzivatel.IV), Sifrovani.HesloNaKlic(hesloUzivatele), uzivatel.IV);
 
-                        Databaze.SdilenaHesla.Remove(heslo);
-                        Databaze.SdilenaHesla.Add(potvrzeno);
+                        Databaze.Entry(heslo).State = EntityState.Modified;
                         Databaze.SaveChanges();
 
                         return Ok(Json("ok"));
@@ -484,7 +434,7 @@ namespace Spravce_hesel.Controllers
                     }
                     byte[] klic = Sifrovani.HesloNaKlic(hesloUzivatele);
                     string desifrovano = Sifrovani.Desifrovat(h.Sifra, klic, u2.IV);
-                    string stringDocasnehoKlice = Sifrovani.Nahodne_info_pro_klic(12);
+                    string stringDocasnehoKlice = Sifrovani.InfoProKlic(12);
                     byte[] klic2 = Sifrovani.HesloNaKlic(stringDocasnehoKlice);
                     
                     if (ModelState.IsValid)
