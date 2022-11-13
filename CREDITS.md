@@ -2,8 +2,6 @@
 
 ## **Ikony**
 
-----------
-
 Ikony byly předělány do fontu přes stránku **[Fontello](https://fontello.com/)**.
 Některé ikony byly použity ze stránky **[Fontello](https://fontello.com/)** a některé vloženy z SVG, stažené ze stránky **[SVGREPO](https://www.svgrepo.com/)**.
 

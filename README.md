@@ -4,8 +4,6 @@ Webová aplikace pro uschovávání a snadnou správu hesel k různým službám
 
 ## **Funkce**
 
-----------
-
 - Umožňuje snadnou generaci hesel podle parametrů, které si zvolí uživatel.
 - Snadná správa, úprava, mazání hesel.
 - Hesla jsou uložená a bezpečně zašifrována na serveru Správce Hesel.
@@ -14,8 +12,6 @@ Webová aplikace pro uschovávání a snadnou správu hesel k různým službám
 - Optimalizováno pro použití i na mobilních zařízeních.
 
 ## **Instalace**
-
-----------
 
 Aplikace je postavena na frameworku **.NET 6**. *Ke stažení na stránkách [dotnet.microsoft.com](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).*
 
@@ -26,8 +22,6 @@ Po stažení a nainstalování .NET můžete aplikaci spustit příkazem `dotnet
 Alternativně je možné aplikaci spustit přes *IIS Express* nebo přes vývojové prostředí *Visual Studio 2022*.
 
 ### **SASS**
-
-----------
 
 Aplikace používá pro styl stránek SASS. Pro jeho použití je nutné SASS přeložit na CSS.\
 Pro překlad je potřeba mít nainstalovaný **Node.js** a globálně nainstalovaný modul **SASS**.
