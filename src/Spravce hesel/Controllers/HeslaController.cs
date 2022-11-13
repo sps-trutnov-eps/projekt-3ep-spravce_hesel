@@ -411,7 +411,7 @@ namespace Spravce_hesel.Controllers
                 if (u == null)
                 {
                     ModelState.AddModelError("Email", "Tento uživatel neexistuje.");
-                    return View();
+                    return RedirectToAction("Sdileni", id);
                 }
                 if (h != null && u2 != null)
                 {
@@ -458,7 +458,7 @@ namespace Spravce_hesel.Controllers
                         return RedirectToAction("Zobrazeni");
                     }
 
-                    return View();
+                    return RedirectToAction("Sdileni", id);
                 }
             }
 
