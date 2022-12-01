@@ -470,3 +470,25 @@ footer {
 .upozorneniHesla:last-of-type {
     margin-bottom: 2em;
 }
+
+// Přehled o funkcích aplikace
+#prehled {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: justify;
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        padding: .5em;
+    }
+
+    img {
+        width: calc(100% - 1em);
+        aspect-ratio: auto;
+        padding: .5em;
+        @include border($text-sekundarni);
+    }
+}

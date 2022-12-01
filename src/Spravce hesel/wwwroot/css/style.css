@@ -601,4 +601,24 @@ footer {
   margin-bottom: 2em;
 }
 
+#prehled {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-align: justify;
+}
+#prehled div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 0.5em;
+}
+#prehled img {
+  width: calc(100% - 1em);
+  aspect-ratio: auto;
+  padding: 0.5em;
+  border: 2px solid #6495ed;
+  border-radius: 2px;
+}
+
 /*# sourceMappingURL=style.css.map */
