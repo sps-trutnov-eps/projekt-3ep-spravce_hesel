@@ -489,6 +489,6 @@ footer {
         width: calc(100% - 1em);
         aspect-ratio: auto;
         padding: .5em;
-        @include border($text-sekundarni);
+        @include border;
     }
 }

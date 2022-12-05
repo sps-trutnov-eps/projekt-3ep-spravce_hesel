@@ -26,6 +26,25 @@
     .upozorneni {
         grid-template-columns: 12% 88% !important;
     }
+
+    // Přehled o funkcích aplikace
+    #prehled {
+        display: initial !important;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+            padding: .5em;
+        }
+
+        img {
+            width: calc(100% - 1em);
+            aspect-ratio: auto;
+            padding: .5em;
+        }
+    }
 }
 
 @media screen and (max-width: 1000px) {
