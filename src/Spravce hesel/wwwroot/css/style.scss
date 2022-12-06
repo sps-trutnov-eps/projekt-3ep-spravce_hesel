@@ -500,9 +500,11 @@ footer {
     #napoveda_navigace_zpet, #napoveda_navigace_vpred {
         @include border;
         background-color: $pozadi-heslo;
-        padding-inline: .5rem;
-        line-height: 2em;
-        height: 2em;
+        padding: 0;
+        margin: 0;
+        line-height: 2rem;
+        height: calc(2rem + 4px);
+        padding-inline: 1rem;
     }
 
     #napoveda_navigace_menu {
@@ -515,8 +517,12 @@ footer {
         line-height: 2rem;
         width: 100%;
 
+        a {
+            text-decoration: none;
+            font-weight: inherit;
+        }
+
         ul {
-            display: none;
             font-size: 1rem;
             background-color: $pozadi-heslo;
             text-align: initial;
@@ -532,18 +538,13 @@ footer {
                 font-size: 1.2rem;
                 font-weight: bold;
 
-                * {
+                *:not(a) {
                     font-weight: initial;
                     font-size: 1rem;
                 }
             }
         }
     }
-}
-
-#napoveda_prehravac {
-    margin-right: 2em;
-    height: 80vh;
 }
 
 #napoveda_navigace_menu:hover {
