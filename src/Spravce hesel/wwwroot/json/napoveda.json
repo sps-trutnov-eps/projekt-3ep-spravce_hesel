@@ -1,7 +1,7 @@
 {
   "Uvod": {
     "Nazev": "Úvod",
-    "Obsah": "Toto je nápověda ke Správci Hesel"
+    "Obsah": "Správce Hesel je velmi jedoduchý nástroj, jak uchovat hesla.<br /><b>V nápovědě najdete vše, co budete potřebovat vědět</b> k jeho obsluže.<br />Nejprve začnete <b>registrací</b> a po dokončení můžete pracovat se svými hesli.<h3>Jak ovládat nápovědu</h3>Dále můžete pokračovat na dalších stránkách nápovědy. <br /> Nápovědou se pohybujete kartou <b>\"Navigace nápovědou\"</b>.<br/>Zvolíte, s jakým oborem potřebujete pomoc a my Vás vším provedeme.<h3>Jak zapisovat do nápovědy - pro adminy</h3>Do nápovědy budete zapisovat přes soubor \"wwwroot/json/napoveda.json\" kde do příslušného oboru do kolonky \"Obsah\" budete zapisovat běžný HTML kód."
   },
 
   "Ucet": {
@@ -35,6 +35,66 @@
       "OdstraneniUctu": {
         "Nazev": "Odstranění účtu",
         "Obsah": "Toto je nápověda k podsekci Odstranění účtu"
+      }
+    }
+  },
+
+  "Hesla": {
+    "Nazev": "Hesla",
+    "Obsah": "Toto je nápověda k heslům ve Správci Hesel",
+
+    "SpravaHesel": {
+      "Nazev": "Správa hesel",
+      "Obsah": "Toto je nápověda k podsekci Správa hesel",
+
+      "PridavaniHesel": {
+        "Nazev": "Vytvoření",
+        "Obsah": "Toto je nápověda k podsekci Vytvoření hesla",
+
+        "Generator": {
+          "Nazev": "Generátor",
+          "Obsah": "Toto je nápověda ke generátoru hesel"
+        }
+      },
+
+      "UpravaHesel": {
+        "Nazev": "Úprava",
+        "Obsah": "Toto je nápověda k podsekci Úprava hesla"
+      },
+
+      "OdstraneniHesel": {
+        "Nazev": "Smazání",
+        "Obsah": "Toto je nápověda k podsekci Smazání hesla"
+      }
+    }
+  },
+
+  "SdileneHesla": {
+    "Nazev": "Sdílená hesla",
+    "Obsah": "Toto je nápověda k sdíleným heslům ve Správci Hesel",
+
+    "Zobrazeni": {
+      "Nazev": "Zobrazení",
+      "Obsah": "Toto je nápověda k podsekci Zobrazení sdílených hesel"
+    },
+
+    "SpravaHesel": {
+      "Nazev": "Správa sdílených hesel",
+      "Obsah": "Toto je nápověda k podsekci Správa sdílených hesel",
+
+      "ZapnutiSdileni": {
+        "Nazev": "Zapnutí sdílení",
+        "Obsah": "Toto je nápověda k podsekci Zapnutí sdílení hesla"
+      },
+
+      "UpravaHesla": {
+        "Nazev": "Úprava sdíleného hesla",
+        "Obsah": "Toto je nápověda k podsekci Úpravy sdílení hesla"
+      },
+
+      "OdstraneniHesla": {
+        "Nazev": "Odstranění sdíleného hesla",
+        "Obsah": "Toto je nápověda k podsekci Odstranění sdílení hesla"
       }
     }
   }

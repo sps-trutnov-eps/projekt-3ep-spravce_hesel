@@ -513,9 +513,17 @@ footer {
         background-color: $pozadi-heslo;
         border-radius: 2px;
         margin-inline: .5em;
-        text-align: center;
+        padding-inline: .5em;
         line-height: 2rem;
         width: 100%;
+
+        > b {
+            float: right;
+        }
+
+        > i {
+            font-size: 1rem;
+        }
 
         a {
             text-decoration: none;

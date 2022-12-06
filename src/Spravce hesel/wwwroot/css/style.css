@@ -670,9 +670,15 @@ footer {
   background-color: #e1e9f7;
   border-radius: 2px;
   margin-inline: 0.5em;
-  text-align: center;
+  padding-inline: 0.5em;
   line-height: 2rem;
   width: 100%;
+}
+#napoveda_navigace #napoveda_navigace_menu > b {
+  float: right;
+}
+#napoveda_navigace #napoveda_navigace_menu > i {
+  font-size: 1rem;
 }
 #napoveda_navigace #napoveda_navigace_menu a {
   text-decoration: none;
