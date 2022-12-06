@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Nápověda";
+}
+
+<div id="ROUTE" style="display: initial">@ViewData["Sekce"]</div>
+
+<h2>Nápověda k používání Správce Hesel</h2>
+
+<div id="napoveda_navigace">
+    <div id="napoveda_navigace_zpet">◀</div>
+    <div id="napoveda_navigace_menu">
+        <b>Navigace nápovědou</b>
+        <ul>
+            <li>Úvod</li>
+            <li>Účet<br/>
+                <ul>
+                    <li>Přihlášení</li>
+                    <li>Registrace</li>
+                    <li>Nastavení<br/>
+                        <ul>
+                            <li>Změna jména</li>
+                            <li>Změna hesla</li>
+                            <li>Odstranění účtu</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>Hesla<br/>
+                <ul>
+                    <li>Zobrazení</li>
+                    <li>Správa hesel<br/>
+                        <ul>
+                            <li>Přidávání hesel<br/>
+                                <ul>
+                                    <li>Generátor</li>
+                                </ul>
+                            </li>
+                            <li>Úprava hesla</li>
+                            <li>Odstranění hesla</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>Sdílené hesla<br/>
+                <ul>
+                    <li>Zobrazení</li>
+                    <li>Správa hesel<br/>
+                        <ul>
+                            <li>Zapnutí sdílení</li>
+                            <li>Úprava hesla</li>
+                            <li>Odstranění hesla</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="napoveda_navigace_vpred">▶</div>
+</div>
+
+<div id="napoveda_prehravac">
+    <h3 id="napoveda_prehravac_nadpis"></h3>
+    <div id="napoveda_prehravac_obsah"></div>
+</div>
+
+<script src="~/js/napoveda.js"></script>

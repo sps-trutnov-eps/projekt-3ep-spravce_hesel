@@ -13,9 +13,9 @@
 }
 
 <nav>
-    <span class="nav-vlevo">
-        <h1><a href="/Home/Index" class="icon-key"><span>Správce hesel</span></a></h1>
-    </span>
+    <div class="nav-vlevo">
+        <h1><a href="/Home/Index" class="icon-key">Správce hesel</a></h1>
+    </div>
 
     @if (uzivatel != null)
     {
@@ -36,7 +36,10 @@
         </div>
     }
 
-    <span class="nav-vpravo">
+    <div class="nav-vpravo">
+        <div class="item item-icon">
+            <a href="/Napoveda" title="Přejít do nápovědy">?</a>
+        </div>
         @if (barevnyMotiv == "svetly")
         {
             <div class="item item-icon">
@@ -77,5 +80,5 @@
                 <a href="/Ucet/Odhlaseni" title="Odhlášení" class="icon-logout"></a>
             </div>
         }
-    </span>
+    </div>
 </nav>

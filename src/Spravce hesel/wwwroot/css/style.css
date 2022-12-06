@@ -13,7 +13,7 @@
 .tmavy header {
   border-image: linear-gradient(to right, #5b8dd7, lightblue, #5b8dd7) 1;
 }
-.tmavy span.nav-vlevo .icon-key:before {
+.tmavy div.nav-vlevo .icon-key:before {
   color: lightblue;
 }
 .tmavy footer {
@@ -96,6 +96,17 @@
 .tmavy #prehled img {
   border-color: lightblue;
 }
+.tmavy #napoveda_navigace #napoveda_navigace_zpet, .tmavy #napoveda_navigace #napoveda_navigace_vpred {
+  border-color: lightblue;
+  background-color: #172e34;
+}
+.tmavy #napoveda_navigace #napoveda_navigace_menu {
+  border-color: lightblue;
+  background-color: #172e34;
+}
+.tmavy #napoveda_navigace #napoveda_navigace_menu ul {
+  background-color: #172e34;
+}
 
 header {
   text-align: center;
@@ -111,20 +122,20 @@ header nav div.item:not(:first-of-type) {
 header nav > * {
   display: inline-block;
 }
-header nav span.nav-vlevo {
+header nav div.nav-vlevo {
   padding: 0;
   left: 0;
   position: absolute;
 }
-header nav span.nav-vlevo .icon-key:before {
+header nav div.nav-vlevo .icon-key:before {
   color: #6495ed;
   margin-right: 0.5rem;
 }
-header nav span.nav-vlevo h1 {
+header nav div.nav-vlevo h1 {
   margin: 0;
   font-size: 1rem;
 }
-header nav span.nav-vpravo {
+header nav div.nav-vpravo {
   padding: 0;
   right: 0;
   position: absolute;
@@ -637,6 +648,58 @@ footer {
   padding: 0.5em;
   border: 2px solid #6495ed;
   border-radius: 2px;
+}
+
+#napoveda_navigace {
+  display: flex;
+}
+#napoveda_navigace #napoveda_navigace_zpet, #napoveda_navigace #napoveda_navigace_vpred {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
+  background-color: #e1e9f7;
+  padding-inline: 0.5rem;
+  line-height: 2em;
+  height: 2em;
+}
+#napoveda_navigace #napoveda_navigace_menu {
+  border: 2px solid #6495ed;
+  border-radius: 2px;
+  font-size: 1.3rem;
+  background-color: #e1e9f7;
+  border-radius: 2px;
+  margin-inline: 0.5em;
+  text-align: center;
+  line-height: 2rem;
+  width: 100%;
+}
+#napoveda_navigace #napoveda_navigace_menu ul {
+  display: none;
+  font-size: 1rem;
+  background-color: #e1e9f7;
+  text-align: initial;
+  line-height: initial;
+  font-weight: initial;
+  margin: 1em;
+}
+#napoveda_navigace #napoveda_navigace_menu ul li {
+  padding-block: 0.15rem;
+}
+#napoveda_navigace #napoveda_navigace_menu ul > li {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#napoveda_navigace #napoveda_navigace_menu ul > li * {
+  font-weight: initial;
+  font-size: 1rem;
+}
+
+#napoveda_prehravac {
+  margin-right: 2em;
+  height: 80vh;
+}
+
+#napoveda_navigace_menu:hover ul {
+  display: block !important;
 }
 
 /*# sourceMappingURL=style.css.map */

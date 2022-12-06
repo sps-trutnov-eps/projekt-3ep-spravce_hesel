@@ -492,3 +492,62 @@ footer {
         @include border;
     }
 }
+
+// Nápověda
+#napoveda_navigace {
+    display: flex;
+
+    #napoveda_navigace_zpet, #napoveda_navigace_vpred {
+        @include border;
+        background-color: $pozadi-heslo;
+        padding-inline: .5rem;
+        line-height: 2em;
+        height: 2em;
+    }
+
+    #napoveda_navigace_menu {
+        @include border;
+        font-size: 1.3rem;
+        background-color: $pozadi-heslo;
+        border-radius: 2px;
+        margin-inline: .5em;
+        text-align: center;
+        line-height: 2rem;
+        width: 100%;
+
+        ul {
+            display: none;
+            font-size: 1rem;
+            background-color: $pozadi-heslo;
+            text-align: initial;
+            line-height: initial;
+            font-weight: initial;
+            margin: 1em;
+
+            li {
+                padding-block: .15rem;
+            }
+
+            > li {
+                font-size: 1.2rem;
+                font-weight: bold;
+
+                * {
+                    font-weight: initial;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+#napoveda_prehravac {
+    margin-right: 2em;
+    height: 80vh;
+}
+
+#napoveda_navigace_menu:hover {
+    ul {
+        display: block !important;
+    }
+}

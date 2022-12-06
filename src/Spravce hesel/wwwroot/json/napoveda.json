@@ -1,0 +1,41 @@
+{
+  "Uvod": {
+    "Nazev": "Úvod",
+    "Obsah": "Toto je nápověda ke Správci Hesel"
+  },
+
+  "Ucet": {
+    "Nazev": "Účet",
+    "Obsah": "Toto je nápověda k účtům ve Správci Hesel",
+
+    "Prihlaseni": {
+      "Nazev": "Příhlášení",
+      "Obsah": "Toto je nápověda k podsekci přihlášení"
+    },
+
+    "Registrace": {
+      "Nazev": "Registrace",
+      "Obsah": "Toto je nápověda k podsekci registrace"
+    },
+
+    "Nastaveni": {
+      "Nazev": "Nastavení",
+      "Obsah": "Toto je nápověda k podsekci Nastavení",
+
+      "ZmenaJmena": {
+        "Nazev": "Změna jména",
+        "Obsah": "Toto je nápověda k podsekci Změna Jména"
+      },
+
+      "ZmenaHesla": {
+        "Nazev": "Změna hesla",
+        "Obsah": "Toto je nápověda k podsekci Změna hesla"
+      },
+
+      "OdstraneniUctu": {
+        "Nazev": "Odstranění účtu",
+        "Obsah": "Toto je nápověda k podsekci Odstranění účtu"
+      }
+    }
+  }
+}
