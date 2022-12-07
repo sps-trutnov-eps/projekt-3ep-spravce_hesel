@@ -672,6 +672,7 @@ footer {
   margin-inline: 0.5em;
   padding-inline: 0.5em;
   line-height: 2rem;
+  min-height: 2rem;
   width: 100%;
 }
 #napoveda_navigace #napoveda_navigace_menu > b {
