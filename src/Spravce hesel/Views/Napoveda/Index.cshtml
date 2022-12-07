@@ -8,60 +8,11 @@
 <h2>Nápověda k používání Správce Hesel</h2>
 
 <div id="napoveda_navigace">
-    <button id="napoveda_navigace_zpet" type="button" onclick="zpet()">◀</button>
+    <button id="napoveda_navigace_zpet" type="button">◀</button>
     <div id="napoveda_navigace_menu">
-        <i id="napoveda_navigace_menu_cesta"></i><b>Navigace nápovědou</b>
-        <ul id="napoveda_menu_seznam" class="skryty">
-            <li><a href="/Napoveda/Uvod">Úvod</a></li>
-            <li><a href="/Napoveda/Ucet">Účet</a><br />
-                <ul>
-                    <li><a href="/Napoveda/Ucet-Prihlaseni">Příhlášení</a></li>
-                    <li><a href="/Napoveda/Ucet-Registrace">Registrace</a></li>
-                    <li><a href="/Napoveda/Ucet-Nastaveni">Nastavení</a><br/>
-                        <ul>
-                            <li><a href="/Napoveda/Ucet-Nastaveni-ZmenaJmena">Změna jména</a></li>
-                            <li><a href="/Napoveda/Ucet-Nastaveni-ZmenaHesla">Změna hesla</a></li>
-                            <li><a href="/Napoveda/Ucet-Nastaveni-OdstraneniUctu">Odstranění účtu</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+        <div id="napoveda_navigace_rozbalit"><i id="napoveda_navigace_menu_cesta"></i><b>Navigace nápovědou</b></div>
 
-            <li><a href="/Napoveda/Hesla">Hesla</a><br />
-                <ul>
-                    <li><a href="/Napoveda/Hesla-Zobrazeni">Zobrazení</a></li>
-                    <li>
-                        <a href="/Napoveda/Hesla-SpravaHesel">Správa hesel</a><br />
-                        <ul>
-                            <li>
-                                <a href="/Napoveda/Hesla-SpravaHesel-PridavaniHesel">Přidávání hesel</a><br />
-                                <ul>
-                                    <li><a href="/Napoveda/Hesla-SpravaHesel-PridavaniHesel-Generator">Generátor</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/Napoveda/Hesla-SpravaHesel-UpravaHesel">Úprava hesla</a></li>
-                            <li><a href="/Napoveda/Hesla-SpravaHesel-OdstraneniHesel">Odstranění hesla</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-
-            <li><a href="/Napoveda/SdileneHesla">Sdílená hesla</a><br />
-                <ul>
-                    <li><a href="/Napoveda/SdileneHesla-Zobrazeni">Zobrazení</a></li>
-                    <li>
-                        <a href="/Napoveda/SdileneHesla-SpravaHesel">Správa sdílených hesel</a><br />
-                        <ul>
-                            <li><a href="/Napoveda/SdileneHesla-SpravaHesel-ZapnutiSdileni">Zapnutí sdílení</a></li>
-                            <li><a href="/Napoveda/SdileneHesla-SpravaHesel-UpravaHesla">Úprava sdíleho hesla</a></li>
-                            <li><a href="/Napoveda/SdileneHesla-SpravaHesel-OdstraneniHesla">Odstranění sdíleného hesla</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
     </div>
-    <button id="napoveda_navigace_vpred" type="button" onclick="rozbalitMenu(this)">▼</button>
 </div>
 
 <div id="napoveda_prehravac">

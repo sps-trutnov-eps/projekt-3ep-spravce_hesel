@@ -518,11 +518,11 @@ footer {
         min-height: 2rem;
         width: 100%;
 
-        > b {
+        div > b {
             float: right;
         }
 
-        > i {
+        div > i {
             font-size: 1rem;
         }
 
@@ -557,7 +557,5 @@ footer {
 }
 
 #napoveda_navigace_menu:hover {
-    ul {
-        display: block !important;
-    }
+    cursor: pointer;
 }

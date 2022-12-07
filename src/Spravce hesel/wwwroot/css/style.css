@@ -675,10 +675,10 @@ footer {
   min-height: 2rem;
   width: 100%;
 }
-#napoveda_navigace #napoveda_navigace_menu > b {
+#napoveda_navigace #napoveda_navigace_menu div > b {
   float: right;
 }
-#napoveda_navigace #napoveda_navigace_menu > i {
+#napoveda_navigace #napoveda_navigace_menu div > i {
   font-size: 1rem;
 }
 #napoveda_navigace #napoveda_navigace_menu a {
@@ -705,8 +705,8 @@ footer {
   font-size: 1rem;
 }
 
-#napoveda_navigace_menu:hover ul {
-  display: block !important;
+#napoveda_navigace_menu:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
