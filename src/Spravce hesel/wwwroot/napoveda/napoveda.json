@@ -1,84 +1,88 @@
 {
   "Uvod": {
-    "Nazev": "Úvod"
+    "&Nazev": "Úvod"
   },
 
   "Ucet": {
-    "Nazev": "Účet",
-
-    "Prihlaseni": {
-      "Nazev": "Příhlášení"
-    },
+    "&Nazev": "Účet",
 
     "Registrace": {
-      "Nazev": "Registrace"
+      "&Nazev": "Registrace"
+    },
+
+    "Prihlaseni": {
+      "&Nazev": "Příhlášení"
+    },
+
+    "Odhlaseni": {
+      "&Nazev": "Odhlášení"
     },
 
     "Nastaveni": {
-      "Nazev": "Nastavení",
+      "&Nazev": "Nastavení",
 
       "ZmenaJmena": {
-        "Nazev": "Změna jména"
+        "&Nazev": "Změna jména"
       },
 
       "ZmenaHesla": {
-        "Nazev": "Změna hesla"
+        "&Nazev": "Změna hesla"
       },
 
       "OdstraneniUctu": {
-        "Nazev": "Odstranění účtu"
+        "&Nazev": "Odstranění účtu"
       }
     }
   },
 
   "Hesla": {
-    "Nazev": "Hesla",
+    "&Nazev": "Hesla",
 
     "Zobrazeni": {
-      "Nazev": "Zobrazení Hesel"
+      "&Nazev": "Zobrazení Hesel"
     },
 
     "SpravaHesel": {
-      "Nazev": "Správa hesel",
+      "&Nazev": "Správa hesel",
 
       "PridavaniHesel": {
-        "Nazev": "Vytvoření",
+        "&Nazev": "Přidání hesla",
 
         "Generator": {
-          "Nazev": "Generátor"
+          "&Nazev": "Generátor"
         }
       },
 
       "UpravaHesel": {
-        "Nazev": "Úprava"
+        "&Nazev": "Úprava hesla"
       },
 
       "OdstraneniHesel": {
-        "Nazev": "Smazání"
+        "&Nazev": "Odstranění hesla"
       }
     }
   },
 
   "SdileneHesla": {
-    "Nazev": "Sdílená hesla",
+    "&Nazev": "Sdílená hesla",
 
     "Zobrazeni": {
-      "Nazev": "Zobrazení"
+      "&Nazev": "Zobrazení"
     },
 
     "SpravaHesel": {
-      "Nazev": "Správa sdílených hesel",
+      "&Nazev": "Správa sdílených hesel",
 
       "ZapnutiSdileni": {
-        "Nazev": "Zapnutí sdílení"
+        "&Nazev": "Zapnutí sdílení"
       },
 
       "UpravaHesla": {
-        "Nazev": "Úprava sdíleného hesla"
+        "&Nazev": "Úprava sdíleného hesla"
       },
 
       "OdstraneniHesla": {
-        "Nazev": "Odstranění sdíleného hesla"
+        "&Nazev": "Odstranění sdíleného hesla"
       }
     }
   }

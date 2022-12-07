@@ -1,9 +1,11 @@
 ﻿function ziskatNavigaci(napoveda, navigace = false, adresa = null) {
     let html = "";
     let podsekce = Object.keys(napoveda);
-    podsekce = podsekce.reverse();
-    podsekce.pop();
-    podsekce = podsekce.reverse();
+    if (podsekce.length > 0 && podsekce[0] == "&Nazev") {
+        podsekce = podsekce.reverse();
+        podsekce.pop();
+        podsekce = podsekce.reverse();
+    }
 
     if (podsekce.length != 0) {
         if (navigace)
@@ -12,11 +14,11 @@
             html += "<ul>";
         podsekce.forEach(sekce => {
             if (adresa == null) {
-                html += '<li><a href="/Napoveda/' + sekce + '">' + napoveda[sekce]["Nazev"];
+                html += '<li><a href="/Napoveda/' + sekce + '">' + napoveda[sekce]["&Nazev"];
                 html += ziskatNavigaci(napoveda[sekce], false, sekce);
             } else {
                 let aktualniAdresa = adresa + "-" + [sekce];
-                html += '<li><a href="/Napoveda/' + aktualniAdresa + '">' + napoveda[sekce]["Nazev"];
+                html += '<li><a href="/Napoveda/' + aktualniAdresa + '">' + napoveda[sekce]["&Nazev"];
                 html += ziskatNavigaci(napoveda[sekce],false, aktualniAdresa);
             }
             html += "</a></li>";
@@ -47,18 +49,22 @@ function load(sekce) {
                 sekce.forEach(rt => {
                     aktualniNapoveda = aktualniNapoveda[rt];
                     html += rt + "/";
-                    cesta += aktualniNapoveda["Nazev"];
+                    cesta += aktualniNapoveda["&Nazev"];
                     if (rt != sekce[sekce.length - 1])
                         cesta += " > ";
                 });
 
-                prehravacNadpis.innerHTML = aktualniNapoveda["Nazev"];
+                prehravacNadpis.innerHTML = aktualniNapoveda["&Nazev"];
                 fetch(html + "Index.html")
                     .then(response => response.text())
                     .then(text => prehravacObsah.innerHTML = text);
                 document.getElementById("napoveda_navigace_menu_cesta").innerHTML = cesta;
 
-                document.getElementById("napoveda_podsekce").innerHTML = ziskatNavigaci(aktualniNapoveda, false, document.getElementById("ROUTE").innerHTML);
+                let podnavigace = ziskatNavigaci(aktualniNapoveda, false, document.getElementById("ROUTE").innerHTML);
+                if (podnavigace.trim().length > 0)
+                    podnavigace = "<h2>Na toto navazuje...</h2>" + podnavigace;
+
+                document.getElementById("napoveda_podsekce").innerHTML = podnavigace;
 
                 $("#napoveda_navigace_rozbalit").click(() => {
                     if (document.getElementById("napoveda_menu_seznam").className === "skryty") {
@@ -70,7 +76,6 @@ function load(sekce) {
             }
 
             catch (chyba) {
-                console.log(chyba);
                 prehravacNadpis.innerHTML = "Došlo k chybě!";
                 prehravacObsah.innerHTML = "<i>Obsah této nápovědy není nyní přístupný!</i>";
             }
