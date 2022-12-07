@@ -23,6 +23,11 @@ function load(sekce) {
                 .then(response => response.text())
                 .then(text => prehravac_obsah.innerHTML = text);
             document.getElementById("napoveda_navigace_menu_cesta").innerHTML = cesta;
+
+            let podsekce = Object.keys(aktualniNapoveda);
+            podsekce = podsekce.reverse();
+            podsekce.pop();
+            podsekce = podsekce.reverse();
         }
 
         catch (chyba) {
