@@ -107,6 +107,12 @@
 .tmavy #napoveda_navigace #napoveda_navigace_menu ul {
   background-color: #172e34;
 }
+.tmavy #napoveda_prehravac_obsah article {
+  border-color: lightblue;
+}
+.tmavy #napoveda_prehravac_obsah img {
+  border-color: lightblue;
+}
 
 header {
   text-align: center;
@@ -192,7 +198,7 @@ header nav div.item:hover div.submenu {
     width: initial;
     display: initial;
   }
-  header nav span.nav-vlevo h1 a span {
+  header nav h1 a span {
     display: none;
   }
   footer span {
@@ -222,6 +228,22 @@ header nav div.item:hover div.submenu {
     aspect-ratio: auto;
     padding: 0.5em;
   }
+  #napoveda_navigace_zpet {
+    display: none;
+  }
+  #napoveda_navigace_menu {
+    margin: 0 !important;
+  }
+  #napoveda_navigace_menu > ul {
+    padding-left: 0 !important;
+    font-size: 0.8em;
+  }
+  #napoveda_navigace_menu > ul > li {
+    list-style: none;
+  }
+  #napoveda_navigace_menu > ul > li ul {
+    padding-left: 0.5em !important;
+  }
 }
 @media screen and (max-width: 1000px) {
   span.chyba {
@@ -238,6 +260,15 @@ header nav div.item:hover div.submenu {
   }
   header nav div.item:hover div.submenu {
     display: none !important;
+  }
+  #napoveda_navigace_menu_cesta {
+    display: none;
+  }
+  #napoveda_navigace_rozbalit {
+    text-align: center;
+  }
+  #napoveda_navigace_rozbalit > b {
+    float: unset !important;
   }
 }
 h1, h2, h3, h4, h5, h6 {
@@ -707,6 +738,22 @@ footer {
 
 #napoveda_navigace_menu:hover {
   cursor: pointer;
+}
+
+#napoveda_prehravac_obsah section {
+  margin-block: 1em;
+}
+#napoveda_prehravac_obsah article {
+  border-bottom: #6495ed solid 2px;
+  padding: 1em;
+}
+#napoveda_prehravac_obsah img {
+  width: calc(100% - 1em - 4px);
+  border: 2px solid #6495ed;
+  border-radius: 2px;
+  margin-block: 2em;
+  padding: 0.5em;
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

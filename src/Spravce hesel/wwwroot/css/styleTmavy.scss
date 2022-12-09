@@ -162,5 +162,15 @@ $zesednuti: #00000077;
             }
         }
     }
+
+    #napoveda_prehravac_obsah {
+        article {
+            border-color: $text-sekundarni;
+        }
+
+        img {
+            border-color: $text-sekundarni;
+        }
+    }
 }
 

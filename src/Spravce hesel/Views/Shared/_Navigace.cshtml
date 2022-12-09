@@ -14,13 +14,13 @@
 
 <nav>
     <div class="nav-vlevo">
-        <h1><a href="/Home/Index" class="icon-key">Správce hesel</a></h1>
+        <h1><a href="/Home/Index" class="icon-key"><span>Správce hesel</span></a></h1>
     </div>
 
     @if (uzivatel != null)
     {
         <div class="item">
-            <a href="/Hesla/Zobrazeni">Moje hesla</a>
+            <a href="/Hesla/Zobrazeni">Hesla</a>
             <div class="submenu">
                 <div>
                     <a href="/Hesla/Zobrazeni">Zobrazení</a>
@@ -32,7 +32,7 @@
     else
     {
         <div class="item">
-            <a href="/Home/Index">Domovská stránka</a>
+            <a href="/Home/Index">Domů</a>
         </div>
     }
 

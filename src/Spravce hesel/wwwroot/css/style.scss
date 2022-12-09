@@ -559,3 +559,22 @@ footer {
 #napoveda_navigace_menu:hover {
     cursor: pointer;
 }
+
+#napoveda_prehravac_obsah {
+    section {
+        margin-block: 1em;
+    }
+
+    article {
+        border-bottom: $text-sekundarni solid 2px;
+        padding: 1em;
+    }
+
+    img {
+        width: calc(100% - 1em - 4px);
+        @include border;
+        margin-block: 2em;
+        padding: .5em;
+        display: block;
+    }
+}
