@@ -66,6 +66,10 @@
   "SdileneHesla": {
     "&Nazev": "Sdílená hesla",
 
+    "Prijeti": {
+      "&Nazev" : "Přijetí sdíleného hesla"
+    },
+
     "Zobrazeni": {
       "&Nazev": "Zobrazení"
     },
