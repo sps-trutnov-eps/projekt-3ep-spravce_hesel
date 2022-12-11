@@ -11,7 +11,7 @@ function zobrazit_zmena_jmena() {
         informace.className = "skryty";
     }
     else
-        zobrazit_informace()
+        zobrazit_informace();
 };
 
 function zobrazit_zmena_hesla() {
@@ -22,7 +22,7 @@ function zobrazit_zmena_hesla() {
         informace.className = "skryty";
     }
     else
-        zobrazit_informace()
+        zobrazit_informace();
 };
 
 function zobrazit_odstraneni() {
@@ -33,7 +33,7 @@ function zobrazit_odstraneni() {
         informace.className = "skryty";
     }
     else
-        zobrazit_informace()
+        zobrazit_informace();
 };
 
 function zobrazit_informace() {

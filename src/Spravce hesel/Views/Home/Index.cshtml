@@ -1,8 +1,57 @@
 @{
     ViewData["Title"] = "Domovská stránka";
+
+    string barevnyMotiv = "svetly";
+    if (HttpContextAccessor.HttpContext != null)
+    {
+        if (HttpContextAccessor.HttpContext.Request.Cookies["TmavyMotiv"] != null)
+        {
+            barevnyMotiv = "tmavy";
+        }
+    }
 }
 
 <article>
     <h2>Vítejte ve Správci Hesel</h2>
-    <div>Pro zobrazení uschovaných hesel se nejprve <a href="/Ucet/Prihlaseni">přihlaš</a></div>
+    <div id="prehled">
+        <div>
+            <h3>Bezpečnost na prvním místě.</h3>
+            <p>
+                Všechna hesla jsou uchovávána v databázi a jsou šifrována pomocí AES algoritmu.
+                Vás od Vašich hesel bezpečně dělí jedno heslo.
+            </p>
+        </div>
+        <div>
+            <img src="~/images/prehled/@barevnyMotiv/prihlaseni.png" title="Přihlášení uživatele" />
+        </div>
+        <div>
+            <img src="~/images/prehled/@barevnyMotiv/zobrazeni.png" title="Zobrazení hesel"/>
+        </div>
+        <div>
+            <h3>Jednoduché uchovávání hesel.</h3>
+            <p>
+                Správce hesel je jednoduchý nástroj pro uchovávání hesel.
+                Vaše hesla jsou Vám jednoduše přístupna ze všech zařízení.
+            </p>
+        </div>
+        <div>
+            <h3>Jednoduchá správa hesel.</h3>
+            <p>
+                Nad svými hesli máte plnou kontrolu. Můžete je přidávat, upravovat a mazat kdykoliv se Vám zlíbí.
+            </p>
+        </div>
+        <div>
+            <img src="~/images/prehled/@barevnyMotiv/pridavani.png" title="Přidávání hesel" />
+        </div>
+        <div>
+            <img src="~/images/prehled/@barevnyMotiv/sdileni.png" title="Přidávání hesel" />
+        </div>
+        <div>
+            <h3>Sdílení rodinných tarifů.</h3>
+            <p>
+                Máte rodinný tarif k nějaké službě. Nemusíte zoufat, Vaše maminka už heslo nezapomene.
+                Všichni budete mít bezpečný a jednoduchý přístup k Vašim službám.
+            </p>
+        </div>
+    </div>
 </article>

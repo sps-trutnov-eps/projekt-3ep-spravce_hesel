@@ -5,15 +5,27 @@
 
 <article class="center">
     <h2>Odebrání účtu</h2>
-
-    <form action="/Ucet/Odebrani" method="post">
-        <input type="checkbox" name="potvrzeni" required
-        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-        oninput="this.setCustomValidity('')"/> Opravdu si přejete odstranit svůj účet? <br/>
-        <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
-        oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
-        oninput="this.setCustomValidity('')"/>
-        <span asp-validation-for="Heslo" class="chyba"></span><br />
-        <input type="submit" value="Potvrdit" />
-    </form>
+    
+    <section class="upozorneni">
+        <span class="icon-error ikona"></span>
+        <div>
+            <h3>Upozornění</h3>
+            <div>
+                Toto smaže vše nějak související s Vaším účtem. Dobře si to promyslete, než budete postupovat.
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <form action="/Ucet/Odebrani" method="post">
+            <input type="checkbox" name="potvrzeni" required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')"/> Opravdu si přejete odstranit svůj účet? <br/>
+            <input name="heslo" placeholder="Zadejte svoje stávající heslo..." type="password" required
+            oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
+            oninput="this.setCustomValidity('')"/>
+            <span asp-validation-for="Heslo" class="chyba"></span><br />
+            <input type="submit" value="Potvrdit" />
+        </form>
+    </section>
 </article>

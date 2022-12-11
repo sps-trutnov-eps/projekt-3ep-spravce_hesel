@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
+    <Folder Include="wwwroot\Images\Prehled\Tmavy\" />
   </ItemGroup>
 
 </Project>
