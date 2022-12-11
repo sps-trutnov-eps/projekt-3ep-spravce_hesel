@@ -270,6 +270,9 @@ header nav div.item:hover div.submenu {
   #napoveda_navigace_rozbalit > b {
     float: unset !important;
   }
+  #napoveda_prehravac_obsah article {
+    padding: 0 !important;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;

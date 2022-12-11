@@ -95,4 +95,10 @@ $("#napoveda_navigace_zpet").click(() => {
     }
 });
 
+$('body').on('click',
+    'img',
+    (e) => {
+        window.location.href = e.target.src;
+    });
+
 load(ROUTE);
