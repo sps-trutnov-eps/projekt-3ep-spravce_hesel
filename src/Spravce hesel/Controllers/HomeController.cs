@@ -16,7 +16,12 @@ namespace Spravce_hesel.Controllers
         public IActionResult Index() => View();
 
         [Route("/Error/{code:int}")]
-        public IActionResult Error(int code) => View(code);
+        public IActionResult Error(int code)
+        {
+            if (code == 404)
+                return RedirectToAction("Index");
+            return View(code);
+        }
 
         [Route("/MakeMeACoffee")]
         public IActionResult MakeMeACoffee() => StatusCode(418);

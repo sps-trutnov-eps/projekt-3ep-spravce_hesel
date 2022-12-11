@@ -470,3 +470,111 @@ footer {
 .upozorneniHesla:last-of-type {
     margin-bottom: 2em;
 }
+
+// Přehled o funkcích aplikace
+#prehled {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: justify;
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        padding: .5em;
+    }
+
+    img {
+        width: calc(100% - 1em);
+        aspect-ratio: auto;
+        padding: .5em;
+        @include border;
+    }
+}
+
+// Nápověda
+#napoveda_navigace {
+    display: flex;
+
+    #napoveda_navigace_zpet, #napoveda_navigace_vpred {
+        @include border;
+        background-color: $pozadi-heslo;
+        padding: 0;
+        margin: 0;
+        line-height: 2rem;
+        height: calc(2rem + 4px);
+        padding-inline: 1rem;
+    }
+
+    #napoveda_navigace_menu {
+        @include border;
+        font-size: 1.3rem;
+        background-color: $pozadi-heslo;
+        border-radius: 2px;
+        margin-inline: .5em;
+        padding-inline: .5em;
+        line-height: 2rem;
+        min-height: 2rem;
+        width: 100%;
+
+        div > b {
+            float: right;
+        }
+
+        div > i {
+            font-size: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: inherit;
+        }
+
+        ul {
+            font-size: 1rem;
+            background-color: $pozadi-heslo;
+            text-align: initial;
+            line-height: initial;
+            font-weight: initial;
+            margin: 1em;
+
+            li {
+                padding-block: .15rem;
+            }
+
+            > li {
+                font-size: 1.2rem;
+                font-weight: bold;
+
+                *:not(a) {
+                    font-weight: initial;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+#napoveda_navigace_menu:hover {
+    cursor: pointer;
+}
+
+#napoveda_prehravac_obsah {
+    section {
+        margin-block: 1em;
+    }
+
+    article {
+        border-bottom: $text-sekundarni solid 2px;
+        padding: 1em;
+    }
+
+    img {
+        width: calc(100% - 1em - 4px);
+        @include border;
+        margin-block: 2em;
+        padding: .5em;
+        display: block;
+    }
+}

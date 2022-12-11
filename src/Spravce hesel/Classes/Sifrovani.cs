@@ -5,10 +5,9 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-
 namespace Spravce_hesel.Classes
 {
-    public class Sifrovani
+    public static class Sifrovani
     {
         //kod prevat z https://learn.microsoft.com/cs-cz/dotnet/api/system.security.cryptography.aes?view=net-6.0
 
@@ -34,11 +33,11 @@ namespace Spravce_hesel.Classes
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
                 // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new MemoryStream())
+                using (MemoryStream msEncrypt = new())
                 {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        using (StreamWriter swEncrypt = new(csEncrypt))
                         {
                             //Write all data to the stream.
                             swEncrypt.Write(plainText);
@@ -77,13 +76,12 @@ namespace Spravce_hesel.Classes
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
                 // Create the streams used for decryption.
-                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                using (MemoryStream msDecrypt = new(cipherText))
                 {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    using (CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        using (StreamReader srDecrypt = new(csDecrypt))
                         {
-
                             // Read the decrypted bytes from the decrypting stream
                             // and place them in a string.
                             plaintext = srDecrypt.ReadToEnd();
@@ -94,10 +92,8 @@ namespace Spravce_hesel.Classes
 
             return plaintext;
         }
-
-
-
-        //vlatni kod
+        
+        // Vlastní kód
         public static byte[] HesloNaKlic(string heslo)
         {
             byte[] bytyHesla = Encoding.UTF8.GetBytes(heslo);
@@ -116,7 +112,6 @@ namespace Spravce_hesel.Classes
                 bytes[i] = bytyHesla[i];
             }
 
-
             int pozice = delka;
             while (delka < 32)
             {
@@ -125,13 +120,12 @@ namespace Spravce_hesel.Classes
                 delka = bytes.Length;
             }
 
-
             return bytes;
         }
-
-        public static string Nahodne_info_pro_klic(int length)
+        
+        public static string InfoProKlic(int length)
         {
-            Random random = new Random();
+            Random random = new();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
