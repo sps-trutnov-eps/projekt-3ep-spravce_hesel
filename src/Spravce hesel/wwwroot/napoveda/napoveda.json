@@ -1,0 +1,93 @@
+{
+  "Uvod": {
+    "&Nazev": "Úvod"
+  },
+
+  "Ucet": {
+    "&Nazev": "Účet",
+
+    "Registrace": {
+      "&Nazev": "Registrace"
+    },
+
+    "Prihlaseni": {
+      "&Nazev": "Příhlášení"
+    },
+
+    "Odhlaseni": {
+      "&Nazev": "Odhlášení"
+    },
+
+    "Nastaveni": {
+      "&Nazev": "Nastavení",
+
+      "ZmenaJmena": {
+        "&Nazev": "Změna jména"
+      },
+
+      "ZmenaHesla": {
+        "&Nazev": "Změna hesla"
+      },
+
+      "OdstraneniUctu": {
+        "&Nazev": "Odstranění účtu"
+      }
+    }
+  },
+
+  "Hesla": {
+    "&Nazev": "Hesla",
+
+    "Zobrazeni": {
+      "&Nazev": "Zobrazení a detail hesel"
+    },
+
+    "SpravaHesel": {
+      "&Nazev": "Správa hesel",
+
+      "PridavaniHesel": {
+        "&Nazev": "Přidání hesla",
+
+        "Generator": {
+          "&Nazev": "Generátor"
+        }
+      },
+
+      "UpravaHesel": {
+        "&Nazev": "Úprava hesla"
+      },
+
+      "OdstraneniHesel": {
+        "&Nazev": "Odstranění hesla"
+      }
+    }
+  },
+
+  "SdileneHesla": {
+    "&Nazev": "Sdílená hesla",
+
+    "Prijeti": {
+      "&Nazev" : "Přijetí sdíleného hesla"
+    },
+
+    "Zobrazeni": {
+      "&Nazev": "Zobrazení"
+    },
+
+    "SpravaHesel": {
+      "&Nazev": "Správa sdílených hesel",
+
+      "ZapnutiSdileni": {
+        "&Nazev": "Zapnutí sdílení"
+      },
+
+      "UpravaHesla": {
+        "&Nazev": "Úprava sdíleného hesla"
+      },
+
+      "OdstraneniHesla": {
+        "&Nazev": "Odstranění sdíleného hesla"
+      }
+    }
+  }
+}

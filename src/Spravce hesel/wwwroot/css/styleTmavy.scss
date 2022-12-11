@@ -28,7 +28,7 @@ $zesednuti: #00000077;
         border-image: linear-gradient(to right, $sdilene-heslo, $text-sekundarni, $sdilene-heslo) 1;
     }
     // Logo
-    span.nav-vlevo .icon-key:before {
+    div.nav-vlevo .icon-key:before {
         color: $text-sekundarni;
     }
     // Footer
@@ -131,7 +131,6 @@ $zesednuti: #00000077;
         border-color: $text-sekundarni;
         background-color: $pozadi-heslo;
     }
-
     // Upozornení na nebezpečí
     .upozorneni {
         border-color: $upozorneni;
@@ -141,4 +140,40 @@ $zesednuti: #00000077;
             border-right-color: $upozorneni;
         }
     }
+    // Přehled o funkcích aplikace
+    #prehled {
+        img {
+            border-color: $text-sekundarni;
+        }
+    }
+    // Nápověda
+    #napoveda_navigace {
+        #napoveda_navigace_zpet, #napoveda_navigace_vpred {
+            border-color: $text-sekundarni;
+            background-color: $pozadi-heslo;
+        }
+
+        #napoveda_navigace_menu {
+            border-color: $text-sekundarni;
+            background-color: $pozadi-heslo;
+
+            ul {
+                background-color: $pozadi-heslo;
+            }
+        }
+    }
+
+    #napoveda_prehravac_obsah {
+        border-bottom: $text-sekundarni solid 2px;
+
+
+        section:not(:last-of-type) {
+            border-bottom: $sdilene-heslo solid 2px;
+        }
+
+        img {
+            border-color: $text-sekundarni;
+        }
+    }
 }
+

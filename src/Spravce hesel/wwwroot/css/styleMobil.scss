@@ -5,7 +5,7 @@
     }
 
     header nav {
-        span.nav-vlevo h1 a span {
+        h1 a span {
             display: none;
         }
     }
@@ -26,6 +26,46 @@
     .upozorneni {
         grid-template-columns: 12% 88% !important;
     }
+
+    // Přehled o funkcích aplikace
+    #prehled {
+        display: initial !important;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+            padding: .5em;
+        }
+
+        img {
+            width: calc(100% - 1em);
+            aspect-ratio: auto;
+            padding: .5em;
+        }
+    }
+
+    #napoveda_navigace_zpet {
+        display: none;
+    }
+
+    #napoveda_navigace_menu {
+        margin: 0 !important;
+
+        > ul {
+            padding-left: 0 !important;
+            font-size: 0.8em;
+
+            > li {
+                list-style: none;
+
+                ul {
+                    padding-left: .5em !important;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -45,5 +85,23 @@
 
     header nav div.item:hover div.submenu {
         display: none !important;
+    }
+
+    #napoveda_navigace_menu_cesta {
+        display: none;
+    }
+
+    #napoveda_navigace_rozbalit {
+        text-align: center;
+
+        > b {
+            float: unset !important;
+        }
+    }
+
+    #napoveda_prehravac_obsah {
+        article {
+            padding: 0 !important;
+        }
     }
 }
