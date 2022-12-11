@@ -164,8 +164,8 @@ $zesednuti: #00000077;
     }
 
     #napoveda_prehravac_obsah {
-        article {
-            border-color: $text-sekundarni;
+        section {
+            border-bottom: $sdilene-heslo solid 2px;
         }
 
         img {
