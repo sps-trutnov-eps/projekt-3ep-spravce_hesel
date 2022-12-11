@@ -164,7 +164,10 @@ $zesednuti: #00000077;
     }
 
     #napoveda_prehravac_obsah {
-        section {
+        border-bottom: $text-sekundarni solid 2px;
+
+
+        section:not(:last-of-type) {
             border-bottom: $sdilene-heslo solid 2px;
         }
 

@@ -561,9 +561,14 @@ footer {
 }
 
 #napoveda_prehravac_obsah {
+    border-bottom: $text-sekundarni solid 2px;
+
     section {
-        border-bottom: $sdilene-heslo solid 2px;
         margin-block: 1em;
+    }
+
+    section:not(:last-of-type) {
+        border-bottom: $sdilene-heslo solid 2px;
     }
 
     article {

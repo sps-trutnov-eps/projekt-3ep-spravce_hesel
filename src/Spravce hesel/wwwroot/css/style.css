@@ -107,7 +107,10 @@
 .tmavy #napoveda_navigace #napoveda_navigace_menu ul {
   background-color: #172e34;
 }
-.tmavy #napoveda_prehravac_obsah section {
+.tmavy #napoveda_prehravac_obsah {
+  border-bottom: lightblue solid 2px;
+}
+.tmavy #napoveda_prehravac_obsah section:not(:last-of-type) {
   border-bottom: #5b8dd7 solid 2px;
 }
 .tmavy #napoveda_prehravac_obsah img {
@@ -743,9 +746,14 @@ footer {
   cursor: pointer;
 }
 
+#napoveda_prehravac_obsah {
+  border-bottom: #6495ed solid 2px;
+}
 #napoveda_prehravac_obsah section {
-  border-bottom: #3e27ea solid 2px;
   margin-block: 1em;
+}
+#napoveda_prehravac_obsah section:not(:last-of-type) {
+  border-bottom: #3e27ea solid 2px;
 }
 #napoveda_prehravac_obsah article {
   padding: 1em;
