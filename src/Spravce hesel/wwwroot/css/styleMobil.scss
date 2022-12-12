@@ -1,4 +1,12 @@
 ﻿@media screen and (max-width: 600px) {
+    input:not([type=checkbox]):not([type=submit]):not([type=button]) {
+        width: calc(100% - 64px) !important;
+    }
+
+    input[type=submit], input[type=button] {
+        width: calc(100%) !important;
+    }
+
     main article.split section {
         width: initial;
         display: initial;
