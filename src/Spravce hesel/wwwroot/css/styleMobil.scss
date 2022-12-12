@@ -104,4 +104,9 @@
             padding: 0 !important;
         }
     }
+
+    #navigace_podobnosti {
+        display: grid;
+        grid-template-columns: 1fr !important;
+    }
 }

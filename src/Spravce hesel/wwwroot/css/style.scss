@@ -583,3 +583,8 @@ footer {
         display: block;
     }
 }
+
+#navigace_podobnosti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

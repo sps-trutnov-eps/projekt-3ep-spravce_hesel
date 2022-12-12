@@ -276,6 +276,10 @@ header nav div.item:hover div.submenu {
   #napoveda_prehravac_obsah article {
     padding: 0 !important;
   }
+  #navigace_podobnosti {
+    display: grid;
+    grid-template-columns: 1fr !important;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -765,6 +769,11 @@ footer {
   margin-block: 2em;
   padding: 0.5em;
   display: block;
+}
+
+#navigace_podobnosti {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /*# sourceMappingURL=style.css.map */
