@@ -7,7 +7,7 @@
     <h2>Přidat záznam hesla</h2>
     <section>
         <h3>Informace o záznamu</h3>
-        <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
+        <form action="/Hesla/Pridat" method="post">
             <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" required
             oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
             oninput="this.setCustomValidity('')"/><br />

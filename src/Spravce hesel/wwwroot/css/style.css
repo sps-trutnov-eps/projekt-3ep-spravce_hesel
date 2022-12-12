@@ -570,6 +570,10 @@ footer #napoveda div {
   border: 2px solid #6495ed;
   border-radius: 2px;
   background-color: #f4f7fc;
+  margin: 0 auto;
+  padding-inline: 0.5em;
+  position: relative;
+  top: -3px;
 }
 .upozorneniCookies button {
   margin-left: 1em;

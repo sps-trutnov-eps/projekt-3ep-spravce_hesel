@@ -45,9 +45,12 @@
             <footer>
                 @if (souhlas == null)
                 {
-                    <div class="upozorneniCookies">Tento web využívá pro svoje fungování cookies a JavaScript   <button type="button" onclick="udeleniSouhlasu()">Souhlasím</button></div>
+                    <div class="upozorneniCookies">Tento web využívá pro svoje fungování cookies a JavaScript <button type="button" onclick="udeleniSouhlasu()">OK</button></div>
                 }
-                <div><b>&copy; Spravce Hesel 2022</b><span> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</span></div>
+                else
+                {
+                    <div><b>&copy; Spravce Hesel 2022</b><span> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</span></div>
+                }
 
                 <a id="napoveda" href="/Napoveda/@napoveda" title="Přejít do nápovědy">
                     <div>?</div>
