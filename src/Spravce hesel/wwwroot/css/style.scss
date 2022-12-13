@@ -152,7 +152,7 @@ span.chyba:not(:empty) {
 span.chyba:not(:empty):before {
     content: '◀';
     position: absolute;
-    left: -1.5em;
+    left: -1em;
 }
 
 // Chybová stránka
@@ -425,12 +425,11 @@ footer {
     padding: 0;
     background-color: $zesednuti;
     z-index: 999;
+    font-weight: bold;
 
     div {
-        @include border;
-        font-size: 1.5em;
-        background-color: $pozadi-heslo;
-        padding: 1em;
+        color: $text-sekundarni;
+        font-size: 2em;
     }
 }
 

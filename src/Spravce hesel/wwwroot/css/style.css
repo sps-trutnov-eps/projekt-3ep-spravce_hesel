@@ -83,8 +83,7 @@
   border-color: lightblue;
 }
 .tmavy #nacitani div {
-  border-color: lightblue;
-  background-color: #172e34;
+  color: #5b8dd7;
 }
 .tmavy .upozorneni {
   border-color: #f1ab58;
@@ -402,7 +401,7 @@ span.chyba:not(:empty) {
 span.chyba:not(:empty):before {
   content: "◀";
   position: absolute;
-  left: -1.5em;
+  left: -1em;
 }
 
 .chyba {
@@ -639,13 +638,11 @@ footer #napoveda div {
   padding: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
+  font-weight: bold;
 }
 #nacitani div {
-  border: 2px solid #6495ed;
-  border-radius: 2px;
-  font-size: 1.5em;
-  background-color: #e1e9f7;
-  padding: 1em;
+  color: #6495ed;
+  font-size: 2em;
 }
 
 .pridat form {

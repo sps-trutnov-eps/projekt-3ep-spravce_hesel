@@ -97,7 +97,7 @@ function skrytPOPUp() {
 
 $('div.POPup').click(function (e) {
     if (e.target == this) {
-        skrytPOPUp()
+        skrytPOPUp();
     }
 });
 
@@ -109,7 +109,6 @@ function udeleniSouhlasu() {
 
 // Načítání
 $('form').submit(function (e) {
-    console.log("ookk");
     if (e.target == this) {
         document.querySelector("#nacitani").className = "";
     }
