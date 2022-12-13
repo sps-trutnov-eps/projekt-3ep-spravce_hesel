@@ -143,12 +143,10 @@ $zesednuti: #00000077;
     }
 
     // Načítání
-    #nacitani {
-        div {
-            color: $sdilene-heslo;
-        }
+    #nacitani div {
+        border-color: $text-sekundarni;
+        background-color: $pozadi-heslo;
     }
-
     // Upozornení na nebezpečí
     .upozorneni {
         border-color: $upozorneni;

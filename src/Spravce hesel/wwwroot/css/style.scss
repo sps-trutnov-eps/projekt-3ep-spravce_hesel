@@ -428,8 +428,10 @@ footer {
     font-weight: bold;
 
     div {
-        color: $text-sekundarni;
-        font-size: 2em;
+        @include border;
+        font-size: 1.5em;
+        background-color: $pozadi-heslo;
+        padding: 1em;
     }
 }
 
