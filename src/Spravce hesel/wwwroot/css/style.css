@@ -197,6 +197,12 @@ header nav div.item:hover div.submenu {
 }
 
 @media screen and (max-width: 600px) {
+  input:not([type=checkbox]):not([type=submit]):not([type=button]) {
+    width: calc(100% - 64px) !important;
+  }
+  input[type=submit], input[type=button] {
+    width: 100% !important;
+  }
   main article.split section {
     width: initial;
     display: initial;
@@ -276,6 +282,10 @@ header nav div.item:hover div.submenu {
   #napoveda_prehravac_obsah article {
     padding: 0 !important;
   }
+  #navigace_podobnosti {
+    display: grid;
+    grid-template-columns: 1fr !important;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -348,12 +358,6 @@ form input[type=range]::-moz-range-thumb {
   background-color: #6495ed;
   cursor: pointer;
 }
-form #posuvnikVystup {
-  height: 1em;
-  width: 1.1em;
-  padding: 0.5em;
-  margin-left: 1em;
-}
 
 button {
   border: 2px solid #6495ed;
@@ -398,7 +402,7 @@ span.chyba:not(:empty) {
 span.chyba:not(:empty):before {
   content: "◀";
   position: absolute;
-  left: -1.5em;
+  left: -1em;
 }
 
 .chyba {
@@ -449,6 +453,22 @@ footer {
   width: 100vw;
   max-width: calc(1000px - 2em);
 }
+footer > * {
+  display: inline-block;
+}
+footer #napoveda {
+  float: right;
+  text-decoration: none;
+}
+footer #napoveda div {
+  font-weight: bold;
+  color: #f1ab58;
+  padding-inline: 0.5em;
+  border: 2px solid #f1ab58;
+  border-radius: 2px;
+  line-height: calc(2em - 4px);
+  background-color: rgba(255, 138, 0, 0.1215686275);
+}
 
 .loginVyber a {
   text-decoration: none;
@@ -456,6 +476,13 @@ footer {
 }
 .loginVyber a.vybran {
   color: #6495ed;
+}
+
+.zobrazeniHesel {
+  text-align: center;
+}
+.zobrazeniHesel > .zobrazeniHeslo {
+  text-align: start;
 }
 
 .zobrazeniHeslo {
@@ -543,6 +570,10 @@ footer {
   border: 2px solid #6495ed;
   border-radius: 2px;
   background-color: #f4f7fc;
+  margin: 0 auto;
+  padding-inline: 0.5em;
+  position: relative;
+  top: -3px;
 }
 .upozorneniCookies button {
   margin-left: 1em;
@@ -608,6 +639,7 @@ footer {
   padding: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
+  font-weight: bold;
 }
 #nacitani div {
   border: 2px solid #6495ed;
@@ -621,16 +653,22 @@ footer {
   width: 100%;
 }
 .pridat form input[type=email], .pridat form input[type=text] {
-  width: 70%;
+  width: calc(100% - 64px - 1em);
 }
 .pridat form input[type=text].server {
   background-image: url("../icons/svg/server.svg");
   padding-left: 40px;
 }
 .pridat form input#gen_vystup {
-  width: 50%;
+  width: calc(100% - 4em - 64px) !important;
   background-image: url("../icons/svg/key.svg");
   padding-left: 40px;
+}
+.pridat form #posuvnikVystup {
+  height: 1em;
+  width: 1.1em !important;
+  padding: 0.5em;
+  margin-left: 1em;
 }
 
 .upozorneni {
@@ -765,6 +803,11 @@ footer {
   margin-block: 2em;
   padding: 0.5em;
   display: block;
+}
+
+#navigace_podobnosti {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /*# sourceMappingURL=style.css.map */

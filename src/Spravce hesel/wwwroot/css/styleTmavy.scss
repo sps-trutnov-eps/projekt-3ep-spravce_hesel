@@ -15,32 +15,39 @@ $zesednuti: #00000077;
     // Pozadí
     background-color: $pozadi;
     color: $text;
+
     // Odkaz
     a {
         color: $text;
     }
+
     // Výběr
     .loginVyber a.vybran {
         color: $text-sekundarni;
     }
+
     // Header
     header {
         border-image: linear-gradient(to right, $sdilene-heslo, $text-sekundarni, $sdilene-heslo) 1;
     }
+
     // Logo
     div.nav-vlevo .icon-key:before {
         color: $text-sekundarni;
     }
+
     // Footer
     footer {
         border-image: linear-gradient(to right, $sdilene-heslo, $text-sekundarni, $sdilene-heslo) 1;
     }
+
     // Tlačítko
     button {
         background-color: $pozadi-sekundarni;
         color: $text;
         border-color: $text-sekundarni;
     }
+
     // Form
     form {
         input {
@@ -58,6 +65,7 @@ $zesednuti: #00000077;
             background-color: $text-sekundarni;
         }
     }
+
     // Podmenu
     div.item {
         div.submenu {
@@ -71,10 +79,12 @@ $zesednuti: #00000077;
             }
         }
     }
+
     // Chyba
     .chyba {
         color: $text-sekundarni;
     }
+
     // Heslo
     .zobrazeniHeslo {
         border-color: $text-sekundarni;
@@ -85,6 +95,7 @@ $zesednuti: #00000077;
             background-color: $pozadi-heslo;
         }
     }
+
     // Sdílené heslo
     .zobrazeniHeslo.sdileneheslo {
         background-color: $pozadi-sdilene-heslo;
@@ -95,6 +106,7 @@ $zesednuti: #00000077;
             background-color: $pozadi-sdilene-heslo;
         }
     }
+
     // Detail o sdíleném heslu
     #detaily > div.sdileneheslo {
         background-color: $pozadi-sdilene-heslo !important;
@@ -104,6 +116,7 @@ $zesednuti: #00000077;
             border-bottom-color: $sdilene-heslo !important;
         }
     }
+
     // POP-up
     #container div.POPup {
         > div {
@@ -115,17 +128,20 @@ $zesednuti: #00000077;
             border-bottom-color: $text-sekundarni;
         }
     }
+
     // Oznámení
     #container div.POPup#oznameni {
         .oznameni {
             border-bottom-color: $text-sekundarni;
         }
     }
+
     // Upozornění na Cookies
     .upozorneniCookies {
         background-color: $pozadi-heslo;
         border-color: $text-sekundarni;
     }
+
     // Načítání
     #nacitani div {
         border-color: $text-sekundarni;
@@ -140,12 +156,14 @@ $zesednuti: #00000077;
             border-right-color: $upozorneni;
         }
     }
+
     // Přehled o funkcích aplikace
     #prehled {
         img {
             border-color: $text-sekundarni;
         }
     }
+
     // Nápověda
     #napoveda_navigace {
         #napoveda_navigace_zpet, #napoveda_navigace_vpred {

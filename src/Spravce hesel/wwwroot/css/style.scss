@@ -106,13 +106,6 @@ form {
         background-color: $text-sekundarni;
         cursor: pointer;
     }
-
-    #posuvnikVystup {
-        height: 1em;
-        width: 1.1em;
-        padding: .5em;
-        margin-left: 1em;
-    }
 }
 
 button {
@@ -159,7 +152,7 @@ span.chyba:not(:empty) {
 span.chyba:not(:empty):before {
     content: '◀';
     position: absolute;
-    left: -1.5em;
+    left: -1em;
 }
 
 // Chybová stránka
@@ -216,6 +209,24 @@ footer {
     margin: 0 auto;
     width: 100vw;
     max-width: calc(1000px - 2em);
+
+    > * {
+        display: inline-block;
+    }
+
+    #napoveda {
+        float: right;
+        text-decoration: none;
+
+        div {
+            font-weight: bold;
+            color: $upozorneni;
+            padding-inline: .5em;
+            @include border($upozorneni);
+            line-height: calc(2em - 4px);
+            background-color: $upozorneni-pozadi;
+        }
+    }
 }
 
 // Přihlášení a registrace
@@ -230,7 +241,15 @@ footer {
     }
 }
 
-// Zobrzování hesel
+// Zobrazování hesel
+.zobrazeniHesel {
+    text-align: center;
+
+    > .zobrazeniHeslo {
+        text-align: start;
+    }
+}
+
 .zobrazeniHeslo {
     @include border;
     width: calc(100% - 4px);
@@ -331,6 +350,10 @@ footer {
 .upozorneniCookies {
     @include border;
     background-color: $pozadi-sekundarni;
+    margin: 0 auto;
+    padding-inline: .5em;
+    position: relative;
+    top: -3px;
 
     button {
         margin-left: 1em;
@@ -402,6 +425,7 @@ footer {
     padding: 0;
     background-color: $zesednuti;
     z-index: 999;
+    font-weight: bold;
 
     div {
         @include border;
@@ -417,7 +441,7 @@ footer {
         width: 100%;
 
         input[type=email], input[type=text] {
-            width: 70%;
+            width: calc(100% - 64px - 1em);
         }
 
         input[type=text].server {
@@ -426,9 +450,16 @@ footer {
         }
 
         input#gen_vystup {
-            width: 50%;
+            width: calc(100% - 4em - 64px) !important;
             background-image: url('../icons/svg/key.svg');
             padding-left: 40px;
+        }
+
+        #posuvnikVystup {
+            height: 1em;
+            width: 1.1em !important;
+            padding: .5em;
+            margin-left: 1em;
         }
     }
 }
@@ -582,4 +613,9 @@ footer {
         padding: .5em;
         display: block;
     }
+}
+
+#navigace_podobnosti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }

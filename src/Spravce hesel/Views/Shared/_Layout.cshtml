@@ -12,6 +12,12 @@
 
         souhlas = HttpContextAccessor.HttpContext.Request.Cookies["Souhlas"];
     }
+
+    dynamic napoveda = "";
+    if (ViewData["Napoveda"] != null)
+    {
+        napoveda = ViewData["Napoveda"];
+    }
 }
 
 <!DOCTYPE html>
@@ -39,12 +45,16 @@
             <footer>
                 @if (souhlas == null)
                 {
-                    <div class="upozorneniCookies">Tento web využívá pro svoje fungování cookies a JavaScript   <button type="button" onclick="udeleniSouhlasu()">Souhlasím</button></div>
+                    <div class="upozorneniCookies">Tento web využívá pro svoje fungování cookies a JavaScript <button type="button" onclick="udeleniSouhlasu()">OK</button></div>
                 }
                 else
                 {
                     <div><b>&copy; Spravce Hesel 2022</b><span> – Jakub Kosinka, Filip Lohynský, Jan Kleistner</span></div>
                 }
+
+                <a id="napoveda" href="/Napoveda/@napoveda" title="Přejít do nápovědy">
+                    <div>?</div>
+                </a>
             </footer>
 
             <script src="~/js/site.js" asp-append-version="true" charset="utf-8"></script>

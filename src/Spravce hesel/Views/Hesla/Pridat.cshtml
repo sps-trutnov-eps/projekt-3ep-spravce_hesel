@@ -1,12 +1,13 @@
 @{
     ViewData["Title"] = "Přidat heslo";
+    ViewData["Napoveda"] = "Hesla-SpravaHesel-PridavaniHesel";
 }
 
 <article class="pridat split">
     <h2>Přidat záznam hesla</h2>
     <section>
         <h3>Informace o záznamu</h3>
-        <form action="/Hesla/Pridat" method="post" onkeydown="return event.key != 'Enter';">
+        <form action="/Hesla/Pridat" method="post">
             <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" required
             oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
             oninput="this.setCustomValidity('')"/><br />
@@ -29,15 +30,15 @@
 
             <div>
                 <h4>Složení hesla</h4>
-                <input type="checkbox" checked id="gen_mala" /> Malá písmena<br />
-                <input type="checkbox" checked id="gen_velka" /> Velká písmena<br />
-                <input type="checkbox" id="gen_cisla" /> Čísla<br />
-                <input type="checkbox" id="gen_znaky" /> Speciální znaky
+                <input type="checkbox" checked id="gen_mala" /> <label>Malá písmena</label><br />
+                <input type="checkbox" checked id="gen_velka" /> <label>Velká písmena</label><br />
+                <input type="checkbox" id="gen_cisla" /> <label>Čísla</label><br />
+                <input type="checkbox" id="gen_znaky" /> <label>Speciální znaky</label>
             </div>
 
             <div>
                 <br />
-                <button type="button" onclick="generace()">Generovat</button>
+                <input type="button" onclick="generace()" value="Generovat" />
             </div>
         </form>
     </section>
