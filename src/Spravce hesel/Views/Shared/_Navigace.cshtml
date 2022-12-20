@@ -16,25 +16,27 @@
     <div class="nav-vlevo">
         <h1><a href="/Home/Index" class="icon-key"><span>Správce hesel</span></a></h1>
     </div>
-
-    @if (uzivatel != null)
-    {
-        <div class="item">
-            <a href="/Hesla/Zobrazeni">Hesla</a>
-            <div class="submenu">
-                <div>
-                    <a href="/Hesla/Zobrazeni">Zobrazení</a>
-                    <a href="/Hesla/Pridat">Přidat</a>
+    
+    <div>
+        @if (uzivatel != null)
+        {
+            <div class="item">
+                <a href="/Hesla/Zobrazeni">Hesla</a>
+                <div class="submenu">
+                    <div>
+                        <a href="/Hesla/Zobrazeni">Zobrazení</a>
+                        <a href="/Hesla/Pridat">Přidat</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-    else
-    {
-        <div class="item">
-            <a href="/Home/Index">Domů</a>
-        </div>
-    }
+        }
+        else
+        {
+            <div class="item">
+                <a href="/Home/Index">Domů</a>
+            </div>
+        }
+    </div>
 
     <div class="nav-vpravo">
         @if (barevnyMotiv == "svetly")
