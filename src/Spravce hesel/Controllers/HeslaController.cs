@@ -74,14 +74,22 @@ namespace Spravce_hesel.Controllers
                         upozorneni.Add(jmena);
                     }
 
-                    List<SdileneHeslo> sdilenaHesla = Databaze.SdilenaHesla
+                    List<SdileneHeslo> sdilenaHeslaNepotvrzena = Databaze.SdilenaHesla
                         .Where(heslo => heslo.UzivatelskeId == uzivatelId && heslo.Potvrzeno == false).ToList();
+                    List<SdileneHeslo> sdilenaHeslaPotvrzena = Databaze.SdilenaHesla
+                        .Where(heslo => heslo.UzivatelskeId == uzivatelId && heslo.Potvrzeno == true).ToList();
 
-                    sdilenaHesla.ForEach(heslo =>
+                    sdilenaHeslaNepotvrzena.ForEach(heslo =>
                         heslo.DesifrovanaSluzba = Sifrovani.Desifrovat(heslo.Sluzba, Sifrovani.HesloNaKlic(heslo.DocasnyStringProKlic), uzivatel.IV));
 
-                    ViewData["Oznameni"] = sdilenaHesla;
-                    ViewData["sdileneHesla"] = Databaze.SdilenaHesla.Where(heslo => heslo.UzivatelskeId == uzivatelId && heslo.Potvrzeno == true).ToList();
+                    sdilenaHeslaPotvrzena.ForEach(heslo =>
+                        heslo.DesifrovanaSluzba = Sifrovani.Desifrovat(heslo.Sluzba, Sifrovani.HesloNaKlic(hesloUzivatele), uzivatel.IV));
+
+                    sdilenaHeslaPotvrzena.ForEach(heslo =>
+                        heslo.DesifrovaneJmeno = Sifrovani.Desifrovat(heslo.Jmeno, Sifrovani.HesloNaKlic(hesloUzivatele), uzivatel.IV));
+
+                    ViewData["Oznameni"] = sdilenaHeslaNepotvrzena;
+                    ViewData["sdileneHesla"] = sdilenaHeslaPotvrzena;
                     ViewData["upozorneni"] = upozorneni;
 
                     return View(hesla);
@@ -132,18 +140,28 @@ namespace Spravce_hesel.Controllers
                     {
                         byte[] docasnyKlic = Sifrovani.HesloNaKlic(heslo.DocasnyStringProKlic);
                         string DesifrovaneHeslo = Sifrovani.Desifrovat(heslo.Sifra, docasnyKlic, uzivatel.IV);
+                        string DesifrovaneJmeno = Sifrovani.Desifrovat(heslo.Jmeno, docasnyKlic, uzivatel.IV);
+                        string DesifrovanaSluzba = Sifrovani.Desifrovat(heslo.Sluzba, docasnyKlic, uzivatel.IV);
+
+
                         heslo.Zmeneno = false;
                         heslo.Sifra = Sifrovani.Zasifrovat(DesifrovaneHeslo, klic, uzivatel.IV);
+                        heslo.Jmeno = Sifrovani.Zasifrovat(DesifrovaneJmeno, klic, uzivatel.IV);
+                        heslo.Sluzba = Sifrovani.Zasifrovat(DesifrovanaSluzba, klic, uzivatel.IV);
 
                         Databaze.Entry(heslo).State = EntityState.Modified;
                         Databaze.SaveChanges();
                         
                         heslo.DesifrovaneHeslo = DesifrovaneHeslo;
+
                         return Ok(Json(heslo));
                     }
                     else
                     {
                         heslo.DesifrovaneHeslo = Sifrovani.Desifrovat(heslo.Sifra, klic, uzivatel.IV);
+                        heslo.DesifrovaneJmeno = Sifrovani.Desifrovat(heslo.Jmeno, klic, uzivatel.IV);
+                        heslo.DesifrovanaSluzba = Sifrovani.Desifrovat(heslo.Sluzba, klic, uzivatel.IV);
+
                         return Ok(Json(heslo));
                     }
                 }
