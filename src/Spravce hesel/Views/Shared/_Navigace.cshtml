@@ -16,40 +16,39 @@
     <div class="nav-vlevo">
         <h1><a href="/Home/Index" class="icon-key"><span>Správce hesel</span></a></h1>
     </div>
-
-    @if (uzivatel != null)
-    {
-        <div class="item">
-            <a href="/Hesla/Zobrazeni">Hesla</a>
-            <div class="submenu">
-                <div>
-                    <a href="/Hesla/Zobrazeni">Zobrazení</a>
-                    <a href="/Hesla/Pridat">Přidat</a>
+    
+    <div>
+        @if (uzivatel != null)
+        {
+            <div class="item">
+                <a href="/Hesla/Zobrazeni">Hesla</a>
+                <div class="submenu">
+                    <div>
+                        <a href="/Hesla/Zobrazeni">Zobrazení</a>
+                        <a href="/Hesla/Pridat">Přidat</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-    else
-    {
-        <div class="item">
-            <a href="/Home/Index">Domů</a>
-        </div>
-    }
+        }
+        else
+        {
+            <div class="item">
+                <a href="/Home/Index">Domů</a>
+            </div>
+        }
+    </div>
 
     <div class="nav-vpravo">
-        <div class="item item-icon">
-            <a href="/Napoveda" title="Přejít do nápovědy">?</a>
-        </div>
         @if (barevnyMotiv == "svetly")
         {
             <div class="item item-icon">
-                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout tmavý režim" class="icon-moon"></a>
+                <a href="JavaScript:void(0);" title="Zapnout tmavý režim" class="icon-moon barevny_motiv"></a>
             </div>
         }
         else
         {
             <div class="item item-icon">
-                <a href="JavaScript:PrepnoutBarevnyMotiv()" title="Zapnout světlý režim" class="icon-sun"></a>
+                <a href="JavaScript:void(0);" title="Zapnout světlý režim" class="icon-sun barevny_motiv"></a>
             </div>
         }
         @if (uzivatel == null)

@@ -11,6 +11,8 @@ $text-sekundarni: #6495ed;
 $sdilene-heslo: #3e27ea;
 $upozorneni: #f1ab58;
 $upozorneni-pozadi: #ff8a001f;
+$chyba: #ff0000;
+$chyba-pozadi: #ff000017;
 $pozadi: #ffffff;
 $pozadi-sekundarni: #f4f7fc;
 $pozadi-heslo: #e1e9f7;
@@ -36,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2 {
     font-size: 2rem;
+    text-align: center;
 }
 
 h3 {
@@ -54,18 +57,18 @@ a {
 }
 
 // Form a button
-form {
-    input {
-        @include border;
-        padding: 20px;
-        margin: 8px 0;
-        background-color: $pozadi-sekundarni;
-        background-size: 1em;
-        background-position: 15px 50%;
-        background-repeat: no-repeat;
-        position: relative;
-    }
+input {
+    @include border;
+    padding: 20px;
+    margin: 8px 0;
+    background-color: $pozadi-sekundarni;
+    background-size: 1em;
+    background-position: 15px 50%;
+    background-repeat: no-repeat;
+    position: relative;
+}
 
+form {
     input[type=text].username {
         background-image: url('../icons/svg/user.svg');
         padding-left: 40px;
@@ -106,13 +109,6 @@ form {
         background-color: $text-sekundarni;
         cursor: pointer;
     }
-
-    #posuvnikVystup {
-        height: 1em;
-        width: 1.1em;
-        padding: .5em;
-        margin-left: 1em;
-    }
 }
 
 button {
@@ -142,24 +138,25 @@ article.split section {
 span.chyba {
     position: absolute;
     margin-left: 3em;
-    height: 60px;
+    height: 56px;
     margin-top: .4em;
-    line-height: 60px;
+    line-height: 56px;
     padding-inline: .5em;
-    color: red !important;
+    color: $chyba !important;
     font-weight: bold;
     white-space: nowrap;
 }
 
 span.chyba:not(:empty) {
-    border: 2px solid red;
+    border: 2px solid $chyba;
+    background-color: $chyba-pozadi;
     border-radius: 2px;
 }
 
 span.chyba:not(:empty):before {
     content: '◀';
     position: absolute;
-    left: -1.5em;
+    left: calc(-1em + 2px);
 }
 
 // Chybová stránka
@@ -216,6 +213,24 @@ footer {
     margin: 0 auto;
     width: 100vw;
     max-width: calc(1000px - 2em);
+
+    > * {
+        display: inline-block;
+    }
+
+    #napoveda {
+        float: right;
+        text-decoration: none;
+
+        div {
+            font-weight: bold;
+            color: $upozorneni;
+            padding-inline: .5em;
+            @include border($upozorneni);
+            line-height: calc(2em - 4px);
+            background-color: $upozorneni-pozadi;
+        }
+    }
 }
 
 // Přihlášení a registrace
@@ -230,7 +245,15 @@ footer {
     }
 }
 
-// Zobrzování hesel
+// Zobrazování hesel
+.zobrazeniHesel {
+    text-align: center;
+
+    > .zobrazeniHeslo {
+        text-align: start;
+    }
+}
+
 .zobrazeniHeslo {
     @include border;
     width: calc(100% - 4px);
@@ -331,6 +354,10 @@ footer {
 .upozorneniCookies {
     @include border;
     background-color: $pozadi-sekundarni;
+    margin: 0 auto;
+    padding-inline: .5em;
+    position: relative;
+    top: -3px;
 
     button {
         margin-left: 1em;
@@ -402,6 +429,7 @@ footer {
     padding: 0;
     background-color: $zesednuti;
     z-index: 999;
+    font-weight: bold;
 
     div {
         @include border;
@@ -417,7 +445,7 @@ footer {
         width: 100%;
 
         input[type=email], input[type=text] {
-            width: 70%;
+            width: calc(100% - 64px - 1em);
         }
 
         input[type=text].server {
@@ -426,9 +454,16 @@ footer {
         }
 
         input#gen_vystup {
-            width: 50%;
+            width: calc(100% - 4em - 64px) !important;
             background-image: url('../icons/svg/key.svg');
             padding-left: 40px;
+        }
+
+        #posuvnikVystup {
+            height: 1em;
+            width: 1.1em !important;
+            padding: .5em;
+            margin-left: 1em;
         }
     }
 }
@@ -491,6 +526,11 @@ footer {
         padding: .5em;
         @include border;
     }
+}
+
+// Možnosti v nastavení
+#nastaveni_moznosti input {
+    min-width: calc(50% - 42px);
 }
 
 // Nápověda
@@ -561,12 +601,17 @@ footer {
 }
 
 #napoveda_prehravac_obsah {
+    border-bottom: $text-sekundarni solid 2px;
+
     section {
         margin-block: 1em;
     }
 
+    section:not(:last-of-type) {
+        border-bottom: $sdilene-heslo solid 2px;
+    }
+
     article {
-        border-bottom: $text-sekundarni solid 2px;
         padding: 1em;
     }
 
@@ -577,4 +622,26 @@ footer {
         padding: .5em;
         display: block;
     }
+}
+
+#navigace_podobnosti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $pozadi;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $text-sekundarni;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $upozorneni;
 }

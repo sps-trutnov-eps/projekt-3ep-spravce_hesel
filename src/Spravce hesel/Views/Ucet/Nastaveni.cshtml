@@ -1,15 +1,16 @@
 @model Uzivatel
 @{
     ViewData["Title"] = "Nastavení účtu";
+    ViewData["Napoveda"] = "Ucet-Nastaveni";
 }
 
 <article class="split">
     <h2>Nastavení účtu</h2>
-    <section>
+    <section id="nastaveni_moznosti">
         <h3>Možnosti</h3>
-        <button type="button" onclick="zobrazit_zmena_jmena()">Změna jména účtu</button><br />
-        <button type="button" onclick="zobrazit_zmena_hesla()">Změna hesla účtu</button><br />
-        <button type="button" onclick="zobrazit_odstraneni()">Odstranění účtu</button>
+        <input type="button" value="Změna jména účtu" class="zmena_jmena"><br />
+        <input type="button" value="Změna hesla účtu" class="zmena_hesla"><br />
+        <input type="button" value="Odstranění účtu" class="odstraneni">
     </section>
 
     <section id="informace">

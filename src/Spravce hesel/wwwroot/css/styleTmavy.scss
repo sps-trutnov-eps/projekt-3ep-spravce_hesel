@@ -42,14 +42,13 @@ $zesednuti: #00000077;
         border-color: $text-sekundarni;
     }
     // Form
+    input {
+        background-color: $pozadi-sekundarni;
+        color: $text;
+        border-color: $text-sekundarni;
+    }
+
     form {
-        input {
-            background-color: $pozadi-sekundarni;
-            color: $text;
-            border-color: $text-sekundarni;
-        }
-
-
         input[type=range]::-webkit-slider-thumb {
             background-color: $text-sekundarni;
         }
@@ -164,8 +163,11 @@ $zesednuti: #00000077;
     }
 
     #napoveda_prehravac_obsah {
-        article {
-            border-color: $text-sekundarni;
+        border-bottom: $text-sekundarni solid 2px;
+
+
+        section:not(:last-of-type) {
+            border-bottom: $sdilene-heslo solid 2px;
         }
 
         img {

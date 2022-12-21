@@ -1,6 +1,7 @@
 ﻿@model Uzivatel
 @{
     ViewData["Title"] = "Sdílet heslo";
+    ViewData["Napoveda"] = "SdileneHesla";
     dynamic? id = ViewData["id"];
     List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdileneHesla"];
 }
@@ -24,7 +25,7 @@
             <input type="email" asp-for="Email" placeholder="Zadejte E-Mail..." required
                    oninvalid="if (this.value == ''){this.setCustomValidity('Vyplňte toto pole!')} if (this.value != ''){this.setCustomValidity('Tato emailová adresa není validní.')}"
                    oninput="setCustomValidity('')"/>
-            <span asp-validation-for="Email" class="chyba"></span><br/>
+            <span asp-validation-for="Email" class="chyba"></span><br />
             <input type="submit" value="Sdílet"/>
         </form>
     </section>
@@ -38,13 +39,13 @@
                 {
                     <div class="zobrazeniHeslo sdileneheslo">
                         <div class="sluzba">
-                            @if (sh.Sluzba == null || sh.Sluzba.Trim() == "")
+                            @if (sh.DesifrovanaSluzba == null || sh.DesifrovanaSluzba.Trim() == "")
                             {
                                 <i>Neznámá služba</i>
                             }
                             else
                             {
-                                @sh.Sluzba
+                                @sh.DesifrovanaSluzba
                             }
                             <span>
                                 <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@sh.Id, 'sdilene')"></a>

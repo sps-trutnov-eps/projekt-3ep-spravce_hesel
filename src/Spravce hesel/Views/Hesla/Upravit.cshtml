@@ -1,6 +1,7 @@
 @model Heslo;
 @{
     ViewData["Title"] = "Upravit heslo";
+    ViewData["Napoveda"] = "Hesla-SpravaHesel-UpravaHesel";
     string? sdilenoPro = (string?)ViewData["sdilenoPro"];
 }
 
@@ -24,34 +25,34 @@
     
     <section>
         <h3>Informace o záznamu</h3>
-        <form href="/Hesla/Upravit/Model.Id" method="post" onkeydown="return event.key != 'Enter';">
-            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" value="@Model.Sluzba"/><br />
-            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" value="@Model.Jmeno"/><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.Desifrovano" required />
-            <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
+        <form href="/Hesla/Upravit/Model.Id" method="post">
+            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" value="@Model.DesifrovanaSluzba"/><br />
+            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" value="@Model.DesifrovaneJmeno"/><br />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.DesifrovaneHeslo" required />
+            <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye zobrazeni_Hesla"></button><br />
             <input value="Upravit záznam" type="submit"/>
         </form>
     </section>
 
     <section>
         <h3>Generátor hesla</h3>
-        <form id="generator" onchange="delka_hesla_aktualizace()" onkeydown="return event.key != 'Enter';">
+        <form id="generator" onkeydown="return event.key != 'Enter';">
             <div>
                 <h4>Délka hesla</h4>
-                <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikVystup" onchange="delka_hesla_zapis()" value="16" placeholder="16" />
+                <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikVystup" onchange="delkaHeslaZapis()" value="16" placeholder="16" />
             </div>
 
             <div>
                 <h4>Složení hesla</h4>
-                <input type="checkbox" checked id="gen_mala" /> Malá písmena<br />
-                <input type="checkbox" checked id="gen_velka" /> Velká písmena<br />
-                <input type="checkbox" id="gen_cisla" /> Čísla<br />
-                <input type="checkbox" id="gen_znaky" /> Speciální znaky
+                <input type="checkbox" checked id="gen_mala" /> <label>Malá písmena</label><br />
+                <input type="checkbox" checked id="gen_velka" /> <label>Velká písmena</label><br />
+                <input type="checkbox" id="gen_cisla" /> <label>Čísla</label><br />
+                <input type="checkbox" id="gen_znaky" /> <label>Speciální znaky</label>
             </div>
 
             <div>
                 <br />
-                <button type="button" onclick="generace()">Generovat</button>
+                <input type="button" class="generace" value="Generovat" />
             </div>
         </form>
     </section>

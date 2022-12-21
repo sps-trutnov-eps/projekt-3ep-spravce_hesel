@@ -17,9 +17,11 @@ namespace Spravce_hesel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UzivatelskeId = table.Column<int>(type: "int", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DesifrovaneHeslo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DesifrovanaSluzba = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DesifrovaneJmeno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sluzba = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Jmeno = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,9 +42,11 @@ namespace Spravce_hesel.Migrations
                     Potvrzeno = table.Column<bool>(type: "bit", nullable: false),
                     Zmeneno = table.Column<bool>(type: "bit", nullable: false),
                     Sifra = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Desifrovano = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Sluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Jmeno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DesifrovaneHeslo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DesifrovanaSluzba = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DesifrovaneJmeno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sluzba = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Jmeno = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     DocasnyStringProKlic = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

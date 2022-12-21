@@ -1,6 +1,7 @@
 @model List<Heslo>
 @{
     ViewData["Title"] = "Moje hesla";
+    ViewData["Napoveda"] = "Hesla-Zobrazeni";
     List<SdileneHeslo>? sdileneHesla = (List<SdileneHeslo>?)ViewData["sdileneHesla"];
     List<SdileneHeslo>? oznameni = (List<SdileneHeslo>?)ViewData["oznameni"];
     List<string[]>? upozorneni = (List<String[]>?)ViewData["upozorneni"];
@@ -39,103 +40,105 @@
         }
 
     <p class="center">
-        <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Přidat heslo</button>
+        <button type="button" class="icon-plus tlacitko_pridat">Přidat heslo</button>
         @if (oznameni != null)
         {
             @if (oznameni.Count == 0)
             {
-                <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
+                <button type="button" class="icon-bell tlacitko_oznameni">Oznámení</button>
             }
             else
             {
-                <button type="button" class="icon-bell upozorneniOznameni" onclick="zobrazitPOPup('oznameni')">Oznámení (@oznameni.Count)</button>
+                <button type="button" class="icon-bell upozorneniOznameni tlacitko_oznameni">Oznámení (@oznameni.Count)</button>
             }
         }
     </p>
-
-    @{
-        if (Model != null)
-        {
-            foreach (Heslo heslo in Model)
+    
+    <div class="zobrazeniHesel">
+        @{
+            if (Model != null)
             {
-                <div class="zobrazeniHeslo">
-                    <div class="sluzba">
-                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.Id)">
-                            @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
+                foreach (Heslo heslo in Model)
+                {
+                    <div class="zobrazeniHeslo">
+                        <div class="sluzba">
+                            <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.Id)">
+                                @if (heslo.DesifrovanaSluzba == null || heslo.DesifrovanaSluzba.Trim() == "")
+                                {
+                                    <i>Neznámá služba</i>
+                                }
+                                else
+                                {
+                                    @heslo.DesifrovanaSluzba
+                                }
+                            </a>
+                            <span>
+                                <a class="icon-share" title="Nastavení sdílení" href="/Hesla/Sdileni/@heslo.Id"></a>
+                                <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.Id"></a>
+                                <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.Id)"></a>
+                            </span>
+                        </div>
+                        <div class="jmeno">
+                            @if (heslo.DesifrovaneJmeno == null || heslo.DesifrovaneJmeno.Trim() == "")
                             {
-                                <i>Neznámá služba</i>
+                                <i>Neznámé jméno</i>
                             }
                             else
                             {
-                                @heslo.Sluzba
+                                @heslo.DesifrovaneJmeno
                             }
-                        </a>
-                        <span>
-                            <a class="icon-share" title="Nastavení sdílení" href="/Hesla/Sdileni/@heslo.Id"></a>
-                            <a class="icon-edit" title="Upravit heslo" href="/Hesla/Upravit/@heslo.Id"></a>
-                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@heslo.Id)"></a>
-                        </span>
+                        </div>
+                        <div class="heslo">••••••••</div>
                     </div>
-                    <div class="jmeno">
-                        @if (heslo.Jmeno == null || heslo.Jmeno.Trim() == "")
-                        {
-                            <i>Neznámé jméno</i>
-                        }
-                        else
-                        {
-                            @heslo.Jmeno
-                        }
-                    </div>
-                    <div class="heslo">••••••••</div>
-                </div>
+                }
             }
-        }
 
-        if (sdileneHesla != null)
-        {
-            foreach (SdileneHeslo h in sdileneHesla)
+            if (sdileneHesla != null)
             {
-                <div class="zobrazeniHeslo sdileneheslo">
-                    <div class="sluzba">
-                        <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id, 'sdilene')">
-                            @if (h.Sluzba == null || h.Sluzba.Trim() == "")
+                foreach (SdileneHeslo h in sdileneHesla)
+                {
+                    <div class="zobrazeniHeslo sdileneheslo">
+                        <div class="sluzba">
+                            <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id, 'sdilene')">
+                                @if (h.DesifrovanaSluzba == null || h.DesifrovanaSluzba.Trim() == "")
+                                {
+                                    <i>Neznámá služba</i>
+                                }
+                                else
+                                {
+                                    @h.DesifrovanaSluzba
+                                }
+                            </a>
+                            <span>
+                                <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@h.Id, 'sdilene')"></a>
+                            </span>
+                        </div>
+                        <div class="jmeno">
+                            @if (h.DesifrovaneJmeno == null || h.DesifrovaneJmeno.Trim() == "")
                             {
-                                <i>Neznámá služba</i>
+                                <i>Neznámé jméno</i>
                             }
                             else
                             {
-                                @h.Sluzba
+                                @h.DesifrovaneJmeno
                             }
-                        </a>
-                        <span>
-                            <a class="icon-bin" title="Odstranit heslo" href="JavaScript:vyzadatOdstraneni(@h.Id, 'sdilene')"></a>
-                        </span>
+                        </div>
+                        <div class="heslo">••••••••</div>
                     </div>
-                    <div class="jmeno">
-                        @if (h.Jmeno == null || h.Jmeno.Trim() == "")
-                        {
-                            <i>Neznámé jméno</i>
-                        }
-                        else
-                        {
-                            @h.Jmeno
-                        }
-                    </div>
-                    <div class="heslo">••••••••</div>
-                </div>
+                }
+            }
+
+            if (Model != null && Model.Count == 0 && sdileneHesla != null && sdileneHesla.Count == 0)
+            {
+                <p>Zatím nemáte přidané žádné heslo</p>
+            }
+            else
+            {
+                <partial name="_DetailHesla" />
+                <partial name="_OdstranitHeslo" />
             }
         }
-
-        if (Model != null && Model.Count == 0 && sdileneHesla != null && sdileneHesla.Count == 0)
-        {
-            <p>Zatím nemáte přidané žádné heslo</p>
-        }
-        else
-        {
-            <partial name="_DetailHesla" />
-            <partial name="_OdstranitHeslo" />
-        }
-    }
+    </div>
 
     <partial name="_Oznameni" />
 </article>
