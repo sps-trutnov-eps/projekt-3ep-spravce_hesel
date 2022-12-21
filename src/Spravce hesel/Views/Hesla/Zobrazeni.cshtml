@@ -40,16 +40,16 @@
         }
 
     <p class="center">
-        <button type="button" class="icon-plus" onclick="window.location.href = '/Hesla/Pridat'">Přidat heslo</button>
+        <button type="button" class="icon-plus tlacitko_pridat">Přidat heslo</button>
         @if (oznameni != null)
         {
             @if (oznameni.Count == 0)
             {
-                <button type="button" class="icon-bell" onclick="zobrazitPOPup('oznameni')">Oznámení</button>
+                <button type="button" class="icon-bell tlacitko_oznameni">Oznámení</button>
             }
             else
             {
-                <button type="button" class="icon-bell upozorneniOznameni" onclick="zobrazitPOPup('oznameni')">Oznámení (@oznameni.Count)</button>
+                <button type="button" class="icon-bell upozorneniOznameni tlacitko_oznameni">Oznámení (@oznameni.Count)</button>
             }
         }
     </p>

@@ -106,7 +106,7 @@ function load(sekce) {
                 let podnavigace = ziskatNavigaci(aktualniNapoveda, false, document.getElementById("ROUTE").innerHTML);
                 let podobne = ziskatSouvisejici(napoveda, sekce);
                 if (podnavigace.trim().length > 0)
-                    podnavigace = '<div id="napoveda_podsekce"><h2>Na toto navazuje...</h2>' + podnavigace + '</div>';
+                    podnavigace = '<div id="napoveda_podsekce"><h2>Navazující</h2>' + podnavigace + '</div>';
                 if (podobne.trim().length > 0)
                     podobne = '<div id="napoveda_souvisejici"><h2>Související</h2>' + podobne + '</div>';
 

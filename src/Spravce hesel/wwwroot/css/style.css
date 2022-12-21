@@ -24,7 +24,7 @@
   color: #c4c2c2;
   border-color: lightblue;
 }
-.tmavy form input {
+.tmavy input {
   background-color: #4a4a4b;
   color: #c4c2c2;
   border-color: lightblue;
@@ -296,6 +296,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 h1, h2 {
   font-size: 2rem;
+  text-align: center;
 }
 
 h3 {
@@ -312,7 +313,7 @@ a {
   color: #000000;
 }
 
-form input {
+input {
   border: 2px solid #6495ed;
   border-radius: 2px;
   padding: 20px;
@@ -323,6 +324,7 @@ form input {
   background-repeat: no-repeat;
   position: relative;
 }
+
 form input[type=text].username {
   background-image: url("../icons/svg/user.svg");
   padding-left: 40px;
@@ -385,24 +387,25 @@ article.split section {
 span.chyba {
   position: absolute;
   margin-left: 3em;
-  height: 60px;
+  height: 56px;
   margin-top: 0.4em;
-  line-height: 60px;
+  line-height: 56px;
   padding-inline: 0.5em;
-  color: red !important;
+  color: #ff0000 !important;
   font-weight: bold;
   white-space: nowrap;
 }
 
 span.chyba:not(:empty) {
-  border: 2px solid red;
+  border: 2px solid #ff0000;
+  background-color: rgba(255, 0, 0, 0.0901960784);
   border-radius: 2px;
 }
 
 span.chyba:not(:empty):before {
   content: "◀";
   position: absolute;
-  left: -1em;
+  left: calc(-1em + 2px);
 }
 
 .chyba {
@@ -725,6 +728,10 @@ footer #napoveda div {
   border-radius: 2px;
 }
 
+#nastaveni_moznosti input {
+  min-width: calc(50% - 42px);
+}
+
 #napoveda_navigace {
   display: flex;
 }
@@ -808,6 +815,22 @@ footer #napoveda div {
 #navigace_podobnosti {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6495ed;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f1ab58;
 }
 
 /*# sourceMappingURL=style.css.map */

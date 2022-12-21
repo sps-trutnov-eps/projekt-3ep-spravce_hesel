@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spravce_hesel.Data;
 
@@ -11,9 +12,10 @@ using Spravce_hesel.Data;
 namespace Spravce_hesel.Migrations
 {
     [DbContext(typeof(SpravceHeselData))]
-    partial class SpravceHeselDataModelSnapshot : ModelSnapshot
+    [Migration("20221221164620_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

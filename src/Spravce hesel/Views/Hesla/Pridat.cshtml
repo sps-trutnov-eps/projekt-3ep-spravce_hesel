@@ -15,17 +15,17 @@
             oninvalid="this.setCustomValidity('Vyplňte toto pole!')"
             oninput="this.setCustomValidity('')" /><br />
             <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" required />
-            <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
+            <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye zobrazeni_Hesla"></button><br />
             <input value="Přidat záznam" type="submit"/>
         </form>
     </section>
 
     <section>
         <h3>Generátor hesla</h3>
-        <form id="generator" onchange="delka_hesla_aktualizace()" onkeydown="return event.key != 'Enter';">
+        <form id="generator" onkeydown="return event.key != 'Enter';">
             <div>
                 <h4>Délka hesla</h4>
-                <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikVystup" onchange="delka_hesla_zapis()" value="16" placeholder="16" />
+                <input type="range" min="4" max="64" value="16" id="gen_delka" title="Délka hesla" /><input type="text" id="posuvnikVystup" onchange="delkaHeslaZapis()" value="16" placeholder="16" />
             </div>
 
             <div>
@@ -38,7 +38,7 @@
 
             <div>
                 <br />
-                <input type="button" onclick="generace()" value="Generovat" />
+                <input type="button" class="generace" value="Generovat" />
             </div>
         </form>
     </section>

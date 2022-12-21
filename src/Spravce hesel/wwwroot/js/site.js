@@ -1,13 +1,3 @@
-// Barevný motiv
-function PrepnoutBarevnyMotiv() {
-    if (!document.cookie.includes("TmavyMotiv"))
-        document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-    else
-        document.cookie = "TmavyMotiv=; path=/; max-age=0";
-
-    window.location.reload();
-    }
-
 // Vyžádání hesla
 function vyzadatHeslo(id, norm = true) {
     let url = "DetailSdilenehoHesla";
@@ -95,26 +85,43 @@ function skrytPOPUp() {
     }
 }
 
-$('div.POPup').click(function (e) {
-    if (e.target == this) {
-        skrytPOPUp();
-    }
-});
-
 // Udělení souhlasu
-function udeleniSouhlasu() {
+$(".udeleni_souhlasu").click(function () {
     document.cookie = "Souhlas=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     window.location.reload();
-}
+});
 
 // Načítání
-$('form').submit(function (e) {
+$("form").submit(function (e) {
     if (e.target == this) {
         document.querySelector("#nacitani").className = "";
     }
 });
 
-//window.onload = (() => {
-//    document.querySelector("#nacitani").className = "skryty";
-//})
+// Skrytí popupu
+$("div.POPup").click(function (e) {
+    if (e.target == this) {
+        skrytPOPUp();
+    }
+});
+
+// Tlačítko přidání
+$(".tlacitko_pridat").click(() => {
+    window.location.href = '/Hesla/Pridat';
+});
+
+// Tlačítko oznámení
+$(".tlacitko_oznameni").click(() => {
+    zobrazitPOPup('oznameni');
+});
+
+// Tlačítko barevného motivu
+$(".barevny_motiv").click(() => {
+    if (!document.cookie.includes("TmavyMotiv"))
+        document.cookie = "TmavyMotiv=true; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    else
+        document.cookie = "TmavyMotiv=; path=/; max-age=0";
+
+    window.location.reload();
+});
 

@@ -42,3 +42,9 @@ function zobrazit_informace() {
     zmena_jmena.className = "skryty";
     zmena_hesla.className = "skryty";
 }
+
+$(".zmena_jmena").click(zobrazit_zmena_jmena);
+
+$(".zmena_hesla").click(zobrazit_zmena_hesla);
+
+$(".odstraneni").click(zobrazit_odstraneni);
