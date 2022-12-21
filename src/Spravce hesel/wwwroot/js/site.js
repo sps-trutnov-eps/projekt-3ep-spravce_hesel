@@ -26,14 +26,14 @@ function vyzadatHeslo(id, norm = true) {
             if (res.value.sluzba == null || res.value.sluzba.trim() == "")
                 document.getElementById("sluzba").innerHTML = "<i>Neznámá služba</i>";
             else
-                document.getElementById("sluzba").innerHTML = res.value.sluzba;
+                document.getElementById("sluzba").innerHTML = res.value.desifrovanaSluzba;
 
             if (res.value.jmeno == null || res.value.jmeno.trim() == "")
                 document.getElementById("jmeno").innerHTML = "<i>Neznámé jméno</i>";
             else
-                document.getElementById("jmeno").innerHTML = res.value.jmeno;
+                document.getElementById("jmeno").innerHTML = res.value.desifrovaneJmeno;
 
-            document.getElementById("heslo").innerHTML = res.value.desifrovano;
+            document.getElementById("heslo").innerHTML = res.value.desifrovaneHeslo;
             document.getElementById("sdilenoOd").innerHTML = "";
 
             if (norm == true) {

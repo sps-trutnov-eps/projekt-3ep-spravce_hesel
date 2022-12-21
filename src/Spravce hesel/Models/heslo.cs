@@ -13,10 +13,13 @@ namespace Spravce_hesel.Models
         [Required]
         public byte[] Sifra { get; set; }
 
-        public string? Desifrovano { get; set; } = null;
+        public string? DesifrovaneHeslo { get; set; } = null;
+        public string? DesifrovanaSluzba { get; set; } = null;
+        public string? DesifrovaneJmeno { get; set; } = null;
+        
 
-        public string? Sluzba { get; set; } = null;
+        public byte[]? Sluzba { get; set; } = null;
 
-        public string? Jmeno { get; set; } = null;
+        public byte[]? Jmeno { get; set; } = null;
     }
 }

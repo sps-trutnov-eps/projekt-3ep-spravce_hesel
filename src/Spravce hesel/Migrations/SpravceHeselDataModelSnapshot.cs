@@ -30,18 +30,24 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Desifrovano")
+                    b.Property<string>("DesifrovanaSluzba")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Jmeno")
+                    b.Property<string>("DesifrovaneHeslo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesifrovaneJmeno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Jmeno")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Sifra")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Sluzba")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Sluzba")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("UzivatelskeId")
                         .HasColumnType("int");
@@ -59,14 +65,20 @@ namespace Spravce_hesel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Desifrovano")
+                    b.Property<string>("DesifrovanaSluzba")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesifrovaneHeslo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesifrovaneJmeno")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DocasnyStringProKlic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Jmeno")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Jmeno")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("Potvrzeno")
                         .HasColumnType("bit");
@@ -78,8 +90,8 @@ namespace Spravce_hesel.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Sluzba")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Sluzba")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("UzivatelskeId")
                         .HasColumnType("int");

@@ -26,9 +26,9 @@
     <section>
         <h3>Informace o záznamu</h3>
         <form href="/Hesla/Upravit/Model.Id" method="post">
-            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" value="@Model.Sluzba"/><br />
-            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" value="@Model.Jmeno"/><br />
-            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.Desifrovano" required />
+            <input name="sluzba" placeholder="Zadejte jméno služby..." type="text" class="server" value="@Model.DesifrovanaSluzba"/><br />
+            <input name="jmeno" placeholder="Zadejte uživatelské jméno / E-Mail..." type="text" class="username" value="@Model.DesifrovaneJmeno"/><br />
+            <input name="heslo" placeholder="Zadejte heslo..." type="password" id="gen_vystup" value="@Model.DesifrovaneHeslo" required />
             <button type="button" id="zobrazeni_hesla_tlacitko" class="icon-eye" onclick="zobrazeni_hesla()"></button><br />
             <input value="Upravit záznam" type="submit"/>
         </form>

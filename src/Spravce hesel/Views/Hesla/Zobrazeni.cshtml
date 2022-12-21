@@ -63,13 +63,13 @@
                     <div class="zobrazeniHeslo">
                         <div class="sluzba">
                             <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@heslo.Id)">
-                                @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
+                                @if (heslo.DesifrovanaSluzba == null || heslo.DesifrovanaSluzba.Trim() == "")
                                 {
                                     <i>Neznámá služba</i>
                                 }
                                 else
                                 {
-                                    @heslo.Sluzba
+                                    @heslo.DesifrovanaSluzba
                                 }
                             </a>
                             <span>
@@ -79,13 +79,13 @@
                             </span>
                         </div>
                         <div class="jmeno">
-                            @if (heslo.Jmeno == null || heslo.Jmeno.Trim() == "")
+                            @if (heslo.DesifrovaneJmeno == null || heslo.DesifrovaneJmeno.Trim() == "")
                             {
                                 <i>Neznámé jméno</i>
                             }
                             else
                             {
-                                @heslo.Jmeno
+                                @heslo.DesifrovaneJmeno
                             }
                         </div>
                         <div class="heslo">••••••••</div>
@@ -100,13 +100,13 @@
                     <div class="zobrazeniHeslo sdileneheslo">
                         <div class="sluzba">
                             <a title="Zobrazit heslo" href="JavaScript:vyzadatHeslo(@h.Id, 'sdilene')">
-                                @if (h.Sluzba == null || h.Sluzba.Trim() == "")
+                                @if (h.DesifrovanaSluzba == null || h.DesifrovanaSluzba.Trim() == "")
                                 {
                                     <i>Neznámá služba</i>
                                 }
                                 else
                                 {
-                                    @h.Sluzba
+                                    @h.DesifrovanaSluzba
                                 }
                             </a>
                             <span>
@@ -114,13 +114,13 @@
                             </span>
                         </div>
                         <div class="jmeno">
-                            @if (h.Jmeno == null || h.Jmeno.Trim() == "")
+                            @if (h.DesifrovaneJmeno == null || h.DesifrovaneJmeno.Trim() == "")
                             {
                                 <i>Neznámé jméno</i>
                             }
                             else
                             {
-                                @h.Jmeno
+                                @h.DesifrovaneJmeno
                             }
                         </div>
                         <div class="heslo">••••••••</div>
