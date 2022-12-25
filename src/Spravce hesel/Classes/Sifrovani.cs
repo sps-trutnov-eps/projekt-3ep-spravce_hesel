@@ -4,6 +4,9 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spravce_hesel.Classes
 {
@@ -13,84 +16,100 @@ namespace Spravce_hesel.Classes
 
         public static byte[] Zasifrovat(string plainText, byte[] key, byte[] iv)
         {
-            // Check arguments.
-            if (plainText == null || plainText.Length <= 0)
-                throw new ArgumentNullException("plainText");
-            if (key == null || key.Length <= 0)
-                throw new ArgumentNullException("key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("iv");
-            byte[] encrypted;
+            try {
+                // Check arguments.
+                if (plainText == null || plainText.Length <= 0)
+                    throw new ArgumentNullException("plainText");
+                if (key == null || key.Length <= 0)
+                    throw new ArgumentNullException("key");
+                if (iv == null || iv.Length <= 0)
+                    throw new ArgumentNullException("iv");
+                byte[] encrypted;
 
-            // Create an Aes object
-            // with the specified key and IV.
-            using (Aes aesAlg = Aes.Create())
-            {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
-
-                // Create an encryptor to perform the stream transform.
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
-                // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new())
+                // Create an Aes object
+                // with the specified key and IV.
+                using (Aes aesAlg = Aes.Create())
                 {
-                    using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    aesAlg.Key = key;
+                    aesAlg.IV = iv;
+
+                    // Create an encryptor to perform the stream transform.
+                    ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                    // Create the streams used for encryption.
+                    using (MemoryStream msEncrypt = new())
                     {
-                        using (StreamWriter swEncrypt = new(csEncrypt))
+                        using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
                         {
-                            //Write all data to the stream.
-                            swEncrypt.Write(plainText);
+                            using (StreamWriter swEncrypt = new(csEncrypt))
+                            {
+                                //Write all data to the stream.
+                                swEncrypt.Write(plainText);
+                            }
+                            encrypted = msEncrypt.ToArray();
                         }
-                        encrypted = msEncrypt.ToArray();
                     }
                 }
+
+                // Return the encrypted bytes from the memory stream.
+                return encrypted;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return null;
             }
 
-            // Return the encrypted bytes from the memory stream.
-            return encrypted;
         }
 
         public static string Desifrovat(byte[] cipherText, byte[] key, byte[] iv)
         {
-            // Check arguments.
-            if (cipherText == null || cipherText.Length <= 0)
-                throw new ArgumentNullException("cipherText");
-            if (key == null || key.Length <= 0)
-                throw new ArgumentNullException("key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("iv");
-
-            // Declare the string used to hold
-            // the decrypted text.
-            string? plaintext = null;
-
-            // Create an Aes object
-            // with the specified key and IV.
-            using (Aes aesAlg = Aes.Create())
+            try
             {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
+                // Check arguments.
+                if (cipherText == null || cipherText.Length <= 0)
+                    throw new ArgumentNullException("cipherText");
+                if (key == null || key.Length <= 0)
+                    throw new ArgumentNullException("key");
+                if (iv == null || iv.Length <= 0)
+                    throw new ArgumentNullException("iv");
 
-                // Create a decryptor to perform the stream transform.
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                // Declare the string used to hold
+                // the decrypted text.
+                string? plaintext = null;
 
-                // Create the streams used for decryption.
-                using (MemoryStream msDecrypt = new(cipherText))
+                // Create an Aes object
+                // with the specified key and IV.
+                using (Aes aesAlg = Aes.Create())
                 {
-                    using (CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    aesAlg.Key = key;
+                    aesAlg.IV = iv;
+
+                    // Create a decryptor to perform the stream transform.
+                    ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                    // Create the streams used for decryption.
+                    using (MemoryStream msDecrypt = new(cipherText))
                     {
-                        using (StreamReader srDecrypt = new(csDecrypt))
+                        using (CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
-                            // Read the decrypted bytes from the decrypting stream
-                            // and place them in a string.
-                            plaintext = srDecrypt.ReadToEnd();
+                            using (StreamReader srDecrypt = new(csDecrypt))
+                            {
+                                // Read the decrypted bytes from the decrypting stream
+                                // and place them in a string.
+                                plaintext = srDecrypt.ReadToEnd();
+                            }
                         }
                     }
                 }
-            }
 
-            return plaintext;
+                return plaintext;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return null;
+            }
         }
         
         // Vlastní kód

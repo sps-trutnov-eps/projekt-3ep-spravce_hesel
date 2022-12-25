@@ -12,13 +12,13 @@
                 foreach(SdileneHeslo heslo in hesla)
                 {
                     <div class="oznameni @heslo.Id">
-                        @if (heslo.Sluzba == null || heslo.Sluzba.Trim() == "")
+                        @if (heslo.DesifrovanaSluzba == null || heslo.DesifrovanaSluzba.Trim() == "")
                         {
                             <h4><i>Neznámá služba</i></h4>
                         }
                         else
                         {
-                            <h4>@heslo.Sluzba</h4>
+                            <h4>@heslo.DesifrovanaSluzba</h4>
                         }
                         <p>Uživatel <i>@heslo.ZakladatelJmeno</i> s vámi chce sdílet heslo</p>
                         <p>

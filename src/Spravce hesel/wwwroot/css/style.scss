@@ -11,6 +11,8 @@ $text-sekundarni: #6495ed;
 $sdilene-heslo: #3e27ea;
 $upozorneni: #f1ab58;
 $upozorneni-pozadi: #ff8a001f;
+$chyba: #ff0000;
+$chyba-pozadi: #ff000017;
 $pozadi: #ffffff;
 $pozadi-sekundarni: #f4f7fc;
 $pozadi-heslo: #e1e9f7;
@@ -36,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2 {
     font-size: 2rem;
+    text-align: center;
 }
 
 h3 {
@@ -54,18 +57,18 @@ a {
 }
 
 // Form a button
-form {
-    input {
-        @include border;
-        padding: 20px;
-        margin: 8px 0;
-        background-color: $pozadi-sekundarni;
-        background-size: 1em;
-        background-position: 15px 50%;
-        background-repeat: no-repeat;
-        position: relative;
-    }
+input {
+    @include border;
+    padding: 20px;
+    margin: 8px 0;
+    background-color: $pozadi-sekundarni;
+    background-size: 1em;
+    background-position: 15px 50%;
+    background-repeat: no-repeat;
+    position: relative;
+}
 
+form {
     input[type=text].username {
         background-image: url('../icons/svg/user.svg');
         padding-left: 40px;
@@ -135,24 +138,25 @@ article.split section {
 span.chyba {
     position: absolute;
     margin-left: 3em;
-    height: 60px;
+    height: 56px;
     margin-top: .4em;
-    line-height: 60px;
+    line-height: 56px;
     padding-inline: .5em;
-    color: red !important;
+    color: $chyba !important;
     font-weight: bold;
     white-space: nowrap;
 }
 
 span.chyba:not(:empty) {
-    border: 2px solid red;
+    border: 2px solid $chyba;
+    background-color: $chyba-pozadi;
     border-radius: 2px;
 }
 
 span.chyba:not(:empty):before {
     content: '◀';
     position: absolute;
-    left: -1em;
+    left: calc(-1em + 2px);
 }
 
 // Chybová stránka
@@ -524,6 +528,11 @@ footer {
     }
 }
 
+// Možnosti v nastavení
+#nastaveni_moznosti input {
+    min-width: calc(50% - 42px);
+}
+
 // Nápověda
 #napoveda_navigace {
     display: flex;
@@ -618,4 +627,21 @@ footer {
 #navigace_podobnosti {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $pozadi;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $text-sekundarni;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $upozorneni;
 }
