@@ -123,7 +123,6 @@ function load(sekce) {
             }
 
             catch (chyba) {
-                //console.log(chyba);
                 prehravacNadpis.innerHTML = "Došlo k chybě!";
                 prehravacObsah.innerHTML = "<article><section><i>Obsah této nápovědy není nyní přístupný!</i></section></article>";
             }
@@ -132,14 +131,18 @@ function load(sekce) {
 }
 
 $("#napoveda_navigace_zpet").click(() => {
-    if (ROUTE.length != 1) {
-        document.getElementById("ROUTE").innerHTML = document.getElementById("ROUTE").innerHTML.replace(ROUTE[ROUTE.length - 1], "");
-        document.getElementById("ROUTE").innerHTML =
-            document.getElementById("ROUTE")
-                .innerHTML.substring(0, document.getElementById("ROUTE").innerHTML.length - 1);
+    if (ROUTE.length != 0) {
+        let odkaz = "/Napoveda/";
 
-        ROUTE = document.getElementById("ROUTE").innerHTML.split("-");
-        load(ROUTE);
+        ROUTE.forEach(segmet => {
+            odkaz += segmet + "-";
+        });
+
+        odkaz = odkaz.substring(0, odkaz.length - 1);
+
+        window.location.href = odkaz;
+    } else {
+        window.location.href = "/Napoveda/Uvod";
     }
 });
 
