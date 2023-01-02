@@ -403,7 +403,7 @@ namespace Spravce_hesel.Controllers
                 && Databaze.Uzivatele.FirstOrDefault(uzivatel => uzivatel.Id == uzivatelId) != null)
             {
                 SdileneHeslo? heslo = Databaze.SdilenaHesla.FirstOrDefault(heslo => heslo.Id == id);
-                if (heslo != null)
+                if (heslo != null && heslo.Potvrzeno == false)
                 {
                     Databaze.SdilenaHesla.Remove(heslo);
                     Databaze.SaveChanges();
