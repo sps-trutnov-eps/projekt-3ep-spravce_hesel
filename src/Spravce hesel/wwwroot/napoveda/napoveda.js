@@ -73,7 +73,8 @@ function ziskatSouvisejici(napoveda, adresa) {
     return html;
 }
     
-let ROUTE = document.getElementById("ROUTE").innerHTML.split("-");
+const ROUTE = document.getElementById("ROUTE").innerHTML.split("-");
+let ERROR = false;
 
 function load(sekce) {
     $.getJSON("../napoveda/napoveda.json",
@@ -104,6 +105,7 @@ function load(sekce) {
                 document.getElementById("napoveda_navigace_menu_cesta").innerHTML = cesta;
 
                 let podnavigace = ziskatNavigaci(aktualniNapoveda, false, document.getElementById("ROUTE").innerHTML);
+
                 let podobne = ziskatSouvisejici(napoveda, sekce);
                 if (podnavigace.trim().length > 0)
                     podnavigace = '<div id="napoveda_podsekce"><h2>Navazující</h2>' + podnavigace + '</div>';
@@ -112,37 +114,47 @@ function load(sekce) {
 
                 document.getElementById("navigace_podobnosti").innerHTML += podnavigace;
                 document.getElementById("navigace_podobnosti").innerHTML += podobne;
-
-                $("#napoveda_navigace_rozbalit").click(() => {
-                    if (document.getElementById("napoveda_menu_seznam").className === "skryty") {
-                        document.getElementById("napoveda_menu_seznam").className = "";
-                    } else {
-                        document.getElementById("napoveda_menu_seznam").className = "skryty";
-                    }
-                });
             }
 
             catch (chyba) {
                 prehravacNadpis.innerHTML = "Došlo k chybě!";
                 prehravacObsah.innerHTML = "<article><section><i>Obsah této nápovědy není nyní přístupný!</i></section></article>";
+                ERROR = true;
             }
         }
     );
 }
 
 $("#napoveda_navigace_zpet").click(() => {
-    if (ROUTE.length != 0) {
-        let odkaz = "/Napoveda/";
+    if (ROUTE.length != 0 && ROUTE[0] != "Uvod") {
+        if (ERROR || ROUTE.length == 1) {
+            window.location.href = "/Napoveda/Uvod";
+        } else {
+            let odkaz = "/Napoveda/";
 
-        ROUTE.forEach(segmet => {
-            odkaz += segmet + "-";
-        });
+            let cesta = Object.assign([], ROUTE);
+            cesta.pop();
 
-        odkaz = odkaz.substring(0, odkaz.length - 1);
+            cesta.forEach(segmet => {
+                odkaz += segmet + "-";
+            });
 
-        window.location.href = odkaz;
-    } else {
+            odkaz = odkaz.substring(0, odkaz.length - 1);
+
+            window.location.href = odkaz;
+        }
+    }
+});
+
+$("#napoveda_navigace_menu").click(() => {
+    if (ERROR) {
         window.location.href = "/Napoveda/Uvod";
+    } else {
+        if (document.getElementById("napoveda_menu_seznam").className === "skryty") {
+            document.getElementById("napoveda_menu_seznam").className = "";
+        } else {
+            document.getElementById("napoveda_menu_seznam").className = "skryty";
+        }
     }
 });
 
@@ -152,4 +164,4 @@ $('body').on('click',
         window.location.href = e.target.src;
     });
 
-load(ROUTE);
+load(Object.assign([], ROUTE));
